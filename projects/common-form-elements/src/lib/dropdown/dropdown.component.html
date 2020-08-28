@@ -1,0 +1,26 @@
+<div class="sb-dropdown">
+  <label>{{label}}</label>
+  <ng-container *ngIf="options">
+    <div class="dropdown-container">
+      <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
+      <select [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )"
+              [formControl]="formControlRef"
+              [compareWith]="ValueComparator.valueComparator" class="sb-dropdown-select" id="sb-dropdown"
+              name="sb-dropdown">
+        <option [defaultSelected]="!default" [ngValue]="null" disabled>{{placeHolder}}
+        </option>
+        <ng-container *ngIf="isOptionsArray(options)">
+          <option *ngFor="let option of options" [ngValue]="option.value">{{option.label}}</option>
+        </ng-container>
+
+        <ng-container *ngIf="isOptionsClosure(options)">
+          <option *ngFor="let option of options$ | async" [ngValue]="option.value">{{option.label}}</option>
+        </ng-container>
+
+        <ng-container *ngIf="isOptionsMap(options) && context && context.value">
+          <option *ngFor="let option of options[context.value]" [ngValue]="option.value">{{option.label}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </ng-container>
+</div>

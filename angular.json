@@ -1,0 +1,43 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "common-form-elements": {
+      "root": "projects/common-form-elements",
+      "sourceRoot": "projects/common-form-elements/src",
+      "projectType": "library",
+      "prefix": "sb",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/common-form-elements/tsconfig.lib.json",
+            "project": "projects/common-form-elements/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/common-form-elements/src/test.ts",
+            "tsConfig": "projects/common-form-elements/tsconfig.spec.json",
+            "karmaConfig": "projects/common-form-elements/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/common-form-elements/tsconfig.lib.json",
+              "projects/common-form-elements/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "common-form-elements"
+}

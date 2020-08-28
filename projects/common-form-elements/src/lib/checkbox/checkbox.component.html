@@ -1,0 +1,12 @@
+<div class="sb-checkbox">
+    <div class="checkbox-row">
+        <label class="container">
+            <input type="checkbox" [formControl]="formControlRef" name="checkbox" value="value">
+            <span class="checkmark"></span>
+        </label>
+        <label *ngIf="label" class="checkbox-label">{{label}}</label>
+        <label class="label-html" *ngIf="labelHtml">
+            <div [innerHTML]="labelHtml | transposeHtml" (click)="handleLinkClick($event)"></div>
+        </label>
+    </div>
+</div>
