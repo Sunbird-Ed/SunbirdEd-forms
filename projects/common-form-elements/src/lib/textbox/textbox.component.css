@@ -6,7 +6,7 @@ label {
 
 .sb-textbox {
   width: 100%;
-  padding: 8px 20px;
+  padding: 8px 16px;
   border: 0.5px solid #333333;
   box-sizing: border-box;
 }
@@ -57,8 +57,10 @@ label {
 
 .prefix{
   white-space: nowrap;
+  padding: 0 4px;
 }
 
 .async-icons{
   margin: auto;
+  padding: 0 4px;
 }
