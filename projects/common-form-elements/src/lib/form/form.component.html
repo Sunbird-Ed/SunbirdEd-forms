@@ -19,7 +19,8 @@
         [formControlRef]="formGroup.get(field.code)" [options]="field.templateOptions?.options"
         [label]="field.templateOptions.label" [dataLoadStatusDelegate]="dataLoadStatusDelegate"
         [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder" 
-        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml">
+        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml"
+        [platform]="platform">
       </sb-multiple-dropdown>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">

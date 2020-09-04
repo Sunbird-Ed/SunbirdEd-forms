@@ -21,6 +21,7 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() formControlRef?: FormControl;
+  @Input() platform: any;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;

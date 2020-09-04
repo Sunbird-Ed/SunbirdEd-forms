@@ -1,4 +1,4 @@
-<div class="multi-select-section">
+<div class="multi-select-section-app" [ngClass]="{'multi-select-section-app': platform === 'mobile' ,  'multi-select-container-web': platform === 'web'}">
   <label class="input-label" *ngIf="label">{{label}}</label>
   <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <div class="multi-select-container">
