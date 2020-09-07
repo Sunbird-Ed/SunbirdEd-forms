@@ -12,6 +12,10 @@ label {
   box-sizing: border-box;
 }
 
+input:focus {
+  outline: 0;
+}
+
 ::placeholder {
   padding: 0.25rem;
   opacity: 0.99;
