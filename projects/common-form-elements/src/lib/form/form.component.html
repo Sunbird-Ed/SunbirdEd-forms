@@ -47,12 +47,12 @@
     <ng-container *ngIf="formGroup.get(field.code) as ref">
       <div *ngIf="field.type === FieldConfigInputType.NESTED_SELECT && ref && ref.value && field.children && field.children[ref.value]">
         <sb-form (initialize)="onNestedFormInitialize($event, field)" (finalize)="onNestedFormFinalize($event, field)"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children[ref.value]"></sb-form>
+          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [platform]="platform" [config]="field.children[ref.value]"></sb-form>
       </div>
 
       <div *ngIf="field.type === FieldConfigInputType.NESTED_GROUP && field.children">
         <sb-form (initialize)="onNestedFormInitialize($event, field)" (finalize)="onNestedFormFinalize($event, field)"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children"></sb-form>
+          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children" [platform]="platform"></sb-form>
       </div>
     </ng-container>
 

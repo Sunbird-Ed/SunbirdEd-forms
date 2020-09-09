@@ -1,4 +1,4 @@
-<div class="multi-select-section-app" [ngClass]="{'multi-select-section-app': platform === 'mobile' ,  'multi-select-container-web': platform === 'web'}">
+<div class="multi-select-section-app">
   <label class="input-label" *ngIf="label">{{label}}</label>
   <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <div class="multi-select-container">
@@ -12,8 +12,8 @@
 
           <ng-container *ngIf="formControlRef.value?.length">
             <span *ngFor="let value of formControlRef.value; let index=index">
-              {{optionValueToOptionLabelMap.get(fromJS(value))}}<span
-            *ngIf="index < formControlRef.value.length - 1">, </span>
+              {{optionValueToOptionLabelMap.get(fromJS(value))}}<span *ngIf="index < formControlRef.value.length - 1">,
+              </span>
             </span>
           </ng-container>
         </ng-container>
@@ -25,7 +25,7 @@
         </ng-container>
       </ul>
     </div>
-    <div class="sb-modal-container" [hidden]="!showModal" (click)="showModal=false;">
+    <div class="sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
       <div class="sb-modal-overlay">
         <div class="sb-modal" (click)="$event.stopPropagation()">
           <div class="header">
@@ -54,6 +54,15 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
+      <ul>
+        <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option':tempValue.includes(option.get('value'))}">
+          <div (click)="addSelected(option); !isMultiple && onSubmit()">
+            <span>{{option.get('label')}}</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

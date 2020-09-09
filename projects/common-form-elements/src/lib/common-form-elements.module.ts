@@ -39,19 +39,7 @@ import { EmptyCircleComponent } from './icon/empty-circle/empty-circle.component
       PipesModule
    ],
    exports: [
-      CommonFormElementsComponent,
-      DropdownComponent,
-      CaretDownComponent,
-      TextboxComponent,
-      TextareaComponent,
-      CheckboxComponent,
-      FormComponent,
-      OptionGroupComponent,
-      DropdownIconComponent,
-      RedExclamationComponent,
-      GreenTickComponent,
-      EmptyCircleComponent,
-      MultipleDropdownComponent
+      FormComponent
    ]
 })
 export class CommonFormElementsModule { }
