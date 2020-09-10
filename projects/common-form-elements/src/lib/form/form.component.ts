@@ -29,6 +29,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   @Output() statusChanges = new EventEmitter();
   @Output() dataLoadStatus = new EventEmitter<'LOADING' | 'LOADED'>();
   @Input() config;
+  @Input() platform: 'mobile' | 'web' = 'web';
   @Input() dataLoadStatusDelegate = new Subject<'LOADING' | 'LOADED'>();
   @Input() asyncValidatorFactory?: AsyncValidatorFactory;
 

@@ -1,6 +1,6 @@
 @import "../../../../../node_modules/common-consumption-styles/assets/_colors.scss";
 
-.multi-select-section{
+.multi-select-section-app {
     margin: 1rem 0;
 }
 
@@ -268,3 +268,50 @@ label{
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+.sb-modal-dropdown-web ul {
+    list-style-type: none;
+    display: block;
+    position: absolute;
+    top: 38px;
+    left: 0;
+    background-color: white;
+    width: 100%;
+    z-index: 1;
+    box-shadow: 2px 2px 2px 2px aliceblue;
+    border: 2px solid #80a7ce;
+}
+
+.sb-modal-dropdown-web ul li {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.sb-modal-dropdown-web .selected-option {
+    font-weight: bold;
+    background-color: #eee;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+

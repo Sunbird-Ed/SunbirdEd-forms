@@ -19,7 +19,8 @@
         [formControlRef]="formGroup.get(field.code)" [options]="field.templateOptions?.options"
         [label]="field.templateOptions.label" [dataLoadStatusDelegate]="dataLoadStatusDelegate"
         [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder" 
-        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml">
+        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml"
+        [platform]="platform">
       </sb-multiple-dropdown>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
@@ -46,12 +47,12 @@
     <ng-container *ngIf="formGroup.get(field.code) as ref">
       <div *ngIf="field.type === FieldConfigInputType.NESTED_SELECT && ref && ref.value && field.children && field.children[ref.value]">
         <sb-form (initialize)="onNestedFormInitialize($event, field)" (finalize)="onNestedFormFinalize($event, field)"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children[ref.value]"></sb-form>
+          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [platform]="platform" [config]="field.children[ref.value]"></sb-form>
       </div>
 
       <div *ngIf="field.type === FieldConfigInputType.NESTED_GROUP && field.children">
         <sb-form (initialize)="onNestedFormInitialize($event, field)" (finalize)="onNestedFormFinalize($event, field)"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children"></sb-form>
+          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children" [platform]="platform"></sb-form>
       </div>
     </ng-container>
 
