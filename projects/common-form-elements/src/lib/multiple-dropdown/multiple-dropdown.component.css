@@ -1,11 +1,12 @@
-@import "../../../../node_modules/common-consumption-styles/assets/styles";
+@import "../../../../../node_modules/common-consumption-styles/assets/_colors.scss";
 
 .multi-select-section{
     margin: 1rem 0;
 }
 
 label{
-    font-size: 1rem;
+    font-size: 14px;
+    font-weight: normal;
     margin: 0
 }
 

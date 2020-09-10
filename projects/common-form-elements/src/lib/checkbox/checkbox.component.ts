@@ -12,7 +12,7 @@ export class CheckboxComponent implements OnInit {
   @Input() value?: any;
   @Input() formControlRef?: FormControl;
   @Input() labelHtml?: any;
-  @Output() clickedLink = new EventEmitter();
+  @Output() clickedLink = new EventEmitter<{ event: MouseEvent, data: { url: string } }>();
 
   constructor() { }
 
@@ -23,7 +23,11 @@ export class CheckboxComponent implements OnInit {
 
   handleLinkClick(event: MouseEvent) {
     if (event.target && event.target['hasAttribute'] && (event.target as HTMLAnchorElement).hasAttribute('href')) {
-      this.clickedLink.emit((event.target as HTMLAnchorElement).getAttribute('href'));
+      const eventData = {
+        event,
+        data: { url: (event.target as HTMLAnchorElement).getAttribute('href') }
+      };
+      this.clickedLink.emit(eventData);
     }
   }
 
