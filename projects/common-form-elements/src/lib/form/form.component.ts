@@ -24,7 +24,7 @@ import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
 export class FormComponent implements OnInit, OnChanges, OnDestroy {
   @Output() initialize = new EventEmitter();
   @Output() finalize = new EventEmitter();
-  @Output() linkClicked = new EventEmitter();
+  @Output() linkClicked = new EventEmitter<{ event: MouseEvent, data: { url: string } }>();
   @Output() valueChanges = new EventEmitter();
   @Output() statusChanges = new EventEmitter();
   @Output() dataLoadStatus = new EventEmitter<'LOADING' | 'LOADED'>();

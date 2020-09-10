@@ -57,8 +57,8 @@
     </ng-container>
 
     <ng-container *ngIf="field.type === FieldConfigInputType.LABEL">
-      <label *ngIf="field.templateOptions?.label">{{field.templateOptions?.label}}</label>
-      <div *ngIf="field.templateOptions?.labelHtml" [innerHTML]="field.templateOptions?.labelHtml | transposeHtml"></div>
+      <label *ngIf="field.templateOptions?.label" class="pb-8">{{field.templateOptions?.label}}</label>
+      <div *ngIf="field.templateOptions?.labelHtml" class="pb-8" [innerHTML]="field.templateOptions?.labelHtml | transposeHtml"></div>
     </ng-container>
     
   </ng-container>
