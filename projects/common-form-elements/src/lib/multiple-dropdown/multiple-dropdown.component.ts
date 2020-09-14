@@ -42,6 +42,7 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.context.valueChanges.pipe(
         tap(() => {
           this.formControlRef.patchValue(null);
+          this.tempValue = this.tempValue.clear();
           this.setupOptions();
         }),
         takeUntil(this.dispose$)
