@@ -1,6 +1,6 @@
 {
   "name": "common-form-elements",
-  "version": "1.0.8",
+  "version": "0.0.8",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
