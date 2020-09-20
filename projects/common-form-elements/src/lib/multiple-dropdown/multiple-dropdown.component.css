@@ -280,6 +280,8 @@ label{
     z-index: 999;
     box-shadow: 2px 2px 2px 2px aliceblue;
     border: 2px solid #80a7ce;
+    max-height: 314px;
+    overflow: scroll;
 }
 
 .sb-modal-dropdown-web ul li {

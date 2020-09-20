@@ -67,6 +67,8 @@ input:focus {
 .prefix{
   white-space: nowrap;
   padding: 0 4px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .async-icons{
