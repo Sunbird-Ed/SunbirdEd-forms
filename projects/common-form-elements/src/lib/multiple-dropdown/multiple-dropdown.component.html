@@ -59,7 +59,7 @@
       <ul>
         <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option':tempValue.includes(option.get('value'))}">
           <div (click)="addSelected(option); !isMultiple && onSubmit()">
-            <span>{{option.get('label')}}</span>
+            <span class="cursor-pointer">{{option.get('label')}}</span>
           </div>
         </li>
       </ul>
