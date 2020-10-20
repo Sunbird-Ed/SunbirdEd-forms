@@ -1,0 +1,11 @@
+<div class="sbt-class-bar">
+  <label>{{label}}</label>
+  <div class="sb-slider-pills-container">
+    <div class="sb-pills-container sb-grade-pills-container" id="gradeScroll">
+      <div class="pill rounded" *ngFor="let facet of options.data; let i = index;" [ngClass]="((options.default === facet.value ? 'active' : '')  + ' ' + styleClass)"
+      attr.id="class{{i}}" (click)="onChangeFacet(facet)">
+      {{facet.value}}
+      </div>
+    </div>
+  </div>
+</div>
