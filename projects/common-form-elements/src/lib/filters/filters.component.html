@@ -1,0 +1,19 @@
+<div *ngIf="type === FilterType.FACET">
+  <div *ngFor="let facet of formattedFacets">
+
+    <!-- Start of Dropdown -->
+    <sb-dropdown *ngIf="facet.type === 'dropdown'" [type]="type" [label]="facet.label" [options]="facet"
+      [placeHolder]="facet.placeHolder" [default]="facet.default" [styleClass]="styleClass"
+      (onChangeFilter)="selectedFilter.emit($event)">
+    </sb-dropdown>
+    <!-- End of Dropdown -->
+
+    <!-- Start of pills -->
+    <div *ngIf="facet.type === 'pills'">
+      <sb-pills [label]="facet.label" [options]="facet" [styleClass]="styleClass"
+        (onChangeFilter)="selectedFilter.emit($event)"></sb-pills>
+    </div>
+    <!-- End of pills -->
+
+  </div>
+</div>

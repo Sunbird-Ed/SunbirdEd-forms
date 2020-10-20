@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {FieldConfigOption, FieldConfigOptionsBuilder} from '../common-form-config';
@@ -23,10 +23,12 @@ export class DropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
-
+  @Input() type?: string;
+  @Input() styleClass?: string;
+  @Output() onChangeFilter: EventEmitter<any> = new EventEmitter();
   options$?: Observable<FieldConfigOption<any>[]>;
   contextValueChangesSubscription?: Subscription;
-
+  selectedType: any;
   constructor() {
   }
 
@@ -69,5 +71,14 @@ export class DropdownComponent implements OnInit, OnChanges, OnDestroy {
 
   isOptionsMap(input: any) {
     return !Array.isArray(input) && typeof input === 'object';
+  }
+
+  onChangeFacet($event) {
+    const selectedObject = this.options.data[$event.currentTarget.options.selectedIndex - 1];
+    let emitPayload = JSON.parse(JSON.stringify(this.options));
+    emitPayload['data'] = selectedObject;
+    emitPayload['selectedLabel'] = selectedObject.label;
+    emitPayload['selectedValue'] = selectedObject.value;
+    this.onChangeFilter.emit(emitPayload);
   }
 }

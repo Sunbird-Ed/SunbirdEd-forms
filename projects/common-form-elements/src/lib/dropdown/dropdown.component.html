@@ -1,4 +1,4 @@
-<div class="sb-dropdown">
+<div class="sb-dropdown" *ngIf="!type">
   <label>{{label}}</label>
   <ng-container *ngIf="options">
     <div class="dropdown-container">
@@ -24,3 +24,21 @@
     </div>
   </ng-container>
 </div>
+
+<!-- Dropdown for filters component -->
+<div class="sb-dropdown" *ngIf="type === 'facet'">
+  <label>{{label}}</label>
+  <ng-container *ngIf="options && options.data">
+    <div class="dropdown-container">
+      <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
+      <select [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )"
+        class="sb-dropdown-select" [ngClass]="(styleClass ? styleClass : 'default-dropdown')" id="sb-dropdown" name="sb-dropdown"
+        (change)="onChangeFacet($event)" placeholder="placeHolder">
+        <option *ngIf="!default" [disabled]="true" selected>{{placeHolder}}</option>
+        <option *ngFor="let option of options.data" [ngValue]="option" [selected]="options.default === option.value">{{option.label}}</option>
+      </select>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Dropdown for filters component -->

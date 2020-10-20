@@ -67,3 +67,7 @@ export interface FieldConfig<T> {
   }[];
   asyncValidation?: FieldConfigAsyncValidation;
 }
+
+export enum FilterType {
+  FACET = 'facet'
+}

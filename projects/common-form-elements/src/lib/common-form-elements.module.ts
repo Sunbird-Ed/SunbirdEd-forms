@@ -15,6 +15,8 @@ import { PipesModule } from './pipes/pipes.module';
 import { RedExclamationComponent } from './icon/red-exclamation/red-exclamation.component';
 import { GreenTickComponent } from './icon/green-tick/green-tick.component';
 import { EmptyCircleComponent } from './icon/empty-circle/empty-circle.component';
+import { FiltersComponent } from './filters/filters.component';
+import { PillsComponent } from './pills/pills.component';
 
 @NgModule({
    declarations: [
@@ -30,7 +32,9 @@ import { EmptyCircleComponent } from './icon/empty-circle/empty-circle.component
       CaretDownComponent,
       RedExclamationComponent,
       GreenTickComponent,
-      EmptyCircleComponent
+      EmptyCircleComponent,
+      FiltersComponent,
+      PillsComponent
    ],
    imports: [
       CommonModule,
@@ -51,7 +55,8 @@ import { EmptyCircleComponent } from './icon/empty-circle/empty-circle.component
       RedExclamationComponent,
       GreenTickComponent,
       EmptyCircleComponent,
-      MultipleDropdownComponent
+      MultipleDropdownComponent,
+      FiltersComponent
    ]
 })
 export class CommonFormElementsModule { }
