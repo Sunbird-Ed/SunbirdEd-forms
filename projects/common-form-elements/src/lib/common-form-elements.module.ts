@@ -18,6 +18,19 @@ import { EmptyCircleComponent } from './icon/empty-circle/empty-circle.component
 import { FiltersComponent } from './filters/filters.component';
 import { PillsComponent } from './pills/pills.component';
 
+
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { DynamicTextboxComponent } from './dynamic-textbox/dynamic-textbox.component';
+import { DynamicTextareaComponent } from './dynamic-textarea/dynamic-textarea.component';
+import { DynamicDropdownComponent } from './dynamic-dropdown/dynamic-dropdown.component';
+import { DynamicMultipleDropdownComponent } from './dynamic-multiple-dropdown/dynamic-multiple-dropdown.component';
+import { DynamicCheckboxComponent } from './dynamic-checkbox/dynamic-checkbox.component';
+import { DynamicFieldDirective } from './dynamic-field/dynamic-field.directive';
+import { DynamicMultiSelectComponent } from './dynamic-multi-select/dynamic-multi-select.component';
+import { TopicpickerComponent } from './topicpicker/topicpicker.component';
+import { KeywordsComponent } from './keywords/keywords.component';
+import { TagInputModule } from 'ngx-chips';
+
 @NgModule({
    declarations: [
       CommonFormElementsComponent,
@@ -34,13 +47,24 @@ import { PillsComponent } from './pills/pills.component';
       GreenTickComponent,
       EmptyCircleComponent,
       FiltersComponent,
-      PillsComponent
+      PillsComponent,
+      DynamicFormComponent,
+      DynamicTextboxComponent,
+      DynamicTextareaComponent,
+      DynamicDropdownComponent,
+      DynamicMultipleDropdownComponent,
+      DynamicCheckboxComponent,
+      DynamicFieldDirective,
+      TopicpickerComponent,
+      KeywordsComponent,
+      DynamicMultiSelectComponent
    ],
    imports: [
       CommonModule,
       ReactiveFormsModule,
       FormsModule,
-      PipesModule
+      PipesModule,
+      TagInputModule
    ],
    exports: [
       CommonFormElementsComponent,
@@ -56,7 +80,28 @@ import { PillsComponent } from './pills/pills.component';
       GreenTickComponent,
       EmptyCircleComponent,
       MultipleDropdownComponent,
-      FiltersComponent
+      FiltersComponent,
+      DynamicFormComponent,
+      DynamicTextboxComponent,
+      DynamicTextareaComponent,
+      DynamicDropdownComponent,
+      DynamicMultipleDropdownComponent,
+      DynamicCheckboxComponent,
+      DynamicMultiSelectComponent,
+      TopicpickerComponent,
+      KeywordsComponent,
+      DynamicFieldDirective
+   ],
+   entryComponents: [
+      DynamicFormComponent,
+      DynamicTextboxComponent,
+      DynamicTextareaComponent,
+      DynamicDropdownComponent,
+      DynamicMultipleDropdownComponent,
+      DynamicCheckboxComponent,
+      DynamicMultiSelectComponent,
+      TopicpickerComponent,
+      KeywordsComponent
    ]
 })
 export class CommonFormElementsModule { }
