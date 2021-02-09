@@ -1,0 +1,11 @@
+<div class="sb-keywords">
+    <label *ngIf="label">{{label}}</label>
+    <tag-input class="sb-keywordbox" [formControl]="formControlRef" [modelAsStrings]="true" [(ngModel)]='items' [placeholder]="field.placeholder || 'Enter Keyword'"
+    [disable]="disabled"></tag-input>
+    <ng-container *ngFor="let validation of validations">
+        <div class="cf-error"
+          *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+</div>
