@@ -41,12 +41,12 @@ export interface FieldConfigAsyncValidation {
 }
 export interface FieldConfig<T> {
   code: string;
-  type: FieldConfigInputType;
+  type?: FieldConfigInputType;
   fieldName?: string;
   default?: any;
   context?: string;
   children?: { [key: string]: FieldConfig<T>[] } | FieldConfig<T>[];
-  templateOptions: {
+  templateOptions?: {
     type?: string,
     label?: string,
     placeHolder?: string,
@@ -85,9 +85,9 @@ export interface FieldConfig<T> {
   terms?: any;
   range?: any;
   depends?: FormControl[];
-  dependencyTerms: any;
+  dependencyTerms?: any;
   output?: string;
-  sourceCategory: string;
+  sourceCategory?: string;
   association?: any;
 }
 
