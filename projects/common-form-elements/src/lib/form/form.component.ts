@@ -27,6 +27,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   @Output() linkClicked = new EventEmitter();
   @Output() valueChanges = new EventEmitter();
   @Output() statusChanges = new EventEmitter();
+  @Input() platform: 'mobile' | 'web' = 'web';
   @Output() dataLoadStatus = new EventEmitter<'LOADING' | 'LOADED'>();
   @Input() config;
   @Input() dataLoadStatusDelegate = new Subject<'LOADING' | 'LOADED'>();
