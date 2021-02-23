@@ -21,7 +21,7 @@
     "common-consumption-styles": "0.0.17",
     "core-js": "^2.5.4",
     "lodash-es": "^4.17.20",
-    "ngx-chips": "^2.1.0",
+    "ngx-chips": "2.1.0",
     "rxjs": "^6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
