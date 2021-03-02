@@ -14,14 +14,16 @@
         <sb-dropdown [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
           [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
           [dataLoadStatusDelegate]="dataLoadStatusDelegate" [options]="field.templateOptions?.options"
-          [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder">
+          [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder"
+          [labelHtml]="field.templateOptions.labelHtml">
         </sb-dropdown>
       </div>
     <div *ngIf="field.type === FieldConfigInputType.NESTED_SELECT" [hidden]="field.templateOptions?.hidden || null">
       <sb-dropdown [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
         [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
         [dataLoadStatusDelegate]="dataLoadStatusDelegate" [options]="field.templateOptions?.options"
-        [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder">
+        [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder"
+        [labelHtml]="field.templateOptions.labelHtml">
       </sb-dropdown>
     </div>
     </ng-container>

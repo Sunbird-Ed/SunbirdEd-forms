@@ -1,5 +1,6 @@
 <div class="sb-dropdown" *ngIf="!type">
-  <label>{{label}}</label>
+  <label class="title-text" *ngIf="label">{{label}}</label>
+  <div class="title-text" *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <ng-container *ngIf="options">
     <div class="dropdown-container">
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
@@ -27,7 +28,8 @@
 
 <!-- Dropdown for filters component -->
 <div class="sb-dropdown" *ngIf="type === 'facet'">
-  <label>{{label}}</label>
+  <label class="title-text" *ngIf="label">{{label}}</label>
+  <div class="title-text" *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <ng-container *ngIf="options && options.data">
     <div class="dropdown-container">
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
