@@ -16,6 +16,7 @@ export class DropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() disabled?: boolean;
   @Input() options: any = [];
   @Input() label?: string;
+  @Input() labelHtml: any;
   @Input() placeHolder?: string;
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
