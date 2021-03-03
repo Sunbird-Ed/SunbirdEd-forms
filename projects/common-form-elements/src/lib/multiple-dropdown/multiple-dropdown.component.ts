@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, HostListener, ViewChild } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
 import {FieldConfigOptionsBuilder} from '../common-form-config';
@@ -21,6 +21,7 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() formControlRef?: FormControl;
+  @Input() platform: any;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
@@ -33,6 +34,12 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
   private dispose$ = new Subject<undefined>();
 
+  @HostListener('document:click')
+  docClick() {
+    if (this.showModal) {
+      this.showModal = false;
+    }
+  }
   constructor(
     private changeDetectionRef: ChangeDetectorRef
   ) {
@@ -71,14 +78,29 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
     this.formControlRef.markAsDirty();
     this.showModal = false;
   }
-  openModal() {
+  openModal(event) {
     if (this.context && this.context.invalid) {
       return;
     }
 
     this.setTempValue(this.formControlRef.value);
+    const htmlCollection = document.getElementsByClassName('sb-modal-dropdown-web');
+    const modalElements = Array.from(htmlCollection);
+    const isModalAlreadyOpened = modalElements.some((element: HTMLElement) => element.hidden === false );
 
-    this.showModal = true;
+    if (this.platform === 'web' && isModalAlreadyOpened && !this.showModal) {
+      modalElements.forEach((item: HTMLElement) => {
+        item.hidden = true;
+      });
+    }
+
+    if (this.platform === 'web' && this.showModal) {
+      this.showModal = false;
+    } else {
+      this.showModal = true;
+    }
+
+    event.stopPropagation();
   }
 
   addSelected(option: Map<string, string>) {

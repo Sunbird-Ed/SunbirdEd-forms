@@ -1,11 +1,11 @@
-<div class="multi-select-section">
+<div class="multi-select-section-app">
   <label class="input-label" *ngIf="label">{{label}}</label>
   <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <div class="multi-select-container">
     <sb-caret-down class="caret-down"
-      [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal()">
+      [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
     </sb-caret-down>
-    <div class="list-border" (click)="openModal()">
+    <div class="list-border" (click)="openModal($event)">
       <ul [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
         <ng-container *ngIf="isMultiple">
           <li *ngIf="!formControlRef.value || !formControlRef.value.length" class="placeholder">{{placeHolder}}</li>
@@ -25,7 +25,7 @@
         </ng-container>
       </ul>
     </div>
-    <div class="sb-modal-container" [hidden]="!showModal" (click)="showModal=false;">
+    <div class="sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
       <div class="sb-modal-overlay">
         <div class="sb-modal" (click)="$event.stopPropagation()">
           <div class="header">
@@ -54,6 +54,15 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
+      <ul>
+        <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option':tempValue.includes(option.get('value'))}">
+          <div (click)="addSelected(option); !isMultiple && onSubmit()">
+            <span>{{option.get('label')}}</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

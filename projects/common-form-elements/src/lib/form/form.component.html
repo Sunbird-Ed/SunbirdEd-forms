@@ -1,32 +1,13 @@
 <div [formGroup]="formGroup">
   <ng-container *ngFor="let field of config; let index = i">
     <div *ngIf="field.type === FieldConfigInputType.SELECT || field.type === FieldConfigInputType.NESTED_SELECT" [hidden]="field.templateOptions?.hidden || null">
-     <ng-container *ngIf="platform==='mobile'">
       <sb-multiple-dropdown [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
         [formControlRef]="formGroup.get(field.code)" [options]="field.templateOptions?.options"
         [label]="field.templateOptions.label" [dataLoadStatusDelegate]="dataLoadStatusDelegate"
         [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder" 
-        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml">
+        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml"
+        [platform]="platform">
       </sb-multiple-dropdown>
-    </ng-container>
-    <ng-container *ngIf="platform==='web'">
-      <div *ngIf="field.type === FieldConfigInputType.SELECT && !field.templateOptions.multiple" [hidden]="field.templateOptions?.hidden || null">
-        <sb-dropdown [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
-          [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [options]="field.templateOptions?.options"
-          [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder"
-          [labelHtml]="field.templateOptions.labelHtml">
-        </sb-dropdown>
-      </div>
-    <div *ngIf="field.type === FieldConfigInputType.NESTED_SELECT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-dropdown [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
-        [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
-        [dataLoadStatusDelegate]="dataLoadStatusDelegate" [options]="field.templateOptions?.options"
-        [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder"
-        [labelHtml]="field.templateOptions.labelHtml">
-      </sb-dropdown>
-    </div>
-    </ng-container>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
       <sb-textbox [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
