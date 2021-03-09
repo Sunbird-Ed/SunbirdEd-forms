@@ -110,12 +110,12 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.dispose$.complete();
   }
 
-  private formatTopics(topics, subTopic = false): Array<TopicTreeNode> {
+  private formatTopics(topics): Array<TopicTreeNode> {
     return _.map(topics, (topic) => ({
       id: topic.identifier,
       name: topic.name,
-      selectable: subTopic ? 'selectable' : 'notselectable',
-      nodes: this.formatTopics(topic.children, true)
+      selectable: 'selectable',
+      nodes: this.formatTopics(topic.children)
     }));
   }
 
@@ -134,7 +134,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initTopicPicker(data: Array<TopicTreeNode>) {
-      $(`.topic-picker-selector_${this.field.code}`).treePicker({
+      $(`#treePicker_${this.field.code}`).treePicker({
         data: data,
         name: 'Topics',
         noDataMessage: 'noDataMessage',
@@ -170,7 +170,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
           return this.disabled ? true : ( this.depends ? (this.isDependsInvalid ? true : false) : false )
         }
       });
-      setTimeout(() => document.getElementById(`topicSelector_${this.field.code}`).classList.add(this.topicPickerClass), 0);
+      setTimeout(() => document.getElementById(`topicSelector_${this.field.code}`).classList.add(`topicSelector_${this.field.code}`), 0);
   }
 
   fetchAssociations() {
