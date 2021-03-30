@@ -17,6 +17,9 @@ import { DynamicMultiSelectComponent } from '../dynamic-multi-select/dynamic-mul
 import { DynamicDropdownComponent } from '../dynamic-dropdown/dynamic-dropdown.component';
 import { DynamicMultipleDropdownComponent } from '../dynamic-multiple-dropdown/dynamic-multiple-dropdown.component';
 import { DynamicCheckboxComponent } from '../dynamic-checkbox/dynamic-checkbox.component';
+import { DynamicTimerComponent } from '../dynamic-timer/dynamic-timer.component';
+import { DynamicFrameworkComponent } from '../dynamic-framework/dynamic-framework.component';
+import { DynamicFrameworkCategorySelectComponent } from '../dynamic-framework-category-select/dynamic-framework-category-select.component';
 
 
 const componentMapper = {
@@ -31,7 +34,10 @@ const componentMapper = {
   licenses: DynamicDropdownComponent,
   label: DynamicTextboxComponent,
   number: DynamicTextboxComponent,
-  checkbox: DynamicCheckboxComponent
+  checkbox: DynamicCheckboxComponent,
+  timer: DynamicTimerComponent,
+  framework: DynamicFrameworkComponent,
+  frameworkCategorySelect: DynamicFrameworkCategorySelectComponent
 };
 
 @Directive({
@@ -45,6 +51,7 @@ export class DynamicFieldDirective implements OnInit {
   @Input() formGroup: FormGroup;
   @Input() formControlRef?: FormControl;
   @Input() disabled?: boolean;
+  @Input() visible?: boolean;
   @Input() label: String;
   @Input() options?: any = [];
   @Input() placeholder?: string;
@@ -88,6 +95,7 @@ export class DynamicFieldDirective implements OnInit {
     this.componentRef.instance.dataLoadStatusDelegate = this.dataLoadStatusDelegate;
     this.componentRef.instance.validations = this.validations;
     this.componentRef.instance.disabled = this.disabled;
+    this.componentRef.instance.visible = this.visible;
 
     // this.componentRef.instance = {
     //   field : this.field,

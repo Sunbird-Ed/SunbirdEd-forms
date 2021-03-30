@@ -1,10 +1,13 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
   Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
   import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
 import * as _ from 'lodash-es';
+import * as moment_ from 'moment';
+import { FieldComparator } from '../utilities/fieldComparator';
+const moment = moment_;
 
 @Component({
   selector: 'sb-dynamic-form',
@@ -24,7 +27,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
   private statusChangesSubscription: Subscription;
   private valueChangesSubscription: Subscription;
 
-
+  FieldComparator = FieldComparator;
   _: any = _;
 
   formGroup: FormGroup;
@@ -154,7 +157,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'textarea':
         defaultVal = element.default || null;
         break;
+      case 'timer':
+        defaultVal = element.default || null;
+        break;
       case 'select':
+      case 'framework':
         if (element.default) {
           if (element.dataType === 'list') {
             if (_.isArray(element.default)) {
@@ -167,6 +174,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
               defaultVal = element.default;
             } else {
               defaultVal = _.toString(element.default);
+            }
+          } else if (element.dataType === 'number') {
+            if (_.isNumber(element.default)) {
+              defaultVal = element.default;
+            } else {
+              defaultVal = _.toNumber(element.default);
             }
           }
         } else {
@@ -195,6 +208,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           }
           break;
       case 'nestedselect':
+      case 'frameworkCategorySelect':
           defaultVal = element.dataType === 'list' ?
           (element.default && Array.isArray(element.default) ? element.default :
           _.isEmpty(element.default) ? [] : [element.default]) :
@@ -211,7 +225,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       element.validations.forEach((data, i) => {
         switch (data.type) {
           case 'required':
-            if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect') {
+            if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect' ||
+            element.inputType === 'frameworkCategorySelect') {
               validationList.push(Validators.required);
             } else if (element.type === 'checkbox') {
               validationList.push(Validators.requiredTrue);
@@ -222,11 +237,23 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           case 'pattern':
             validationList.push(Validators.pattern(element.validations[i].value as string));
             break;
-          case 'min':
+          case 'minLength':
             validationList.push(Validators.minLength(element.validations[i].value as number));
             break;
-          case 'max':
+          case 'maxLength':
             validationList.push(Validators.maxLength(element.validations[i].value as number));
+            break;
+          case 'min':
+            validationList.push(Validators.min(element.validations[i].value as number));
+            break;
+          case 'max':
+            validationList.push(Validators.max(element.validations[i].value as number));
+            break;
+          case 'time':
+            validationList.push(this.validateTime.bind(this, element.validations[i].value, element));
+            break;
+          case 'compare':
+            validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
             break;
         }
       });
@@ -280,6 +307,32 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   getFlattenedSectionFields() {
     return _.flatten(_.map(this.config, 'fields'));
+  }
+
+  validateTime(pattern, field, control: AbstractControl): ValidationErrors | null  {
+    const isPatternMatched = moment(control.value, pattern, true).isValid();
+    if (!isPatternMatched && (control.touched || control.dirty)) {
+      return {time : true};
+    }
+    return null;
+    // return moment(control.value, pattern, true).isValid() && control.touched ? null : {time: true};
+  }
+
+
+
+  compareFields(criteria, control: AbstractControl): ValidationErrors | null {
+    const result = _.find(criteria, (val, key) => {
+      if (control && control.parent && control.parent.controls[val]) {
+        return FieldComparator.operators[key](control.parent.controls[val].value, control.value);
+      } else {
+        return false;
+      }
+    });
+    if (result && (control.touched || control.dirty)) {
+      return { compare: true };
+    }
+    return null;
+    // return result ? {compare: true} : null;
   }
 
 }
