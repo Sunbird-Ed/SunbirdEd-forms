@@ -45,7 +45,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   public selectedNodes: any;
   public placeHolder: string;
 
-  public isDependsInvalid: any;
+  public isDependsInvalid: any = false;
   private dispose$ = new Subject<undefined>();
   options$?: Observable<FieldConfigOption<any>[]>;
   latestParentValue: string;
@@ -60,9 +60,9 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!_.isEmpty(this.depends)) {
       this.checkForCustomEventHandler();
      this.handleDependantFieldChanges();
+     this.checkIfDependsHasDefault();
     }
 
-    this.checkIfDependsHasDefault();
     this.handleClosureOption();
 
      this.setDefaultValue();
