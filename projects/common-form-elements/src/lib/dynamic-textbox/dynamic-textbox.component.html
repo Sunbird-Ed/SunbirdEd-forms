@@ -9,7 +9,7 @@
     <input [formControl]="formControlRef" [class.valid]="formControlRef.valid &&
     (formControlRef.dirty || formControlRef.touched)"
 [class.invalid]="formControlRef.invalid &&
-(formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}}" placeholder={{placeholder}} type="text"
+(formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}}" placeholder={{placeholder}} [type]="field.dataType === 'number' ? 'number' : 'text'"
 [attr.disabled]="disabled ? true : null">
     <div class="async-icons" *ngIf="asyncValidation && asyncValidation?.trigger">
       <!-- <sb-green-tick *ngIf="formControlRef.value && formControlRef.status === 'VALID'"></sb-green-tick> -->

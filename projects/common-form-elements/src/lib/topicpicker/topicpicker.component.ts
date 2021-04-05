@@ -166,18 +166,16 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.topicChange.emit(this.selectedTopics);
 
     if (!_.isEmpty(this.default) && this.isDefaultExistsInTerms()) {
-      this.placeHolder = this.default &&  this.default.length + ' topics selected';
+      this.placeHolder = this.getPlaceHolder();
     } else if (!_.isEmpty(this.default)) {
+      this.placeHolder = this.getPlaceHolder();
       this.formControlRef.setValue(this.default);
     }
 
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
-    if (this.field.terms || this.tempAssociation) {
-      this.initTopicPicker(this.formatTopics(this.field.terms || this.tempAssociation));
-    }
-
+      this.initTopicPicker(this.formatTopics(this.field.terms || this.tempAssociation || []));
   }
 
   ngOnDestroy(): void {
@@ -226,7 +224,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
             identifier: node.id,
             name: node.name
           }));
-          this.placeHolder = this.selectedTopics.length + ' topics selected';
+          this.placeHolder = this.getPlaceHolder();
           this.topicChange.emit(this.selectedTopics);
           const topics = [];
           _.forEach(this.selectedTopics, (value, index) => {
@@ -246,6 +244,17 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
       setTimeout(() => document.getElementById(`topicSelector_${this.field.code}`).classList.add(`topicSelector_${this.field.code}`), 0);
+  }
+
+  getPlaceHolder() {
+    if (!_.isEmpty(this.selectedTopics)) {
+      return this.selectedTopics.length + ' topics selected';
+    } else if (!_.isEmpty(this.selectedNodes)) {
+      const selectedNodesIdentifiers =  _.map(this.selectedNodes, 'identifier');
+      return selectedNodesIdentifiers.length + ' topics selected';
+    } else if (!_.isEmpty(this.default)) {
+      return this.default.length + ' topics selected';
+    }
   }
 
   fetchAssociations() {

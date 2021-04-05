@@ -434,6 +434,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
 
   private resetTempValue() {
     this.tempValue = Set(null);
+    this.default = [];
   }
 
   private setupOptions() {

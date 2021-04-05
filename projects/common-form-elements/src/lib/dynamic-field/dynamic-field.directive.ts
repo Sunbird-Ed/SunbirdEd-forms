@@ -75,27 +75,30 @@ export class DynamicFieldDirective implements OnInit {
   ) { }
 
   ngOnInit() {
-    const factory = this.resolver.resolveComponentFactory(componentMapper[this.field.inputType]);
-    this.componentRef = this.container.createComponent(factory);
-    // this.renderer2.appendChild(this.elementRef.nativeElement, this.componentRef.location.nativeElement);
-    if (this.field.renderingHints && this.field.renderingHints.class) {
-      this.setClassListOnElement(this.field.renderingHints.class);
+    const mappedComponent =  componentMapper[this.field.inputType];
+    if (!_.isEmpty(mappedComponent)) {
+      const factory = this.resolver.resolveComponentFactory(mappedComponent);
+      this.componentRef = this.container.createComponent(factory);
+      // this.renderer2.appendChild(this.elementRef.nativeElement, this.componentRef.location.nativeElement);
+      if (this.field.renderingHints && this.field.renderingHints.class) {
+        this.setClassListOnElement(this.field.renderingHints.class);
+      }
+      this.componentRef.instance.field = this.field;
+      this.componentRef.instance.formGroup = this.formGroup;
+      this.componentRef.instance.formControlRef = this.formControlRef;
+      this.componentRef.instance.label = this.label;
+      this.componentRef.instance.placeholder = this.placeholder;
+      this.componentRef.instance.options = this.options;
+      this.componentRef.instance.context = this.context;
+      this.componentRef.instance.contextTerms = this.contextTerms;
+      this.componentRef.instance.depends = this.depends;
+      this.componentRef.instance.dependencyTerms = this.dependencyTerms;
+      this.componentRef.instance.default = this.default;
+      this.componentRef.instance.dataLoadStatusDelegate = this.dataLoadStatusDelegate;
+      this.componentRef.instance.validations = this.validations;
+      this.componentRef.instance.disabled = this.disabled;
+      this.componentRef.instance.visible = this.visible;
     }
-    this.componentRef.instance.field = this.field;
-    this.componentRef.instance.formGroup = this.formGroup;
-    this.componentRef.instance.formControlRef = this.formControlRef;
-    this.componentRef.instance.label = this.label;
-    this.componentRef.instance.placeholder = this.placeholder;
-    this.componentRef.instance.options = this.options;
-    this.componentRef.instance.context = this.context;
-    this.componentRef.instance.contextTerms = this.contextTerms;
-    this.componentRef.instance.depends = this.depends;
-    this.componentRef.instance.dependencyTerms = this.dependencyTerms;
-    this.componentRef.instance.default = this.default;
-    this.componentRef.instance.dataLoadStatusDelegate = this.dataLoadStatusDelegate;
-    this.componentRef.instance.validations = this.validations;
-    this.componentRef.instance.disabled = this.disabled;
-    this.componentRef.instance.visible = this.visible;
 
     // this.componentRef.instance = {
     //   field : this.field,
