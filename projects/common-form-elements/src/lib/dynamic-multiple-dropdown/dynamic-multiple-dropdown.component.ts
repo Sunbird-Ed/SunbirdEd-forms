@@ -34,7 +34,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
 
   public isDependsInvalid: any;
-
+  masterSelected: boolean;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -86,6 +86,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
       takeUntil(this.dispose$)
     ).subscribe();
     this.setupOptions();
+    this.isAllSelected();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -153,6 +154,8 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
         this.tempValue = this.tempValue.add(option.get('name'));
       }
     }
+
+    this.masterSelected = this.tempValue.size === this.options.length;
   }
 
   onCancel() {
@@ -249,4 +252,27 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.setTempValue(this.default);
   }
 
+  isAllSelected() {
+    if (this.isOptionsArray()) {
+      if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
+        this.masterSelected = true;
+      }
+    }
+  }
+
+  checkUncheckAll(event) {
+    this.formControlRef.patchValue(null);
+    this.resetTempValue();
+
+    if (event.target.checked) {
+      this.resolvedOptions.forEach(option => {
+        this.addSelected(option);
+      });
+
+      this.masterSelected = true;
+      this.onSubmit();
+    } else {
+      this.masterSelected = false;
+    }
+  }
 }

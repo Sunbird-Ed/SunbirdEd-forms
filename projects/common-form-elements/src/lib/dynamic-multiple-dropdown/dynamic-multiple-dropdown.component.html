@@ -54,11 +54,19 @@
         </div>
       </div>
     </div>
-    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
+
+    <!-- Conflict with this on select list-->
+    <!-- confict(click)="showModal=false;" -->
+    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
       <ul>
+        <li>
+            <input type = "checkbox" [(ngModel)]="masterSelected" id="selectAll" (click)="checkUncheckAll($event)">
+            <label class="cursor-pointer" for="selectAll">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
+        </li>
         <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option': !_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))}">
-          <div (click)="addSelected(option); onSubmit()">
-            <span class="cursor-pointer">{{option.get('name')}}</span>
+          <div>
+            <input (click)="addSelected(option); onSubmit()" type="checkbox" id="op{{i}}" [checked]="!_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))" >
+            <label class="cursor-pointer" for="op{{i}}">{{option.get('name')}}</label>
           </div>
         </li>
       </ul>
