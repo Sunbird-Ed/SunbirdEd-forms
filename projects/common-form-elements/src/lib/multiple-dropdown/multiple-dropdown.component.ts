@@ -9,7 +9,7 @@ import {fromJS, List, Map, Set} from 'immutable';
 @Component({
   selector: 'sb-multiple-dropdown',
   templateUrl: './multiple-dropdown.component.html',
-  styleUrls: ['./multiple-dropdown.component.css'],
+  styleUrls: ['./multiple-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {

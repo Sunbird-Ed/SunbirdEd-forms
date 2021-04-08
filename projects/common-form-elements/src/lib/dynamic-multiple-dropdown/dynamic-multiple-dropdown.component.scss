@@ -32,20 +32,21 @@ label{
 
 .multi-select-container .list-border ul {
   list-style-type: none;
-  position: absolute;
+  position: inherit !important;
   margin: 0;
   font-size: 14px;
   font-weight: bold;
+  padding-left: 0.3rem;
 }
 
 .multi-select-container .list-border {
   border: 0.5px solid var(--gray-400);
-  padding: 1.3rem;
+  padding: 0.6rem 1.7rem 0.6rem 0.8rem !important;
   cursor: pointer;
   display: flex;
   align-items: center;
   left: 0;
-  height: 40px;
+  height: inherit !important;
 }
 
 .multi-select-container .list-border li {
@@ -281,6 +282,7 @@ label{
   border: 2px solid #80a7ce;
   max-height: 314px;
   overflow: scroll;
+  padding-left: 1rem;
 }
 
 .sb-modal-dropdown-web ul li {

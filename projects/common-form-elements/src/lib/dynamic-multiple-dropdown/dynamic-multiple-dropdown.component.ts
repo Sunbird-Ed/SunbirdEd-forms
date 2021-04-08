@@ -9,7 +9,7 @@ import * as _ from 'lodash-es';
 @Component({
   selector: 'sb-dynamic-multiple-dropdown',
   templateUrl: './dynamic-multiple-dropdown.component.html',
-  styleUrls: ['./dynamic-multiple-dropdown.component.css']
+  styleUrls: ['./dynamic-multiple-dropdown.component.scss']
 })
 export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
