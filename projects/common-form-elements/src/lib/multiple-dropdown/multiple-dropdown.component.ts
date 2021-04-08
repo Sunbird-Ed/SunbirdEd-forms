@@ -1,4 +1,16 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, HostListener, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  HostListener,
+  ViewChild,
+  Output, EventEmitter
+} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
 import {FieldConfigOptionsBuilder} from '../common-form-config';
@@ -9,7 +21,7 @@ import {fromJS, List, Map, Set} from 'immutable';
 @Component({
   selector: 'sb-multiple-dropdown',
   templateUrl: './multiple-dropdown.component.html',
-  styleUrls: ['./multiple-dropdown.component.css'],
+  styleUrls: ['./multiple-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
@@ -54,10 +66,6 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
         }),
         takeUntil(this.dispose$)
       ).subscribe();
-    }
-
-    if (!this.formControlRef) {
-      this.formControlRef = new FormControl([]);
     }
 
     this.formControlRef.valueChanges.pipe(

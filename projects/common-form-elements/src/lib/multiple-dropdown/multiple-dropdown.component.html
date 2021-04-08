@@ -1,20 +1,21 @@
-<div class="multi-select-section-app" [class.open]="showModal">
-  <label class="input-label" *ngIf="label">{{label}}</label>
-  <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
-  <div class="multi-select-container">
-    <sb-caret-up *ngIf="showModal" class="caret-down"
+<div class="cfe-multiselect-container multi-select-section-app" [class.open]="showModal">
+  <label class="cfe-multiselect-label input-label" *ngIf="label">{{label}}</label>
+  <div class="cfe-multiselect-label" *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
+  <div class="cfe-multiselect-field multi-select-container">
+    <sb-caret-up *ngIf="showModal" class="cfe-multiselect-field-caret caret-down"
       [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
     </sb-caret-up>
-    <sb-caret-down *ngIf="!showModal" class="caret-down"
+    <sb-caret-down *ngIf="!showModal" class="cfe-multiselect-field-caret caret-down"
                    [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
     </sb-caret-down>
-    <div class="list-border" (click)="openModal($event)">
+
+    <div class="cfe-multiselect-field-label-container list-border" (click)="openModal($event)">
       <ul [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
         <ng-container *ngIf="isMultiple">
-          <li *ngIf="!formControlRef.value || !formControlRef.value.length" class="placeholder">{{placeHolder}}</li>
+          <li class="cfe-multiselect-field-label placeholder" *ngIf="!formControlRef.value || !formControlRef.value.length">{{placeHolder}}</li>
 
           <ng-container *ngIf="formControlRef.value?.length">
-            <span *ngFor="let value of formControlRef.value; let index=index">
+            <span class="cfe-multiselect-field-label" *ngFor="let value of formControlRef.value; let index=index">
               {{optionValueToOptionLabelMap.get(fromJS(value))}}<span
             *ngIf="index < formControlRef.value.length - 1">, </span>
             </span>
@@ -22,22 +23,23 @@
         </ng-container>
 
         <ng-container *ngIf="!isMultiple">
-          <li *ngIf="!formControlRef.value" class="placeholder">{{placeHolder}}</li>
+          <li class="cfe-multiselect-field-label placeholder" *ngIf="!formControlRef.value">{{placeHolder}}</li>
 
-          <span *ngIf="formControlRef.value">{{optionValueToOptionLabelMap.get(fromJS(formControlRef.value))}}</span>
+          <span class="cfe-multiselect-field-label" *ngIf="formControlRef.value">{{optionValueToOptionLabelMap.get(fromJS(formControlRef.value))}}</span>
         </ng-container>
       </ul>
     </div>
-    <div class="sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
-      <div class="sb-modal-overlay">
-        <div class="sb-modal" (click)="$event.stopPropagation()">
-          <div class="header">
+
+    <div class="cfe-multiselect-modal-container sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
+      <div class="cfe-multiselect-modal-overlay sb-modal-overlay">
+        <div class="cfe-multiselect-modal sb-modal" (click)="$event.stopPropagation()">
+          <div class="cfe-multiselect-modal-header header">
             {{placeHolder}}
           </div>
-          <div class="body">
+          <div class="cfe-multiselect-modal-body body">
             <ul>
               <li *ngFor="let option of resolvedOptions; let i=index">
-                <div (click)="addSelected(option)" class="row">
+                <div class="cfe-multiselect-modal-item" (click)="addSelected(option)" class="row">
                   <label class="container" style="pointer-events: none">
                     <input [checked]="tempValue.includes(option.get('value'))" class="sb-checkbox" type="checkbox">
                     <span class="checkmark"></span>
@@ -47,21 +49,22 @@
               </li>
             </ul>
           </div>
-          <div class="footer">
-            <div class="sb-form-button">
+          <div class="cfe-multiselect-modal-footer footer">
+            <div class="cfe-multiselect-modal-footer-button sb-form-button">
               <button class="sb-btn-primary-outline" (click)="onCancel()">cancel</button>
             </div>
-            <div class="sb-form-button">
+            <div class="cfe-multiselect-modal-footer-button sb-form-button">
               <button class="sb-btn-primary" (click)="onSubmit()">submit</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
+
+    <div class="cfe-multiselect-dropdown sb-modal-dropdown-web cfe-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
       <ul>
         <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option':tempValue.includes(option.get('value'))}">
-          <div (click)="addSelected(option); !isMultiple && onSubmit()">
+          <div (click)="addSelected(option); onSubmit()">
             <span>{{option.get('label')}}</span>
           </div>
         </li>

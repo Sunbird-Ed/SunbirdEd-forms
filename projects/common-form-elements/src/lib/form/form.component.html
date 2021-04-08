@@ -1,27 +1,27 @@
 <div [formGroup]="formGroup">
   <ng-container *ngFor="let field of config; let index = i">
     <div *ngIf="field.type === FieldConfigInputType.SELECT || field.type === FieldConfigInputType.NESTED_SELECT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-multiple-dropdown [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
+      <sb-multiple-dropdown [class]="fieldTemplateClass" [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
         [formControlRef]="formGroup.get(field.code)" [options]="field.templateOptions?.options"
         [label]="field.templateOptions.label" [dataLoadStatusDelegate]="dataLoadStatusDelegate"
-        [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder" 
+        [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder"
         [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml"
         [platform]="platform">
       </sb-multiple-dropdown>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-textbox [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
+      <sb-textbox [class]="fieldTemplateClass" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
         [placeholder]="field.templateOptions.placeHolder" [validations]="field.validations" [prefix]="field.templateOptions.prefix"
         [labelHtml]="field.templateOptions.labelHtml">
       </sb-textbox>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.TEXTAREA" [hidden]="field.templateOptions?.hidden || null">
-      <sb-textarea [config]="field" [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
+      <sb-textarea [class]="fieldTemplateClass" [config]="field" [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
         [placeholder]="field.templateOptions.placeHolder">
       </sb-textarea>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.CHECKBOX" [hidden]="field.templateOptions?.hidden || null">
-      <sb-checkbox [code]="field.code" [formControlRef]="formGroup.get(field.code)"
+      <sb-checkbox [class]="fieldTemplateClass" [code]="field.code" [formControlRef]="formGroup.get(field.code)"
         [label]="field.templateOptions.label" [labelHtml]="field.templateOptions.labelHtml" [value]="field.default"
         (clickedLink)="clickedLink($event)"></sb-checkbox>
     </div>
@@ -33,12 +33,16 @@
     <ng-container *ngIf="formGroup.get(field.code) as ref">
       <div *ngIf="field.type === FieldConfigInputType.NESTED_SELECT && ref && ref.value && field.children && field.children[ref.value]">
         <sb-form (initialize)="onNestedFormInitialize($event, field)" (finalize)="onNestedFormFinalize($event, field)"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children[ref.value]"></sb-form>
+                 [fieldTemplateClass]="fieldTemplateClass"
+                 [dataLoadStatusDelegate]="dataLoadStatusDelegate"
+                 [config]="field.children[ref.value]"></sb-form>
       </div>
 
       <div *ngIf="field.type === FieldConfigInputType.NESTED_GROUP && field.children">
         <sb-form (initialize)="onNestedFormInitialize($event, field)" (finalize)="onNestedFormFinalize($event, field)"
-          [dataLoadStatusDelegate]="dataLoadStatusDelegate" [config]="field.children"></sb-form>
+                 [fieldTemplateClass]="fieldTemplateClass"
+                 [dataLoadStatusDelegate]="dataLoadStatusDelegate"
+                 [config]="field.children"></sb-form>
       </div>
     </ng-container>
 
@@ -46,6 +50,6 @@
       <label *ngIf="field.templateOptions?.label">{{field.templateOptions?.label}}</label>
       <div *ngIf="field.templateOptions?.labelHtml" [innerHTML]="field.templateOptions?.labelHtml | transposeHtml"></div>
     </ng-container>
-    
+
   </ng-container>
 </div>
