@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommonFormElementsComponent } from './common-form-elements.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { TextboxComponent } from './textbox/textbox.component';
 import { TextareaComponent } from './textarea/textarea.component';
@@ -33,7 +32,6 @@ import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
    declarations: [
-      CommonFormElementsComponent,
       DropdownComponent,
       TextboxComponent,
       TextareaComponent,
@@ -67,7 +65,6 @@ import { TagInputModule } from 'ngx-chips';
       TagInputModule
    ],
    exports: [
-      CommonFormElementsComponent,
       DropdownComponent,
       CaretDownComponent,
       TextboxComponent,
