@@ -1,9 +1,12 @@
-<div class="multi-select-section-app">
+<div class="multi-select-section-app" [class.open]="showModal">
   <label class="input-label" *ngIf="label">{{label}}</label>
   <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <div class="multi-select-container">
-    <sb-caret-down class="caret-down"
+    <sb-caret-up *ngIf="showModal" class="caret-down"
       [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
+    </sb-caret-up>
+    <sb-caret-down *ngIf="!showModal" class="caret-down"
+                   [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
     </sb-caret-down>
     <div class="list-border" (click)="openModal($event)">
       <ul [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">

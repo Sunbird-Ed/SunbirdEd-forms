@@ -56,6 +56,10 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
       ).subscribe();
     }
 
+    if (!this.formControlRef) {
+      this.formControlRef = new FormControl([]);
+    }
+
     this.formControlRef.valueChanges.pipe(
       tap((value) => {
         this.setTempValue(value);

@@ -10,6 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DropdownIconComponent } from './icon/dropdown/dropdownIcon.component';
 import { MultipleDropdownComponent } from './multiple-dropdown/multiple-dropdown.component';
 import { CaretDownComponent } from './icon/caret-down/caret-down.component';
+import { CaretUpComponent } from './icon/caret-up/caret-up.component';
 import { PipesModule } from './pipes/pipes.module';
 import { RedExclamationComponent } from './icon/red-exclamation/red-exclamation.component';
 import { GreenTickComponent } from './icon/green-tick/green-tick.component';
@@ -41,6 +42,7 @@ import { TagInputModule } from 'ngx-chips';
       DropdownIconComponent,
       MultipleDropdownComponent,
       CaretDownComponent,
+      CaretUpComponent,
       RedExclamationComponent,
       GreenTickComponent,
       EmptyCircleComponent,
@@ -67,6 +69,7 @@ import { TagInputModule } from 'ngx-chips';
    exports: [
       DropdownComponent,
       CaretDownComponent,
+      CaretUpComponent,
       TextboxComponent,
       TextareaComponent,
       CheckboxComponent,
