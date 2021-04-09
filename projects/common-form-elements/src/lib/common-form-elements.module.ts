@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CommonFormElementsComponent } from './common-form-elements.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { TextboxComponent } from './textbox/textbox.component';
 import { TextareaComponent } from './textarea/textarea.component';
@@ -11,6 +10,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DropdownIconComponent } from './icon/dropdown/dropdownIcon.component';
 import { MultipleDropdownComponent } from './multiple-dropdown/multiple-dropdown.component';
 import { CaretDownComponent } from './icon/caret-down/caret-down.component';
+import { CaretUpComponent } from './icon/caret-up/caret-up.component';
 import { PipesModule } from './pipes/pipes.module';
 import { RedExclamationComponent } from './icon/red-exclamation/red-exclamation.component';
 import { GreenTickComponent } from './icon/green-tick/green-tick.component';
@@ -33,7 +33,6 @@ import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
    declarations: [
-      CommonFormElementsComponent,
       DropdownComponent,
       TextboxComponent,
       TextareaComponent,
@@ -43,6 +42,7 @@ import { TagInputModule } from 'ngx-chips';
       DropdownIconComponent,
       MultipleDropdownComponent,
       CaretDownComponent,
+      CaretUpComponent,
       RedExclamationComponent,
       GreenTickComponent,
       EmptyCircleComponent,
@@ -67,9 +67,9 @@ import { TagInputModule } from 'ngx-chips';
       TagInputModule
    ],
    exports: [
-      CommonFormElementsComponent,
       DropdownComponent,
       CaretDownComponent,
+      CaretUpComponent,
       TextboxComponent,
       TextareaComponent,
       CheckboxComponent,

@@ -22,6 +22,7 @@ import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() fieldTemplateClass?: String;
   @Output() initialize = new EventEmitter();
   @Output() finalize = new EventEmitter();
   @Output() linkClicked = new EventEmitter();
