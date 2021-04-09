@@ -1,11 +1,19 @@
 <div [formGroup]="formGroup">
   <ng-container *ngFor="let field of config; let index = i">
     <div *ngIf="field.type === FieldConfigInputType.SELECT || field.type === FieldConfigInputType.NESTED_SELECT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-multiple-dropdown [class]="fieldTemplateClass" [context]="field.context ? formGroup.get(field.context) : null " [default]="field.default"
-        [formControlRef]="formGroup.get(field.code)" [options]="field.templateOptions?.options"
-        [label]="field.templateOptions.label" [dataLoadStatusDelegate]="dataLoadStatusDelegate"
-        [disabled]="field.templateOptions?.disabled" [placeHolder]="field?.templateOptions?.placeHolder"
-        [isMultiple]="field.templateOptions.multiple" [labelHtml]="field.templateOptions.labelHtml"
+      <sb-multiple-dropdown
+        [class]="fieldTemplateClass"
+        [extras]="field.templateOptions?.inputTypeOptions"
+        [context]="field.context ? formGroup.get(field.context) : null "
+        [default]="field.default"
+        [formControlRef]="formGroup.get(field.code)"
+        [options]="field.templateOptions?.options"
+        [label]="field.templateOptions.label"
+        [dataLoadStatusDelegate]="dataLoadStatusDelegate"
+        [disabled]="field.templateOptions?.disabled"
+        [placeHolder]="field?.templateOptions?.placeHolder"
+        [isMultiple]="field.templateOptions.multiple"
+        [labelHtml]="field.templateOptions.labelHtml"
         [platform]="platform">
       </sb-multiple-dropdown>
     </div>
