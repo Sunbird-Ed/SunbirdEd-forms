@@ -1,7 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, HostListener, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  HostListener,
+  ViewChild,
+  Output, EventEmitter
+} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
-import {FieldConfigOptionsBuilder} from '../common-form-config';
+import {FieldConfigInputType, FieldConfigInputTypeOptionsModelMap, FieldConfigOptionsBuilder} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
 import {fromJS, List, Map, Set} from 'immutable';
 
@@ -13,6 +25,7 @@ import {fromJS, List, Map, Set} from 'immutable';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() extras?: FieldConfigInputTypeOptionsModelMap[FieldConfigInputType.SELECT];
   @Input() disabled?: boolean;
   @Input() options: any;
   @Input() label?: string;
@@ -25,6 +38,7 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
+  showModalStateDirty = false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -45,6 +59,10 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   ) {
   }
   ngOnInit() {
+    if (!this.extras) {
+      this.extras = { type: 'dropdown' };
+    }
+
     if (this.context) {
       this.context.valueChanges.pipe(
         tap(() => {
@@ -82,6 +100,8 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
     if (this.context && this.context.invalid) {
       return;
     }
+
+    this.showModalStateDirty = true;
 
     this.setTempValue(this.formControlRef.value);
     const htmlCollection = document.getElementsByClassName('sb-modal-dropdown-web');

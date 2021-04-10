@@ -8,8 +8,19 @@ export enum FieldConfigInputType {
   LABEL = 'label',
   TEXTAREA = 'textarea',
   NESTED_SELECT = 'nested_select',
-  NESTED_GROUP = 'nested_group',
-  MULTIPLE_SELECT = 'multiple_select'
+  NESTED_GROUP = 'nested_group'
+}
+
+export interface FieldConfigInputTypeOptionsModelMap {
+  [FieldConfigInputType.INPUT]: {};
+  [FieldConfigInputType.CHECKBOX]: {};
+  [FieldConfigInputType.SELECT]: {
+    type: 'dropdown' | 'pills'
+  };
+  [FieldConfigInputType.LABEL]: {};
+  [FieldConfigInputType.TEXTAREA]: {};
+  [FieldConfigInputType.NESTED_SELECT]: {};
+  [FieldConfigInputType.NESTED_GROUP]: {};
 }
 
 export enum FieldConfigValidationType {
@@ -39,14 +50,15 @@ export interface FieldConfigAsyncValidation {
   trigger?: string;
   asyncValidatorFactory?: AsyncValidatorFactory;
 }
-export interface FieldConfig<T> {
+export interface FieldConfig<T, F extends FieldConfigInputType = any> {
   code: string;
-  type?: FieldConfigInputType;
+  type?: F;
   fieldName?: string;
   default?: any;
   context?: string;
   children?: { [key: string]: FieldConfig<T>[] } | FieldConfig<T>[];
   templateOptions?: {
+    inputTypeOptions?: FieldConfigInputTypeOptionsModelMap[F],
     type?: string,
     label?: string,
     placeHolder?: string,
