@@ -64,6 +64,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
         tap(() => {
           this.formControlRef.patchValue(null);
           this.resetTempValue();
+          this.resetMasterSelected();
         }),
         takeUntil(this.dispose$)
       ).subscribe();
@@ -195,6 +196,14 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.tempValue = Set(null);
   }
 
+  private resetMasterSelected() {
+    this.masterSelected = false;
+  }
+
+  private setMasterSelected() {
+    this.masterSelected = true;
+  }
+
   private setupOptions() {
     if (!this.options) {
       this.options = [];
@@ -260,19 +269,19 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
   }
 
-  checkUncheckAll(event) {
+  checkUncheckAll() {
     this.formControlRef.patchValue(null);
     this.resetTempValue();
 
-    if (event.target.checked) {
+    if (this.masterSelected === false) {
       this.resolvedOptions.forEach(option => {
         this.addSelected(option);
       });
 
-      this.masterSelected = true;
+      this.setMasterSelected();
       this.onSubmit();
     } else {
-      this.masterSelected = false;
+      this.resetMasterSelected();
     }
   }
 }

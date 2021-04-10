@@ -57,13 +57,13 @@
 
     <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
       <ul>
-        <li>
-            <input type = "checkbox" [(ngModel)]="masterSelected" id="selectAll" (click)="checkUncheckAll($event)">
-            <label class="cursor-pointer" for="selectAll"> {{ masterSelected ? 'Unselect All': 'Select All' }} </label>
+        <li (click)="checkUncheckAll()">
+            <input type="checkbox" [checked]="masterSelected">
+            <label class="cursor-pointer">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
         </li>
-        <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option': !_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))}">
-            <input (click)="addSelected(option); onSubmit()" type="checkbox" id="op{{i}}" [checked]="!_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))" >
-            <label class="cursor-pointer" for="op{{i}}"> {{option.get('name')}} </label>
+        <li *ngFor="let option of resolvedOptions; let i=index" (click)="addSelected(option); onSubmit();" [ngClass]="{'selected-option': !_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))}">
+            <input type="checkbox" [checked]="!_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))" >
+            <label class="cursor-pointer">{{option.get('name')}}</label>
         </li>
       </ul>
     </div>
