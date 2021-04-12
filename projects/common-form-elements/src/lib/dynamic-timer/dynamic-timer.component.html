@@ -1,0 +1,16 @@
+<div class="sb-input">
+  <label *ngIf="label"> {{label}}</label>
+
+  <input (keyup)="onChangeEvent($event)" [class.valid]="formControlRef.valid &&
+    (formControlRef.dirty || formControlRef.touched)"
+    [class.invalid]="formControlRef.invalid &&
+    (formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}}" placeholder={{placeholder}} type="text"
+    [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )" [(ngModel)]="value">
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] &&
+      (formControlRef.dirty || formControlRef.touched)) ">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>
