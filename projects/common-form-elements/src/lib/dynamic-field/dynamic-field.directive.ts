@@ -76,7 +76,7 @@ export class DynamicFieldDirective implements OnInit {
 
   ngOnInit() {
     const mappedComponent =  componentMapper[this.field.inputType];
-    if (!_.isEmpty(mappedComponent)) {
+    if (_.isFunction(mappedComponent)) {
       const factory = this.resolver.resolveComponentFactory(mappedComponent);
       this.componentRef = this.container.createComponent(factory);
       // this.renderer2.appendChild(this.elementRef.nativeElement, this.componentRef.location.nativeElement);
