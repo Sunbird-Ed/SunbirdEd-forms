@@ -6,6 +6,7 @@
   },
   "whitelistedNonPeerDependencies": [
     "immutable",
-    "ngx-chips"
+    "ngx-chips",
+    "moment"
   ]
 }

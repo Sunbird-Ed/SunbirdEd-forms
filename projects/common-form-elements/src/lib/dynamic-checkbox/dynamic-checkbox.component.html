@@ -1,5 +1,7 @@
-<div class="sb-checkbox sb-checkbox-primary">
-  <input [attr.disabled]="disabled ? true : null" type="checkbox" [formControl]="formControlRef" id="{{_.kebabCase(field.name) || field.code}}"
-  name="{{_.kebabCase(field.name) || field.code}}" [checked]="checked" (change)="onChecklistChange($event.target.checked)">
-  <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}">{{label}}</label>
-</div>
+<ng-container *ngIf="visible">
+  <div class="sb-checkbox sb-checkbox-primary">
+    <input [attr.disabled]="disabled ? true : null" type="checkbox" [formControl]="formControlRef" id="{{_.kebabCase(field.name) || field.code}}"
+    name="{{_.kebabCase(field.name) || field.code}}" [checked]="checked" (change)="onChecklistChange($event.target.checked)">
+    <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}">{{label}}</label>
+  </div>
+</ng-container>

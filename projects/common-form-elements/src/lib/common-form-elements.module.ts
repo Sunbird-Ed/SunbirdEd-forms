@@ -30,6 +30,9 @@ import { DynamicMultiSelectComponent } from './dynamic-multi-select/dynamic-mult
 import { TopicpickerComponent } from './topicpicker/topicpicker.component';
 import { KeywordsComponent } from './keywords/keywords.component';
 import { TagInputModule } from 'ngx-chips';
+import { DynamicTimerComponent } from './dynamic-timer/dynamic-timer.component';
+import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-category-select/dynamic-framework-category-select.component';
+import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework.component';
 
 @NgModule({
    declarations: [
@@ -57,7 +60,10 @@ import { TagInputModule } from 'ngx-chips';
       DynamicFieldDirective,
       TopicpickerComponent,
       KeywordsComponent,
-      DynamicMultiSelectComponent
+      DynamicMultiSelectComponent,
+      DynamicTimerComponent,
+      DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkComponent
    ],
    imports: [
       CommonModule,
@@ -90,10 +96,15 @@ import { TagInputModule } from 'ngx-chips';
       DynamicMultiSelectComponent,
       TopicpickerComponent,
       KeywordsComponent,
-      DynamicFieldDirective
+      DynamicFieldDirective,
+      DynamicTimerComponent,
+      DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkComponent
    ],
    entryComponents: [
       DynamicFormComponent,
+      CommonFormElementsComponent,
+      DynamicTimerComponent,
       DynamicTextboxComponent,
       DynamicTextareaComponent,
       DynamicDropdownComponent,
@@ -101,7 +112,10 @@ import { TagInputModule } from 'ngx-chips';
       DynamicCheckboxComponent,
       DynamicMultiSelectComponent,
       TopicpickerComponent,
-      KeywordsComponent
+      KeywordsComponent,
+      DynamicTimerComponent,
+      DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkComponent
    ]
 })
 export class CommonFormElementsModule { }

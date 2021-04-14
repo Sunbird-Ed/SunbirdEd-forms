@@ -11,7 +11,7 @@
           <ng-container *ngIf="formControlRef.value?.length">
             <span *ngFor="let value of formControlRef.value; let index=index">
               {{optionValueToOptionLabelMap.get(fromJS(value))}}
-              <span *ngIf="index < formControlRef.value?.length - 1 && !_.isEmpty(optionValueToOptionLabelMap.get(fromJS(value)))">,
+              <span *ngIf="index < formControlRef.value?.length - 1">,
               </span>
             </span>
           </ng-container>
