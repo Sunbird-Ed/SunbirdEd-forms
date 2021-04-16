@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Subscription, combineLatest, Subject, merge, from, Observable } from 'rxjs';
 import * as _ from 'lodash-es';
 import { FormControl , FormGroup} from '@angular/forms';
@@ -22,7 +22,8 @@ interface JQuery {
 @Component({
   selector: 'sb-topicpicker',
   templateUrl: './topicpicker.component.html',
-  styleUrls: ['./topicpicker.component.css']
+  styleUrls: ['./topicpicker.component.css'],
+  encapsulation : ViewEncapsulation.None
 })
 export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 

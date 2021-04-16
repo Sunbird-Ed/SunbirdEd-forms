@@ -1,5 +1,5 @@
 <div class="sb-dropdown" *ngIf="!type">
-  <label>{{label}} {{context && 'has context'}}  {{context ?  field.context : '' }}</label>
+  <label [attr.data-title]="field.description ? field.description : null">{{label}} {{context && 'has context'}}  {{context ?  field.context : '' }}</label>
   <ng-container *ngIf="options">
     <div class="dropdown-container">
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
