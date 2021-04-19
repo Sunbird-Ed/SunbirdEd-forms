@@ -31,3 +31,22 @@ label {
     left: 0;
     height: 40px;
 }
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -26px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap;
+  border: solid 1px #ccc;
+}
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  z-index: 9999;
+}
