@@ -103,7 +103,6 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
    ],
    entryComponents: [
       DynamicFormComponent,
-      CommonFormElementsComponent,
       DynamicTimerComponent,
       DynamicTextboxComponent,
       DynamicTextareaComponent,
