@@ -2,14 +2,13 @@ import {Facet, FacetValue, IFilterFacet} from './models/facets';
 import {IFacetFilterFieldTemplateConfig} from './facet-filter-field-template-config';
 import {ISearchFilter} from './models/search-filter';
 import {Injectable} from '@angular/core';
-import {TitleCasePipe} from '@angular/common';
 import {FieldConfig, FieldConfigInputType} from '../../common-form-config';
 
 type ISearchResultsFacetsMap = {[facet in Facet]?: FacetValue[]};
 
 @Injectable()
 export class SearchResultFacetFormConfigAdapter {
-  constructor(private titleCasePipe: TitleCasePipe) {}
+  constructor() {}
 
   map(
     searchResultFacets: IFilterFacet[],
@@ -53,7 +52,9 @@ export class SearchResultFacetFormConfigAdapter {
           placeHolder: config.placeholderText,
           multiple: config.multiple,
           options: searchResultsFacetsMap[config.facet] ?
-            searchResultsFacetsMap[config.facet].map((value) => ({ label: this.titleCasePipe.transform(value), value })) :
+            searchResultsFacetsMap[config.facet]
+              .sort()
+              .map((value) => ({ label: value, value })) :
             []
         }
       };

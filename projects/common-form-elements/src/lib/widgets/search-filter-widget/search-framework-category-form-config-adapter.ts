@@ -2,14 +2,13 @@ import {CategoryTerm, FrameworkCategory} from '@project-sunbird/client-services/
 import {IFrameworkCategoryFilterFieldTemplateConfig} from './framework-category-filter-field-template-config';
 import {ISearchFrameworkAssociationsMap, ISearchFrameworkCategoryFilter} from './models/framework';
 import {Injectable} from '@angular/core';
-import {TitleCasePipe} from '@angular/common';
 import {FieldConfig, FieldConfigInputType} from '../../common-form-config';
 
 type CategoryTermName = CategoryTerm['name'];
 
 @Injectable()
 export class SearchFrameworkCategoryFormConfigAdapter {
-  constructor(private titleCasePipe: TitleCasePipe) {}
+  constructor() {}
 
   map(
     frameworkAssociationsMap: ISearchFrameworkAssociationsMap,
@@ -48,7 +47,9 @@ export class SearchFrameworkCategoryFormConfigAdapter {
           placeHolder: config.placeholderText,
           multiple: config.multiple,
           options: frameworkAssociationsMap[config.category] ?
-            frameworkAssociationsMap[config.category].map((value) => ({ label: value, value })) :
+            frameworkAssociationsMap[config.category]
+              .sort()
+              .map((value) => ({ label: value, value })) :
             []
         }
       };
