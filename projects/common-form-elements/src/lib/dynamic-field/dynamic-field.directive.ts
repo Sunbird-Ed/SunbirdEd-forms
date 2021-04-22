@@ -20,6 +20,7 @@ import { DynamicCheckboxComponent } from '../dynamic-checkbox/dynamic-checkbox.c
 import { DynamicTimerComponent } from '../dynamic-timer/dynamic-timer.component';
 import { DynamicFrameworkComponent } from '../dynamic-framework/dynamic-framework.component';
 import { DynamicFrameworkCategorySelectComponent } from '../dynamic-framework-category-select/dynamic-framework-category-select.component';
+import { DynamicRichtextComponent } from '../dynamic-richtext/dynamic-richtext.component';
 
 
 const componentMapper = {
@@ -37,7 +38,8 @@ const componentMapper = {
   checkbox: DynamicCheckboxComponent,
   timer: DynamicTimerComponent,
   framework: DynamicFrameworkComponent,
-  frameworkCategorySelect: DynamicFrameworkCategorySelectComponent
+  frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
+  richtext: DynamicRichtextComponent
 };
 
 @Directive({

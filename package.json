@@ -35,6 +35,7 @@
     "@angular/language-service": "~8.0.0",
     "@ionic/angular-toolkit": "^2.0.0",
     "@project-sunbird/client-services": "3.8.6",
+    "@project-sunbird/ckeditor-build-classic": "^0.0.1",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
