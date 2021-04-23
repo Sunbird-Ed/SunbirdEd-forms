@@ -248,7 +248,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
              }
             break;
           case 'maxLength':
-            if (element.inputType === 'richText') {
+            if (element.inputType === 'richtext') {
               validationList.push(this.validateRichTextLength.bind(this, 'maxLength' , '>', element.validations[i].value ));
              } else {
               validationList.push(Validators.maxLength(element.validations[i].value as number));
