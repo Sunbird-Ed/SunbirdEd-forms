@@ -1,5 +1,5 @@
 <div class="sb-dropdown">
-  <label>{{label}}</label>
+  <label [attr.data-title]="field.description ? field.description : null">{{label}}</label>
   <ng-container *ngIf="options">
     <div class="dropdown-container">
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>

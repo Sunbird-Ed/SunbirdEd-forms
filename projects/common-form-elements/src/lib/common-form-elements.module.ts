@@ -33,6 +33,7 @@ import { TagInputModule } from 'ngx-chips';
 import { DynamicTimerComponent } from './dynamic-timer/dynamic-timer.component';
 import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-category-select/dynamic-framework-category-select.component';
 import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework.component';
+import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.component';
 
 @NgModule({
    declarations: [
@@ -63,7 +64,8 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
       DynamicMultiSelectComponent,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
-      DynamicFrameworkComponent
+      DynamicFrameworkComponent,
+      DynamicRichtextComponent
    ],
    imports: [
       CommonModule,
@@ -99,7 +101,8 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
       DynamicFieldDirective,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
-      DynamicFrameworkComponent
+      DynamicFrameworkComponent,
+      DynamicRichtextComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -114,7 +117,8 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
       KeywordsComponent,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
-      DynamicFrameworkComponent
+      DynamicFrameworkComponent,
+      DynamicRichtextComponent
    ]
 })
 export class CommonFormElementsModule { }
