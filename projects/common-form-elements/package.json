@@ -1,6 +1,6 @@
 {
   "name": "common-form-elements",
-  "version": "3.9.2",
+  "version": "3.9.9",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "immutable": "^4.0.0-rc.12",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "@project-sunbird/ckeditor-build-classic": "0.0.3"
   }
 }
