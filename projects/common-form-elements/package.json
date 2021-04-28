@@ -11,6 +11,6 @@
   "dependencies": {
     "immutable": "^4.0.0-rc.12",
     "moment": "^2.29.1",
-    "@project-sunbird/ckeditor-build-classic": "0.0.3"
+    "@project-sunbird/ckeditor-build-classic": "0.0.4"
   }
 }
