@@ -1,12 +1,16 @@
 {
   "name": "common-form-elements",
-  "version": "3.7.3",
+  "version": "3.9.9",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
-    "@angular/forms": "^8.0.0"
+    "@angular/forms": "^8.0.0",
+    "@project-sunbird/client-services": "3.6.x",
+    "lodash-es": "^4.17.15"
   },
   "dependencies": {
-    "immutable": "^4.0.0-rc.12"
+    "immutable": "^4.0.0-rc.12",
+    "moment": "^2.29.1",
+    "@project-sunbird/ckeditor-build-classic": "0.0.4"
   }
 }
