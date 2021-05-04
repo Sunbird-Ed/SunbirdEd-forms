@@ -36,7 +36,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
 
 
   public isDependsInvalid: any;
-
+  masterSelected: boolean= false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -88,6 +88,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
     }
 
     this.setupOptions();
+    this.isAllSelected();
   }
 
   checkIfDependsHasDefault() {
@@ -97,6 +98,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
     this.associationOption = this.fetchDependencyTerms();
     this.options = this.associationOption;
     this.setupOptions();
+    this.isAllSelected();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -136,6 +138,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
           this.formControlRef.patchValue(null);
           this.checkIfDependsHasDefault();
           this.resetTempValue();
+          this.resetMasterSelected();
         }),
         takeUntil(this.dispose$)
       ).subscribe();
@@ -395,6 +398,8 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
         this.tempValue = this.tempValue.add(option.get('name'));
       }
     }
+
+    this.masterSelected = this.tempValue.size === this.options.length;
   }
   onCancel() {
     this.formControlRef.markAsDirty();
@@ -494,5 +499,35 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
     this.setTempValue(this.default);
   }
 
+  private resetMasterSelected() {
+    this.masterSelected = false;
+  }
+
+  private setMasterSelected() {
+    this.masterSelected = true;
+  }
+
+  isAllSelected() {
+    if (this.isOptionsArray()) {
+      if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
+        this.setMasterSelected();
+      }
+    }
+  }
+
+  checkUncheckAll() {
+    this.formControlRef.patchValue(null);
+    this.resetTempValue();
+
+    if (this.masterSelected === false) {
+      this.resolvedOptions.forEach(option => {
+        this.addSelected(option);
+      });
+
+      this.onSubmit();
+    } else {
+      this.resetMasterSelected();
+    }
+  }
 
 }

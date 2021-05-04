@@ -319,3 +319,7 @@ label{
 .cursor-pointer {
     cursor: pointer;
 }
+
+.sb-modal-dropdown-web ul li label{
+  padding-left: 0.5em;
+}

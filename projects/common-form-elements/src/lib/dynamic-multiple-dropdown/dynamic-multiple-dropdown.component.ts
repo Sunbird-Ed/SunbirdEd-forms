@@ -34,7 +34,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
 
   public isDependsInvalid: any;
-  masterSelected: boolean;
+  masterSelected: boolean= false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -265,7 +265,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   isAllSelected() {
     if (this.isOptionsArray()) {
       if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
-        this.masterSelected = true;
+        this.setMasterSelected();
       }
     }
   }
@@ -279,7 +279,6 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
         this.addSelected(option);
       });
 
-      this.setMasterSelected();
       this.onSubmit();
     } else {
       this.resetMasterSelected();
