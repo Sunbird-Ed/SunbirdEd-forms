@@ -25,6 +25,7 @@
       "common-form-elements/*": [
         "dist/common-form-elements/*"
       ]
-    }
+    },
+    "skipLibCheck": true
   }
 }
