@@ -192,16 +192,16 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
   }
 
-  private resetTempValue() {
+  resetTempValue() {
     this.tempValue = Set(null);
     this.default = [];
   }
 
-  private resetMasterSelected() {
+  resetMasterSelected() {
     this.masterSelected = false;
   }
 
-  private setMasterSelected() {
+  setMasterSelected() {
     this.masterSelected = true;
   }
 

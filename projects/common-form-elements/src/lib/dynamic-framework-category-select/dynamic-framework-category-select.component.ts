@@ -437,7 +437,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
     }
   }
 
-  private resetTempValue() {
+  resetTempValue() {
     this.tempValue = Set(null);
     this.default = [];
   }
@@ -499,11 +499,11 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
     this.setTempValue(this.default);
   }
 
-  private resetMasterSelected() {
+  resetMasterSelected() {
     this.masterSelected = false;
   }
 
-  private setMasterSelected() {
+  setMasterSelected() {
     this.masterSelected = true;
   }
 
