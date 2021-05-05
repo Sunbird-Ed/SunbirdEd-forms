@@ -77,7 +77,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     );
 
     if (this.field && this.field.range) {
-      this.options = this.field.range;
+      this.options = this.sortOptions(this.field.range);
     } else if (_.isEmpty(this.options) && _.isEmpty(this.field.range) && this.default) {
       this.field.range = [];
       this.field.range.push(this.default);
@@ -149,12 +149,12 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
           (association.category === this.field.sourceCategory) :
           association.category === this.field.code;
         });
-        return this.tempAssociation;
+        return this.sortOptions(this.tempAssociation);
       } else  {
-        return this.options;
+        return this.sortOptions(this.options);
       }
     } else {
-      return this.options;
+      return this.sortOptions(this.options);
     }
   }
 
@@ -208,5 +208,21 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
   convertOptionToArray(option, output?) {
 
+  }
+
+  sortOptions(options) {
+   return  options.sort((option, b) => {
+     const firstVal = option[this.field.output] || option.value || option.identifier || option.name || option.label || option;
+     const secondVal = b[this.field.output] || b.value || b.identifier || b.name || b.label || b;
+     if (_.isString(firstVal)) {
+       return (firstVal).localeCompare((secondVal), undefined, {
+         numeric: true,
+         sensitivity: 'base'
+       });
+     } else if (_.isNumber(firstVal)) {
+      return firstVal - secondVal;
+     }
+      // tslint:disable-next-line:max-line-length
+    });
   }
 }

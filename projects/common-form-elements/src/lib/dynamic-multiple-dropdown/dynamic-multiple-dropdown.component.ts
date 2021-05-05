@@ -259,10 +259,28 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
       this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(value, labelVal);
     });
 
+    this.resolvedOptions = this.sortOptions(this.resolvedOptions);
+
     this.setTempValue(this.default);
   }
 
-  isAllSelected() {
+  sortOptions(options) {
+    return  options.sort((option, b) => {
+      const firstVal = option.get(this.field.output) || option.get('value') || option.get('identifier') || option.get('name') || option.get('label');
+      const secondVal = b.get(this.field.output) || b.get('value') || b.get('identifier') || b.get('name') || b.get('label');
+      if (_.isString(firstVal)) {
+        return (firstVal).localeCompare((secondVal), undefined, {
+          numeric: true,
+          sensitivity: 'base'
+        });
+      } else if (_.isNumber(firstVal)) {
+       return firstVal - secondVal;
+      }
+       // tslint:disable-next-line:max-line-length
+     });
+   }
+
+   isAllSelected() {
     if (this.isOptionsArray()) {
       if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
         this.setMasterSelected();
