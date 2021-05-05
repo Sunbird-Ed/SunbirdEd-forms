@@ -1,14 +1,4 @@
-@import "~common-consumption-styles/assets/_variables.scss";
-@import "~common-consumption-styles/assets/_colors.scss";
-
-:host(:not(.normalize)) {
-  label{
-    font-size: 14px;
-    font-weight: normal;
-    margin: 0
-  }
-
-  .multi-select-container {
+.multi-select-container {
     position: relative;
     margin-bottom: 8px;
   }
@@ -276,10 +266,10 @@
     background-color: white;
     width: 100%;
     z-index: 999;
-    border: 1px solid #d6d4d4 !important;
-    box-shadow: 0 0 2px #cecaca !important;
     max-height: 314px;
     overflow: scroll;
+    border: 1px solid #d6d4d4 !important;
+    box-shadow: 0 0 2px #cecaca !important;
   }
 
   .sb-modal-dropdown-web ul li {
@@ -318,4 +308,3 @@
   .cursor-pointer {
     cursor: pointer;
   }
-}

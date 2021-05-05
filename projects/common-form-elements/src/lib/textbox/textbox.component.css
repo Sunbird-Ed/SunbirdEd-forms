@@ -14,10 +14,8 @@ label {
 ::placeholder {
   padding: 0.25rem;
   opacity: 0.99;
-  color: #999999;
   font-family: "Noto Sans";
   font-size: 12px;
-  font-weight: bold;
 }
 
 .sb-input {
@@ -63,4 +61,8 @@ label {
 .async-icons{
   margin: auto;
   padding: 0 4px;
+}
+.sb-textbox::placeholder {
+  color: #333 !important;
+  font-weight: 500 !important;
 }

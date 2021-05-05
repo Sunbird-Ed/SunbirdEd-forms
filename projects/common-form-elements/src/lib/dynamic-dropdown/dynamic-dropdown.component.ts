@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
 import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder} from '../common-form-config';
@@ -9,7 +9,8 @@ import {ValueComparator} from '../utilities/value-comparator';
 @Component({
   selector: 'sb-dynamic-dropdown',
   templateUrl: './dynamic-dropdown.component.html',
-  styleUrls: ['./dynamic-dropdown.component.css']
+  styleUrls: ['./dynamic-dropdown.component.scss'],
+  encapsulation : ViewEncapsulation.None
 })
 export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   ValueComparator = ValueComparator;

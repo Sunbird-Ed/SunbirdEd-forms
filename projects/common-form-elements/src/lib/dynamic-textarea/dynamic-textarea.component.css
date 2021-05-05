@@ -13,6 +13,11 @@ label {
   resize: vertical;
 }
 
+.sb-textarea::placeholder {
+  color: #333 !important;
+  font-weight: 500 !important;
+}
+
 .sb-textarea-container {
   margin-bottom: 10px;
 }

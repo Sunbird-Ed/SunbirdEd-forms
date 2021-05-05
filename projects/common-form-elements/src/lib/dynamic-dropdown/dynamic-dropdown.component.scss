@@ -1,6 +1,5 @@
 label {
   display: block;
-  padding: 10px;
   font-size: 1rem;
 }
 
@@ -27,7 +26,7 @@ opacity: 0.3;
 
 .sb-dropdown-select {
 opacity: 0.99;
-color: #333333;
+// color: #333333;
 font-family: "Noto Sans";
 font-size: 12px;
 font-weight: bold;
@@ -42,26 +41,16 @@ select {
   text-overflow: '';
 }
 
-.sb-dropdown-select {
-  opacity: 0.99;
-  color: #333333;
-  font-family: "Noto Sans";
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 0;
-  line-height: 17px;
-}
-
 .sb-dropdown {
   margin-bottom: 8px;
 }
 
-.placeholder select option:first-child {
-  color: #999999;
-}
+// .placeholder select option:first-child {
+//   color: #999999;
+// }
 
 .option-default {
-  color: #333333;
+  // color: #333333;
   font-weight: bold;
   font-size: 12px;
 }
