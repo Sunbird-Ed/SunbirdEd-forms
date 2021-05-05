@@ -30,6 +30,11 @@ export enum FieldConfigValidationType {
   MINLENGTH = 'minLength',
   PATTERN = 'pattern'
 }
+export interface DialcodeResponse {
+  isEditable?: Boolean;
+  isValid?: Boolean;
+  statusMsg?: String;
+}
 
 export type FieldConfigOptionsBuilder<T> =
   (control: FormControl, context?: FormControl, notifyLoading?: () => void,
