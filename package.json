@@ -20,6 +20,8 @@
     "@angular/router": "^8.0.0",
     "common-consumption-styles": "0.0.17",
     "core-js": "^2.5.4",
+    "jquery": "^3.6.0",
+    "jquery.fancytree": "^2.38.0",
     "lodash-es": "^4.17.20",
     "moment": "^2.29.1",
     "ngx-chips": "2.1.0",
