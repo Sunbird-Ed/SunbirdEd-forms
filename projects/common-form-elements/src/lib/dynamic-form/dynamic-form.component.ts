@@ -154,6 +154,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'text':
         defaultVal = element.default || null;
         break;
+      case 'dialcode':
+        defaultVal = element.default || null;
+        break;
       case 'textarea':
         defaultVal = element.default || null;
         break;
@@ -220,12 +223,16 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'checkbox':
         defaultVal = (element.dataType === 'text') ? (element.default === 'Yes' ? 'Yes' : 'No') : !!element.default;
         break;
+      case 'radio':
+        defaultVal = element.default || null;
+        break;
     }
 
     formValueList.push(defaultVal);
 
     if (element.validations && element.validations.length) {
       element.validations.forEach((data, i) => {
+        if (element.inputType === 'dialcode') { return false; }
         switch (data.type) {
           case 'required':
             if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect' ||
