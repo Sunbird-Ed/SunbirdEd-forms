@@ -20,11 +20,6 @@ label {
     position: relative;
 }
 
-.sb-textarea::placeholder {
-  color: #333 !important;
-  font-weight: 500 !important;
-}
-
 .remaining-length {
     position: absolute;
     bottom: 0.5rem;

@@ -1,6 +1,7 @@
 label {
   display: block;
   font-size: 1rem;
+  padding: 10px;
 }
 
 .dropdown-icon {
@@ -26,7 +27,7 @@ opacity: 0.3;
 
 .sb-dropdown-select {
 opacity: 0.99;
-// color: #333333;
+color: #333333;
 font-family: "Noto Sans";
 font-size: 12px;
 font-weight: bold;
@@ -45,12 +46,12 @@ select {
   margin-bottom: 8px;
 }
 
-// .placeholder select option:first-child {
-//   color: #999999;
-// }
+.placeholder select option:first-child {
+  color: #999999;
+}
 
 .option-default {
-  // color: #333333;
+  color: #333333;
   font-weight: bold;
   font-size: 12px;
 }

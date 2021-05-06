@@ -16,6 +16,8 @@ label {
     opacity: 0.99;
     font-family: "Noto Sans";
     font-size: 12px;
+    color: #999999;
+    font-weight: bold;
   }
   
   .sb-input {
@@ -64,7 +66,4 @@ label {
   }
   
   .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_se, .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_sw{transform:inherit !important}
-  .sb-textbox::placeholder {
-    color: #333 !important;
-    font-weight: 500 !important;
-  }
+  
