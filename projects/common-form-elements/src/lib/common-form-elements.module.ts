@@ -34,6 +34,8 @@ import { DynamicTimerComponent } from './dynamic-timer/dynamic-timer.component';
 import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-category-select/dynamic-framework-category-select.component';
 import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework.component';
 import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.component';
+import { DynamicRadioComponent } from './dynamic-radio/dynamic-radio.component';
+import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.component';
 
 @NgModule({
    declarations: [
@@ -65,7 +67,9 @@ import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.co
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
       DynamicFrameworkComponent,
-      DynamicRichtextComponent
+      DynamicRichtextComponent,
+      DynamicRadioComponent,
+      DynamicDialcodeComponent
    ],
    imports: [
       CommonModule,
@@ -102,7 +106,9 @@ import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.co
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
       DynamicFrameworkComponent,
-      DynamicRichtextComponent
+      DynamicRichtextComponent,
+      DynamicRadioComponent,
+      DynamicDialcodeComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -118,7 +124,9 @@ import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.co
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
       DynamicFrameworkComponent,
-      DynamicRichtextComponent
+      DynamicRichtextComponent,
+      DynamicRadioComponent,
+      DynamicDialcodeComponent
    ]
 })
 export class CommonFormElementsModule { }

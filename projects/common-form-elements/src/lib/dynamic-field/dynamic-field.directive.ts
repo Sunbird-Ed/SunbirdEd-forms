@@ -21,7 +21,8 @@ import { DynamicTimerComponent } from '../dynamic-timer/dynamic-timer.component'
 import { DynamicFrameworkComponent } from '../dynamic-framework/dynamic-framework.component';
 import { DynamicFrameworkCategorySelectComponent } from '../dynamic-framework-category-select/dynamic-framework-category-select.component';
 import { DynamicRichtextComponent } from '../dynamic-richtext/dynamic-richtext.component';
-
+import { DynamicRadioComponent } from '../dynamic-radio/dynamic-radio.component';
+import { DynamicDialcodeComponent } from '../dynamic-dialcode/dynamic-dialcode.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -30,7 +31,6 @@ const componentMapper = {
   multiselect: DynamicMultiSelectComponent,
   nestedselect: DynamicMultipleDropdownComponent,
   keywords: KeywordsComponent,
-  dialcode: DynamicTextboxComponent,
   topicselector: TopicpickerComponent,
   licenses: DynamicDropdownComponent,
   label: DynamicTextboxComponent,
@@ -39,7 +39,9 @@ const componentMapper = {
   timer: DynamicTimerComponent,
   framework: DynamicFrameworkComponent,
   frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
-  richtext: DynamicRichtextComponent
+  richtext: DynamicRichtextComponent,
+  radio: DynamicRadioComponent,
+  dialcode: DynamicDialcodeComponent
 };
 
 @Directive({
