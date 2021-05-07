@@ -54,12 +54,15 @@
         </div>
       </div>
     </div>
-    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
+    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
       <ul>
-        <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option': !_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))}">
-          <div (click)="addSelected(option); onSubmit()">
-            <span class="cursor-pointer">{{option.get('name')}}</span>
-          </div>
+        <li (click)="checkUncheckAll()">
+            <input type="checkbox" [checked]="masterSelected">
+            <label class="cursor-pointer d-inline-block">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
+        </li>
+        <li *ngFor="let option of resolvedOptions; let i=index" (click)="addSelected(option); onSubmit();" [ngClass]="{'selected-option': !_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))}">
+            <input type="checkbox" [checked]="!_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))" >
+            <label class="cursor-pointer d-inline-block">{{option.get('name')}}</label>
         </li>
       </ul>
     </div>
