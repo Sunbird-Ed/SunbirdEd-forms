@@ -9,7 +9,7 @@ import * as _ from 'lodash-es';
 @Component({
   selector: 'sb-dynamic-multiple-dropdown',
   templateUrl: './dynamic-multiple-dropdown.component.html',
-  styleUrls: ['./dynamic-multiple-dropdown.component.css']
+  styleUrls: ['./dynamic-multiple-dropdown.component.scss']
 })
 export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -34,7 +34,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
 
   public isDependsInvalid: any;
-
+  masterSelected: boolean= false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -64,6 +64,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
         tap(() => {
           this.formControlRef.patchValue(null);
           this.resetTempValue();
+          this.resetMasterSelected();
         }),
         takeUntil(this.dispose$)
       ).subscribe();
@@ -86,6 +87,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
       takeUntil(this.dispose$)
     ).subscribe();
     this.setupOptions();
+    this.isAllSelected();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -153,6 +155,8 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
         this.tempValue = this.tempValue.add(option.get('name'));
       }
     }
+
+    this.masterSelected = this.tempValue.size === this.options.length;
   }
 
   onCancel() {
@@ -188,9 +192,17 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
   }
 
-  private resetTempValue() {
+  resetTempValue() {
     this.tempValue = Set(null);
     this.default = [];
+  }
+
+  resetMasterSelected() {
+    this.masterSelected = false;
+  }
+
+  setMasterSelected() {
+    this.masterSelected = true;
   }
 
   private setupOptions() {
@@ -268,4 +280,26 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
      });
    }
 
+   isAllSelected() {
+    if (this.isOptionsArray()) {
+      if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
+        this.setMasterSelected();
+      }
+    }
+  }
+
+  checkUncheckAll() {
+    this.formControlRef.patchValue(null);
+    this.resetTempValue();
+
+    if (this.masterSelected === false) {
+      this.resolvedOptions.forEach(option => {
+        this.addSelected(option);
+      });
+
+      this.onSubmit();
+    } else {
+      this.resetMasterSelected();
+    }
+  }
 }
