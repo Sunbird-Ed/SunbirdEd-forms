@@ -482,14 +482,16 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
       ).subscribe();
     }
 
-    this.resolvedOptions.forEach((option) => {
-      const value: any = !_.isEmpty(this.field.output) ? option.get(this.field.output) :
-      option.get('name') || option.get('identifier') || option.get('value') || option;
-
-      const labelVal: any = option.get('name') || option.get('label') || option;
-
-      this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(value, labelVal);
-    });
+    if (this.resolvedOptions) {
+      this.resolvedOptions.forEach((option) => {
+        const value: any = !_.isEmpty(this.field.output) ? option.get(this.field.output) :
+        option.get('name') || option.get('identifier') || option.get('value') || option;
+        
+        const labelVal: any = option.get('name') || option.get('label') || option;
+        
+        this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(value, labelVal);
+      });
+    }
 
     this.setTempValue(this.default);
   }
