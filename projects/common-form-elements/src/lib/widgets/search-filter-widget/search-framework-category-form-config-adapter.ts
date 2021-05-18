@@ -48,7 +48,6 @@ export class SearchFrameworkCategoryFormConfigAdapter {
           multiple: config.multiple,
           options: frameworkAssociationsMap[config.category] ?
             frameworkAssociationsMap[config.category]
-              .sort()
               .map((value) => ({ label: value, value })) :
             []
         }
