@@ -14,9 +14,9 @@ label {
   ::placeholder {
     padding: 0.25rem;
     opacity: 0.99;
-    color: #999999;
     font-family: "Noto Sans";
     font-size: 12px;
+    color: #999999;
     font-weight: bold;
   }
   
@@ -66,3 +66,4 @@ label {
   }
   
   .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_se, .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_sw{transform:inherit !important}
+  

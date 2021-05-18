@@ -9,7 +9,7 @@ import {
   SimpleChanges,
   HostListener,
   ViewChild,
-  Output, EventEmitter
+  Output, EventEmitter, ViewEncapsulation
 } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
@@ -22,7 +22,8 @@ import {fromJS, List, Map, Set} from 'immutable';
   selector: 'sb-multiple-dropdown',
   templateUrl: './multiple-dropdown.component.html',
   styleUrls: ['./multiple-dropdown.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation : ViewEncapsulation.None
 })
 export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() extras?: FieldConfigInputTypeOptionsModelMap[FieldConfigInputType.SELECT];

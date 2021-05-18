@@ -11,7 +11,7 @@ import * as _ from 'lodash-es';
 @Component({
   selector: 'sb-dynamic-framework-category-select',
   templateUrl: './dynamic-framework-category-select.component.html',
-  styleUrls: ['./dynamic-framework-category-select.component.css']
+  styleUrls: ['./dynamic-framework-category-select.component.scss']
 })
 export class DynamicFrameworkCategorySelectComponent implements OnInit {
 
