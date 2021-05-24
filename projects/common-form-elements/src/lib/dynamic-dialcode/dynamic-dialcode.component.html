@@ -1,0 +1,36 @@
+<div class="sb-input">
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">
+    {{label}}
+    <a *ngIf="isEditable && isDialcodeRequired == 'yes' && !disabled" (click)="editDialCode()" class="sb-edit-btn">EDIT</a>
+  </label>
+  <div class="sb-dialcode-group">
+    <div class="prefix" *ngIf="prefix">
+      <span>{{prefix}}</span>
+    </div>
+    <input *ngIf="!isEditable" (keyup)="onValueChange($event.target.value)" [value]="dialcodes" [attr.maxlength]="maxLength" [class.valid]="formControlRef.valid &&
+    (formControlRef.dirty || formControlRef.touched)" [class.invalid]="formControlRef.invalid &&
+(formControlRef.dirty || formControlRef.touched)" class="sb-dialcode {{disabled}}" placeholder={{placeholder}}
+    type="text" [attr.disabled]="disabled ? true : (isDialcodeRequired == 'no' ? 'disabled' : null)">
+      <div *ngIf="isEditable" class="ui action right icon input">
+        <div class="dialcode-status">
+            {{dialcodes}}
+            <i *ngIf="isValid" class="green check icon"></i>
+            <i *ngIf="!isValid" class="red remove icon"></i>
+            <span style="color: #d61011;" *ngIf="!isValid">{{dialcodeErrMsg}}</span>
+        </div>
+     </div>
+      <div *ngIf="isMinLengthValid && !isEditable && isDialcodeRequired == 'yes' && !disabled " (click)="clearDialCode();" >
+        <i class="large red remove circle icon"></i>
+      </div>
+      <div *ngIf="isMinLengthValid && !isEditable && isDialcodeRequired == 'yes' && !disabled" (click)="validateDialCode()">
+        <i class="large blue check circle icon"></i>
+      </div>
+  </div>
+
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>
