@@ -41,9 +41,9 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
     this.updateQueryParams(aggregatedSearchFilter);
   }
 
-  resetFilter() {
+  resetFilter(resetAll?: boolean) {
     if (this.onResetSearchFilter) {
-      this.updateQueryParams(this.onResetSearchFilter);
+      this.updateQueryParams(this.onResetSearchFilter, resetAll);
     }
   }
 
@@ -61,19 +61,28 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
     }
   }
 
-  protected updateQueryParams(searchFilter: IAnySearchFilter) {
+  protected updateQueryParams(searchFilter: IAnySearchFilter, resetAll?: boolean) {
     this.router.navigate([], {
       queryParams: {
         ...(() => {
           const queryParams = cloneDeep(this.activatedRoute.snapshot.queryParams);
+          const currentFilterData = cloneDeep(this.currentFilter);
+          if (resetAll && queryParams) {
+            for (let prop in searchFilter) {
+              queryParams[prop] = [];
+              searchFilter[prop] = [];
+              currentFilterData[prop] = [];
+              this.baseSearchFilter[prop] = [];
+            }            
+          }
 
           if (this.supportedFilterAttributes && this.supportedFilterAttributes.length) {
             this.supportedFilterAttributes.forEach((attr) => delete queryParams[attr]);
-            Object.keys(this.currentFilter).forEach((attr) => delete queryParams[attr]);
+            Object.keys(currentFilterData).forEach((attr) => delete queryParams[attr]);
             return queryParams;
           }
 
-          Object.keys(this.currentFilter).forEach((attr) => delete queryParams[attr]);
+          Object.keys(currentFilterData).forEach((attr) => delete queryParams[attr]);
           return queryParams;
         })(),
         ...searchFilter
