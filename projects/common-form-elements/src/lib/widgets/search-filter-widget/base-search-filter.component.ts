@@ -22,7 +22,7 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
 
   public currentFilter?: IAnySearchFilter;
   public formConfig?: FieldConfig<any>[];
-
+  private resetAll = false;
   constructor(
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
@@ -42,6 +42,7 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
   }
 
   resetFilter(resetAll?: boolean) {
+    this.resetAll = resetAll
     if (this.onResetSearchFilter) {
       this.updateQueryParams(this.onResetSearchFilter, resetAll);
     }
@@ -55,6 +56,14 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
   }
 
   protected updateCurrentFilter(searchFilter: IAnySearchFilter) {
+    if (this.resetAll) {
+      for (let prop in searchFilter) {
+        this.currentFilter[prop] = [];
+      }
+      this.searchFilterChange.emit(this.currentFilter);
+      this.resetAll = false;
+      return;
+    }
     if (!isEqual(this.currentFilter, searchFilter)) {
       this.currentFilter = searchFilter;
       this.searchFilterChange.emit(this.currentFilter);
