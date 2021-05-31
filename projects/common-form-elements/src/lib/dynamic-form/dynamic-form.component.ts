@@ -96,15 +96,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     this.flattenSectionFields = this.getFlattenedSectionFields();
     this.formGroup = this.formBuilder.group(formGroupData);
 
-    this.statusChangesSubscription = this.formGroup.valueChanges.pipe(
+    this.statusChangesSubscription = this.formGroup.statusChanges.pipe(
       tap((v) => {
-        this.statusChanges.emit({
-          isPristine: this.formGroup.pristine,
-          isDirty: this.formGroup.dirty,
-          isInvalid: this.formGroup.invalid,
-          isValid: this.formGroup.valid,
-          controls: this.getFormValidationErrors()
-        });
+        this.emitFormGroupStatus();
       })
     ).subscribe();
 
@@ -113,6 +107,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         this.valueChanges.emit(data);
       })
     ).subscribe();
+
+    this.emitFormGroupStatus();
   }
 
   ngOnDestroy(): void {
@@ -125,6 +121,16 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     if (this.valueChangesSubscription) {
       this.valueChangesSubscription.unsubscribe();
     }
+  }
+
+  emitFormGroupStatus() {
+    this.statusChanges.emit({
+      isPristine: this.formGroup.pristine,
+      isDirty: this.formGroup.dirty,
+      isInvalid: this.formGroup.invalid,
+      isValid: this.formGroup.valid,
+      controls: this.getFormValidationErrors()
+    });
   }
 
   getFormValidationErrors() {
