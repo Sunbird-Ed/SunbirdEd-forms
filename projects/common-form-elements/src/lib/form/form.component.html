@@ -18,18 +18,18 @@
       </sb-multiple-dropdown>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-textbox [class]="fieldTemplateClass" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
+      <sb-textbox [class]="fieldTemplateClass" tabindex="0" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
         [placeholder]="field.templateOptions.placeHolder" [validations]="field.validations" [prefix]="field.templateOptions.prefix"
         [labelHtml]="field.templateOptions.labelHtml">
       </sb-textbox>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.TEXTAREA" [hidden]="field.templateOptions?.hidden || null">
-      <sb-textarea [class]="fieldTemplateClass" [config]="field" [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
+      <sb-textarea [class]="fieldTemplateClass" tabindex="0" [config]="field" [formControlRef]="formGroup.get(field.code)" [label]="field.templateOptions.label"
         [placeholder]="field.templateOptions.placeHolder">
       </sb-textarea>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.CHECKBOX" [hidden]="field.templateOptions?.hidden || null">
-      <sb-checkbox [class]="fieldTemplateClass" [code]="field.code" [formControlRef]="formGroup.get(field.code)"
+      <sb-checkbox [class]="fieldTemplateClass" tabindex="0" [code]="field.code" [formControlRef]="formGroup.get(field.code)"
         [label]="field.templateOptions.label" [labelHtml]="field.templateOptions.labelHtml" [value]="field.default"
         (clickedLink)="clickedLink($event)"></sb-checkbox>
     </div>
@@ -42,7 +42,7 @@
       <div *ngIf="field.type === FieldConfigInputType.NESTED_SELECT && ref && ref.value && field.children && field.children[ref.value]">
         <sb-form (initialize)="onNestedFormInitialize($event, field)"
                  (finalize)="onNestedFormFinalize($event, field)"
-                 [platform]="platform"
+                 [platform]="platform" tabindex="0"
                  [fieldTemplateClass]="fieldTemplateClass"
                  [dataLoadStatusDelegate]="dataLoadStatusDelegate"
                  [config]="field.children[ref.value]"></sb-form>
@@ -51,7 +51,7 @@
       <div *ngIf="field.type === FieldConfigInputType.NESTED_GROUP && field.children">
         <sb-form (initialize)="onNestedFormInitialize($event, field)"
                  (finalize)="onNestedFormFinalize($event, field)"
-                 [platform]="platform"
+                 [platform]="platform" tabindex="0"
                  [fieldTemplateClass]="fieldTemplateClass"
                  [dataLoadStatusDelegate]="dataLoadStatusDelegate"
                  [config]="field.children"></sb-form>
