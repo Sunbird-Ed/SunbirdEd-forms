@@ -96,7 +96,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     this.flattenSectionFields = this.getFlattenedSectionFields();
     this.formGroup = this.formBuilder.group(formGroupData);
 
-    this.statusChangesSubscription = this.formGroup.statusChanges.pipe(
+    this.statusChangesSubscription = this.formGroup.valueChanges.pipe(
       tap((v) => {
         this.emitFormGroupStatus();
       })
