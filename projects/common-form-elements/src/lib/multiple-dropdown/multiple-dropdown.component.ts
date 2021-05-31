@@ -201,9 +201,11 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
       ).subscribe();
     }
 
-    this.resolvedOptions.forEach((option) => {
-      this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(option.get('value'), option.get('label'));
-    });
+    if (this.resolvedOptions) { 
+      this.resolvedOptions.forEach((option) => {
+        this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(option.get('value'), option.get('label'));
+      });
+    }
 
     this.setTempValue(this.default);
   }
