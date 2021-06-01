@@ -38,7 +38,8 @@ const componentMapper = {
   checkbox: DynamicCheckboxComponent,
   timer: DynamicTimerComponent,
   framework: DynamicFrameworkComponent,
-  frameworkCategorySelect: DynamicFrameworkCategorySelectComponent
+  frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
+  richtext: DynamicRichtextComponent
 };
 
 @Directive({
