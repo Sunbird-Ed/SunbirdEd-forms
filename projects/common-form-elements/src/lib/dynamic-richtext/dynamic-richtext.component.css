@@ -65,3 +65,4 @@ label {
     padding: 0 4px;
   }
   
+  .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_se, .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_sw{transform:inherit !important}
