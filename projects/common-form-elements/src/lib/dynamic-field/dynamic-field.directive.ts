@@ -39,7 +39,6 @@ const componentMapper = {
   timer: DynamicTimerComponent,
   framework: DynamicFrameworkComponent,
   frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
-  richtext: DynamicRichtextComponent,
   radio: DynamicRadioComponent,
   dialcode: DynamicDialcodeComponent
 };

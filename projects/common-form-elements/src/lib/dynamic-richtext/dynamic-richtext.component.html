@@ -5,10 +5,10 @@
     <div class="prefix" *ngIf="prefix">
       <span>{{prefix}}</span>
     </div>
-    <textarea *ngIf="showEditor" id="richTextCount" #EDITOR [formControl]="formControlRef" [class.valid]="formControlRef.valid &&
+    <textarea  id="richTextCount"  [formControl]="formControlRef" [class.valid]="formControlRef.valid &&
 (formControlRef.dirty || formControlRef.touched)" [class.invalid]="formControlRef.invalid &&
-(formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}} ck ck-reset ck-editor ck-rounded-corners 
-ck ck-reset ck-editor ck-rounded-corners " placeholder={{placeholder}} type="text"
+(formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}} 
+" placeholder={{placeholder}} type="text"
       [attr.disabled]="disabled ? true : null"></textarea>
     <div class="async-icons" *ngIf="asyncValidation && asyncValidation?.trigger">
     </div>
