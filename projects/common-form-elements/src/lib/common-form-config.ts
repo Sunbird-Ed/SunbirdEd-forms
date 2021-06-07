@@ -142,5 +142,4 @@ export interface CustomFormControl extends FormControl {
   termsForDependantFields?: any;
   customEventHandler$?: Subject<any>;
   shouldListenToCustomEvent?: Boolean;
-  richTextCharacterCount?: any;
 }

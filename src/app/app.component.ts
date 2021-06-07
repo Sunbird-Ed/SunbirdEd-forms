@@ -17,4 +17,8 @@ export class AppComponent {
     console.log(event);
   }
 
+  statusChanges(event) {
+    console.log(event);
+  }
+
 }

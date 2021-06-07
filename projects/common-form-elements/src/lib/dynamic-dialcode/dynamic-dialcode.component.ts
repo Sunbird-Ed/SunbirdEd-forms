@@ -69,10 +69,10 @@ export class DynamicDialcodeComponent implements OnInit, OnDestroy  {
   handleDependantFieldChanges() {
     this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
       tap((value: any) => {
-        this.isDialcodeRequired = value;
+        this.isDialcodeRequired = _.toLower(value);
       })
       ).subscribe();
-      this.isDialcodeRequired = _.first(_.map(this.depends, depend => depend.value));
+      this.isDialcodeRequired = _.toLower(_.first(_.map(this.depends, depend => depend.value)));
   }
 
   onValueChange(value) {
