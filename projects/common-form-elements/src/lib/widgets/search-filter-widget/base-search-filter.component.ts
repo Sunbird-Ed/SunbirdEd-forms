@@ -78,7 +78,8 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
         })(),
         ...searchFilter
       },
-      relativeTo: this.activatedRoute.parent
+      relativeTo: this.activatedRoute.parent,
+      replaceUrl: true
     });
   }
 
