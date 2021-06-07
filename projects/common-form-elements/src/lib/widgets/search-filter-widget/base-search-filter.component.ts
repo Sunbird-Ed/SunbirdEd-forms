@@ -22,7 +22,7 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
 
   public currentFilter?: IAnySearchFilter;
   public formConfig?: FieldConfig<any>[];
-
+  private resetAll = false;
   constructor(
     protected router: Router,
     protected activatedRoute: ActivatedRoute,
@@ -41,9 +41,10 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
     this.updateQueryParams(aggregatedSearchFilter);
   }
 
-  resetFilter() {
+  resetFilter(resetAll?: boolean) {
+    this.resetAll = resetAll
     if (this.onResetSearchFilter) {
-      this.updateQueryParams(this.onResetSearchFilter);
+      this.updateQueryParams(this.onResetSearchFilter, resetAll);
     }
   }
 
@@ -55,25 +56,42 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
   }
 
   protected updateCurrentFilter(searchFilter: IAnySearchFilter) {
+    if (this.resetAll) {
+      for (let prop in searchFilter) {
+        this.currentFilter[prop] = [];
+      }
+      this.searchFilterChange.emit(this.currentFilter);
+      this.resetAll = false;
+      return;
+    }
     if (!isEqual(this.currentFilter, searchFilter)) {
       this.currentFilter = searchFilter;
       this.searchFilterChange.emit(this.currentFilter);
     }
   }
 
-  protected updateQueryParams(searchFilter: IAnySearchFilter) {
+  protected updateQueryParams(searchFilter: IAnySearchFilter, resetAll?: boolean) {
     this.router.navigate([], {
       queryParams: {
         ...(() => {
           const queryParams = cloneDeep(this.activatedRoute.snapshot.queryParams);
+          const currentFilterData = cloneDeep(this.currentFilter);
+          if (resetAll && queryParams) {
+            for (let prop in searchFilter) {
+              queryParams[prop] = [];
+              searchFilter[prop] = [];
+              currentFilterData[prop] = [];
+              this.baseSearchFilter[prop] = [];
+            }            
+          }
 
           if (this.supportedFilterAttributes && this.supportedFilterAttributes.length) {
             this.supportedFilterAttributes.forEach((attr) => delete queryParams[attr]);
-            Object.keys(this.currentFilter).forEach((attr) => delete queryParams[attr]);
+            Object.keys(currentFilterData).forEach((attr) => delete queryParams[attr]);
             return queryParams;
           }
 
-          Object.keys(this.currentFilter).forEach((attr) => delete queryParams[attr]);
+          Object.keys(currentFilterData).forEach((attr) => delete queryParams[attr]);
           return queryParams;
         })(),
         ...searchFilter

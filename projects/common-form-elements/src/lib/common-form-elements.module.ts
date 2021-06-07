@@ -67,7 +67,8 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFrameworkCategorySelectComponent,
       DynamicFrameworkComponent,
       DynamicRadioComponent,
-      DynamicDialcodeComponent
+      DynamicDialcodeComponent,
+      DynamicFrameworkComponent
    ],
    imports: [
       CommonModule,
@@ -105,7 +106,8 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFrameworkCategorySelectComponent,
       DynamicFrameworkComponent,
       DynamicRadioComponent,
-      DynamicDialcodeComponent
+      DynamicDialcodeComponent,
+      DynamicFrameworkComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -122,7 +124,8 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFrameworkCategorySelectComponent,
       DynamicFrameworkComponent,
       DynamicRadioComponent,
-      DynamicDialcodeComponent
+      DynamicDialcodeComponent,
+      DynamicFrameworkComponent
    ]
 })
 export class CommonFormElementsModule { }
