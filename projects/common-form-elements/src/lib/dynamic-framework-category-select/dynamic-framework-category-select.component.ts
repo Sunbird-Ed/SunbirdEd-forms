@@ -276,29 +276,6 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
         this.tempAssociation = _.uniqBy(consolidatedAssociations, 'identifier');
         return this.tempAssociation;
       }
-
-      // if (filteredTerm) {
-      //   let tempAssociations: any;
-      //   let lookUp: string;
-      //   if (filteredTerm.categories) {
-      //     tempAssociations = filteredTerm.categories;
-      //     lookUp = 'code';
-      //   } else if (filteredTerm.terms) {
-      //     tempAssociations = filteredTerm.terms;
-      //     lookUp = 'category';
-      //   } else if (filteredTerm.associations) {
-      //     tempAssociations = filteredTerm.associations;
-      //     lookUp = 'category';
-      //   }
-
-      //   const filteredCategory = _.filter(tempAssociations, association => {
-      //     return (this.field.sourceCategory) ? (association[lookUp] === this.field.sourceCategory) :
-      //      association[lookUp] === this.field.code;
-      //   });
-      //   this.tempAssociation =  this.extractAndFlattenTerms(filteredCategory);
-
-      // return this.tempAssociation;
-      // }
     }
   }
 
@@ -491,9 +468,9 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
       this.resolvedOptions.forEach((option) => {
         const value: any = !_.isEmpty(this.field.output) ? option.get(this.field.output) :
         option.get('name') || option.get('identifier') || option.get('value') || option;
-        
+
         const labelVal: any = option.get('name') || option.get('label') || option;
-        
+
         this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(value, labelVal);
       });
     }

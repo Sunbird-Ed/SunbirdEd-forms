@@ -135,7 +135,7 @@ export interface SectionConfig<T> {
 
 
 export interface CustomFormGroup extends FormGroup {
-  lastChangedField: any;
+  lastChangedField?: any;
 }
 
 export interface CustomFormControl extends FormControl {
