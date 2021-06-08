@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
   Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
-  import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
+  import {AsyncValidatorFactory, CustomFormGroup, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
-import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import * as moment_ from 'moment';
 import { FieldComparator } from '../utilities/fieldComparator';
@@ -30,7 +30,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
   FieldComparator = FieldComparator;
   _: any = _;
 
-  formGroup: FormGroup;
+  formGroup: CustomFormGroup;
   FieldConfigInputType = FieldConfigInputType;
   fieldDependency: {};
   isSection = false;
@@ -173,6 +173,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         defaultVal = element.default || null;
         break;
       case 'select':
+      case 'topicselector':
       case 'framework':
         if (element.default) {
           if (element.dataType === 'list') {
