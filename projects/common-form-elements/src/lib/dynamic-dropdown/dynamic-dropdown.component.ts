@@ -106,7 +106,8 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     this.formControlRef.valueChanges.pipe(
       tap((value) => {
         if (!_.isEmpty(this.formControlRef.value)) {
-          this.formGroup.lastChangedField = { code: this.field.code, value: this.formControlRef.value };
+          // tslint:disable-next-line:max-line-length
+          this.formGroup.lastChangedField = { code: this.field.code, value: this.formControlRef.value, sourceCategory: this.field.sourceCategory };
         }
         return value;
       }),
@@ -155,7 +156,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
         _.includes(this.getParentValue(), terms[this.field.output]) :
         _.includes(this.getParentValue(), terms.name) ;
       });
-      if (filteredTerm) {
+      if (!_.isEmpty(filteredTerm)) {
         this.tempAssociation =  _.filter(_.compact(_.flatten(_.map(filteredTerm, 'associations'))), association => {
           return (this.field.sourceCategory) ?
           (_.toLower(association.category) === _.toLower(this.field.sourceCategory)) :
@@ -174,7 +175,9 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     const field = this.formGroup.lastChangedField;
     if (!_.isEmpty(field) && field.code !== this.field.code && _.includes(this.field.depends, field.code)) {
       return _.filter(this.dependencyTerms, terms => {
-        return _.toLower(terms.category) === _.toLower(this.formGroup.lastChangedField.code);
+        return field.sourceCategory ?
+        _.toLower(terms.category) === _.toLower(field.sourceCategory) :
+        _.toLower(terms.category) === _.toLower(field.code);
       });
     } else {
       return this.dependencyTerms;

@@ -116,7 +116,8 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
             this.checkIfDependsHasDefault();
             this.setTermsForDependantFields(this.formControlRef.value);
             if (!_.isEmpty(this.formControlRef.value)) {
-              this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value};
+              // tslint:disable-next-line:max-line-length
+              this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value, sourceCategory: this.field.sourceCategory};
             }
           }
         }, error => {
@@ -162,7 +163,8 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
         if (value && this.tempAssociation) {
           this.setTermsForDependantFields(value);
           this.setTempValue(value);
-          this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value};
+          // tslint:disable-next-line:max-line-length
+          this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value, sourceCategory: this.field.sourceCategory};
         } else if (this.tempAssociation) {
           const termsByValue = this.getTermsByValue([this.tempAssociation], value, true);
           if (termsByValue) {
