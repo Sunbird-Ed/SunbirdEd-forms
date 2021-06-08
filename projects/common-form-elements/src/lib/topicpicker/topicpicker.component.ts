@@ -209,13 +209,13 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private formatSelectedTopics(topics, unformatted, formatted) {
     _.forEach(topics, (topic) => {
-      if (unformatted.includes(this.field.output ? topic[this.field.output] : topic.name) && !topic.children) {
+      if (unformatted.includes(this.field.output ? topic[this.field.output] : topic.name)) {
         formatted.push({
           identifier: topic.identifier,
           name: topic.name
         });
       }
-      if (topic.children) {
+      if (!_.isEmpty(topic.children)) {
         this.formatSelectedTopics(topic.children, unformatted, formatted);
       }
     });
