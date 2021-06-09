@@ -85,7 +85,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.formControlRef.valueChanges.pipe(
       tap(val => {
         if (!_.isEmpty(this.formControlRef.value)) {
-          this.formGroup.lastChangedField = { code: this.field.code, value: val };
+          this.formGroup.lastChangedField = { code: this.field.code, value: val, sourceCategory: this.field.sourceCategory };
         }
         return val;
       }),
@@ -282,7 +282,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
         _.includes(this.getParentValue(), terms[this.field.output]) :
         _.includes(this.getParentValue(), terms.name) ;
       });
-      if (filteredTerm) {
+      if (!_.isEmpty(filteredTerm)) {
         this.tempAssociation =  _.filter(_.compact(_.flatten(_.map(filteredTerm, 'associations'))), association => {
           return (this.field.sourceCategory) ?
           (association.category === this.field.sourceCategory) :
@@ -299,9 +299,16 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   filterDependencyTermsByLastChangedValue() {
-    return _.filter(this.dependencyTerms, terms => {
-      return  this.formGroup.lastChangedField ? terms.category === this.formGroup.lastChangedField.code : true;
-    });
+    const field = this.formGroup.lastChangedField;
+    if (!_.isEmpty(field)) {
+      return _.filter(this.dependencyTerms, terms => {
+        return field.sourceCategory ?
+        _.toLower(terms.category) === _.toLower(field.sourceCategory) :
+        _.toLower(terms.category) === _.toLower(field.code);
+      });
+    } else {
+      return this.dependencyTerms;
+    }
   }
 
   fetchDependencyTerms() { // subject
