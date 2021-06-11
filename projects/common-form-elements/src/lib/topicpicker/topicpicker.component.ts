@@ -74,11 +74,21 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.checkIfDependsIsTouched();
     this.generateDependencyTerms();
     this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
+    if (!_.isEmpty(this.isDynamicDependencyTerms)) {
+      this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
+    } else {
+      this.initTopicPicker(this.formatTopics(this.fetchAssociations()));
+    }
   }
 
   handleSelfChange() {
     this.formControlRef.valueChanges.pipe(
-      tap(val => val),
+      tap(val => {
+        if (!_.isEmpty(this.formControlRef.value)) {
+          this.formGroup.lastChangedField = { code: this.field.code, value: val, sourceCategory: this.field.sourceCategory };
+        }
+        return val;
+      }),
       takeUntil(this.dispose$)
     ).subscribe();
   }
@@ -97,7 +107,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
        if (!_.isEmpty(this.isDynamicDependencyTerms)) {
          this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
        } else {
-         this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
+         this.initTopicPicker(this.formatTopics(this.fetchAssociations()));
        }
       }),
       takeUntil(this.dispose$)
@@ -176,7 +186,11 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngAfterViewInit() {
-      this.initTopicPicker(this.formatTopics(this.field.terms || this.tempAssociation || []));
+    if (!_.isEmpty(this.isDynamicDependencyTerms)) {
+      this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
+    } else {
+      this.initTopicPicker(this.formatTopics(this.fetchAssociations()));
+    }
   }
 
   ngOnDestroy(): void {
@@ -195,13 +209,13 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private formatSelectedTopics(topics, unformatted, formatted) {
     _.forEach(topics, (topic) => {
-      if (unformatted.includes(this.field.output ? topic[this.field.output] : topic.name) && !topic.children) {
+      if (unformatted.includes(this.field.output ? topic[this.field.output] : topic.name)) {
         formatted.push({
           identifier: topic.identifier,
           name: topic.name
         });
       }
-      if (topic.children) {
+      if (!_.isEmpty(topic.children)) {
         this.formatSelectedTopics(topic.children, unformatted, formatted);
       }
     });
@@ -225,6 +239,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
             identifier: node.id,
             name: node.name
           }));
+          this.default = [];
           this.placeHolder = this.getPlaceHolder();
           this.topicChange.emit(this.selectedTopics);
           const topics = [];
@@ -261,19 +276,38 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   fetchAssociations() {
     // && this.context.value && this.field.association
     if (!_.isEmpty(this.depends)) {
-      const filteredTerm = _.find(this.dependencyTerms, terms => {
-        return !_.isEmpty(this.field.output) ? _.includes(this.getParentValue(), terms[this.field.output]) : _.includes(this.getParentValue(), terms.name) ;
+      const filterDependencyTerms = this.filterDependencyTermsByLastChangedValue();
+      const filteredTerm = _.filter(filterDependencyTerms, terms => {
+        return !_.isEmpty(this.field.output) ?
+        _.includes(this.getParentValue(), terms[this.field.output]) :
+        _.includes(this.getParentValue(), terms.name) ;
       });
-      if (filteredTerm) {
-        this.tempAssociation =  _.filter(filteredTerm.associations, association => {
-          return (this.field.sourceCategory) ? (association.category === this.field.sourceCategory) : association.category === this.field.code;
+      if (!_.isEmpty(filteredTerm)) {
+        this.tempAssociation =  _.filter(_.compact(_.flatten(_.map(filteredTerm, 'associations'))), association => {
+          return (this.field.sourceCategory) ?
+          (association.category === this.field.sourceCategory) :
+          association.category === this.field.code;
         });
-        return this.tempAssociation;
+        return _.uniqBy(this.tempAssociation, 'identifier');
       } else  {
         return this.field.terms;
       }
     } else {
       return this.field.terms;
+    }
+  }
+
+
+  filterDependencyTermsByLastChangedValue() {
+    const field = this.formGroup.lastChangedField;
+    if (!_.isEmpty(field)) {
+      return _.filter(this.dependencyTerms, terms => {
+        return field.sourceCategory ?
+        _.toLower(terms.category) === _.toLower(field.sourceCategory) :
+        _.toLower(terms.category) === _.toLower(field.code);
+      });
+    } else {
+      return this.dependencyTerms;
     }
   }
 
@@ -305,6 +339,8 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
         return this.tempAssociation;
       }
 
+    } else if (!_.isEmpty(this.dependencyTerms)) {
+      return this.dependencyTerms;
     }
   }
 
@@ -313,7 +349,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     !_.isEmpty(this.formGroup.lastChangedField) &&
     !_.isEmpty(this.formGroup.lastChangedField.value) &&
     this.formGroup.lastChangedField.value ||
-    _.castArray(_.last(_.compact(_.flatten((_.map(this.depends, 'value'))))));
+    _.castArray(_.last(_.compact(_.map(this.depends, 'value'))));
   }
 
   getTermsByValue(categories, value,  doFlatten?) {

@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges
   OnInit, SimpleChanges, HostListener, ViewChild } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {from, Subject, merge} from 'rxjs';
-import {FieldConfig, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder} from '../common-form-config';
+import {FieldConfig, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormControl, CustomFormGroup} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
 import {fromJS, List, Map, Set} from 'immutable';
 import * as _ from 'lodash-es';
 @Component({
   selector: 'sb-dynamic-multiple-dropdown',
   templateUrl: './dynamic-multiple-dropdown.component.html',
-  styleUrls: ['./dynamic-multiple-dropdown.component.css']
+  styleUrls: ['./dynamic-multiple-dropdown.component.scss']
 })
 export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -22,7 +22,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   @Input() isMultiple = true;
   @Input() context?: FormControl;
   @Input() formControlRef?: FormControl;
-  @Input() formGroup?: FormGroup;
+  @Input() formGroup?: CustomFormGroup;
   @Input() platform: any = 'web';
   @Input() default?: any;
   @Input() contextData: any;
@@ -34,11 +34,12 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
 
   public isDependsInvalid: any;
-
+  masterSelected: boolean = false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
   optionValueToOptionLabelMap = Map<any, string>();
+  latestParentValue: string;
 
   fromJS = fromJS;
 
@@ -60,32 +61,100 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
 
     if (!_.isEmpty(this.depends)) {
-      merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
-        tap(() => {
-          this.formControlRef.patchValue(null);
-          this.resetTempValue();
-        }),
-        takeUntil(this.dispose$)
-      ).subscribe();
-
-      merge(..._.map(this.depends, depend => depend.statusChanges)).pipe(
-        tap(() => {
-          this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
-        }),
-        takeUntil(this.dispose$)
-      ).subscribe();
-
-      this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
+      this.handleDependantFieldChanges();
     }
 
+    this.handleSelfChange();
+    this.setupOptions();
+    this.isAllSelected();
+  }
+
+  handleDependantFieldChanges() {
+    merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
+      tap(() => {
+        this.formControlRef.patchValue(null);
+        this.checkIfDependsHasDefault();
+        this.resetTempValue();
+        this.resetMasterSelected();
+      }),
+      takeUntil(this.dispose$)
+    ).subscribe();
+
+    merge(..._.map(this.depends, depend => depend.statusChanges)).pipe(
+      tap(() => {
+        this.checkIfDependsIsInvalid();
+      }),
+      takeUntil(this.dispose$)
+    ).subscribe();
+
+    this.checkIfDependsIsInvalid();
+  }
+
+  handleSelfChange() {
     this.formControlRef.valueChanges.pipe(
       tap((value) => {
         this.setTempValue(value);
+        if (!_.isEmpty(this.formControlRef.value)) {
+          // tslint:disable-next-line:max-line-length
+          this.formGroup.lastChangedField = { code: this.field.code, value: this.formControlRef.value , sourceCategory: this.field.sourceCategory};
+        }
         this.changeDetectionRef.detectChanges();
       }),
       takeUntil(this.dispose$)
     ).subscribe();
+  }
+
+  checkIfDependsHasDefault() {
+    this.checkIfDependsIsInvalid();
+    this.options = this.fetchDependencyTerms();
     this.setupOptions();
+    this.isAllSelected();
+
+  }
+
+  fetchDependencyTerms() {
+    if (!_.isEmpty(this.dependencyTerms) && !_.isEmpty(this.depends)) {
+      const filterDependencyTerms = this.filterDependencyTermsByLastChangedValue();
+      const filteredTerm = _.filter(filterDependencyTerms, terms => {
+        return !_.isEmpty(this.field.output) ?
+        _.includes(this.getParentValue(), terms[this.field.output]) :
+        _.includes(this.getParentValue(), terms.name) ;
+      });
+      if (!_.isEmpty(filteredTerm)) {
+        const tempAssociation =  _.filter(_.compact(_.flatten(_.map(filteredTerm, 'associations'))), association => {
+          return (this.field.sourceCategory) ?
+          (_.toLower(association.category) === _.toLower(this.field.sourceCategory)) :
+          _.toLower(association.category) === _.toLower(this.field.code);
+        });
+        return _.uniqBy(tempAssociation, 'identifier');
+      } else  {
+        return this.options;
+      }
+    }
+  }
+
+  getParentValue() {
+    return !_.isEmpty(this.latestParentValue) && this.latestParentValue ||
+    _.castArray(_.last(_.compact(_.map(this.depends, 'value'))));
+  }
+
+  filterDependencyTermsByLastChangedValue() {
+    const field = this.formGroup.lastChangedField;
+    if (!_.isEmpty(field) && field.code !== this.field.code && _.includes(this.field.depends, field.code)) {
+      return _.filter(this.dependencyTerms, terms => {
+        return field.sourceCategory ?
+        _.toLower(terms.category) === _.toLower(field.sourceCategory) :
+        _.toLower(terms.category) === _.toLower(field.code);
+      });
+    } else {
+      return this.dependencyTerms;
+    }
+  }
+
+
+  checkIfDependsIsInvalid() {
+    this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
+    return this.isDependsInvalid;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -153,6 +222,8 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
         this.tempValue = this.tempValue.add(option.get('name'));
       }
     }
+
+    this.masterSelected = this.tempValue.size === this.options.length;
   }
 
   onCancel() {
@@ -188,9 +259,17 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
   }
 
-  private resetTempValue() {
+  resetTempValue() {
     this.tempValue = Set(null);
     this.default = [];
+  }
+
+  resetMasterSelected() {
+    this.masterSelected = false;
+  }
+
+  setMasterSelected() {
+    this.masterSelected = true;
   }
 
   private setupOptions() {
@@ -242,9 +321,9 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
       this.resolvedOptions.forEach((option) => {
         const value: any = !_.isEmpty(this.field.output) ? option.get(this.field.output) :
         option.get('name') || option.get('identifier') || option.get('value') || option;
-        
+
         const labelVal: any = option.get('name') || option.get('label') || option;
-        
+
         this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(value, labelVal);
       });
     }
@@ -270,4 +349,26 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
      });
    }
 
+   isAllSelected() {
+    if (this.isOptionsArray()) {
+      if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
+        this.setMasterSelected();
+      }
+    }
+  }
+
+  checkUncheckAll() {
+    this.formControlRef.patchValue(null);
+    this.resetTempValue();
+
+    if (this.masterSelected === false) {
+      this.resolvedOptions.forEach(option => {
+        this.addSelected(option);
+      });
+
+      this.onSubmit();
+    } else {
+      this.resetMasterSelected();
+    }
+  }
 }

@@ -33,6 +33,8 @@ import { TagInputModule } from 'ngx-chips';
 import { DynamicTimerComponent } from './dynamic-timer/dynamic-timer.component';
 import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-category-select/dynamic-framework-category-select.component';
 import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework.component';
+import { DynamicRadioComponent } from './dynamic-radio/dynamic-radio.component';
+import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.component';
 
 @NgModule({
    declarations: [
@@ -63,6 +65,9 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
       DynamicMultiSelectComponent,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkComponent,
+      DynamicRadioComponent,
+      DynamicDialcodeComponent,
       DynamicFrameworkComponent
    ],
    imports: [
@@ -99,6 +104,9 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
       DynamicFieldDirective,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkComponent,
+      DynamicRadioComponent,
+      DynamicDialcodeComponent,
       DynamicFrameworkComponent
    ],
    entryComponents: [
@@ -114,6 +122,9 @@ import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework
       KeywordsComponent,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkComponent,
+      DynamicRadioComponent,
+      DynamicDialcodeComponent,
       DynamicFrameworkComponent
    ]
 })

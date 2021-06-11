@@ -20,7 +20,8 @@ import { DynamicCheckboxComponent } from '../dynamic-checkbox/dynamic-checkbox.c
 import { DynamicTimerComponent } from '../dynamic-timer/dynamic-timer.component';
 import { DynamicFrameworkComponent } from '../dynamic-framework/dynamic-framework.component';
 import { DynamicFrameworkCategorySelectComponent } from '../dynamic-framework-category-select/dynamic-framework-category-select.component';
-
+import { DynamicRadioComponent } from '../dynamic-radio/dynamic-radio.component';
+import { DynamicDialcodeComponent } from '../dynamic-dialcode/dynamic-dialcode.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -29,7 +30,6 @@ const componentMapper = {
   multiselect: DynamicMultiSelectComponent,
   nestedselect: DynamicMultipleDropdownComponent,
   keywords: KeywordsComponent,
-  dialcode: DynamicTextboxComponent,
   topicselector: TopicpickerComponent,
   licenses: DynamicDropdownComponent,
   label: DynamicTextboxComponent,
@@ -38,6 +38,8 @@ const componentMapper = {
   timer: DynamicTimerComponent,
   framework: DynamicFrameworkComponent,
   frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
+  radio: DynamicRadioComponent,
+  dialcode: DynamicDialcodeComponent
 };
 
 @Directive({
@@ -53,6 +55,7 @@ export class DynamicFieldDirective implements OnInit {
   @Input() disabled?: boolean;
   @Input() visible?: boolean;
   @Input() label: String;
+  @Input() labelHtml?: any;
   @Input() options?: any = [];
   @Input() placeholder?: string;
   @Input() context?: FormControl;
@@ -87,6 +90,7 @@ export class DynamicFieldDirective implements OnInit {
       this.componentRef.instance.formGroup = this.formGroup;
       this.componentRef.instance.formControlRef = this.formControlRef;
       this.componentRef.instance.label = this.label;
+      this.componentRef.instance.labelHtml = this.labelHtml;
       this.componentRef.instance.placeholder = this.placeholder;
       this.componentRef.instance.options = this.options;
       this.componentRef.instance.context = this.context;

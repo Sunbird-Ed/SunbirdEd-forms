@@ -3,5 +3,8 @@
     <input [attr.disabled]="disabled ? true : null" type="checkbox" [formControl]="formControlRef" id="{{_.kebabCase(field.name) || field.code}}"
     name="{{_.kebabCase(field.name) || field.code}}" [checked]="checked" (change)="onChecklistChange($event.target.checked)">
     <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}">{{label}}</label>
+    <label class="label-html" *ngIf="labelHtml">
+      <div [innerHTML]="labelHtml | safeHtml"></div>
+    </label>
   </div>
 </ng-container>

@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
-import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder} from '../common-form-config';
-import {tap} from 'rxjs/operators';
+import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup} from '../common-form-config';
+import {takeUntil, tap} from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import {ValueComparator} from '../utilities/value-comparator';
 
@@ -22,7 +22,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() context?: FormControl;
   @Input() contextTerms?: any;
   @Input() formControlRef?: FormControl;
-  @Input() formGroup?: FormGroup;
+  @Input() formGroup?: CustomFormGroup;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
@@ -35,6 +35,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;
+  private dispose$ = new Subject<undefined>();
 
   options$?: Observable<FieldConfigOption<any>[]>;
   contextValueChangesSubscription?: Subscription;
@@ -101,6 +102,17 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       // tslint:disable-next-line:max-line-length
       this.options$ = (this.options as DynamicFieldConfigOptionsBuilder<any>)(this.formControlRef, this.depends, this.formGroup, () => this.dataLoadStatusDelegate.next('LOADING'), () => this.dataLoadStatusDelegate.next('LOADED')) as any;
     }
+
+    this.formControlRef.valueChanges.pipe(
+      tap((value) => {
+        if (!_.isEmpty(this.formControlRef.value)) {
+          // tslint:disable-next-line:max-line-length
+          this.formGroup.lastChangedField = { code: this.field.code, value: this.formControlRef.value, sourceCategory: this.field.sourceCategory };
+        }
+        return value;
+      }),
+      takeUntil(this.dispose$)
+    ).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -138,18 +150,19 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   fetchAssociations() {
     // && this.context.value && this.field.association
     if (!_.isEmpty(this.depends)) {
-      const filteredTerm = _.find(this.dependencyTerms, terms => {
+      const filterDependencyTerms = this.filterDependencyTermsByLastChangedValue();
+      const filteredTerm = _.filter(filterDependencyTerms, terms => {
         return !_.isEmpty(this.field.output) ?
         _.includes(this.getParentValue(), terms[this.field.output]) :
         _.includes(this.getParentValue(), terms.name) ;
       });
-      if (filteredTerm) {
-        this.tempAssociation =  _.filter(filteredTerm.associations, association => {
+      if (!_.isEmpty(filteredTerm)) {
+        this.tempAssociation =  _.filter(_.compact(_.flatten(_.map(filteredTerm, 'associations'))), association => {
           return (this.field.sourceCategory) ?
-          (association.category === this.field.sourceCategory) :
-          association.category === this.field.code;
+          (_.toLower(association.category) === _.toLower(this.field.sourceCategory)) :
+          _.toLower(association.category) === _.toLower(this.field.code);
         });
-        return this.sortOptions(this.tempAssociation);
+        return this.sortOptions(_.uniqBy(this.tempAssociation, 'identifier'));
       } else  {
         return this.sortOptions(this.options);
       }
@@ -158,9 +171,23 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
+  filterDependencyTermsByLastChangedValue() {
+    const field = this.formGroup.lastChangedField;
+    if (!_.isEmpty(field) && field.code !== this.field.code && _.includes(this.field.depends, field.code)) {
+      return _.filter(this.dependencyTerms, terms => {
+        return field.sourceCategory ?
+        _.toLower(terms.category) === _.toLower(field.sourceCategory) :
+        _.toLower(terms.category) === _.toLower(field.code);
+      });
+    } else {
+      return this.dependencyTerms;
+    }
+  }
+
 
   getParentValue() {
-    return this.latestParentValue || _.compact(_.map(this.depends, 'value'));
+    return !_.isEmpty(this.latestParentValue) && this.latestParentValue ||
+    _.castArray(_.last(_.compact(_.map(this.depends, 'value'))));
   }
 
   getOptionValueForTerms(option) {

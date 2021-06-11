@@ -3,6 +3,7 @@
  */
 export * from './lib/common-form-elements.module';
 export * from './lib/common-form-config';
+export * from './lib/dialcode-cursor.service';
 
 export * from './lib/widgets/search-filter-widget/injection-tokens';
 export * from './lib/widgets/search-filter-widget/sb-search-facet-filter.component';

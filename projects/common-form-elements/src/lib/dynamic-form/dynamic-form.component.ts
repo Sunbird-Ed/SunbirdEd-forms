@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
   Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
-  import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
+  import {AsyncValidatorFactory, CustomFormGroup, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
-import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import * as moment_ from 'moment';
 import { FieldComparator } from '../utilities/fieldComparator';
@@ -30,7 +30,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
   FieldComparator = FieldComparator;
   _: any = _;
 
-  formGroup: FormGroup;
+  formGroup: CustomFormGroup;
   FieldConfigInputType = FieldConfigInputType;
   fieldDependency: {};
   isSection = false;
@@ -98,13 +98,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
     this.statusChangesSubscription = this.formGroup.valueChanges.pipe(
       tap((v) => {
-        this.statusChanges.emit({
-          isPristine: this.formGroup.pristine,
-          isDirty: this.formGroup.dirty,
-          isInvalid: this.formGroup.invalid,
-          isValid: this.formGroup.valid,
-          controls: this.getFormValidationErrors()
-        });
+        this.emitFormGroupStatus();
       })
     ).subscribe();
 
@@ -113,6 +107,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         this.valueChanges.emit(data);
       })
     ).subscribe();
+
+    this.emitFormGroupStatus();
   }
 
   ngOnDestroy(): void {
@@ -125,6 +121,16 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     if (this.valueChangesSubscription) {
       this.valueChangesSubscription.unsubscribe();
     }
+  }
+
+  emitFormGroupStatus() {
+    this.statusChanges.emit({
+      isPristine: this.formGroup.pristine,
+      isDirty: this.formGroup.dirty,
+      isInvalid: this.formGroup.invalid,
+      isValid: this.formGroup.valid,
+      controls: this.getFormValidationErrors()
+    });
   }
 
   getFormValidationErrors() {
@@ -154,6 +160,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'text':
         defaultVal = element.default || null;
         break;
+      case 'dialcode':
+        defaultVal = element.default || null;
+        break;
       case 'textarea':
         defaultVal = element.default || null;
         break;
@@ -164,6 +173,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         defaultVal = element.default || null;
         break;
       case 'select':
+      case 'topicselector':
       case 'framework':
         if (element.default) {
           if (element.dataType === 'list') {
@@ -220,12 +230,16 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'checkbox':
         defaultVal = (element.dataType === 'text') ? (element.default === 'Yes' ? 'Yes' : 'No') : !!element.default;
         break;
+      case 'radio':
+        defaultVal = element.default || null;
+        break;
     }
 
     formValueList.push(defaultVal);
 
     if (element.validations && element.validations.length) {
       element.validations.forEach((data, i) => {
+        if (element.inputType === 'dialcode') { return false; }
         switch (data.type) {
           case 'required':
             if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect' ||
