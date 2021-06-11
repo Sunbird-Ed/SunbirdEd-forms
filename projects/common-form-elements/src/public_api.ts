@@ -39,4 +39,7 @@ export * from './lib/dynamic-framework/dynamic-framework.component';
 export * from './lib/widgets/search-filter-widget/sb-search-framework-filter.component';
 export * from './lib/multiple-dropdown/multiple-dropdown.component';
 export * from './lib/dynamic-dropdown/dynamic-dropdown.component';
+export * from './lib/dynamic-radio/dynamic-radio.component';
+export * from './lib/dynamic-dropdown/dynamic-dropdown.component';
+export * from './lib/dynamic-dialcode/dynamic-dialcode.component';
 
