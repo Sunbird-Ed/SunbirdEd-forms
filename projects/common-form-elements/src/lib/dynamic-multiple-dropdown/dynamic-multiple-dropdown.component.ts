@@ -62,10 +62,10 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
     if (!_.isEmpty(this.depends)) {
       this.handleDependantFieldChanges();
+      this.checkIfDependsHasDefault();
     }
 
     this.handleSelfChange();
-    this.checkIfDependsHasDefault();
     this.setupOptions();
     this.isAllSelected();
   }

@@ -302,7 +302,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     }), (depend) => {
       return depend.terms || depend.range;
     });
-    return _.flatten(dependsTerms);
+    return _.compact(_.flatten(dependsTerms));
   }
 
   getAppIcon(config, val) {
