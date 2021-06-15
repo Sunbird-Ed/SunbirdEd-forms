@@ -52,6 +52,10 @@ export class DynamicFrameworkComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.formControlRef.customEventHandler$ =  new BehaviorSubject<any>({});
 
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
     if (!this.options) {
       this.options = _.isEmpty(this.field.options) ? this.isOptionsClosure(this.field.options) && this.field.options : [];
     }

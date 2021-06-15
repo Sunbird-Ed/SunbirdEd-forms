@@ -21,7 +21,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   @Input() placeholder?: string;
   @Input() isMultiple = true;
   @Input() context?: FormControl;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
   @Input() platform: any = 'web';
   @Input() default?: any;
@@ -56,6 +56,11 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   ) {
   }
   ngOnInit() {
+
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
     if (this.field && this.field.range) {
       this.options = this.field.range;
     }

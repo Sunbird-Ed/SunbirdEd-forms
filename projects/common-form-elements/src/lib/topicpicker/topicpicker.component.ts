@@ -57,6 +57,10 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
     this.handleSelfChange();
     if (!_.isEmpty(this.depends)) {
       this.checkForCustomEventHandler();

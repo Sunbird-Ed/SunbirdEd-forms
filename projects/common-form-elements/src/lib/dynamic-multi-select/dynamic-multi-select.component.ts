@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
-import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder} from '../common-form-config';
+import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormControl} from '../common-form-config';
 import {tap} from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import {ValueComparator} from '../utilities/value-comparator';
@@ -20,7 +20,7 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() contextTerms?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: FormGroup;
   @Input() default?: any;
   @Input() contextData: any;
@@ -57,6 +57,10 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   }
 
   ngOnInit() {
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
     // if (this.context) {
       // this.contextValueChangesSubscription = this.context.valueChanges.pipe(
       //   tap(() => {
