@@ -63,21 +63,19 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.handleSelfChange();
     if (!_.isEmpty(this.depends)) {
-      this.checkForCustomEventHandler();
+     this.checkForCustomEventHandler();
      this.handleDependantFieldChanges();
      this.checkIfDependsHasDefault();
     }
 
     this.handleClosureOption();
-
-     this.setDefaultValue();
+    this.setDefaultValue();
   }
 
   checkIfDependsHasDefault() {
     this.checkIfDependsIsInvalid();
     this.checkIfDependsIsTouched();
     this.generateDependencyTerms();
-    this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
     if (!_.isEmpty(this.isDynamicDependencyTerms)) {
       this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
     } else {
