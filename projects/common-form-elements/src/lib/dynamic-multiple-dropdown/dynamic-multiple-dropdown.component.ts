@@ -6,6 +6,7 @@ import {FieldConfig, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder
 import {takeUntil, tap} from 'rxjs/operators';
 import {fromJS, List, Map, Set} from 'immutable';
 import * as _ from 'lodash-es';
+import { getAssociation, getSelectedCategoryTerms } from '../utilities/utility';
 @Component({
   selector: 'sb-dynamic-multiple-dropdown',
   templateUrl: './dynamic-multiple-dropdown.component.html',
@@ -59,6 +60,10 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
     if (!_.isEmpty(this.field.sourceCategory)) {
       this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
+    if (!_.isEmpty(this.field.output)) {
+      this.formControlRef.output = this.field.output;
     }
 
     if (this.field && this.field.range) {

@@ -56,6 +56,10 @@ export class DynamicFrameworkComponent implements OnInit, OnDestroy {
       this.formControlRef.sourceCategory = this.field.sourceCategory;
     }
 
+    if (!_.isEmpty(this.field.output)) {
+      this.formControlRef.output = this.field.output;
+    }
+
     if (!this.options) {
       this.options = _.isEmpty(this.field.options) ? this.isOptionsClosure(this.field.options) && this.field.options : [];
     }

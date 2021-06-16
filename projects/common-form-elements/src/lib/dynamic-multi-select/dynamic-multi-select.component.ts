@@ -61,6 +61,10 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       this.formControlRef.sourceCategory = this.field.sourceCategory;
     }
 
+    if (!_.isEmpty(this.field.output)) {
+      this.formControlRef.output = this.field.output;
+    }
+
     // if (this.context) {
       // this.contextValueChangesSubscription = this.context.valueChanges.pipe(
       //   tap(() => {
