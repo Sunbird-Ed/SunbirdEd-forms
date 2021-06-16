@@ -5,6 +5,7 @@ import { FormControl , FormGroup} from '@angular/forms';
 import { CustomFormControl, CustomFormGroup, DynamicFieldConfigOptionsBuilder,
   FieldConfig, FieldConfigOption } from '../common-form-config';
 import { tap, takeUntil } from 'rxjs/operators';
+import { getAllDependencyFieldValues, getSelectedCategoryTerms, getAssociation } from '../utilities/utility';
 
 declare var treePicker: any;
 declare var $: any;
@@ -57,6 +58,10 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
     this.handleSelfChange();
     if (!_.isEmpty(this.depends)) {
      this.checkForCustomEventHandler();
@@ -282,8 +287,10 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
         _.includes(this.getParentValue(), terms[this.field.output]) :
         _.includes(this.getParentValue(), terms.name) ;
       });
-      if (!_.isEmpty(filteredTerm)) {
-        this.tempAssociation =  _.filter(_.compact(_.flatten(_.map(filteredTerm, 'associations'))), association => {
+      const selectedCategoryTerms = getSelectedCategoryTerms(this.dependencyTerms, this.depends);
+      const filteredAssociationTerms = this.getCommonAssociations(_.compact(selectedCategoryTerms), getAssociation(filteredTerm));
+      if (!_.isEmpty(filteredAssociationTerms)) {
+        this.tempAssociation =  _.filter(filteredAssociationTerms, association => {
           return (this.field.sourceCategory) ?
           (association.category === this.field.sourceCategory) :
           association.category === this.field.code;
@@ -297,48 +304,70 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-
   filterDependencyTermsByLastChangedValue() {
     const field = this.formGroup.lastChangedField;
+    let terms = [];
     if (!_.isEmpty(field)) {
-      return _.filter(this.dependencyTerms, terms => {
+      terms = _.filter(this.dependencyTerms, term => {
         return field.sourceCategory ?
-        _.toLower(terms.category) === _.toLower(field.sourceCategory) :
-        _.toLower(terms.category) === _.toLower(field.code);
+        _.toLower(term.category) === _.toLower(field.sourceCategory) :
+        _.toLower(term.category) === _.toLower(field.code);
       });
     } else {
-      return this.dependencyTerms;
+      terms = this.dependencyTerms;
     }
+    return _.compact(terms);
+  }
+
+  getCommonAssociations(parentTerms, selectedTerms) {
+    let finalAssociation = _.cloneDeep(selectedTerms);
+    const groupParentTermsByCategory = _.chain(parentTerms)
+          .groupBy(parent => {
+            return parent.category || _.toLower(parent.objectType);
+          })
+          .map((value, key) => ({ field: key, terms: _.flatten(_.map(value, i => i.associations || i.categories))  }))
+          .value();
+    _.forEach(groupParentTermsByCategory, parent => {
+        if (parent.field === 'framework') {
+          const associations = _.flatten(_.map(parent.terms, 'terms'));
+          finalAssociation = _.intersectionBy(associations, finalAssociation, 'name');
+        } else {
+          finalAssociation = _.intersectionBy(parent.terms, finalAssociation, 'name');
+        }
+    });
+    return finalAssociation;
   }
 
   fetchDependencyTerms() { // subject
     if (!_.isEmpty(this.isDynamicDependencyTerms)) {
-      const filteredTerm = this.getTermsByValue(this.isDynamicDependencyTerms, this.getParentValue(), true);
-      if (!_.isEmpty(filteredTerm)) {
+      // const filteredTerm = this.getTermsByValue(this.isDynamicDependencyTerms, this.getParentValue(), true);
+
+      const selectedCategoryTerms = getSelectedCategoryTerms(this.isDynamicDependencyTerms, this.depends);
+      if (!_.isEmpty(selectedCategoryTerms)) {
         const consolidatedAssociations = [];
-        _.forEach(filteredTerm, item => {
-            let tempAssociations: any;
-            let lookUp: string;
-            if (item.categories) {
-              tempAssociations = item.categories;
-              lookUp = 'code';
-            } else if (item.terms) {
-              tempAssociations = item.terms;
-              lookUp = 'category';
-            } else if (item.associations) {
-              tempAssociations = item.associations;
-              lookUp = 'category';
-            }
-            const filteredCategory = _.filter(tempAssociations, association => {
-              return (this.field.sourceCategory) ? (association[lookUp] === this.field.sourceCategory) :
+        _.forEach(selectedCategoryTerms, item => {
+          let tempAssociations: any;
+          let lookUp: string;
+          if (item.categories) {
+            tempAssociations = item.categories;
+            lookUp = 'code';
+          } else if (item.terms) {
+            tempAssociations = item.terms;
+            lookUp = 'category';
+          } else if (item.associations) {
+            tempAssociations = item.associations;
+            lookUp = 'category';
+          }
+          const filteredCategory = _.filter(tempAssociations, association => {
+            return (this.field.sourceCategory) ? (association[lookUp] === this.field.sourceCategory) :
               association[lookUp] === this.field.code;
-            });
-            consolidatedAssociations.push(...this.extractAndFlattenTerms(filteredCategory));
+          });
+          consolidatedAssociations.push(...this.extractAndFlattenTerms(filteredCategory));
         });
         this.tempAssociation = _.uniqBy(consolidatedAssociations, 'identifier');
-        return this.tempAssociation;
       }
-
+      const filteredAssociationTerms = this.getCommonAssociations(_.compact(this.isDynamicDependencyTerms), this.tempAssociation);
+      return filteredAssociationTerms;
     } else if (!_.isEmpty(this.dependencyTerms)) {
       return this.dependencyTerms;
     }

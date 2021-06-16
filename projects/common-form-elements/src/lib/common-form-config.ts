@@ -141,6 +141,7 @@ export interface CustomFormGroup extends FormGroup {
 export interface CustomFormControl extends FormControl {
   termsForDependantFields?: any;
   sourceCategory?: any;
+  output?: any;
   customEventHandler$?: Subject<any>;
   shouldListenToCustomEvent?: Boolean;
 }
