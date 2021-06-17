@@ -321,12 +321,13 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getCommonAssociations(parentTerms, selectedTerms) {
     let finalAssociation = _.cloneDeep(selectedTerms);
-    const groupParentTermsByCategory = _.chain(parentTerms)
-          .groupBy(parent => {
-            return parent.category || _.toLower(parent.objectType);
-          })
-          .map((value, key) => ({ field: key, terms: _.flatten(_.map(value, i => i.associations || i.categories))  }))
-          .value();
+
+    const groupByCategory = _.groupBy(parentTerms, parent => {
+      return parent.category || _.toLower(parent.objectType);
+    });
+
+    // tslint:disable-next-line:max-line-length
+    const groupParentTermsByCategory = _.map(groupByCategory, (value, key) => ({ field: key, terms: _.compact(_.flatten(_.map(value, i => i.associations || i.categories)))  }));
     _.forEach(groupParentTermsByCategory, parent => {
         if (parent.field === 'framework') {
           const associations = _.flatten(_.map(parent.terms, 'terms'));
