@@ -245,7 +245,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect' ||
             element.inputType === 'frameworkCategorySelect') {
               validationList.push(Validators.required);
-            } else if (element.type === 'checkbox') {
+            } else if (element.inputType === 'checkbox') {
               validationList.push(Validators.requiredTrue);
             } else {
               validationList.push(Validators.required);
