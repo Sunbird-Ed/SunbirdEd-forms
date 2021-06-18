@@ -108,8 +108,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       })
     ).subscribe();
 
+    this.emitInitialFormGroupValue();
     this.emitFormGroupStatus();
   }
+
+
 
   ngOnDestroy(): void {
     this.finalize.emit();
@@ -121,6 +124,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     if (this.valueChangesSubscription) {
       this.valueChangesSubscription.unsubscribe();
     }
+  }
+
+
+  emitInitialFormGroupValue() {
+    this.valueChanges.emit(this.formGroup.value);
   }
 
   emitFormGroupStatus() {
