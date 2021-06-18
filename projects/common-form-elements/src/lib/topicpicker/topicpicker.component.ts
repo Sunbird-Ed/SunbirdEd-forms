@@ -177,6 +177,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
     this.formatSelectedTopics(this.field.terms, selectedTopics.unformatted, selectedTopics.formatted);
     this.default = selectedTopics.unformatted;
     this.selectedNodes = { ...selectedTopics.formatted };
+    this.selectedNodes = _.uniqBy(_.map(this.selectedNodes), this.field.output || 'name');
     this.topicChange.emit(this.selectedTopics);
 
     if (!_.isEmpty(this.default) && this.isDefaultExistsInTerms()) {

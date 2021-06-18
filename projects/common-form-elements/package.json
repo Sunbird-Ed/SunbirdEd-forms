@@ -1,6 +1,6 @@
 {
   "name": "common-form-elements",
-  "version": "4.0.12",
+  "version": "4.0.14",
   "peerDependencies": {
     "@angular/common": "^8.0.0",
     "@angular/core": "^8.0.0",
