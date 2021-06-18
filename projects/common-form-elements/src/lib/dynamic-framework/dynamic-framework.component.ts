@@ -67,7 +67,8 @@ export class DynamicFrameworkComponent implements OnInit, OnDestroy {
           this.formControlRef.termsForDependantFields = [];
           this.formControlRef.termsForDependantFields.push(result);
           if (!_.isEmpty(this.formControlRef.value)) {
-            this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value};
+            // tslint:disable-next-line:max-line-length
+            this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value, sourceCategory: this.field.sourceCategory};
           }
           this.formControlRef.customEventHandler$.next(true);
           // if (!this.isTermsLoaded) {
@@ -88,7 +89,8 @@ export class DynamicFrameworkComponent implements OnInit, OnDestroy {
         const result = _.get(value, 'framework');
         this.formControlRef.termsForDependantFields = [];
         this.formControlRef.termsForDependantFields.push(result);
-        this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value};
+        // tslint:disable-next-line:max-line-length
+        this.formGroup.lastChangedField = {code: this.field.code, value: this.formControlRef.value, sourceCategory: this.field.sourceCategory};
         this.formControlRef.customEventHandler$.next(true);
       }),
       takeUntil(this.dispose$)
