@@ -59,21 +59,19 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.handleSelfChange();
     if (!_.isEmpty(this.depends)) {
-      this.checkForCustomEventHandler();
+     this.checkForCustomEventHandler();
      this.handleDependantFieldChanges();
      this.checkIfDependsHasDefault();
     }
 
     this.handleClosureOption();
-
-     this.setDefaultValue();
+    this.setDefaultValue();
   }
 
   checkIfDependsHasDefault() {
     this.checkIfDependsIsInvalid();
     this.checkIfDependsIsTouched();
     this.generateDependencyTerms();
-    this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
     if (!_.isEmpty(this.isDynamicDependencyTerms)) {
       this.initTopicPicker(this.formatTopics(this.fetchDependencyTerms()));
     } else {
@@ -209,7 +207,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private formatSelectedTopics(topics, unformatted, formatted) {
     _.forEach(topics, (topic) => {
-      if (unformatted.includes(this.field.output ? topic[this.field.output] : topic.name)) {
+      if (_.includes(unformatted, this.field.output ? topic[this.field.output] : topic.name)) {
         formatted.push({
           identifier: topic.identifier,
           name: topic.name
@@ -232,7 +230,9 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
         chooseAllText: 'Choose All',
         searchText: 'Search',
         selectedText: 'selected',
-        picked: (!_.isEmpty(this.selectedNodes)) ? _.map(this.selectedNodes, 'identifier') : (!_.isEmpty(this.default) ? this.default : []),
+        picked: (!_.isEmpty(this.selectedNodes)) ?
+        _.map(this.selectedNodes, 'identifier') :
+        (!_.isEmpty(this.default) ? this.default : []),
         onSubmit: (selectedNodes) => {
           this.selectedNodes = selectedNodes;
           this.selectedTopics = _.map(selectedNodes, node => ({

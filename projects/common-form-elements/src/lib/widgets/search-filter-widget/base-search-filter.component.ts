@@ -110,6 +110,9 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
   protected buildAggregatedSearchFilter(): IAnySearchFilter {
     const queryParams = this.activatedRoute.snapshot.queryParams;
     const aggregatedSearchFilter: IAnySearchFilter = cloneDeep(this.baseSearchFilter);
+    for (let prop in this.baseSearchFilter) {
+      this.baseSearchFilter[prop] = [];
+    }
 
     Object.keys(queryParams)
       .filter((paramKey) => this.supportedFilterAttributes.length ? this.supportedFilterAttributes.includes(paramKey) : true)
