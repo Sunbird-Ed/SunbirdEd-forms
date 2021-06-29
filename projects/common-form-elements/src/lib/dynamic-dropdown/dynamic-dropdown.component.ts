@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
-import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup} from '../common-form-config';
+import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup, CustomFormControl} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import {ValueComparator} from '../utilities/value-comparator';
@@ -21,7 +21,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() contextTerms?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
   @Input() default?: any;
   @Input() contextData: any;
@@ -63,6 +63,14 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     if (!this.options) {
       this.options = [];
+    }
+
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
+    if (!_.isEmpty(this.field.output)) {
+      this.formControlRef.output = this.field.output;
     }
 
     // if (this.context) {
