@@ -108,8 +108,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       })
     ).subscribe();
 
+    this.emitInitialFormGroupValue();
     this.emitFormGroupStatus();
   }
+
+
 
   ngOnDestroy(): void {
     this.finalize.emit();
@@ -121,6 +124,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     if (this.valueChangesSubscription) {
       this.valueChangesSubscription.unsubscribe();
     }
+  }
+
+
+  emitInitialFormGroupValue() {
+    this.valueChanges.emit(this.formGroup.value);
   }
 
   emitFormGroupStatus() {
@@ -245,7 +253,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect' ||
             element.inputType === 'frameworkCategorySelect') {
               validationList.push(Validators.required);
-            } else if (element.type === 'checkbox') {
+            } else if (element.inputType === 'checkbox') {
               validationList.push(Validators.requiredTrue);
             } else {
               validationList.push(Validators.required);
