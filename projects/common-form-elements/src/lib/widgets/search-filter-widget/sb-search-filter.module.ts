@@ -24,7 +24,7 @@ import {CommonFormElementsModule} from '../../common-form-elements.module';
 export class SbSearchFilterModule {
   static forRoot(
     platform: 'mobile' | 'web'
-  ): ModuleWithProviders {
+  ): ModuleWithProviders<SbSearchFilterModule> {
     return {
       ngModule: SbSearchFilterModule,
       providers: [

@@ -36,7 +36,7 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
   @Input() disabled: Boolean;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
 
-  @ViewChild('validationTrigger', {static: false}) validationTrigger: ElementRef;
+  @ViewChild('validationTrigger') validationTrigger: ElementRef;
   public isDependsInvalid: any;
   contextValueChangesSubscription?: Subscription;
   options$?: Observable<FieldConfigOption<any>[]>;
