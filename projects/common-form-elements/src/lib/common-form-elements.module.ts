@@ -35,6 +35,7 @@ import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-cat
 import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework.component';
 import { DynamicRadioComponent } from './dynamic-radio/dynamic-radio.component';
 import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.component';
+import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
 
 @NgModule({
    declarations: [
@@ -65,6 +66,7 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicMultiSelectComponent,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkCategoryNestedSelectComponent,
       DynamicFrameworkComponent,
       DynamicRadioComponent,
       DynamicDialcodeComponent,
@@ -104,6 +106,7 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFieldDirective,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkCategoryNestedSelectComponent,
       DynamicFrameworkComponent,
       DynamicRadioComponent,
       DynamicDialcodeComponent,
@@ -122,6 +125,7 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       KeywordsComponent,
       DynamicTimerComponent,
       DynamicFrameworkCategorySelectComponent,
+      DynamicFrameworkCategoryNestedSelectComponent,
       DynamicFrameworkComponent,
       DynamicRadioComponent,
       DynamicDialcodeComponent,

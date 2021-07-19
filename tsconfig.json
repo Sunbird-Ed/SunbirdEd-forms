@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "common-form-elements": [
+      "common-form-elements-v9": [
         "dist/common-form-elements"
       ],
-      "common-form-elements/*": [
+      "common-form-elements-v9/*": [
         "dist/common-form-elements/*"
       ]
     },

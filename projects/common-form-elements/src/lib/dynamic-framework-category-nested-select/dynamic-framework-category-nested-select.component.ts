@@ -10,10 +10,10 @@ import * as _ from 'lodash-es';
 
 @Component({
   selector: 'sb-dynamic-framework-category-select',
-  templateUrl: './dynamic-framework-category-select.component.html',
-  styleUrls: ['./dynamic-framework-category-select.component.css']
+  templateUrl: './dynamic-framework-category-nested-select.component.html',
+  styleUrls: ['./dynamic-framework-category-nested-select.component.css']
 })
-export class DynamicFrameworkCategorySelectComponent implements OnInit {
+export class DynamicFrameworkCategoryNestedSelectComponent implements OnInit {
 
   @Input() disabled?: boolean;
   @Input() field: FieldConfig<String>;
@@ -21,7 +21,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
   @Input() label?: string;
   @Input() labelHtml: any;
   @Input() placeholder?: string;
-  @Input() isMultiple = false;
+  @Input() isMultiple = true;
   @Input() context?: FormControl;
   @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;

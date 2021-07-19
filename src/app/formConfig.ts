@@ -1,516 +1,827 @@
 export const timer = [
     {
-        'name': 'Dialcode Section',
-        'fields': [
+        "name": "First Section",
+        "fields": [
             {
-                'code': 'dialcodeRequired',
-                'dataType': 'text',
-                'description': 'QR CODE REQUIRED',
-                'editable': true,
-                'default': 'No',
-                'index': 5,
-                'inputType': 'radio',
-                'label': 'QR CODE REQUIRED',
-                'name': 'dialcodeRequired',
-                'placeholder': 'QR CODE REQUIRED',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
+                "code": "appIcon",
+                "dataType": "text",
+                "description": "appIcon of the content",
+                "editable": true,
+                "inputType": "appIcon",
+                "label": "Icon",
+                "name": "Icon",
+                "placeholder": "Icon",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
                 },
-                'range': ['Yes', 'No'],
-                'required': false,
-                'visible': true
+                "required": true,
+                "visible": true
             },
             {
-                'code': 'dialcodes',
-                'depends': ['dialcodeRequired'],
-                'dataType': 'list',
-                'description': 'QR CODES',
-                'editable': true,
-                'inputType': 'dialcode',
-                'label': 'QR CODES',
-                'name': 'dialcode',
-                'placeholder': 'Enter code here',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
+                "code": "name",
+                "dataType": "text",
+                "description": "Name of the content",
+                "editable": true,
+                "inputType": "text",
+                "label": "Title",
+                "name": "Name",
+                "placeholder": "Title",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
                 },
-                'required': true,
-                'visible': true,
-                'validations': [
+                "required": true,
+                "visible": true,
+                "validations": [
                     {
-                        'type': 'minLength',
-                        'value': '2',
+                        "type": "maxLength",
+                        "value": "120",
+                        "message": "Input is Exceeded"
                     },
                     {
-                        'type': 'maxLength',
-                        'value': '20',
+                        "type": "required",
+                        "message": "Title is required"
                     }
                 ],
+                "default": "Untitled Course"
+            },
+            {
+                "code": "description",
+                "dataType": "text",
+                "description": "Description of the content",
+                "editable": true,
+                "inputType": "textarea",
+                "label": "Description",
+                "name": "Description",
+                "placeholder": "Description",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1"
+                },
+                "required": false,
+                "visible": true,
+                "validations": [
+                    {
+                        "type": "maxLength",
+                        "value": "256",
+                        "message": "Input is Exceeded"
+                    }
+                ],
+                "default": "Enter description for Course"
+            },
+            {
+                "code": "keywords",
+                "visible": true,
+                "editable": true,
+                "dataType": "list",
+                "name": "Keywords",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                },
+                "description": "Keywords for the content",
+                "inputType": "keywords",
+                "label": "Keywords",
+                "placeholder": "Enter Keywords",
+                "required": false,
+                "validations": []
             }
         ]
     },
     {
-        'name': '',
-        'fields': [
+        "name": "Second Section",
+        "fields": [
             {
-                'code': 'instructions',
-                'dataType': 'text',
-                'description': 'Instructions for the question set',
-                'editable': true,
-                'inputType': 'richtext',
-                'label': 'Instructions',
-                'name': 'Instruction',
-                'placeholder': 'Enter Instructions',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-2 required'
+                "code": "dialcodeRequired",
+                "dataType": "text",
+                "description": "QR CODE REQUIRED",
+                "editable": true,
+                "default": "No",
+                "index": 5,
+                "inputType": "radio",
+                "label": "QR code required",
+                "name": "dialcodeRequired",
+                "placeholder": "QR code required",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1"
                 },
-                'validations': [
+                "range": [
+                    "Yes",
+                    "No"
+                ],
+                "required": false,
+                "visible": true
+            },
+            {
+                "code": "dialcodes",
+                "depends": [
+                    "dialcodeRequired"
+                ],
+                "dataType": "list",
+                "description": "Digital Infrastructure for Augmented Learning",
+                "editable": true,
+                "inputType": "dialcode",
+                "label": "QR code",
+                "name": "dialcode",
+                "placeholder": "Enter code here",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1"
+                },
+                "required": true,
+                "visible": true,
+                "validations": [
                     {
-                        'type': 'maxLength',
-                        'value': '500',
-                        'message': 'Input is Exceeded'
+                        "type": "minLength",
+                        "value": "2"
                     },
                     {
-                        'type': 'required',
-                        'message': 'Instruction is required'
+                        "type": "maxLength",
+                        "value": "20"
                     }
-                ],
-                'required': true,
-                'visible': true,
-                'default': '<p>Chapter 1:&nbsp;<i><strong>माता का अँचल</strong></i></p><p>Chapter 2:&nbsp;<i><strong>जॉर्ज पंचम की नाक</strong></i></p><p>Chapter 3:&nbsp;<i><strong>साना – साना हाथ जोड़ि</strong></i></p><p>Chapter 4:&nbsp;<i><strong>एही ठैयाँ झुलनी हेरानी हो रामा!</strong></i></p><p>Chapter 5:&nbsp;<i><strong>मैं क्यों लिखता हूँ?</strong></i></p><p>Chapter 6:<i><strong>&nbsp;लेखक परिचय</strong></i></p><p>Chapter 7:<i><strong>&nbsp;लेखक परिचय</strong></i></p>'
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Third Section",
+        "fields": [
+            {
+                "code": "primaryCategory",
+                "dataType": "text",
+                "description": "Type",
+                "editable": true,
+                "renderingHints": {},
+                "inputType": "select",
+                "label": "Category",
+                "name": "Type",
+                "placeholder": "",
+                "required": true,
+                "visible": true,
+                "validations": [],
+                "default": "Course",
+                "range": [
+                    "Course"
+                ]
             },
             {
-                'code': 'name',
-                'dataType': 'text',
-                'description': 'Name of the QuestionSet',
-                'editable': true,
-                'inputType': 'text',
-                'label': 'Name',
-                'name': 'Name',
-                'placeholder': 'Name',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1 required'
+                "code": "additionalCategories",
+                "dataType": "list",
+                "depends": [
+                    "primaryCategory"
+                ],
+                "description": "Additonal Category of the Content",
+                "editable": true,
+                "inputType": "nestedselect",
+                "label": "Additional Category",
+                "name": "Additional Category",
+                "placeholder": "Select Additional Category",
+                "renderingHints": {},
+                "required": false,
+                "visible": true,
+                "range": [
+                    "Textbook",
+                    "Lesson Plan"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Organisation Framework Terms",
+        "fields": [
+            {
+                "code": "framework",
+                "visible": true,
+                "editable": true,
+                "dataType": "text",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
                 },
-                'required': true,
-                'visible': true,
-                'validations': [
+                "description": "",
+                "label": "Course Type",
+                "required": true,
+                "name": "Framework",
+                "inputType": "framework",
+                "default": "nit_k-12",
+                "placeholder": "Select Course Type",
+                "output": "identifier",
+                "validations": [
                     {
-                        'type': 'max',
-                        'value': '120',
-                        'message': 'Input is Exceeded'
+                        "type": "required",
+                        "message": "Course Type is required"
+                    }
+                ],
+                "range": [
+                    {
+                        "label": "nit_k-12",
+                        "identifier": "nit_k-12"
                     },
                     {
-                        'type': 'required',
-                        'message': 'Name is required'
+                        "label": "nit_tpd",
+                        "identifier": "nit_tpd"
                     }
-                ],
-                'default': 'NCERT Solutions new'
-            },
-            {
-                'code': 'description',
-                'dataType': 'text',
-                'description': 'Description of the content',
-                'editable': true,
-                'inputType': 'textarea',
-                'label': 'Description',
-                'name': 'Description',
-                'placeholder': 'Description',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1 required'
-                },
-                'required': true,
-                'visible': true,
-                'validations': [
-                    {
-                        'type': 'required',
-                        'message': 'description is required'
-                    }
-                ],
-                'default': 'Hello'
-            },
-            {
-                'code': 'keywords',
-                'visible': true,
-                'editable': true,
-                'dataType': 'list',
-                'name': 'Keywords',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1 required'
-                },
-                'description': 'Keywords for the content',
-                'inputType': 'keywords',
-                'label': 'keywords',
-                'placeholder': 'Enter Keywords',
-                'required': true,
-                'validations': [
-                    {
-                        'type': 'required',
-                        'message': 'keywords is required'
-                    }
-                ],
-                'default': [
-                    'test'
                 ]
             },
             {
-                'code': 'primaryCategory',
-                'dataType': 'text',
-                'description': 'Type',
-                'editable': false,
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'inputType': 'text',
-                'label': 'Type',
-                'name': 'Type',
-                'placeholder': '',
-                'required': false,
-                'visible': true,
-                'default': 'Practice Question Set',
-                'range': [
-                    'Practice Question Set'
-                ]
-            },
-            {
-                'code': 'additionalCategories',
-                'dataType': 'list',
-                'description': 'Additonal Category of the Content',
-                'editable': true,
-                'inputType': 'nestedselect',
-                'label': 'Additional Category',
-                'name': 'Additional Category',
-                'placeholder': 'Select Additional Category',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'default': [
-                    'Classroom Teaching Video'
+                "code": "subjectIds",
+                "visible": true,
+                "editable": true,
+                "dataType": "list",
+                "depends": [
+                    "framework"
                 ],
-                'required': false,
-                'visible': true,
-                'range': [
-                    'Classroom Teaching Video',
-                    'வரவேற்பு',
-                    '1',
-                    1,
-                    10,
-                    'स्वागत हे',
-                    'Concept Map',
-                    'Curiosity Question Set',
-                    'Experiential Resource',
-                    'Explanation Video',
-                    'Focus Spot',
-                    'Learning Outcome Definition',
-                    'Lesson Plan',
-                    'Marking Scheme Rubric',
-                    'Pedagogy Flow',
-                    'Previous Board Exam Papers',
-                    'TV Lesson',
-                    'Textbook'
-                ]
-            },
-            {
-                'code': 'audience',
-                'dataType': 'list',
-                'description': 'Audience',
-                'editable': true,
-                'inputType': 'select',
-                'label': 'Audience',
-                'name': 'Audience',
-                'placeholder': 'Select Audience',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1 required'
+                "sourceCategory": "subject",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
                 },
-                'required': true,
-                'visible': true,
-                'range': [
-                    'Student',
-                    'Teacher',
-                    'Administrator'
-                ],
-                'validations': [
+                "description": "",
+                // "isMultiple": false,
+                "default": ["nit_k-12_subject_english"],
+                "label": "Subjects covered in the course",
+                "required": true,
+                "name": "Subject",
+                "inputType": "frameworkCategorySelect",
+                "placeholder": "Select Subject(s)",
+                "output": "identifier",
+                "validations": [
                     {
-                        'type': 'required',
-                        'message': 'Audience is required'
+                        "type": "required",
+                        "message": "Subjects Taught is required"
+                    }
+                ]
+            },
+            {
+                "code": "topicsIds",
+                "visible": true,
+                "editable": true,
+                "dataType": "list",
+                "depends": [
+                    "framework",
+                    "subjectIds"
+                ],
+                "sourceCategory": "topic",
+                "renderingHints": {},
+                "name": "Topic",
+                "description": "Choose a Topics",
+                "inputType": "topicselector",
+                "label": "Topics covered in the course",
+                "placeholder": "Choose Topics",
+                "required": false,
+                "output": "identifier"
+            }
+        ]
+    },
+    {
+        "name": "Target Framework Terms",
+        "fields": [
+            {
+                "code": "audience",
+                "dataType": "list",
+                "description": "Audience",
+                "editable": true,
+                "inputType": "nestedselect",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1"
+                },
+                "label": "Audience Type",
+                "name": "Audience Type",
+                "placeholder": "Select Audience Type",
+                "required": false,
+                "visible": true,
+                "range": [
+                    "Student",
+                    "Teacher",
+                    "Parent",
+                    "Administrator"
+                ],
+                "default": [
+                    "Student"
+                ]
+            },
+            {
+                "code": "targetBoardIds",
+                "visible": true,
+                "depends": [],
+                "editable": true,
+                "dataType": "list",
+                "sourceCategory": "board",
+                "output": "identifier",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                },
+                "description": "Board",
+                "label": "Board/Syllabus of the audience",
+                "required": true,
+                "name": "Board/Syllabus",
+                "inputType": "select",
+                "placeholder": "Select Board/Syllabus",
+                "validations": [
+                    {
+                        "type": "required",
+                        "message": "Board is required"
                     }
                 ],
-                'default': [
-                    'Student'
-                ]
-            },
-            {
-                'code': 'showFeedback',
-                'dataType': 'text',
-                'description': 'Show Feedback',
-                'editable': true,
-                'default': 'Yes',
-                'inputType': 'checkbox',
-                'label': 'Show Feedback',
-                'name': 'showFeedback',
-                'placeholder': 'Show Feedback',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'required': false,
-                'visible': true
-            },
-            {
-                'code': 'shuffle',
-                'dataType': 'boolean',
-                'description': 'Shuffle Questions',
-                'editable': true,
-                'default': true,
-                'inputType': 'checkbox',
-                'label': 'Shuffle Questions',
-                'name': 'Shuffle Questions',
-                'placeholder': 'Shuffle Questions',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'required': false,
-                'visible': true
-            },
-            {
-                'code': 'maxAttempts',
-                'visible': true,
-                'editable': true,
-                'dataType': 'number',
-                'name': 'Max Attempts',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'description': 'Max Attempts',
-                'inputType': 'select',
-                'label': 'Max Attempts',
-                'placeholder': 'Max Attempts',
-                'required': false,
-                'range': [
-                    1,
-                    2,
-                    3,
-                    4,
-                    12,
-                    13,
-                    14,
-                    15,
-                    16,
-                    17,
-                    18,
-                    5,
-                    6,
-                    7,
-                    8,
-                    9,
-                    10,
-                    11,
-                    19,
-                    20,
-                    21,
-                    22,
-                    23,
-                    24,
-                    25
-                ],
-                'default': 15
-            },
-            {
-                'code': 'maxTime',
-                'visible': true,
-                'editable': true,
-                'dataType': 'text',
-                'name': 'MaxTimer',
-                'default': '00:00:00',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1 required'
-                },
-                'description': 'MaxTime for the content',
-                'inputType': 'timer',
-                'label': 'Max time',
-                'placeholder': 'HH:mm:ss',
-                'required': true,
-                'validations': [
+                "terms": [
                     {
-                        'type': 'required',
-                        'message': 'Maxtime is required'
+                        "associations": [
+                            {
+                                "identifier": "nit_k-12_subject_english",
+                                "code": "English",
+                                "translations": null,
+                                "name": "English",
+                                "description": "English",
+                                "index": 0,
+                                "category": "subject",
+                                "status": "Live"
+                            },
+                            {
+                                "identifier": "nit_k-12_gradelevel_grade-1",
+                                "code": "Grade 1",
+                                "translations": null,
+                                "name": "Grade 1",
+                                "description": "Grade 1",
+                                "index": 0,
+                                "category": "gradeLevel",
+                                "status": "Live"
+                            },
+                            {
+                                "identifier": "nit_k-12_medium_english",
+                                "code": "English",
+                                "translations": null,
+                                "name": "English",
+                                "description": "English",
+                                "index": 0,
+                                "category": "medium",
+                                "status": "Live"
+                            }
+                        ],
+                        "identifier": "nit_k-12_board_cbse",
+                        "code": "CBSE",
+                        "translations": null,
+                        "name": "CBSE",
+                        "description": "CBSE",
+                        "index": 1,
+                        "category": "board",
+                        "status": "Live"
                     },
                     {
-                        'type': 'time',
-                        'message': 'Please enter in hh:mm:ss',
-                        'value': 'HH:mm:ss'
-                    },
-                    {
-                        'type': 'max',
-                        'value': '05:59:59',
-                        'message': 'max time should be less than 05:59:59'
+                        "associations": [
+                            {
+                                "identifier": "nit_k-12_medium_hindi",
+                                "code": "Hindi",
+                                "translations": null,
+                                "name": "Hindi",
+                                "description": "Hindi",
+                                "index": 0,
+                                "category": "medium",
+                                "status": "Live"
+                            },
+                            {
+                                "identifier": "nit_k-12_gradelevel_grade-2",
+                                "code": "Grade 2",
+                                "translations": null,
+                                "name": "Grade 2",
+                                "description": "Grade 2",
+                                "index": 0,
+                                "category": "gradeLevel",
+                                "status": "Live"
+                            },
+                            {
+                                "identifier": "nit_k-12_subject_hindi",
+                                "code": "Hindi",
+                                "translations": null,
+                                "name": "Hindi",
+                                "description": "Hindi",
+                                "index": 0,
+                                "category": "subject",
+                                "status": "Live"
+                            }
+                        ],
+                        "identifier": "nit_k-12_board_ncert",
+                        "code": "NCERT",
+                        "translations": null,
+                        "name": "NCERT",
+                        "description": "NCERT",
+                        "index": 2,
+                        "category": "board",
+                        "status": "Live"
                     }
                 ]
             },
             {
-                'code': 'warningTime',
-                'visible': true,
-                'editable': true,
-                'dataType': 'list',
-                'name': 'Warning Time',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'depends': [
-                    'maxTime'
+                "code": "targetMediumIds",
+                "visible": true,
+                "depends": [
+                    "targetBoardIds"
                 ],
-                'description': 'warning for the content',
-                'inputType': 'timer',
-                'label': 'Warning Time',
-                'placeholder': 'hh:mm:ss',
-                'required': false,
-                'validations': [
+                "editable": true,
+                "dataType": "list",
+                "sourceCategory": "medium",
+                "output": "identifier",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                },
+                "description": "",
+                "label": "Medium(s) of the audience",
+                "required": true,
+                "name": "Medium",
+                "inputType": "nestedselect",
+                "placeholder": "Select Medium",
+                "validations": [
                     {
-                        'type': 'time',
-                        'message': 'Please enter hh:mm:ss',
-                        'value': 'HH:mm:ss'
-                    },
-                    {
-                        'type': 'compare',
-                        'criteria': {
-                            '<=': [
-                                'maxTime'
-                            ]
-                        },
-                        'message': 'warning time should be less than max timer'
+                        "type": "required",
+                        "message": "Medium is required"
                     }
                 ],
-                'default': null
-            },
-            {
-                'code': 'requiresSubmit',
-                'visible': true,
-                'editable': true,
-                'dataType': 'text',
-                'name': 'Submit Confirmation',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'description': 'Submit Confirmation',
-                'inputType': 'checkbox',
-                'label': 'Submit Confirmation',
-                'placeholder': 'Submit Confirmation',
-                'required': false,
-                'default': 'Yes'
-            },
-            {
-                'code': 'maxQuestions',
-                'dataType': 'number',
-                'description': 'Show Questions',
-                'editable': true,
-                'inputType': 'select',
-                'label': 'Show Questions',
-                'name': 'maxQuestions',
-                'placeholder': 'Number of questions to be shown',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'required': false,
-                'visible': true,
-                'default': 2,
-                'range': [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
+                "terms": [
+                    {
+                        "associations": [
+                            {
+                                "identifier": "nit_k-12_subject_english",
+                                "code": "English",
+                                "translations": null,
+                                "name": "English",
+                                "description": "English",
+                                "index": 0,
+                                "category": "subject",
+                                "status": "Live"
+                            },
+                            {
+                                "identifier": "nit_k-12_gradelevel_grade-1",
+                                "code": "Grade 1",
+                                "translations": null,
+                                "name": "Grade 1",
+                                "description": "Grade 1",
+                                "index": 0,
+                                "category": "gradeLevel",
+                                "status": "Live"
+                            }
+                        ],
+                        "identifier": "nit_k-12_medium_english",
+                        "code": "English",
+                        "translations": null,
+                        "name": "English",
+                        "description": "English",
+                        "index": 1,
+                        "category": "medium",
+                        "status": "Live"
+                    },
+                    {
+                        "associations": [
+                            {
+                                "identifier": "nit_k-12_subject_hindi",
+                                "code": "Hindi",
+                                "translations": null,
+                                "name": "Hindi",
+                                "description": "Hindi",
+                                "index": 0,
+                                "category": "subject",
+                                "status": "Live"
+                            },
+                            {
+                                "identifier": "nit_k-12_gradelevel_grade-2",
+                                "code": "Grade 2",
+                                "translations": null,
+                                "name": "Grade 2",
+                                "description": "Grade 2",
+                                "index": 0,
+                                "category": "gradeLevel",
+                                "status": "Live"
+                            }
+                        ],
+                        "identifier": "nit_k-12_medium_hindi",
+                        "code": "Hindi",
+                        "translations": null,
+                        "name": "Hindi",
+                        "description": "Hindi",
+                        "index": 2,
+                        "category": "medium",
+                        "status": "Live"
+                    }
                 ]
             },
             {
-                'code': 'author',
-                'dataType': 'text',
-                'description': 'Author of the content',
-                'editable': true,
-                'inputType': 'text',
-                'label': 'Author',
-                'name': 'Author',
-                'placeholder': 'Author',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1 required'
+                "code": "targetGradeLevelIds",
+                "visible": true,
+                "depends": [
+                    "targetBoardIds",
+                    "targetMediumIds"
+                ],
+                "editable": true,
+                "dataType": "list",
+                "sourceCategory": "gradeLevel",
+                "output": "identifier",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
                 },
-                'required': true,
-                'visible': true,
-                'validations': [
+                "description": "Class",
+                "label": "Class(es) of the audience",
+                "required": true,
+                "name": "Class",
+                "inputType": "nestedselect",
+                "placeholder": "Select Class",
+                "validations": [
                     {
-                        'type': 'required',
-                        'message': 'Author is required'
+                        "type": "required",
+                        "message": "Class is required"
                     }
                 ],
-                'default': 'Test'
+                "terms": [
+                    {
+                        "associations": [
+                            {
+                                "identifier": "nit_k-12_subject_english",
+                                "code": "English",
+                                "translations": null,
+                                "name": "English",
+                                "description": "English",
+                                "index": 0,
+                                "category": "subject",
+                                "status": "Live"
+                            }
+                        ],
+                        "identifier": "nit_k-12_gradelevel_grade-1",
+                        "code": "Grade 1",
+                        "translations": null,
+                        "name": "Grade 1",
+                        "description": "Grade 1",
+                        "index": 1,
+                        "category": "gradeLevel",
+                        "status": "Live"
+                    },
+                    {
+                        "associations": [
+                            {
+                                "identifier": "nit_k-12_subject_hindi",
+                                "code": "Hindi",
+                                "translations": null,
+                                "name": "Hindi",
+                                "description": "Hindi",
+                                "index": 0,
+                                "category": "subject",
+                                "status": "Live"
+                            }
+                        ],
+                        "identifier": "nit_k-12_gradelevel_grade-2",
+                        "code": "Grade 2",
+                        "translations": null,
+                        "name": "Grade 2",
+                        "description": "Grade 2",
+                        "index": 2,
+                        "category": "gradeLevel",
+                        "status": "Live"
+                    }
+                ]
             },
             {
-                'code': 'attributions',
-                'dataType': 'text',
-                'description': 'Attributions',
-                'editable': true,
-                'inputType': 'text',
-                'label': 'Attributions',
-                'name': 'Attributions',
-                'placeholder': 'Attributions',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'required': false,
-                'visible': true,
-                'default': null
-            },
-            {
-                'code': 'copyright',
-                'dataType': 'text',
-                'description': 'Copyright & year',
-                'editable': true,
-                'inputType': 'text',
-                'label': 'Copyright & year',
-                'name': 'Copyright & year',
-                'placeholder': 'Copyright & year',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'required': false,
-                'visible': true,
-                'default': 'NIT123'
-            },
-            {
-                'code': 'license',
-                'dataType': 'text',
-                'description': 'license',
-                'editable': true,
-                'inputType': 'select',
-                'label': 'license',
-                'name': 'license',
-                'placeholder': 'Select license',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
-                },
-                'required': false,
-                'visible': true,
-                'range': [],
-                'default': 'CC BY 4.0'
-            },
-            {
-                'code': 'showTimer',
-                'visible': false,
-                'editable': false,
-                'dataType': 'text',
-                'default': 'Yes',
-                'depends': [
-                    'maxTime'
+                "code": "targetSubjectIds",
+                "visible": true,
+                "depends": [
+                    "targetBoardIds",
+                    "targetMediumIds",
+                    "targetGradeLevelIds"
                 ],
-                'name': 'Show Timer',
-                'renderingHints': {
-                    'class': 'sb-g-col-lg-1'
+                "editable": true,
+                "dataType": "list",
+                "sourceCategory": "subject",
+                "output": "identifier",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
                 },
-                'description': 'Show Timer',
-                'inputType': 'checkbox',
-                'label': 'Show Timer',
-                'placeholder': 'Show Timer',
-                'required': false
+                "description": "",
+                "label": "Subject(s) of the audience",
+                "required": true,
+                "name": "Subject",
+                "inputType": "nestedselect",
+                "placeholder": "Select Subject",
+                "validations": [
+                    {
+                        "type": "required",
+                        "message": "Subject is required"
+                    }
+                ],
+                "terms": [
+                    {
+                        "identifier": "nit_k-12_subject_english",
+                        "code": "English",
+                        "translations": null,
+                        "name": "English",
+                        "description": "English",
+                        "index": 1,
+                        "category": "subject",
+                        "status": "Live"
+                    },
+                    {
+                        "identifier": "nit_k-12_subject_hindi",
+                        "code": "Hindi",
+                        "translations": null,
+                        "name": "Hindi",
+                        "description": "Hindi",
+                        "index": 2,
+                        "category": "subject",
+                        "status": "Live"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Sixth Section",
+        "fields": [
+            {
+                "code": "author",
+                "dataType": "text",
+                "description": "Author of the content",
+                "editable": true,
+                "inputType": "text",
+                "label": "Author",
+                "name": "Author",
+                "placeholder": "Author",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1"
+                },
+                "required": false,
+                "visible": true
+            },
+            {
+                "code": "attributions",
+                "dataType": "text",
+                "description": "Attributions",
+                "editable": true,
+                "inputType": "text",
+                "label": "Attributions",
+                "name": "Attributions",
+                "placeholder": "Attributions",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1"
+                },
+                "required": false,
+                "visible": true
+            },
+            {
+                "code": "copyright",
+                "dataType": "text",
+                "description": "Copyright",
+                "editable": true,
+                "inputType": "text",
+                "label": "Copyright",
+                "name": "Copyright & year",
+                "placeholder": "Copyright",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                },
+                "required": true,
+                "visible": true,
+                "validations": [
+                    {
+                        "type": "required",
+                        "message": "Copyright is required"
+                    }
+                ],
+                "default": "NIT123"
+            },
+            {
+                "code": "copyrightYear",
+                "dataType": "text",
+                "description": "Year",
+                "editable": true,
+                "inputType": "text",
+                "label": "Copyright Year",
+                "name": "Copyright Year",
+                "placeholder": "Copyright Year",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                },
+                "required": true,
+                "visible": true,
+                "validations": [
+                    {
+                        "type": "required",
+                        "message": "Copyright Year is required"
+                    }
+                ]
+            },
+            {
+                "code": "license",
+                "dataType": "text",
+                "description": "license",
+                "editable": true,
+                "inputType": "select",
+                "label": "License",
+                "name": "license",
+                "placeholder": "Select License",
+                "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                },
+                "required": true,
+                "visible": true,
+                "defaultValue": "CC BY 4.0",
+                "validations": [
+                    {
+                        "type": "required",
+                        "message": "License is required"
+                    }
+                ],
+                "default": "CC BY 4.0",
+                "range": [
+                    "-458552951",
+                    "-45855295122",
+                    "6L",
+                    "@+kp_ft_license_102876130",
+                    "@+kp_ft_license_132244417",
+                    "@+kp_ft_license_164164056",
+                    "@+kp_ft_license_286331732",
+                    "@+kp_ft_license_498246311",
+                    "@+kp_ft_license_521144914",
+                    "@+kp_ft_license_636993495",
+                    "@+kp_ft_license_672532435",
+                    "@+kp_ft_license_901890155",
+                    "CC BY 4.0",
+                    "CC BY-NC 4.0",
+                    "CC BY-NC-SA 4.0",
+                    "CC BY-ND 4.0",
+                    "CC BY-SA 4.0",
+                    "CC-BY-ND",
+                    "dddd",
+                    "g1ZWJ",
+                    "H5p content",
+                    "ILzzW",
+                    "kp_ft_100191779",
+                    "kp_ft_100375181",
+                    "kp_ft_100737426",
+                    "kp_ft_100905252",
+                    "kp_ft_102812116",
+                    "kp_ft_104490138",
+                    "kp_ft_105561653",
+                    "kp_ft_106535531",
+                    "kp_ft_110061100",
+                    "kp_ft_110129883",
+                    "kp_ft_110373338",
+                    "kp_ft_111248116",
+                    "kp_ft_112181869",
+                    "kp_ft_112348463",
+                    "kp_ft_112611587",
+                    "kp_ft_119364153",
+                    "kp_ft_119983025",
+                    "kp_ft_120196901",
+                    "kp_ft_121031563",
+                    "kp_ft_122810212",
+                    "kp_ft_125593226",
+                    "kp_ft_128971207",
+                    "kp_ft_129602359",
+                    "kp_ft_130758550",
+                    "kp_ft_130867493",
+                    "kp_ft_131412327",
+                    "kp_ft_131425817",
+                    "kp_ft_131696054",
+                    "kp_ft_131710976",
+                    "kp_ft_131933204",
+                    "kp_ft_132826627",
+                    "kp_ft_132958141",
+                    "kp_ft_132983874",
+                    "kp_ft_133298378",
+                    "kp_ft_134086708",
+                    "kp_ft_134230027",
+                    "kp_ft_142669093",
+                    "kp_ft_143257518",
+                    "kp_ft_144102734",
+                    "kp_ft_146726233",
+                    "kp_ft_146831717",
+                    "kp_ft_146858574",
+                    "kp_ft_148225639",
+                    "kp_ft_148718730",
+                    "kp_ft_149389903",
+                    "kp_ft_149479769",
+                    "kp_ft_150679871",
+                    "kp_ft_150801989",
+                    "kp_ft_151255386",
+                    "kp_ft_151728040",
+                    "kp_ft_154431274",
+                    "kp_ft_154878314",
+                    "KP_FT_154935468",
+                    "kp_ft_155892624",
+                    "kp_ft_157224276",
+                    "kp_ft_158293175",
+                    "kp_ft_158920797",
+                    "KP_FT_1591100865142",
+                    "KP_FT_1591100876934",
+                    "KP_FT_1591101166392",
+                    "KP_FT_1591101169139",
+                    "KP_FT_1591101169537",
+                    "KP_FT_1591101169937",
+                    "KP_FT_1591264229320",
+                    "KP_FT_1591264231006",
+                    "KP_FT_1591264231502",
+                    "KP_FT_1591264231837",
+                    "KP_FT_1591275096702",
+                    "KP_FT_1591275097981",
+                    "KP_FT_1591275098134",
+                    "KP_FT_1591275098310",
+                    "KP_FT_1591276062479",
+                    "KP_FT_1591276063946",
+                    "KP_FT_1591276064201",
+                    "KP_FT_1591276064365",
+                    "KP_FT_1591276468206",
+                    "KP_FT_1591276469489",
+                    "KP_FT_1591276469748"
+                ]
             }
         ]
     }
-];
+]
