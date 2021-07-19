@@ -3,10 +3,10 @@
   <div class="cfe-multiselect-label" *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <ng-container *ngIf="extras?.type === 'dropdown'">
     <div class="cfe-multiselect-field multi-select-container">
-      <sb-caret-up *ngIf="showModal" class="cfe-multiselect-field-caret caret-down"  tabindex="0"
+      <sb-caret-up *ngIf="showModal" class="cfe-multiselect-field-caret caret-down" tabindex="0"
                    [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-up>
-      <sb-caret-down *ngIf="!showModal" class="cfe-multiselect-field-caret caret-down"  tabindex="0"
+      <sb-caret-down *ngIf="!showModal" class="cfe-multiselect-field-caret caret-down" tabindex="0"
                      [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-down>
 
@@ -33,14 +33,14 @@
 
       <div class="cfe-multiselect-modal-container sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
         <div class="cfe-multiselect-modal-overlay sb-modal-overlay">
-          <div class="cfe-multiselect-modal sb-modal" (click)="$event.stopPropagation()">
+          <div class="cfe-multiselect-modal sb-modal" (click)="$event.stopPropagation()" tabindex="0">
             <div class="cfe-multiselect-modal-header header">
               {{placeHolder}}
             </div>
             <div class="cfe-multiselect-modal-body body">
               <ul>
                 <li *ngFor="let option of resolvedOptions; let i=index">
-                  <div class="cfe-multiselect-modal-item row" (click)="addSelected(option)">
+                  <div class="cfe-multiselect-modal-item row" (click)="addSelected(option)" tabindex="0">
                     <label class="container" style="pointer-events: none">
                       <input [checked]="tempValue.includes(option.get('value'))" class="sb-checkbox" type="checkbox">
                       <span class="checkmark"></span>
@@ -52,10 +52,10 @@
             </div>
             <div class="cfe-multiselect-modal-footer footer">
               <div class="cfe-multiselect-modal-footer-button sb-form-button">
-                <button class="sb-btn-primary-outline" (click)="onCancel()">cancel</button>
+                <button class="sb-btn-primary-outline" (click)="onCancel()" tabindex="0">cancel</button>
               </div>
               <div class="cfe-multiselect-modal-footer-button sb-form-button">
-                <button class="sb-btn-primary" (click)="onSubmit()">submit</button>
+                <button class="sb-btn-primary" (click)="onSubmit()" tabindex="0">submit</button>
               </div>
             </div>
           </div>
@@ -65,7 +65,7 @@
       <div class="cfe-multiselect-dropdown sb-modal-dropdown-web cfe-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="showModal=false;">
         <ul tabindex="-1">
           <li *ngFor="let option of resolvedOptions; let i=index" [ngClass]="{'selected-option':tempValue.includes(option.get('value'))}">
-            <div (click)="addSelected(option); onSubmit()">
+            <div (click)="addSelected(option); onSubmit()" tabindex="0">
               <span>{{option.get('label')}}</span>
             </div>
           </li>
