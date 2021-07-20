@@ -15,7 +15,7 @@ export class TextboxComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() validations?: any;
   @Input() formControlRef?: FormControl;
   @Input() prefix?: String;
-  @ViewChild('validationTrigger', { static:false }) validationTrigger: ElementRef;
+  @ViewChild('validationTrigger') validationTrigger: ElementRef;
 
   constructor() {
   }

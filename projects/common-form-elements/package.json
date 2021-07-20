@@ -1,10 +1,10 @@
 {
-  "name": "common-form-elements",
-  "version": "4.1.1",
+  "name": "common-form-elements-v9",
+  "version": "4.1.0",
   "peerDependencies": {
-    "@angular/common": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/forms": "^8.0.0",
+    "@angular/common": "^9.1.13",
+    "@angular/core": "^9.1.13",
+    "@angular/forms": "^9.1.13",
     "@project-sunbird/client-services": "3.6.x",
     "lodash-es": "^4.17.15"
   },
