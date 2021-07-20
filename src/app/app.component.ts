@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { delay, switchMap } from 'rxjs/operators';
 import { timer } from './formConfig';
 import * as _ from 'lodash-es';
 @Component({
@@ -338,7 +338,7 @@ export class AppComponent implements OnInit {
                 'type': 'K-12',
                 'objectType': 'Framework'
             }
-        });
+        }).pipe(delay(100));
         } else {
           return of(null);
         }

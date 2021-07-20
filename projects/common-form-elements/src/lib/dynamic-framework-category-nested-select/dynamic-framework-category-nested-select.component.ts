@@ -13,7 +13,7 @@ import * as _ from 'lodash-es';
   templateUrl: './dynamic-framework-category-nested-select.component.html',
   styleUrls: ['./dynamic-framework-category-nested-select.component.css']
 })
-export class DynamicFrameworkCategoryNestedSelectComponent implements OnInit {
+export class DynamicFrameworkCategoryNestedSelectComponent implements OnInit, OnChanges {
 
   @Input() disabled?: boolean;
   @Input() field: FieldConfig<String>;

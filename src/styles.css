@@ -2,3 +2,7 @@
 [data-title] {
   z-index: 1 !important;
 }
+
+label {
+  display: inline-block !important;
+}
