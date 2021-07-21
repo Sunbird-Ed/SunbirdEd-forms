@@ -7,22 +7,21 @@ import {FieldConfig, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder
 import {takeUntil, tap} from 'rxjs/operators';
 import {fromJS, List, Map, Set} from 'immutable';
 import * as _ from 'lodash-es';
-import {ValueComparator} from '../utilities/value-comparator';
 
 @Component({
   selector: 'sb-dynamic-framework-category-select',
-  templateUrl: './dynamic-framework-category-select.component.html',
-  styleUrls: ['./dynamic-framework-category-select.component.css']
+  templateUrl: './dynamic-framework-category-nested-select.component.html',
+  styleUrls: ['./dynamic-framework-category-nested-select.component.css']
 })
-export class DynamicFrameworkCategorySelectComponent implements OnInit {
-  ValueComparator = ValueComparator;
+export class DynamicFrameworkCategoryNestedSelectComponent implements OnInit, OnChanges {
+
   @Input() disabled?: boolean;
   @Input() field: FieldConfig<String>;
   @Input() options: any;
   @Input() label?: string;
   @Input() labelHtml: any;
   @Input() placeholder?: string;
-  @Input() isMultiple = false;
+  @Input() isMultiple = true;
   @Input() context?: FormControl;
   @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
@@ -37,7 +36,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
 
 
   public isDependsInvalid: any;
-  masterSelected = false;
+  masterSelected: boolean= false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -330,7 +329,7 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
 
   onSubmit() {
     const finalValue = this.tempValue.toList().toJS();
-    this.formControlRef.patchValue(this.field.dataType === 'list' ? finalValue : finalValue[0]);
+    this.formControlRef.patchValue(this.isMultiple ? finalValue : finalValue[0]);
     this.formControlRef.markAsDirty();
     this.showModal = false;
   }
@@ -390,15 +389,6 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
 
     this.masterSelected = this.tempValue.size === this.options.length;
   }
-
-  getOptionValueForRange(option) {
-    if (this.field.dataType === 'list') {
-      return [option.get(this.field.output || 'name')];
-    } else if (this.field.dataType === 'text') {
-      return option.get(this.field.output || 'name');
-    }
-  }
-
   onCancel() {
     this.formControlRef.markAsDirty();
     this.showModal = false;
@@ -512,6 +502,21 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
       if (this.default && this.default.length > 1 && this.default.length == this.options.length) {
         this.setMasterSelected();
       }
+    }
+  }
+
+  checkUncheckAll() {
+    this.formControlRef.patchValue(null);
+    this.resetTempValue();
+
+    if (this.masterSelected === false) {
+      this.resolvedOptions.forEach(option => {
+        this.addSelected(option);
+      });
+
+      this.onSubmit();
+    } else {
+      this.resetMasterSelected();
     }
   }
 

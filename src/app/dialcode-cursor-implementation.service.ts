@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { DialcodeCursor } from 'common-form-elements';
+import { DialcodeCursor } from 'common-form-elements-v9';
 
 @Injectable({
     providedIn: 'root'
