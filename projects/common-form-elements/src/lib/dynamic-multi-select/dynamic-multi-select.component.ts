@@ -66,7 +66,6 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
     // }
 
     this.dataLoadStatusDelegate.subscribe(
-      console.log
     );
 
     if (this.field && this.field.range) {

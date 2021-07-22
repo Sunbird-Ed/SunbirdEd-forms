@@ -35,6 +35,8 @@ import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-cat
 import { DynamicFrameworkComponent } from './dynamic-framework/dynamic-framework.component';
 import { DynamicRadioComponent } from './dynamic-radio/dynamic-radio.component';
 import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.component';
+import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
+import { DynamicTimeComponent } from './dynamic-time/dynamic-time.component';
 
 @NgModule({
    declarations: [
@@ -68,7 +70,9 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFrameworkComponent,
       DynamicRadioComponent,
       DynamicDialcodeComponent,
-      DynamicFrameworkComponent
+      DynamicFrameworkComponent,
+      DynamicDateComponent,
+      DynamicTimeComponent
    ],
    imports: [
       CommonModule,
@@ -107,7 +111,9 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFrameworkComponent,
       DynamicRadioComponent,
       DynamicDialcodeComponent,
-      DynamicFrameworkComponent
+      DynamicFrameworkComponent,
+      DynamicDateComponent,
+      DynamicTimeComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -125,7 +131,9 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
       DynamicFrameworkComponent,
       DynamicRadioComponent,
       DynamicDialcodeComponent,
-      DynamicFrameworkComponent
+      DynamicFrameworkComponent,
+      DynamicDateComponent,
+      DynamicTimeComponent
    ]
 })
 export class CommonFormElementsModule { }

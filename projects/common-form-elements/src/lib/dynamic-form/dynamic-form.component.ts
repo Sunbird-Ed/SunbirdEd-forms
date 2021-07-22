@@ -172,6 +172,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'richtext':
         defaultVal = element.default || null;
         break;
+      case 'date':
+        defaultVal = element.default || null;
+        break;
+      case 'time':
+          defaultVal = element.default || null;
+          break;
       case 'select':
       case 'topicselector':
       case 'framework':
@@ -233,6 +239,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'radio':
         defaultVal = element.default || null;
         break;
+      case 'date':
+        defaultVal = element.default || null;
+        break;
+      case 'time':
+        defaultVal = element.default || null;
+        break;
     }
 
     formValueList.push(defaultVal);
@@ -243,7 +255,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         switch (data.type) {
           case 'required':
             if (element.inputType === 'select' || element.inputType === 'multiselect' || element.inputType === 'nestedselect' ||
-            element.inputType === 'frameworkCategorySelect') {
+            element.inputType === 'frameworkCategorySelect'||element.inputType === 'date'||element.inputType === 'time') {
               validationList.push(Validators.required);
             } else if (element.type === 'checkbox') {
               validationList.push(Validators.requiredTrue);
@@ -271,6 +283,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             break;
           case 'compare':
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
+            break;
+          case 'date':
+            validationList.push(this.validateDate.bind(this, element.validations[i].criteria));
             break;
         }
       });
@@ -334,8 +349,14 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     return null;
     // return moment(control.value, pattern, true).isValid() && control.touched ? null : {time: true};
   }
-
-
+  
+  validateDate(pattern, field, control: AbstractControl){
+    const isPatternMatched = moment(control.value, pattern, true).isValid();
+    if (!isPatternMatched && (control.touched || control.dirty)) {
+      return {time : true};
+    }
+    return null;
+  }
 
   compareFields(criteria, control: AbstractControl): ValidationErrors | null {
     const result = _.find(criteria, (val, key) => {
