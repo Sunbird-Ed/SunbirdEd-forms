@@ -9,7 +9,7 @@ import {fromJS, List, Map, Set} from 'immutable';
 import * as _ from 'lodash-es';
 
 @Component({
-  selector: 'sb-dynamic-framework-category-select',
+  selector: 'sb-dynamic-framework-category-nested-select',
   templateUrl: './dynamic-framework-category-nested-select.component.html',
   styleUrls: ['./dynamic-framework-category-nested-select.component.css']
 })
