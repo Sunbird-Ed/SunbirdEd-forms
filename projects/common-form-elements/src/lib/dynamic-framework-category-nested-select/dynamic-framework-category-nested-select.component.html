@@ -1,0 +1,70 @@
+<div class="multi-select-section-app">
+  <label class="input-label" [attr.data-title]="field.description ? field.description : null"  *ngIf="label">{{label}}</label>
+  <!-- <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div> -->
+  <div class="multi-select-container">
+    <sb-caret-down class="caret-down" [ngClass]="{'disabled': disabled === true ? true : ( depends ? (isDependsInvalid ? true : null) : null ) }" (click)="openModal($event)" [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">
+    </sb-caret-down>
+    <div class="list-border" (click)="openModal($event)">
+      <ul [ngClass]="{'disabled': disabled === true ? true : ( depends ? (isDependsInvalid ? true : null) : null ) }" [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">
+        <ng-container *ngIf="isMultiple">
+          <li *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder">{{placeholder}}</li>
+          <ng-container *ngIf="formControlRef.value?.length">
+            <span *ngFor="let value of formControlRef.value; let index=index">
+              {{optionValueToOptionLabelMap.get(fromJS(value))}}
+              <span *ngIf="index < formControlRef.value?.length - 1">,
+              </span>
+            </span>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!isMultiple">
+          <li *ngIf="!formControlRef.value" class="placeholder">{{placeholder}}</li>
+
+          <span *ngIf="formControlRef.value">{{optionValueToOptionLabelMap.get(fromJS(formControlRef.value))}}</span>
+        </ng-container>
+      </ul>
+    </div>
+    <div class="sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
+      <div class="sb-modal-overlay">
+        <div class="sb-modal" (click)="$event.stopPropagation()">
+          <div class="header">
+            {{placeholder}}
+          </div>
+          <div class="body">
+            <ul>
+              <li *ngFor="let option of resolvedOptions; let i=index">
+                <div (click)="addSelected(option)" class="row">
+                  <label class="container" style="pointer-events: none">
+                    <input [checked]="!_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))" class="sb-checkbox" type="checkbox">
+                    <span class="checkmark"></span>
+                  </label>
+                  <span>{{option.get('name')}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="footer">
+            <div class="sb-form-button">
+              <button class="sb-btn-primary-outline" (click)="onCancel()">cancel</button>
+            </div>
+            <div class="sb-form-button">
+              <button class="sb-btn-primary" (click)="onSubmit()">submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
+      <ul>
+        <li (click)="checkUncheckAll()">
+            <input type="checkbox" [checked]="masterSelected">
+            <label class="cursor-pointer d-inline-block">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
+        </li>
+        <li *ngFor="let option of resolvedOptions; let i=index" (click)="addSelected(option); onSubmit();" [ngClass]="{'selected-option': !_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))}">
+            <input type="checkbox" [checked]="!_.isEmpty(field.output) ? tempValue.includes(option.get(field.output)) : tempValue.includes(option.get('name'))" >
+            <label class="cursor-pointer d-inline-block">{{option.get('name')}}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+[data-title] {
+  z-index: 1 !important;
+}
+
+label {
+  display: inline-block !important;
+}

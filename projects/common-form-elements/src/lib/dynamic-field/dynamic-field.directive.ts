@@ -22,6 +22,7 @@ import { DynamicFrameworkComponent } from '../dynamic-framework/dynamic-framewor
 import { DynamicFrameworkCategorySelectComponent } from '../dynamic-framework-category-select/dynamic-framework-category-select.component';
 import { DynamicRadioComponent } from '../dynamic-radio/dynamic-radio.component';
 import { DynamicDialcodeComponent } from '../dynamic-dialcode/dynamic-dialcode.component';
+import { DynamicFrameworkCategoryNestedSelectComponent } from '../dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -37,6 +38,7 @@ const componentMapper = {
   checkbox: DynamicCheckboxComponent,
   timer: DynamicTimerComponent,
   framework: DynamicFrameworkComponent,
+  frameworkCategoryNestedSelect: DynamicFrameworkCategoryNestedSelectComponent,
   frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
   radio: DynamicRadioComponent,
   dialcode: DynamicDialcodeComponent

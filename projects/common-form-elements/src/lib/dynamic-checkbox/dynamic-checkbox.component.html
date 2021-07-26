@@ -8,3 +8,9 @@
     </label>
   </div>
 </ng-container>
+<ng-container *ngFor="let validation of validations">
+  <div class="cf-error"
+    *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+    {{ validation.message }}
+  </div>
+</ng-container>

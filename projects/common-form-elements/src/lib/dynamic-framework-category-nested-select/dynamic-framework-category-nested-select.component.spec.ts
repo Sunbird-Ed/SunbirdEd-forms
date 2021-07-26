@@ -1,23 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DynamicFrameworkCategorySelectComponent } from './dynamic-framework-category-select.component';
+import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framework-category-nested-select.component';
 import {FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
 import { CaretDownComponent } from '../icon/caret-down/caret-down.component';
 
 
-describe('DynamicFrameworkCategorySelectComponent', () => {
-  let component: DynamicFrameworkCategorySelectComponent;
-  let fixture: ComponentFixture<DynamicFrameworkCategorySelectComponent>;
+describe('DynamicFrameworkCategoryNestedSelectComponent', () => {
+  let component: DynamicFrameworkCategoryNestedSelectComponent;
+  let fixture: ComponentFixture<DynamicFrameworkCategoryNestedSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule],
-      declarations: [ DynamicFrameworkCategorySelectComponent, CaretDownComponent ]
+      declarations: [ DynamicFrameworkCategoryNestedSelectComponent, CaretDownComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DynamicFrameworkCategorySelectComponent);
+    fixture = TestBed.createComponent(DynamicFrameworkCategoryNestedSelectComponent);
     component = fixture.componentInstance;
     component.formControlRef = new FormControl();
     component.options = [];
@@ -52,4 +52,22 @@ describe('DynamicFrameworkCategorySelectComponent', () => {
     expect(component.masterSelected).toBeFalsy();
   });
 
+  it('#resetTempValue() should be called after #checkUncheckAll()', ()=> {
+    spyOn(component, 'resetTempValue').and.callThrough();
+    component.checkUncheckAll();
+    expect(component.resetTempValue).toHaveBeenCalled();
+  });
+
+  it('#onSubmit() should be called after #checkUncheckAll() if #masterSelected is false', ()=> {
+    spyOn(component, 'onSubmit').and.callThrough();
+    component.checkUncheckAll();
+    expect(component.onSubmit).toHaveBeenCalled();
+  });
+
+  it('#resetMasterSelected() should be called after #checkUncheckAll() if #masterSelected is true', ()=> {
+    component.masterSelected = true;
+    spyOn(component, 'resetMasterSelected').and.callThrough();
+    component.checkUncheckAll();
+    expect(component.resetMasterSelected).toHaveBeenCalled();
+  });
 });
