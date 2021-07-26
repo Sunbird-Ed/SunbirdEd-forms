@@ -32,8 +32,10 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
   _: any = _;
 
-
   public isDependsInvalid: any;
+  public isSearchables: any;
+  public showMaterSelect: boolean = true;
+  public searchInput:any;
   masterSelected: boolean = false;
   showModal = false;
   tempValue = Set<any>();
@@ -60,6 +62,11 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
       this.options = this.field.range;
     }
 
+    if (this.field && this.field.isSearchable)
+    {
+      this.isSearchables = this.field.isSearchable;
+    }
+
     if (!_.isEmpty(this.depends)) {
       this.handleDependantFieldChanges();
       this.checkIfDependsHasDefault();
@@ -69,7 +76,6 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.setupOptions();
     this.isAllSelected();
   }
-
   handleDependantFieldChanges() {
     merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
       tap(() => {
@@ -170,6 +176,43 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.formControlRef.markAsDirty();
     this.showModal = false;
   }
+  showAllList()
+  {
+    this.setupOptions();
+    this.setTempValue(this.formControlRef.value);
+    this.showMaterSelect = true;
+  }
+  removeItem(removeSearch)
+  {
+    const index: number = this.formControlRef.value.indexOf(removeSearch);
+    this.formControlRef.value.splice(index, 1);
+  }
+  // Filter items from the dropdown
+  filterItem(){
+
+    if (!this.searchInput)
+    {
+      // Set the actual option to the dropdown
+      this.setupOptions();
+      this.setTempValue(this.formControlRef.value);
+
+      this.showMaterSelect = true;
+    }
+    else
+    {
+      this.showMaterSelect = false;
+
+      this.resolvedOptions = this.resolvedOptions.filter(it => {
+          let optionValue = it.get('name');
+
+          // Search the option and return match result
+          if (optionValue.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase()))
+          {
+            return it;
+          }
+      });
+    }
+  }
 
   openModal(event) {
     if (this.context && this.context.invalid) {
@@ -225,6 +268,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
 
     this.masterSelected = this.tempValue.size === this.options.length;
+    this.searchInput = '';
   }
 
   onCancel() {
@@ -330,7 +374,6 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
 
     this.resolvedOptions = this.sortOptions(this.resolvedOptions);
-
     this.setTempValue(this.default);
   }
 
