@@ -183,6 +183,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'select':
       case 'topicselector':
       case 'framework':
+      case 'frameworkCategorySelect':
         if (element.default) {
           if (element.dataType === 'list') {
             if (_.isArray(element.default)) {
@@ -229,7 +230,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           }
           break;
       case 'nestedselect':
-      case 'frameworkCategorySelect':
+      case 'frameworkCategoryNestedSelect':
           defaultVal = element.dataType === 'list' ?
           (element.default && Array.isArray(element.default) ? element.default :
           _.isEmpty(element.default) ? [] : [element.default]) :
