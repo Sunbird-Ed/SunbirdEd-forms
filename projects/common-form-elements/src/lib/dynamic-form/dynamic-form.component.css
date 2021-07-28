@@ -69,16 +69,16 @@
 .sb-g-col-lg-1 {
   grid-column: span 1;
 }
-.show-title .sectionTitle {
+.show-name .sectionName {
   display: block;
 }
-.hide-title .sectionTitle {
+.hide-name .sectionName {
   display: none;
 }
-.two-column-grid .sectionTitle{
+.two-column-grid .sectionName {
   display:none;
 }
-.sectionTitle{
+.sectionName{
   font-size: 0.8rem;
   font-weight: 600;
 }
