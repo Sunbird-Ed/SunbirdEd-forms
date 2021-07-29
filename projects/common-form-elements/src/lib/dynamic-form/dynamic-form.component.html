@@ -1,6 +1,6 @@
 
 <div class="dynamic-form" [formGroup]="formGroup">
-  <div *ngFor="let section of config" class="formSection" [ngClass]="checkSectionLevelCss(section) ? section?.renderingHints?.class : 'grid two-column-grid'">
+  <div *ngFor="let section of config" class="formSection" [ngClass]="section?.renderingHints?.class || 'grid two-column-grid'">
     <span class="sectionName"> {{section?.name}} </span> 
       <ng-container *ngFor="let field of section['fields']" sbDynamicField
       [depends]="getAllDependsFormControl(field.code, field.depends)" [dependencyTerms]="field.depends ? fetchDependencyTerms(field.code, field.depends) : []"

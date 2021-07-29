@@ -360,11 +360,4 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     return null;
     // return result ? {compare: true} : null;
   }
-  checkSectionLevelCss(section) {
-    if (_.has(section, 'renderingHints.class')) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
