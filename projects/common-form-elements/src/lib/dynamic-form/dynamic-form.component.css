@@ -13,65 +13,78 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 0.5rem;
 }
+ /* Field level css classes start*/
 .sb-g-col-lg-1 {
   grid-column: span 1 !important;
-}
-.sb-col-3 {
-  grid-column: span 3 !important;
 }
 .sb-col-2 {
   grid-column: span 2 !important;
 }
+.sb-col-3 {
+  grid-column: span 3 !important;
+}
 .sb-col-4 {
   grid-column: span 4 !important;
 }
+ /* Field level css classes end */
+
+ /* This is for one row 1 column view for check box fields*/
 .d-grid-inline-1 {
   display: inline-grid;
   width: 100%;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for one row 2 column view for check box fields*/
 .d-grid-inline-2 {
   display: inline-grid;
   width: 50%;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for one row 3 column view for check box fields*/
 .d-grid-inline-3 {
   display: inline-grid;
   width: 33.3%;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for one row 4 column view for check box fields*/
 .d-grid-inline-4 {
   display: inline-grid;
   width: 25%;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for one row 3 column view other than check box fields*/
 .d-grid-3 {
   display: grid;
   grid-template-columns: auto auto auto;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for one row 2 column view other than check box fields*/
 .d-grid-2 {
   display: grid;
   grid-template-columns: auto auto;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for one row one column view other than check box fields*/
 .d-grid {
   display: grid;
   grid-column-gap: 1rem;
   grid-row-gap: 1rem;
 }
+ /* This is for show section name for new config */
 .show-section-name .sectionName {
   display: block;
 }
-.show-section-name .sectionName {
+ /* This is for hide section name  for new config*/
+.hide-section-name .sectionName {
   display: none;
 }
+ /* This is to hide section name for old config*/
 .two-column-grid .sectionName {
   display:none;
 }
