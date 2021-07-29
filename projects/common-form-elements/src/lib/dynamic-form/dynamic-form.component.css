@@ -3,16 +3,7 @@
   grid-template-columns: repeat(2, 1fr);
   column-gap: 0.5rem;
 }
-.one-column-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  column-gap: 0.5rem;
-}
-.three-column-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 0.5rem;
-}
+
  /* Field level css classes start*/
 .sb-g-col-lg-1 {
   grid-column: span 1 !important;
