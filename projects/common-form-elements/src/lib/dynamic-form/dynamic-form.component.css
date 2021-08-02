@@ -1,0 +1,4 @@
+ /* This is to hide section name for old config*/
+.two-column-grid .sectionName {
+  display:none;
+}
