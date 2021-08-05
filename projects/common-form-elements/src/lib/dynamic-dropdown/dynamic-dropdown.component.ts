@@ -1,7 +1,7 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter, HostListener} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
-import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup, CustomFormControl} from '../common-form-config';
+import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import {ValueComparator} from '../utilities/value-comparator';
@@ -21,7 +21,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() contextTerms?: any;
-  @Input() formControlRef?: CustomFormControl;
+  @Input() formControlRef?: FormControl;
   @Input() formGroup?: CustomFormGroup;
   @Input() default?: any;
   @Input() contextData: any;
@@ -35,6 +35,11 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;
+  public isSearchables: any;
+  public showDropdown: boolean = false;
+  public showSelectdItem: any='';
+  public searchInput:any;
+  public hidePlaceholder:boolean = false;
   private dispose$ = new Subject<undefined>();
 
   options$?: Observable<FieldConfigOption<any>[]>;
@@ -42,6 +47,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   selectedType: any;
   tempAssociation: any;
   latestParentValue: string;
+
   constructor() {
   }
 
@@ -65,14 +71,10 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.options = [];
     }
 
-    if (!_.isEmpty(this.field.sourceCategory)) {
-      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    if (this.field && this.field.isSearchable)
+    {
+      this.isSearchables = this.field.isSearchable;
     }
-
-    if (!_.isEmpty(this.field.output)) {
-      this.formControlRef.output = this.field.output;
-    }
-
     // if (this.context) {
       // this.contextValueChangesSubscription = this.context.valueChanges.pipe(
       //   tap(() => {
@@ -123,6 +125,18 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     ).subscribe();
   }
 
+showList(event)
+{
+    this.showDropdown = !this.showDropdown? true : false;
+    event.stopPropagation();
+}
+
+ addSelected(selectedItem)
+ {
+  this.showSelectdItem = selectedItem;
+  this.showDropdown = false;
+  this.searchInput='';
+ }
   ngOnDestroy(): void {
     if (this.contextValueChangesSubscription) {
       this.contextValueChangesSubscription.unsubscribe();
@@ -260,4 +274,29 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       // tslint:disable-next-line:max-line-length
     });
   }
+  showAllList()
+  {
+    this.field.range = this.options;
+    this.showSelectdItem='';
+    this.hidePlaceholder = true;
+  }
+    // Filter items from the dropdown
+    filterItem(){
+      this.showDropdown = true;
+
+      if (!this.searchInput)
+      {
+        this.field.range = this.options;
+      }
+      else
+      {
+        this.field.range = this.field.range.filter(val => {
+            // sSearch the option and return match result
+            if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase()))
+            {
+              return val;
+            }
+        });
+      }
+    }
 }

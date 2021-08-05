@@ -1,6 +1,7 @@
 
-<div class="dynamic-form" [formGroup]="formGroup">
-  <div *ngFor="let section of config" class="formSection grid two-column-grid">
+<div class="dynamic-form d-grid" [formGroup]="formGroup">
+  <div *ngFor="let section of config" class="formSection grid two-column-grid two-column-grid">
+      <h5>{{section.name}}</h5>
       <ng-container *ngFor="let field of section['fields']" sbDynamicField
       [depends]="getAllDependsFormControl(field.code, field.depends)" [dependencyTerms]="field.depends ? fetchDependencyTerms(field.code, field.depends) : []"
       [context]="field.context ? formGroup.get(field.context) : null" [contextTerms]="fetchContextTerms(config, field.context)"
