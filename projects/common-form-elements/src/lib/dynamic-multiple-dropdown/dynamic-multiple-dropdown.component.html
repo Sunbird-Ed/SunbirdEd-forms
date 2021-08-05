@@ -18,11 +18,11 @@
             </span>
           </ng-container>
           <ng-container>
-            <span *ngIf="isSearchables">
-              <input [(ngModel)]="searchInput" id="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchables" autocomplete="off">
+            <span *ngIf="isSearchable">
+              <input [(ngModel)]="searchInput" id="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
               <label for="searchbox-input" *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder float-label">{{placeholder}}</label>
             </span>
-            <span *ngIf="!isSearchables">
+            <span *ngIf="!isSearchable">
               <label for="searchbox-input" *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder not-searchable-label">{{placeholder}}</label>
             </span>
           </ng-container>
@@ -67,7 +67,7 @@
     </div>
     <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
       <ul>
-        <li (click)="checkUncheckAll()" [hidden]="!showMaterSelect">
+        <li (click)="checkUncheckAll()" [hidden]="!showMasterSelect">
             <input type="checkbox" [checked]="masterSelected">
             <label class="cursor-pointer d-inline-block">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
         </li>

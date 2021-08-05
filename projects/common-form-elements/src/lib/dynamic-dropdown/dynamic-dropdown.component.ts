@@ -35,7 +35,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;
-  public isSearchables: any;
+  public isSearchable: any;
   public showDropdown: boolean = false;
   public showSelectdItem: any='';
   public searchInput:any;
@@ -73,7 +73,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
     if (this.field && this.field.isSearchable)
     {
-      this.isSearchables = this.field.isSearchable;
+      this.isSearchable = this.field.isSearchable;
     }
     // if (this.context) {
       // this.contextValueChangesSubscription = this.context.valueChanges.pipe(

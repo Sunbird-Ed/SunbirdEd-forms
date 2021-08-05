@@ -34,8 +34,8 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   _: any = _;
 
   public isDependsInvalid: any;
-  public isSearchables: any;
-  public showMaterSelect: boolean = true;
+  public isSearchable: any;
+  public showMasterSelect: boolean = true;
   public searchInput:any;
   masterSelected: boolean = false;
   showModal = false;
@@ -74,7 +74,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
     if (this.field && this.field.isSearchable)
     {
-      this.isSearchables = this.field.isSearchable;
+      this.isSearchable = this.field.isSearchable;
     }
 
     if (!_.isEmpty(this.depends)) {
@@ -190,7 +190,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   {
     this.setupOptions();
     this.setTempValue(this.formControlRef.value);
-    this.showMaterSelect = true;
+    this.showMasterSelect = true;
   }
   removeItem(removeSearch)
   {
@@ -206,11 +206,11 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
       this.setupOptions();
       this.setTempValue(this.formControlRef.value);
 
-      this.showMaterSelect = true;
+      this.showMasterSelect = true;
     }
     else
     {
-      this.showMaterSelect = false;
+      this.showMasterSelect = false;
 
       this.resolvedOptions = this.resolvedOptions.filter(it => {
           let optionValue = it.get('name');

@@ -3,11 +3,11 @@
   <ng-container *ngIf="options">
     <div class="dropdown-container">
       <div class="dd-container form-floating" (click)="showList($event)">
-          <input [(ngModel)]="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchables" autocomplete="off">
-          <label *ngIf="!showSelectdItem && isSearchables && !hidePlaceholder" for="searchbox-input" class="float-label">{{placeholder}}</label>
-          <label *ngIf="!showSelectdItem && !isSearchables" for="searchbox-input" class="not-searchable-label">{{placeholder}}</label>
-          <label *ngIf="showSelectdItem && isSearchables" for="searchbox-input" class="float-label">{{showSelectdItem}}</label>
-          <label *ngIf="showSelectdItem && !isSearchables" for="searchbox-input" class="not-searchable-label">{{showSelectdItem}}</label>
+          <input [(ngModel)]="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
+          <label *ngIf="!showSelectdItem && isSearchable && !hidePlaceholder" for="searchbox-input" class="float-label">{{placeholder}}</label>
+          <label *ngIf="!showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{placeholder}}</label>
+          <label *ngIf="showSelectdItem && isSearchable" for="searchbox-input" class="float-label">{{showSelectdItem}}</label>
+          <label *ngIf="showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{showSelectdItem}}</label>
       </div>
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
       <div [hidden]="!showDropdown">
