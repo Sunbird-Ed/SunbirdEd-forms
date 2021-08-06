@@ -1,6 +1,6 @@
 <div class="sb-textarea-container">
   <label [attr.data-title]="field.description ? field.description : null">{{label}}</label>
-  <textarea class="sb-textarea" [formControl]="formControlRef" rows="5" name="sb-textarea" placeholder={{placeholder}} [attr.disabled]="disabled ? true : null">
+  <textarea class="sb-textarea" [formControl]="formControlRef" rows="5" name="sb-textarea" placeholder={{placeholder}} [attr.disabled]="disabled ? true : null" maxlength="maxLengthVal">
   </textarea>
   <div class="remaining-length" *ngIf="remainderValidLength$">
      {{remainderValidLength$ | async}} Characters left
