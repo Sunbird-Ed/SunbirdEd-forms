@@ -350,13 +350,17 @@ margin-top: 10px;
   line-height: 34px;
 }
 
+.multi-select-container .multi-select-label-parent {
+  background-color: #efefef;
+  padding: 8px;
+  margin-right: 5px;
+}
 .multi-select-container .multi-select-label{
 margin: .1rem .3rem .1rem 0;
 background: #efefef;
 height: 32px;
 display: inline-block;
 text-align: center;
-padding-left: 10px;
 }
 
 .multi-select-container .multi-select-label .delete{
@@ -399,4 +403,13 @@ input:not(:placeholder-shown) ~ .float-label {
     background-color: transparent;
 }
 
+.multi-select-container {
+  .placeholder{
+    display: block !important;
+    text-align: left !important;
+  }
+  .multi-select-label{
+    height: inherit !important;
+  }
+}
 
