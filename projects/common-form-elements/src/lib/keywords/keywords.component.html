@@ -1,6 +1,7 @@
 <div class="sb-keywords">
     <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
-    <tag-input class="sb-keywordbox" [formControl]="formControlRef" [modelAsStrings]="true" [(ngModel)]='items' [placeholder]="field.placeholder || 'Enter Keyword'"
+    <tag-input class="sb-keywordbox" [formControl]="formControlRef" [modelAsStrings]="true" [(ngModel)]='items'
+    [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
     [disable]="disabled"></tag-input>
     <ng-container *ngFor="let validation of validations">
         <div class="cf-error"
