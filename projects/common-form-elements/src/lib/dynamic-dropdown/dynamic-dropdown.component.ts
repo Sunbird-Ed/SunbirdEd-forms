@@ -71,10 +71,14 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.options = [];
     }
 
-    if (this.field && this.field.isSearchable)
-    {
+    if (this.field && this.field.isSearchable) {
       this.isSearchable = this.field.isSearchable;
     }
+
+    if (this.field && this.field.editable) {
+      this.disabled = this.field.editable;
+    }
+
     // if (this.context) {
       // this.contextValueChangesSubscription = this.context.valueChanges.pipe(
       //   tap(() => {
@@ -93,7 +97,6 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.field.range = [];
       this.field.range.push(this.default);
     }
-
 
     if (!_.isEmpty(this.depends)) {
      this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
@@ -125,18 +128,21 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     ).subscribe();
   }
 
-showList(event)
-{
+  showList(event) {
+    if (this.disabled === true || this.isDependsInvalid) {
+      return;
+    }
+
     this.showDropdown = !this.showDropdown? true : false;
     event.stopPropagation();
-}
+  }
 
- addSelected(selectedItem)
- {
-  this.showSelectdItem = selectedItem;
-  this.showDropdown = false;
-  this.searchInput='';
- }
+  addSelected(selectedItem) {
+    this.showSelectdItem = selectedItem;
+    this.showDropdown = false;
+    this.searchInput='';
+  }
+
   ngOnDestroy(): void {
     if (this.contextValueChangesSubscription) {
       this.contextValueChangesSubscription.unsubscribe();
@@ -157,6 +163,7 @@ showList(event)
   }
 
   isOptionsArrayMap(input: any) {
+
     return Array.isArray(input) && typeof input[0] === 'object';
   }
 
@@ -274,29 +281,24 @@ showList(event)
       // tslint:disable-next-line:max-line-length
     });
   }
-  showAllList()
-  {
+  showAllList(){
     this.field.range = this.options;
     this.showSelectdItem='';
     this.hidePlaceholder = true;
   }
-    // Filter items from the dropdown
-    filterItem(){
-      this.showDropdown = true;
+  // Filter items from the dropdown
+  filterItem(){
+    this.showDropdown = true;
 
-      if (!this.searchInput)
-      {
-        this.field.range = this.options;
-      }
-      else
-      {
-        this.field.range = this.field.range.filter(val => {
-            // sSearch the option and return match result
-            if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase()))
-            {
-              return val;
-            }
-        });
-      }
+    if (!this.searchInput) {
+      this.field.range = this.options;
+    } else {
+      this.field.range = this.field.range.filter(val => {
+          // Search the option and return match result
+          if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())) {
+            return val;
+          }
+      });
     }
+  }
 }
