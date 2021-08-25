@@ -126,10 +126,20 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       }),
       takeUntil(this.dispose$)
     ).subscribe();
+
+    if (this.field && this.field.range) {
+      this.field.range.forEach(element => {
+        let rangeResult = ValueComparator.valueComparator(element, this.field.default);
+
+        if (rangeResult) {
+          this.field.default = element; 
+        }
+      });
+    }
   }
 
   showList(event) {
-    if (this.disabled === true || this.isDependsInvalid) {
+    if (this.disabled !== true || this.isDependsInvalid) {
       return;
     }
 
@@ -141,6 +151,16 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     this.showSelectdItem = selectedItem;
     this.showDropdown = false;
     this.searchInput='';
+
+    if (this.field && this.field.range) {
+      this.field.range.forEach(element => {
+        let rangeResult = ValueComparator.valueComparator(element, this.field.default);
+
+        if (rangeResult) {
+          this.field.default = element; 
+        }
+      });
+    }
   }
 
   ngOnDestroy(): void {
