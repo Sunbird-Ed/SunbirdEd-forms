@@ -168,6 +168,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'text':
         defaultVal = element.default || null;
         break;
+      case 'date':
+        defaultVal = element.default || null;
+        break;  
       case 'dialcode':
         defaultVal = element.default || null;
         break;

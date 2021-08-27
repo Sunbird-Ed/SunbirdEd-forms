@@ -2,6 +2,8 @@ import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRe
 import {FormControl} from '@angular/forms';
 import { FieldConfigAsyncValidation } from '../common-form-config';
 import { DatePipe } from '@angular/common';
+import { tap } from 'rxjs/operators';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'sb-dynamic-date',
@@ -21,7 +23,7 @@ export class DynamicDateComponent implements OnInit {
   @Input() disabled: Boolean;
  
   @ViewChild('validationTrigger') validationTrigger: ElementRef;
- 
+  valueChangesSubscription: Subscription;
   constructor() {
   }
 
@@ -29,8 +31,13 @@ export class DynamicDateComponent implements OnInit {
   }
 
   ngOnChanges() {
-    console.log(this.field.minDate);
+    this.valueChangesSubscription =  this.formControlRef.valueChanges.pipe(
+      tap((data) => {
+        console.log(data);
+      })
+    ).subscribe();
   }
+
 
   ngAfterViewInit() {
     if (this.asyncValidation && this.asyncValidation.asyncValidatorFactory && this.formControlRef) {

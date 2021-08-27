@@ -58,9 +58,20 @@ export const timer = [
                 },
                 'required': true,
                 'visible': true,
-                'default': 'Untitled Course',
-                "minDate":new Date().toJSON().split('T')[0], //can be empty
-                "maxDate":"2022-01-01" // can be empty
+                'default': '',
+                "dateFormat":"YYYY/MM/DD",
+                'validations': [
+                    {
+                        'type': 'minDate',
+                        'value': new Date().toJSON().split('T')[0],
+                        'message': 'Date should be less than '+new Date().toJSON().split('T')[0]
+                    },
+                    {
+                        'type': 'maxDate',
+                        'value':"2022-01-01",
+                        'message': 'Date should be greater than 2022-01-01'
+                    }
+                ]
             },
             {
                 'code': 'description',
