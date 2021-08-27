@@ -59,7 +59,6 @@ export const timer = [
                 'required': true,
                 'visible': true,
                 'default': '',
-                "dateFormat":"YYYY/MM/DD",
                 'validations': [
                     {
                         'type': 'minDate',
