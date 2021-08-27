@@ -45,6 +45,24 @@ export const timer = [
                 'default': 'Untitled Course'
             },
             {
+                'code': 'startDate',
+                'dataType': 'date',
+                'description': 'start Date',
+                'editable': true,
+                'inputType': 'date',
+                'label': 'Start Date',
+                'name': 'Start Date',
+                'placeholder': 'start Date',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'required': true,
+                'visible': true,
+                'default': 'Untitled Course',
+                "minDate":new Date().toJSON().split('T')[0], //can be empty
+                "maxDate":"2022-01-01" // can be empty
+            },
+            {
                 'code': 'description',
                 'dataType': 'text',
                 'description': 'Description of the content',
