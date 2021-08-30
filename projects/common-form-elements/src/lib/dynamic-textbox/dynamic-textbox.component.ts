@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef} from '@angular/core';
+import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { FieldConfigAsyncValidation } from '../common-form-config';
 import * as _ from 'lodash-es';
@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators'
   templateUrl: './dynamic-textbox.component.html',
   styleUrls: ['./dynamic-textbox.component.css']
 })
-export class DynamicTextboxComponent implements OnInit,  AfterViewInit, OnChanges  {
+export class DynamicTextboxComponent implements OnInit,  AfterViewInit, OnChanges,OnDestroy  {
 
   @Input() asyncValidation?: FieldConfigAsyncValidation;
   @Input() label: String;
@@ -61,4 +61,9 @@ export class DynamicTextboxComponent implements OnInit,  AfterViewInit, OnChange
       this.isTextBoxRequired = _.toLower(_.first(_.map(this.depends, depend => depend.value)));
   }
 
+  ngOnDestroy(): void {
+    if (this.contextValueChangesSubscription) {
+      this.contextValueChangesSubscription.unsubscribe();
+    }
+  }
 }
