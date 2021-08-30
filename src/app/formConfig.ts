@@ -136,7 +136,36 @@ export const timer = [
                         'value': '20'
                     }
                 ]
-            }
+            },
+             {
+                'code': 'instanceLabel',
+                'depends': [
+                'dialcodeRequired'
+                ],
+                'dataType': 'text',
+                'description': 'Add label',
+                'editable': true,
+                'inputType': 'text',
+                'label': 'Add label',
+                'name': 'instanceLabel',
+                'placeholder': '',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'required': true,
+                'visible': true,
+                'validations': [
+                    {
+                        'type': 'maxLength',
+                        'value': '120',
+                        'message': 'Input is Exceeded'
+                    },
+                    {
+                        'type': 'required',
+                        'message': 'Label is required'
+                    }
+                ],
+            },
         ]
     },
     {
