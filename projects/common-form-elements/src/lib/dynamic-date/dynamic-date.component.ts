@@ -4,6 +4,7 @@ import { FieldConfigAsyncValidation } from '../common-form-config';
 import { DatePipe } from '@angular/common';
 import { tap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/internal/Subscription';
+import * as moment_ from 'moment';
 
 @Component({
   selector: 'sb-dynamic-date',
@@ -21,23 +22,17 @@ export class DynamicDateComponent implements OnInit {
   @Input() default: String;
   @Input() field?: any;
   @Input() disabled: Boolean;
- 
   @ViewChild('validationTrigger') validationTrigger: ElementRef;
   valueChangesSubscription: Subscription;
   constructor() {
   }
 
   ngOnInit() {
+    let result = this.validations.find(data => data.type==='dateFormat');
+    var date = moment_(this.field.default,result.value).format("YYYY-MM-DD")
+    console.log(date)
+    this.formControlRef.setValue(date);
   }
-
-  ngOnChanges() {
-    this.valueChangesSubscription =  this.formControlRef.valueChanges.pipe(
-      tap((data) => {
-        console.log(data);
-      })
-    ).subscribe();
-  }
-
 
   ngAfterViewInit() {
     if (this.asyncValidation && this.asyncValidation.asyncValidatorFactory && this.formControlRef) {
@@ -52,6 +47,5 @@ export class DynamicDateComponent implements OnInit {
       console.log(this.formControlRef);
     }
   }
-
 }
 
