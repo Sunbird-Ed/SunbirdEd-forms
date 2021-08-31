@@ -29,18 +29,8 @@ export class DynamicDateComponent implements OnInit {
 
   ngOnInit() {
     let result = this.validations.find(data => data.type==='dateFormat');
-    var date = moment_(this.field.default,result.value).format("YYYY-MM-DD")
+    let date = moment_(this.field.default,result.value).format("YYYY-MM-DD")
     this.formControlRef.setValue(date);
-    this.validations.forEach(data => {
-      if(data.type === 'minDate'){
-        var date = moment_(data.value, result.value).format("YYYY-MM-DD")
-        data.value = date;
-      }
-      else if(data.type === 'maxDate'){
-        var date = moment_(data.value, result.value).format("YYYY-MM-DD")
-        data.value = date;
-      }    
-    });
   }
 
   ngAfterViewInit() {

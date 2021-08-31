@@ -284,12 +284,16 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           case 'compare':
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
             break;
+          case 'minDate':
+            validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
+            break;
+          case 'maxDate':
+              validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
+            break;    
         }
       });
     }
-
     formValueList.push(Validators.compose(validationList));
-
     return formValueList;
   }
 
@@ -363,4 +367,18 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     return null;
     // return result ? {compare: true} : null;
   }
+
+  compareDate(validations,types, control: AbstractControl): ValidationErrors | null {
+    let result = validations.find(data => data.type === 'dateFormat');
+    let currentDate=moment_(control.value, result.value).format('YYYY-MM-DD');
+    let minDate = moment_(types.value, result.value).format('YYYY-MM-DD');
+    let maxDate = moment_(types.value, result.value).format('YYYY-MM-DD');
+      if ((types.type==='minDate' && currentDate < minDate)){
+        return {mindate:types.message};
+      }
+      else if((types.type==='maxDate' && currentDate > maxDate)){
+        return {maxdate:types.message};
+      }
+      return null;
+    }
 }

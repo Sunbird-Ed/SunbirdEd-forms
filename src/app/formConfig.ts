@@ -58,21 +58,21 @@ export const timer = [
                 },
                 'required': true,
                 'visible': true,
-                'default': '20/10/2021',
+                'default': '2021-07-20T00:00:00.000Z',
                 'validations': [
                     {
                         'type': 'minDate',
-                        'value': "01/07/2021",
-                        'message': 'Date should not be less than 01-08-2021'
+                        'value': '2021-07-01T00:00:00.000Z',
+                        'message': 'Date should not be less than 01-07-2021'
                     },
                     {
                         'type': 'maxDate',
-                        'value':"01/01/2022",
-                        'message': 'Date should be greater than 01-01-2022'
+                        'value':'2022-01-01T00:00:00.000Z',
+                        'message': 'Date should be greater than 01-07-2022'
                     },
                     {
                         'type': 'dateFormat',
-                        'value':"DD/MM/YYYY",
+                        'value':"YYYY-MM-DD[T]HH:mm:ss.SSS[Z]",
                         'message': 'Date format not matched'
                     }
                 ]
