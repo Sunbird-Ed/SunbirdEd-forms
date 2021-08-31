@@ -45,6 +45,39 @@ export const timer = [
                 'default': 'Untitled Course'
             },
             {
+                'code': 'startDate',
+                'dataType': 'date',
+                'description': 'start Date',
+                'editable': true,
+                'inputType': 'date',
+                'label': 'Start Date',
+                'name': 'Start Date',
+                'placeholder': 'start Date',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'required': true,
+                'visible': true,
+                'default': '2021-07-20T00:00:00.000Z',
+                'validations': [
+                    {
+                        'type': 'minDate',
+                        'value': '2021-07-01T00:00:00.000Z',
+                        'message': 'Date should not be less than 01-07-2021'
+                    },
+                    {
+                        'type': 'maxDate',
+                        'value':'2022-01-01T00:00:00.000Z',
+                        'message': 'Date should be greater than 01-07-2022'
+                    },
+                    {
+                        'type': 'dateFormat',
+                        'value':"YYYY-MM-DD[T]HH:mm:ss.SSS[Z]",
+                        'message': 'Date format not matched'
+                    }
+                ]
+            },
+            {
                 'code': 'description',
                 'dataType': 'text',
                 'description': 'Description of the content',
