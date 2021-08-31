@@ -370,13 +370,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   compareDate(validations,types, control: AbstractControl): ValidationErrors | null {
     let result = validations.find(data => data.type === 'dateFormat');
-    let currentDate=moment_(control.value, result.value).format('YYYY-MM-DD');
     let minDate = moment_(types.value, result.value).format('YYYY-MM-DD');
     let maxDate = moment_(types.value, result.value).format('YYYY-MM-DD');
-      if ((types.type==='minDate' && currentDate < minDate)){
+      if ((types.type==='minDate' && control.value < minDate)){
         return {mindate:types.message};
       }
-      else if((types.type==='maxDate' && currentDate > maxDate)){
+      else if((types.type==='maxDate' && control.value > maxDate)){
         return {maxdate:types.message};
       }
       return null;
