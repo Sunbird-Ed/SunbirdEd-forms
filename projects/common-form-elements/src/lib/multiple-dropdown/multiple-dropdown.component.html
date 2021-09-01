@@ -34,7 +34,7 @@
       <div class="cfe-multiselect-modal-container sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
         <div class="cfe-multiselect-modal-overlay sb-modal-overlay">
           <div class="cfe-multiselect-modal sb-modal" (click)="$event.stopPropagation()" tabindex="0">
-            <div class="cfe-multiselect-modal-header header">
+            <div class="cfe-multiselect-modal-header header" role="heading" aria-level="1">
               {{placeHolder}}
             </div>
             <div class="cfe-multiselect-modal-body body">
