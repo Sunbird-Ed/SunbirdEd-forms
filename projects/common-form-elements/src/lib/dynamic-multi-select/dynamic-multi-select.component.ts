@@ -57,12 +57,17 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   }
 
   ngOnInit() {
+    this.formControlRef.isVisible = 'yes';
     if (!_.isEmpty(this.field.sourceCategory)) {
       this.formControlRef.sourceCategory = this.field.sourceCategory;
     }
 
     if (!_.isEmpty(this.field.output)) {
       this.formControlRef.output = this.field.output;
+    }
+
+    if (!this.options) {
+      this.options = _.isEmpty(this.field.options) ? this.isOptionsClosure(this.field.options) && this.field.options : [];
     }
 
     // if (this.context) {
@@ -107,6 +112,15 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
     if (this.isOptionsClosure(this.options)) {
       // tslint:disable-next-line:max-line-length
       this.options$ = (this.options as DynamicFieldConfigOptionsBuilder<any>)(this.formControlRef, this.depends, this.formGroup, () => this.dataLoadStatusDelegate.next('LOADING'), () => this.dataLoadStatusDelegate.next('LOADED')) as any;
+      this.options$.subscribe(
+        (response: any) => {
+          if (response && response.range) {
+            this.field.range = response.range;
+          } else {
+            this.field.range = null;
+          }
+        }
+      );
     }
 
 

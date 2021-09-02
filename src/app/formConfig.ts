@@ -3,6 +3,59 @@ export const timer = [
         'name': 'First Section',
         'fields': [
             {
+                'code': 'showEvidence',
+                'dataType': 'text',
+                'description': 'Allow Evidence',
+                'editable': true,
+                'index': 5,
+                'inputType': 'radio',
+                'label': 'Allow Evidence',
+                'name': 'showEvidence',
+                'placeholder': 'showEvidence',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1'
+                },
+                'range': [
+                    'Yes',
+                    'No'
+                ],
+                'required': true,
+                'visible': true
+            },
+            {
+                'code': 'evidenceMimeType',
+                'dataType': 'list',
+                'depends': [
+                    'showEvidence'
+                ],
+                'description': 'Evidence',
+                'editable': true,
+                'inputType': 'multiselect',
+                'label': 'evidence',
+                'name': 'evidenceMimeType',
+                'placeholder': 'evidence',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1'
+                },
+                'required': false,
+                'visible': true,
+                'range': [
+                    {
+                    'value': 'image/png',
+                    'label': 'image/png'
+                    },
+                    {'value': 'audio/mp3',
+                    'label': 'audio/mp3'
+                    },
+                    {'value': 'video/mp4',
+                    'label': 'video/mp4'
+                    },
+                    {'value': 'video/webm',
+                    'label': 'video/webm'
+                    }
+                ]
+            },
+            {
                 'code': 'appIcon',
                 'dataType': 'text',
                 'description': 'appIcon of the content',
@@ -72,7 +125,7 @@ export const timer = [
                     },
                     {
                         'type': 'dateFormat',
-                        'value':"YYYY-MM-DD[T]HH:mm:ss.SSS[Z]",
+                        'value':'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]',
                         'message': 'Date format not matched'
                     }
                 ]
