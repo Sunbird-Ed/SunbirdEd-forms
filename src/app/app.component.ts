@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { of } from 'rxjs';
+import { merge, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
 import { timer } from './formConfig';
 import * as _ from 'lodash-es';
 import * as moment_ from 'moment';
+let evidenceMimeType;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,6 +14,7 @@ import * as moment_ from 'moment';
 export class AppComponent implements OnInit {
   title = 'sunbird-forms';
   config: any  = timer;
+  evidenceMimeType: any;
 
 
   ngOnInit() {
@@ -20,6 +22,11 @@ export class AppComponent implements OnInit {
       _.forEach(section.fields, field => {
         if (field.code === 'framework') {
           field.options = this.getFramework;
+        }
+        if (field.code === 'evidenceMimeType') {
+            evidenceMimeType = field.range;
+            field.options = this.setEvidence;
+            field.range = null;
         }
       });
     });
@@ -352,4 +359,19 @@ export class AppComponent implements OnInit {
     return response;
   }
 
+  setEvidence(control, depends: FormControl[], formGroup: FormGroup, loading, loaded) {
+    control.isVisible = 'no';
+    const response = merge(..._.map(depends, depend => depend.valueChanges)).pipe(
+        switchMap((value: any) => {
+            if (!_.isEmpty(value) && _.toLower(value) === 'yes') {
+                control.isVisible = 'yes';
+                return of({range: evidenceMimeType});
+            } else {
+                control.isVisible = 'no';
+                return of(null);
+            }
+        })
+    );
+    return response;
+  }
 }
