@@ -281,6 +281,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           case 'time':
             validationList.push(this.validateTime.bind(this, element.validations[i].value, element));
             break;
+          case 'maxtimevalue':
+            validationList.push(this.validateMaxTime.bind(this, element.validations[i].value, element));
+            break;
           case 'compare':
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
             break;
@@ -349,6 +352,23 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     }
     return null;
     // return moment(control.value, pattern, true).isValid() && control.touched ? null : {time: true};
+  }
+
+  validateMaxTime(maxTimeValue, field, control: AbstractControl): ValidationErrors | null {
+    if (control.value && maxTimeValue) {
+      const maxTimeInputTimeArray = control.value.split(':');
+      const maxTimeAllowedArray = maxTimeValue.split(':');
+      const maxTimeAllowedInSeconds = (_.parseInt(maxTimeAllowedArray[0]) * 3600) +
+      (_.parseInt(maxTimeAllowedArray[1]) * 60);
+      const maxTimeInputInSeconds = (_.parseInt(maxTimeInputTimeArray[0]) * 3600) +
+      (_.parseInt(maxTimeInputTimeArray[1]) * 60);
+      if (maxTimeInputInSeconds > maxTimeAllowedInSeconds) {
+        return { maxtimevalue: true };
+      }
+      return null;
+    } else {
+      return null;
+    }
   }
 
 

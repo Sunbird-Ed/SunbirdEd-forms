@@ -935,7 +935,63 @@ export const timer = [
                     'KP_FT_1591276469489',
                     'KP_FT_1591276469748'
                 ]
-            }
+            },
+            {
+                'code': 'maxTime',
+                'visible': true,
+                'editable': true,
+                'dataType': 'text',
+                'name': 'MaxTimer',
+                'default': '00:00',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'description': 'MaxTime for the content',
+                'inputType': 'timer',
+                'label': 'Max time',
+                'placeholder': 'hh:mm',
+                'required': true,
+                'validations': [
+                    {
+                        'type': 'required',
+                        'message': 'Maxtime is required'
+                    },
+                    {
+                        'type': 'maxtimevalue',
+                        'value': '05:30',
+                        'message': 'max time should be less than or equal to 05:30'
+                    }
+                ]
+            },
+            {
+                'code': 'warningTime',
+                'visible': true,
+                'editable': true,
+                'dataType': 'text',
+                'name': 'Warning Time',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1'
+                },
+                'depends': [
+                    'maxTime'
+                ],
+                'description': 'warning for the content',
+                'inputType': 'timer',
+                'label': 'Warning Time',
+                'placeholder': 'hh:mm',
+                'required': false,
+                'validations': [
+                    {
+                        'type': 'compare',
+                        'criteria': {
+                            '<=': [
+                                'maxTime'
+                            ]
+                        },
+                        'message': 'warning time should be less than max timer'
+                    }
+                ]
+            },
         ]
     }
 ];
