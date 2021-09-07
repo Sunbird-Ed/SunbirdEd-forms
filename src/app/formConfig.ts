@@ -3,6 +3,59 @@ export const timer = [
         'name': 'First Section',
         'fields': [
             {
+                'code': 'showEvidence',
+                'dataType': 'text',
+                'description': 'Allow Evidence',
+                'editable': true,
+                'index': 5,
+                'inputType': 'radio',
+                'label': 'Allow Evidence',
+                'name': 'showEvidence',
+                'placeholder': 'showEvidence',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1'
+                },
+                'range': [
+                    'Yes',
+                    'No'
+                ],
+                'required': true,
+                'visible': true
+            },
+            {
+                'code': 'evidenceMimeType',
+                'dataType': 'list',
+                'depends': [
+                    'showEvidence'
+                ],
+                'description': 'Evidence',
+                'editable': true,
+                'inputType': 'multiselect',
+                'label': 'evidence',
+                'name': 'evidenceMimeType',
+                'placeholder': 'evidence',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1'
+                },
+                'required': false,
+                'visible': true,
+                'range': [
+                    {
+                    'value': 'image/png',
+                    'label': 'image/png'
+                    },
+                    {'value': 'audio/mp3',
+                    'label': 'audio/mp3'
+                    },
+                    {'value': 'video/mp4',
+                    'label': 'video/mp4'
+                    },
+                    {'value': 'video/webm',
+                    'label': 'video/webm'
+                    }
+                ]
+            },
+            {
                 'code': 'appIcon',
                 'dataType': 'text',
                 'description': 'appIcon of the content',
@@ -43,6 +96,39 @@ export const timer = [
                     }
                 ],
                 'default': 'Untitled Course'
+            },
+            {
+                'code': 'startDate',
+                'dataType': 'date',
+                'description': 'start Date',
+                'editable': true,
+                'inputType': 'date',
+                'label': 'Start Date',
+                'name': 'Start Date',
+                'placeholder': 'start Date',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'required': true,
+                'visible': true,
+                'default': '2021-07-20T00:00:00.000Z',
+                'validations': [
+                    {
+                        'type': 'minDate',
+                        'value': '2021-07-01T00:00:00.000Z',
+                        'message': 'Date should not be less than 01-07-2021'
+                    },
+                    {
+                        'type': 'maxDate',
+                        'value':'2022-01-01T00:00:00.000Z',
+                        'message': 'Date should be greater than 01-07-2022'
+                    },
+                    {
+                        'type': 'dateFormat',
+                        'value':'YYYY-MM-DD[T]HH:mm:ss.SSS[Z]',
+                        'message': 'Date format not matched'
+                    }
+                ]
             },
             {
                 'code': 'description',
@@ -136,7 +222,36 @@ export const timer = [
                         'value': '20'
                     }
                 ]
-            }
+            },
+             {
+                'code': 'instanceLabel',
+                'depends': [
+                'dialcodeRequired'
+                ],
+                'dataType': 'text',
+                'description': 'Add label',
+                'editable': true,
+                'inputType': 'text',
+                'label': 'Add label',
+                'name': 'instanceLabel',
+                'placeholder': '',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'required': true,
+                'visible': true,
+                'validations': [
+                    {
+                        'type': 'maxLength',
+                        'value': '120',
+                        'message': 'Input is Exceeded'
+                    },
+                    {
+                        'type': 'required',
+                        'message': 'Label is required'
+                    }
+                ],
+            },
         ]
     },
     {

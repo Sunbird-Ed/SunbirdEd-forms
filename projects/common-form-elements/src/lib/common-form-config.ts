@@ -123,7 +123,7 @@ export interface Validator {
 
 
 export type DynamicFieldConfigOptionsBuilder<T> =
-  (control: FormControl, depends?: FormControl[], formGroup?: FormGroup, notifyLoading?: () => void,
+  (control: CustomFormControl, depends?: FormControl[], formGroup?: FormGroup, notifyLoading?: () => void,
     notifyLoaded?: () => void) => Observable<FieldConfigOption<T>[]> | Promise<FieldConfigOption<T>[]>;
 
 
@@ -145,4 +145,5 @@ export interface CustomFormControl extends FormControl {
   output?: any;
   customEventHandler$?: Subject<any>;
   shouldListenToCustomEvent?: Boolean;
+  isVisible?: any;
 }

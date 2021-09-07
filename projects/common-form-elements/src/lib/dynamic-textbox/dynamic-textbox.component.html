@@ -1,4 +1,4 @@
-<div class="sb-input">
+<div class="sb-input" *ngIf="isTextBoxRequired=='yes'">
   <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
   <!-- <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div> -->
 
