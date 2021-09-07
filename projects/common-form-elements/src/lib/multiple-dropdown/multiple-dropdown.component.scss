@@ -3,20 +3,20 @@
 
 :host(:not(.normalize)) {
   label{
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: normal;
     margin: 0
   }
 
   .multi-select-container {
     position: relative;
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
   }
 
   .multi-select-container .caret-down {
     position: absolute;
-    top: 12px;
-    right: 19px;
+    top: 0.75rem;
+    right: 1.125rem;
     z-index: 0;
   }
 
@@ -34,25 +34,26 @@
     list-style-type: none;
     position: absolute;
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: bold;
   }
 
   .multi-select-container .list-border {
-    border: 0.5px solid var(--gray-400);
+    border: 0.03125rem solid var(--gray-400);
     padding: 1.3rem;
     cursor: pointer;
     display: flex;
     align-items: center;
     left: 0;
-    height: 40px;
+    height: 2.5rem;
+    background-color: #fff;
   }
 
   .multi-select-container .list-border li {
     float: left;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
-    margin-left: 4px;
+    margin-left: 0.25rem;
   }
 
   .multi-select-container .dropdown ul {
@@ -61,8 +62,8 @@
 
   .multi-select-container .dropdown li {
     cursor: pointer;
-    padding: 8px;
-    border: 1px solid var(--white);
+    padding: 0.5rem;
+    border: 0.0625rem solid var(--white);
   }
 
   .multi-select-container .dropdown ul {
@@ -80,9 +81,9 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 0rem;
-    padding-left: 8px;
-    padding-bottom: 8px;
-    padding-top: 8px;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
   }
 
   .multi-select-container .sb-modal-container {
@@ -126,71 +127,66 @@
 
   .multi-select-container .sb-modal li {
     cursor: pointer;
-    padding-bottom: 8px;
-    padding-top: 8px;
-    padding-left: 16px;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    padding-left: 1rem;
 
   }
 
   .value-label {
-    width: 270px;
+    width: 16.875rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .multi-select-container .sb-forms-radio {
-    margin-top: 6px;
+    margin-top: 0.375rem;
   }
 
   .multi-select-container .sb-form-button {
     display: inline;
-    padding: 10px;
+    padding: 0.625rem;
   }
-
+  .multi-select-container .sb-btn-primary-outline,.multi-select-container .sb-btn-primary {
+    border: 0.03125rem solid var(--primary-color);
+    border-radius: 0.25rem;
+    padding: 0.625rem 2.5rem;
+    font-size: 1rem;
+    text-transform: uppercase;
+    width: 100%;
+  }
   .multi-select-container .sb-btn-primary-outline {
     color: var(--primary-color);
     background-color: transparent;
-    border: 0.5px solid var(--primary-color);
-    border-radius: 4px;
-    padding: 10px 40px;
-    font-size: 16px;
-    text-transform: uppercase;
-    width: 100%;
   }
 
   .multi-select-container .sb-btn-primary {
     color: var(--white);
     background-color: var(--primary-color);
-    border: 0.5px solid var(--primary-color);
-    border-radius: 4px;
-    padding: 10px 40px;
-    font-size: 16px;
-    text-transform: uppercase;
-    width: 100%;
   }
 
   .multi-select-container .header {
-    padding: 16px;
-    margin-left: 8px;
+    padding: 1rem;
+    margin-left: 0.5rem;
     font-weight: bold;
   }
 
   .multi-select-container .body {
-    padding-top: 8px;
-    border-bottom: 0.5px solid var(--gray-100);
+    padding-top: 0.5rem;
+    border-bottom: 0.03125rem solid var(--gray-100);
   ;
-    border-top: 0.5px solid var(--gray-100);
-    max-height: 300px;
+    border-top: 0.03125rem solid var(--gray-100);
+    max-height: 18.75rem;
     overflow: scroll;
   }
 
   .list-with-ellipsis:nth-child(3) {
     float: left;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 700;
-    margin-left: 4px;
-    width: 50px;
+    margin-left: 0.25rem;
+    width: 3.125rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -204,10 +200,10 @@
   .multi-select-container .container {
     display: block;
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    padding-left: 2.1875rem;
+    margin-bottom: 0.75rem;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 1.375rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -226,11 +222,11 @@
   /* Create a custom checkbox */
   .checkmark {
     position: absolute;
-    top: 3px;
+    top: 0.1875rem;
     left: 0;
-    height: 15px;
-    width: 15px;
-    border: 0.4px solid var(--black);
+    height: 0.9375rem;
+    width: 0.9375rem;
+    border: 0.03125rem solid var(--black);
   }
 
   /* On mouse-over, add a grey background color */
@@ -257,12 +253,12 @@
 
   /* Style the checkmark/indicator */
   .container .checkmark:after {
-    left: 5px;
+    left: 0.3125rem;
     top: 0px;
-    width: 5px;
-    height: 10px;
+    width: 0.3125rem;
+    height: 0.625rem;
     border: solid var(--white);
-    border-width: 0 2px 2px 0;
+    border-width: 0 0.125rem 0.125rem 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
@@ -272,22 +268,22 @@
     list-style-type: none;
     display: block;
     position: absolute;
-    top: 38px;
+    top: 2.375rem;
     left: 0;
     background-color: white;
     width: 100%;
     z-index: 999;
-    box-shadow: 2px 2px 2px 2px aliceblue;
-    border: 2px solid #80a7ce;
-    max-height: 314px;
+    box-shadow: 0.125rem 0.125rem 0.125rem 0.125rem aliceblue;
+    border: 0.125rem solid #80a7ce;
+    max-height: 19.625rem;
     overflow: scroll;
   }
 
   .sb-modal-dropdown-web ul li {
-    margin-top: 10px;
-    margin-bottom: 8px;
-    padding: 8px;
-    font-size: 13px;
+    margin-top: 0.625rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    font-size: 0.8125rem;
   }
 
   .sb-modal-dropdown-web .selected-option {
@@ -298,7 +294,7 @@
 
   /* width */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 0.375rem;
   }
 
   /* Track */

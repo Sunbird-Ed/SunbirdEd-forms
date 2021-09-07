@@ -35,7 +35,4 @@ export class DynamicTextareaComponent implements OnInit {
       );
     }
   }
-  getId(id) {
-    return id.replace(/\s/g, '');
-  }
 }
