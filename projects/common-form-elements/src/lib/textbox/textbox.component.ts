@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { FieldConfigAsyncValidation } from '../common-form-config';
+import { FieldConfig, FieldConfigAsyncValidation } from '../common-form-config';
 
 @Component({
   selector: 'sb-textbox',
@@ -15,6 +15,7 @@ export class TextboxComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() validations?: any;
   @Input() formControlRef?: FormControl;
   @Input() prefix?: String;
+  @Input() config: FieldConfig<String>;
   @ViewChild('validationTrigger') validationTrigger: ElementRef;
 
   constructor() {
