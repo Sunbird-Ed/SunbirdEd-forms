@@ -41,6 +41,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   public searchInput:any;
   public hidePlaceholder:boolean = false;
   private dispose$ = new Subject<undefined>();
+  public editable:boolean;
 
   options$?: Observable<FieldConfigOption<any>[]>;
   contextValueChangesSubscription?: Subscription;
@@ -76,7 +77,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (this.field && this.field.editable) {
-      this.disabled = this.field.editable;
+      this.editable = this.field.editable;
     }
 
     // if (this.context) {
@@ -139,7 +140,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   showList(event) {
-    if (this.disabled !== true || this.isDependsInvalid) {
+    if (this.editable !== true || this.isDependsInvalid) {
       return;
     }
 

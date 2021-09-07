@@ -6,8 +6,9 @@
           <input [(ngModel)]="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
           <label *ngIf="!showSelectdItem && isSearchable && !hidePlaceholder" for="searchbox-input" class="float-label">{{placeholder}}</label>
           <label *ngIf="!showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{placeholder}}</label>
-          <label *ngIf="showSelectdItem && isSearchable" for="searchbox-input" class="float-label">{{showSelectdItem}}</label>
-          <label *ngIf="showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{showSelectdItem}}</label>
+          <label *ngIf="showSelectdItem && isSearchable && formControlRef.value?.length" for="searchbox-input" class="float-label">{{showSelectdItem}}</label>
+          <label *ngIf="showSelectdItem && !isSearchable && formControlRef.value?.length" for="searchbox-input" class="not-searchable-label">{{showSelectdItem}}</label>
+          <label *ngIf="field.default && !showSelectdItem" for="searchbox-input" class="not-searchable-label">{{field.default}}</label>
       </div>
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
       <div [hidden]="!showDropdown">
