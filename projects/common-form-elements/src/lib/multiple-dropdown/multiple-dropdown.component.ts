@@ -89,7 +89,9 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
     this.setupOptions();
   }
-
+  getId(id) {
+    return id.replace(/\s/g, '');
+  }
   onSubmit() {
     const finalValue = this.tempValue.toList().toJS();
     this.formControlRef.patchValue(this.isMultiple ? finalValue : finalValue[0]);
