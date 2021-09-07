@@ -1,8 +1,8 @@
 <div class="cfe-multiselect-container multi-select-section-app" [ngClass]="{'open': showModalStateDirty && showModal, 'closed': showModalStateDirty && !showModal}">
-  <label class="cfe-multiselect-label input-label" tabindex="0" *ngIf="label" for="{{label}}">{{label}}</label>
+  <label class="cfe-multiselect-label input-label" tabindex="0" *ngIf="label" for="{{getId(label)}}">{{label}}</label>
   <div class="cfe-multiselect-label" *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div>
   <ng-container *ngIf="extras?.type === 'dropdown'">
-    <div class="cfe-multiselect-field multi-select-container">
+    <div class="cfe-multiselect-field multi-select-container" id="{{getId(label)}}">
       <sb-caret-up *ngIf="showModal" class="cfe-multiselect-field-caret caret-down"  tabindex="0"
                    [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-up>
