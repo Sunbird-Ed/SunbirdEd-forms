@@ -170,7 +170,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         break;
       case 'date':
         defaultVal = element.default || null;
-        break;  
+        break;
       case 'dialcode':
         defaultVal = element.default || null;
         break;
@@ -267,10 +267,18 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             validationList.push(Validators.pattern(element.validations[i].value as string));
             break;
           case 'minLength':
-            validationList.push(Validators.minLength(element.validations[i].value as number));
+            if (element.inputType === 'richtext') {
+              validationList.push(this.validateRichTextLength.bind(this, 'minLength' , '<', element.validations[i].value ));
+             } else {
+              validationList.push(Validators.minLength(element.validations[i].value as number));
+             }
             break;
           case 'maxLength':
-            validationList.push(Validators.maxLength(element.validations[i].value as number));
+            if (element.inputType === 'richtext') {
+              validationList.push(this.validateRichTextLength.bind(this, 'maxLength' , '>', element.validations[i].value ));
+             } else {
+              validationList.push(Validators.maxLength(element.validations[i].value as number));
+             }
             break;
           case 'min':
             validationList.push(Validators.min(element.validations[i].value as number));
@@ -285,11 +293,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
             break;
           case 'minDate':
-            validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
+            validationList.push(this.compareDate.bind(this, element.validations, element.validations[i]));
             break;
           case 'maxDate':
-              validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
-            break;    
+              validationList.push(this.compareDate.bind(this, element.validations, element.validations[i]));
+            break;
         }
       });
     }
@@ -368,16 +376,29 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     // return result ? {compare: true} : null;
   }
 
-  compareDate(validations,types, control: AbstractControl): ValidationErrors | null {
-    let result = validations.find(data => data.type === 'dateFormat');
-    let minDate = moment_(types.value, result.value).format('YYYY-MM-DD');
-    let maxDate = moment_(types.value, result.value).format('YYYY-MM-DD');
-      if ((types.type==='minDate' && control.value < minDate)){
-        return {mindate:types.message};
-      }
-      else if((types.type==='maxDate' && control.value > maxDate)){
-        return {maxdate:types.message};
+  compareDate(validations, types, control: AbstractControl): ValidationErrors | null {
+    const result = validations.find(data => data.type === 'dateFormat');
+    const minDate = moment_(types.value, result.value).format('YYYY-MM-DD');
+    const maxDate = moment_(types.value, result.value).format('YYYY-MM-DD');
+      if ((types.type === 'minDate' && control.value < minDate)) {
+        return {mindate: types.message};
+      } else if ((types.type === 'maxDate' && control.value > maxDate)) {
+        return {maxdate: types.message};
       }
       return null;
+  }
+
+  validateRichTextLength(validationType, keyOperator, validationValue, control: AbstractControl): ValidationErrors | null {
+    let comp;
+      if (control.touched) {
+        comp = FieldComparator.operators[keyOperator](control['richTextCharacterCount'], validationValue);
+      } else {
+        comp =  false;
+      }
+    if (comp && (control.touched || control.dirty)) {
+      return { [_.toLower(validationType)]: true };
     }
+    return null;
+  }
+
 }

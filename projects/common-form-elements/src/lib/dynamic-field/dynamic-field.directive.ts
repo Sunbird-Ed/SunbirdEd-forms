@@ -1,5 +1,4 @@
 import { ComponentFactoryResolver, ComponentRef, Directive, Input, OnInit, ViewContainerRef, Renderer2, ElementRef} from '@angular/core';
-
 import { FormGroup, FormControl } from '@angular/forms';
 import { FieldConfig } from '../common-form-config';
 // import { InputComponent } from '../input/input.component';
@@ -24,6 +23,7 @@ import { DynamicRadioComponent } from '../dynamic-radio/dynamic-radio.component'
 import { DynamicDialcodeComponent } from '../dynamic-dialcode/dynamic-dialcode.component';
 import { DynamicFrameworkCategoryNestedSelectComponent } from '../dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
 import { DynamicDateComponent } from '../dynamic-date/dynamic-date.component';
+import { DynamicRichtextComponent } from '../dynamic-richtext/dynamic-richtext.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -43,7 +43,8 @@ const componentMapper = {
   frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
   radio: DynamicRadioComponent,
   dialcode: DynamicDialcodeComponent,
-  date:DynamicDateComponent
+  date: DynamicDateComponent,
+  richtext: DynamicRichtextComponent
 };
 
 @Directive({
