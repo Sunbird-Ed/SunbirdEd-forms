@@ -22,8 +22,8 @@
       <div>
         <input class="p-10 mr-20" list="hours" #hourField name="hour" id="hour" maxlength="2"
         placeholder="{{placeholders[0]}}"
-        (change)="onChangeTimer(field, 'hr', $event.target.value)"
-        (keyup)="onChangeTimer(field, 'hr', $event.target.value);"
+        (change)="onChangeTimer('hr', $event.target.value)"
+        (keyup)="onChangeTimer('hr', $event.target.value);"
         (focusout)="onFocusOutEvent('hr', $event.target.value)"
         [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">
         <datalist id="hours">
@@ -33,8 +33,8 @@
       <div>
         <input class="p-10 mr-20" list="minutes" #minField name="minute" id="minute" maxlength="2"
         placeholder="{{placeholders[1]}}"
-        (change)="onChangeTimer(field, 'min', $event.target.value)"
-        (keyup)="onChangeTimer(field, 'min', $event.target.value)"
+        (change)="onChangeTimer('min', $event.target.value)"
+        (keyup)="onChangeTimer('min', $event.target.value)"
         (focusout)="onFocusOutEvent('min', $event.target.value)"
         [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">
         <datalist id="minutes">

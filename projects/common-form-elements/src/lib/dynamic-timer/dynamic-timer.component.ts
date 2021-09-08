@@ -228,7 +228,7 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
     }
   }
 
-  onChangeTimer(field, fieldType, value) {
+  onChangeTimer(fieldType, value) {
     if (fieldType === 'hr') {
       const numericValue = value.replace(/[^0-9]/g, '');
       this.defaultHr = numericValue;

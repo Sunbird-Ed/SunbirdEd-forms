@@ -356,12 +356,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   validateMaxTime(maxTimeValue, field, control: AbstractControl): ValidationErrors | null {
     if (control.value && maxTimeValue) {
-      const maxTimeInputTimeArray = control.value.split(':');
-      const maxTimeAllowedArray = maxTimeValue.split(':');
-      const maxTimeAllowedInSeconds = (_.parseInt(maxTimeAllowedArray[0]) * 3600) +
-      (_.parseInt(maxTimeAllowedArray[1]) * 60);
-      const maxTimeInputInSeconds = (_.parseInt(maxTimeInputTimeArray[0]) * 3600) +
-      (_.parseInt(maxTimeInputTimeArray[1]) * 60);
+      const maxTimeInputTime = control.value.split(':');
+      const maxTimeAllowed = maxTimeValue.split(':');
+      const maxTimeAllowedInSeconds = (_.parseInt(maxTimeAllowed[0]) * 3600) +
+      (_.parseInt(maxTimeAllowed[1]) * 60);
+      const maxTimeInputInSeconds = (_.parseInt(maxTimeInputTime[0]) * 3600) +
+      (_.parseInt(maxTimeInputTime[1]) * 60);
       if (maxTimeInputInSeconds > maxTimeAllowedInSeconds) {
         return { maxtimevalue: true };
       }
