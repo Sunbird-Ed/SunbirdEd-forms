@@ -1,26 +1,9 @@
-<!-- <div class="sb-input">
-  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null"> {{label}}</label>
-
-  <input (keyup)="onChangeEvent($event)"  [class.valid]="formControlRef.valid &&
-    (formControlRef.dirty || formControlRef.touched)"
-    [class.invalid]="formControlRef.invalid &&
-    (formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}}" placeholder={{placeholder}} type="text"
-    [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )" [(ngModel)]="value">
-  <ng-container *ngFor="let validation of validations">
-    <div class="cf-error"
-      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] &&
-      (formControlRef.dirty || formControlRef.touched)) ">
-      {{ validation.message }}
-    </div>
-  </ng-container>
-</div> -->
-
 <div class="sb-input">
   <label *ngIf="label" [attr.data-title]="field.description ? field.description : null"> {{label}}</label>
   <ng-container>
     <div class="d-flex">
       <div>
-        <input class="p-10 mr-20" list="hours" #hourField name="hour" id="hour" maxlength="2"
+        <input class="p-10 mr-20" list="hours" #hourField name="hour" maxlength="2"
         placeholder="{{placeholders[0]}}"
         (change)="onChangeTimer('hr', $event.target.value)"
         (keyup)="onChangeTimer('hr', $event.target.value);"
@@ -31,7 +14,7 @@
         </datalist>
       </div>
       <div>
-        <input class="p-10 mr-20" list="minutes" #minField name="minute" id="minute" maxlength="2"
+        <input class="p-10 mr-20" list="minutes" #minField name="minute" maxlength="2"
         placeholder="{{placeholders[1]}}"
         (change)="onChangeTimer('min', $event.target.value)"
         (keyup)="onChangeTimer('min', $event.target.value)"
