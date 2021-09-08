@@ -281,8 +281,11 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           case 'time':
             validationList.push(this.validateTime.bind(this, element.validations[i].value, element));
             break;
-          case 'maxtimevalue':
+          case 'maxTime':
             validationList.push(this.validateMaxTime.bind(this, element.validations[i].value, element));
+            break;
+          case 'minTime':
+            validationList.push(this.validateMinTime.bind(this, element.validations[i].value, element));
             break;
           case 'compare':
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
@@ -292,7 +295,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             break;
           case 'maxDate':
               validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
-            break;    
+            break;
         }
       });
     }
@@ -363,7 +366,24 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       const maxTimeInputInSeconds = (_.parseInt(maxTimeInputTime[0]) * 3600) +
       (_.parseInt(maxTimeInputTime[1]) * 60);
       if (maxTimeInputInSeconds > maxTimeAllowedInSeconds) {
-        return { maxtimevalue: true };
+        return { maxtime: true };
+      }
+      return null;
+    } else {
+      return null;
+    }
+  }
+
+  validateMinTime(minTimeValue, field, control: AbstractControl): ValidationErrors | null {
+    if (control.value && minTimeValue) {
+      const inputTime = control.value.split(':');
+      const minTimeRequired = minTimeValue.split(':');
+      const minTimeRequiredInSeconds = (_.parseInt(minTimeRequired[0]) * 3600) +
+      (_.parseInt(minTimeRequired[1]) * 60);
+      const inputTimeInSeconds = (_.parseInt(inputTime[0]) * 3600) +
+      (_.parseInt(inputTime[1]) * 60);
+      if (inputTimeInSeconds < minTimeRequiredInSeconds) {
+        return { mintime: true };
       }
       return null;
     } else {

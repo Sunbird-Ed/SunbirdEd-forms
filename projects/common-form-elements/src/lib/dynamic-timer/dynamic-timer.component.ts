@@ -230,45 +230,48 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
 
   onChangeTimer(fieldType, value) {
     if (fieldType === 'hr') {
-      const numericValue = value.replace(/[^0-9]/g, '');
-      this.defaultHr = numericValue;
-      this.hourField.nativeElement.value = numericValue;
-      if (!this.defaultMin) {
-        this.defaultMin = '00';
-        this.minField.nativeElement.value = '00';
+      if (!_.isEmpty(value)) {
+        const numericValue = value.replace(/[^0-9]/g, '');
+        this.defaultHr = numericValue;
+        this.hourField.nativeElement.value = numericValue;
+        if (!this.defaultMin) {
+          this.defaultMin = '00';
+          this.minField.nativeElement.value = '00';
+        }
       }
     }
     if (fieldType === 'min') {
-      const numericValue = value.replace(/[^0-9]/g, '');
-      if (_.parseInt(numericValue) > 59) {
-        const subtractedMinute = _.toString(_.parseInt(numericValue) - 60);
-        if (subtractedMinute.length === 1) {
-          this.defaultMin = '0' + subtractedMinute;
-        } else {
-          this.defaultMin = _.toString(subtractedMinute);
-        }
-        if (this.defaultHr) {
-          this.defaultHr = _.toString(_.parseInt(this.defaultHr) + 1);
-          if (this.defaultHr.length === 1) {
-            this.defaultHr = '0' + this.defaultHr;
+      if (!_.isEmpty(value)) {
+        const numericValue = value.replace(/[^0-9]/g, '');
+        if (_.parseInt(numericValue) > 59) {
+          const subtractedMinute = _.toString(_.parseInt(numericValue) - 60);
+          if (subtractedMinute.length === 1) {
+            this.defaultMin = '0' + subtractedMinute;
           } else {
-            this.defaultHr = _.toString(this.defaultHr);
+            this.defaultMin = _.toString(subtractedMinute);
           }
-        } else if (!this.defaultHr) {
-          this.defaultHr = '00';
-        }
-        this.minField.nativeElement.value = this.defaultMin;
-        this.hourField.nativeElement.value = this.defaultHr;
-      } else {
-        this.defaultMin = numericValue;
-        this.minField.nativeElement.value = numericValue;
-        if (!this.defaultHr) {
-          this.defaultHr = '00';
-          this.hourField.nativeElement.value = '00';
+          if (this.defaultHr) {
+            this.defaultHr = _.toString(_.parseInt(this.defaultHr) + 1);
+            if (this.defaultHr.length === 1) {
+              this.defaultHr = '0' + this.defaultHr;
+            } else {
+              this.defaultHr = _.toString(this.defaultHr);
+            }
+          } else if (!this.defaultHr) {
+            this.defaultHr = '00';
+          }
+          this.minField.nativeElement.value = this.defaultMin;
+          this.hourField.nativeElement.value = this.defaultHr;
+        } else {
+          this.defaultMin = numericValue;
+          this.minField.nativeElement.value = numericValue;
+          if (!this.defaultHr) {
+            this.defaultHr = '00';
+            this.hourField.nativeElement.value = '00';
+          }
         }
       }
     }
-
     if (this.defaultHr && this.defaultMin)  {
       this.patchTimerValue();
     }
@@ -302,16 +305,21 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
   }
 
   onFocusOutEvent(fieldType, value) {
-    if (fieldType === 'hr') {
-      if (value.length === 1) {
-        this.defaultHr = '0' + value;
-        this.hourField.nativeElement.value = this.defaultHr;
+    if (_.isEmpty(value) || _.isNull(value)) {
+      this.formControlRef.markAsTouched();
+      this.formControlRef.patchValue(null);
+    } else {
+      if (fieldType === 'hr') {
+        if (value.length === 1) {
+          this.defaultHr = '0' + value;
+          this.hourField.nativeElement.value = this.defaultHr;
+        }
       }
-    }
-    if (fieldType === 'min') {
-      if (value.length === 1) {
-        this.defaultMin = '0' + value;
-      this.minField.nativeElement.value =  this.defaultMin;
+      if (fieldType === 'min') {
+        if (value.length === 1) {
+          this.defaultMin = '0' + value;
+          this.minField.nativeElement.value =  this.defaultMin;
+        }
       }
     }
   }

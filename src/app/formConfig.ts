@@ -942,7 +942,7 @@ export const timer = [
                 'editable': true,
                 'dataType': 'text',
                 'name': 'MaxTimer',
-                'default': '00:00',
+                // 'default': '00:10',
                 'renderingHints': {
                     'class': 'sb-g-col-lg-1 required'
                 },
@@ -957,9 +957,14 @@ export const timer = [
                         'message': 'Maxtime is required'
                     },
                     {
-                        'type': 'maxtimevalue',
+                        'type': 'maxTime',
                         'value': '05:30',
                         'message': 'max time should be less than or equal to 05:30'
+                    },
+                    {
+                        'type': 'minTime',
+                        'value': '00:01',
+                        'message': 'max time should not be 00:00'
                     }
                 ]
             },
