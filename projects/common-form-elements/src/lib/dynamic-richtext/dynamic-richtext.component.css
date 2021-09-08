@@ -1,0 +1,68 @@
+label {
+    display: block;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  .sb-textbox {
+    width: 100%;
+    padding: 8px 16px;
+    border: 0.5px solid #333333;
+    box-sizing: border-box;
+  }
+
+  ::placeholder {
+    padding: 0.25rem;
+    opacity: 0.99;
+    color: #999999;
+    font-family: "Noto Sans";
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .sb-input {
+    margin: 1rem 0;
+  }
+
+  .cf-error{
+    color: red;
+    font-family: "Noto Sans";
+    font-size: 12px;
+  }
+
+  .async-container{
+    text-align: center;
+  }
+
+  .async-btn{
+    padding: 12px 16px;
+    background-color: #008840;
+    color: white;
+    border-radius: 20px !important;
+  }
+
+  .async-text{
+    display: flex;
+    align-items: center;
+    border: 0.5px solid #333333;
+  }
+
+  .async-text > input{
+    border: none
+  }
+
+  .normal-text > .async-icons > sb-red-exclamation, .normal-text > .async-icons > sb-green-tick, .normal-text > .async-icons > sb-empty-circle{
+    display: none;
+  }
+
+  .prefix{
+    white-space: nowrap;
+    padding: 0 4px;
+  }
+
+  .async-icons{
+    margin: auto;
+    padding: 0 4px;
+  }
+
+  .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_se, .ck.ck-dropdown .ck-dropdown__panel.ck-dropdown__panel_sw{transform:inherit !important} 
