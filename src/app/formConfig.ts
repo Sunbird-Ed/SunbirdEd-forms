@@ -1,5 +1,34 @@
 export const timer = [
     {
+        'name': 'Rich Text Section',
+        'fields': [{
+            'code': 'instructions',
+            'dataType': 'text',
+            'description': 'Name of the Instruction',
+            'editable': true,
+            'inputType': 'richtext',
+            'label': 'Instructions',
+            'name': 'Instruction',
+            'placeholder': 'Enter instructions',
+            'renderingHints': {
+              'class': 'sb-g-col-lg-2 required'
+            },
+            'validations': [
+              {
+                'type': 'maxLength',
+                'value': '100',
+                'message': 'Input is Exceeded'
+              },
+              {
+                'type': 'required',
+                'message': 'Instruction is required'
+              }
+            ],
+            'required': true,
+            'visible': true,
+          }]
+    },
+    {
         'name': 'First Section',
         'fields': [
             {

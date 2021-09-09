@@ -267,10 +267,18 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             validationList.push(Validators.pattern(element.validations[i].value as string));
             break;
           case 'minLength':
-            validationList.push(Validators.minLength(element.validations[i].value as number));
+            if (element.inputType === 'richtext') {
+              validationList.push(this.validateRichTextLength.bind(this, 'minLength' , '<', element.validations[i].value ));
+             } else {
+              validationList.push(Validators.minLength(element.validations[i].value as number));
+             }
             break;
           case 'maxLength':
-            validationList.push(Validators.maxLength(element.validations[i].value as number));
+            if (element.inputType === 'richtext') {
+              validationList.push(this.validateRichTextLength.bind(this, 'maxLength' , '>', element.validations[i].value ));
+             } else {
+              validationList.push(Validators.maxLength(element.validations[i].value as number));
+             }
             break;
           case 'min':
             validationList.push(Validators.min(element.validations[i].value as number));
@@ -407,6 +415,19 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       }
       else if((types.type==='maxDate' && control.value > maxDate)){
         return {maxdate:types.message};
+      }
+      return null;
+    }
+
+    validateRichTextLength(validationType, keyOperator, validationValue, control: AbstractControl): ValidationErrors | null {
+      let comp;
+        if (control.touched) {
+          comp = FieldComparator.operators[keyOperator](control['richTextCharacterCount'], validationValue);
+        } else {
+          comp =  false;
+        }
+      if (comp && (control.touched || control.dirty)) {
+        return { [_.toLower(validationType)]: true };
       }
       return null;
     }
