@@ -35,5 +35,4 @@ export class DynamicTextareaComponent implements OnInit {
       );
     }
   }
-
 }

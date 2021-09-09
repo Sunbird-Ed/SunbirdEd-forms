@@ -1,9 +1,8 @@
 label {
   display: block;
-  font-size: 1rem;
+  font-size: 0.875rem;
   margin: 0;
 }
-
 .sb-textbox {
   width: 100%;
   padding: 8px 16px;
@@ -29,7 +28,6 @@ label {
   font-family: "Noto Sans";
   font-size: 12px;
 }
-
 .async-container{
   text-align: center;
 }
