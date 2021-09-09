@@ -7,6 +7,7 @@
   "whitelistedNonPeerDependencies": [
     "immutable",
     "ngx-chips",
-    "moment"
+    "moment",
+    "@project-sunbird/ckeditor-build-classic"
   ]
 }
