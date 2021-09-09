@@ -110,7 +110,7 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
       this.hourField.nativeElement.value = defaultTime[0];
       this.minField.nativeElement.value = defaultTime[1];
       this.formControlRef.markAsTouched();
-      this.formControlRef.patchValue(this.defaultHr + ':' + this.defaultMin);
+      this.formControlRef.patchValue(this.defaultHr + ':' + this.defaultMin + ':' + '00');
     }
   }
 
