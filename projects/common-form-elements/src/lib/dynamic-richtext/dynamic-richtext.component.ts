@@ -31,8 +31,11 @@ export class DynamicRichtextComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.editorConfig = {
+      alignment: {
+        options: [ 'left', 'right', 'center' ]
+      },
       toolbar: ['bold', '|', 'italic', '|', 'underline', '|', 'insertTable',
-        '|', 'numberedList', '|', 'BulletedList', '|', 'fontSize', '|',
+        '|', 'numberedList', '|', 'BulletedList', '|', 'fontSize', '|', 'alignment', '|'
       ],
       fontSize: {
         options: [
