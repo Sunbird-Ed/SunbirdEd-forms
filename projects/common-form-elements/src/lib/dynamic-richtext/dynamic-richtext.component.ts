@@ -32,7 +32,11 @@ export class DynamicRichtextComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.editorConfig = {
       alignment: {
-        options: [ 'left', 'right', 'center' ]
+        options: [
+          { name: 'left', className: 'text-left' },
+          { name: 'center', className: 'text-center' },
+          { name: 'right', className: 'text-right' }
+        ]
       },
       toolbar: ['bold', '|', 'italic', '|', 'underline', '|', 'insertTable',
         '|', 'numberedList', '|', 'BulletedList', '|', 'fontSize', '|', 'alignment', '|'
@@ -73,6 +77,7 @@ export class DynamicRichtextComponent implements OnInit, AfterViewInit {
   initializeEditors() {
     ClassicEditor.create(this.editorRef.nativeElement, {
       extraPlugins: ['Font', 'Table'],
+      alignment : this.editorConfig.alignment,
       toolbar: this.editorConfig.toolbar,
       fontSize: this.editorConfig.fontSize,
       isReadOnly: this.editorConfig.isReadOnly,
