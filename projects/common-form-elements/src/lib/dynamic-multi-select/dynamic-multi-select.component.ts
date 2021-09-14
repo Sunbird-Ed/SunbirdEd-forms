@@ -123,8 +123,17 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
       );
     }
 
+    this.handleDependsWithDefault();
+  }
 
-
+  handleDependsWithDefault() {
+    const value = _.first(_.map(this.depends, depend => depend.value));
+    if (!_.isEmpty(value) && _.toLower(value) === 'yes') {
+      this.formControlRef.isVisible = 'yes';
+      this.field.range = this.formControlRef.range;
+    } else {
+        this.formControlRef.isVisible = 'no';
+    }
   }
 
   ngOnDestroy(): void {
