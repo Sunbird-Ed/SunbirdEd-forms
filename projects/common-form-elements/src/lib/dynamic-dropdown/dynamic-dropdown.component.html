@@ -6,15 +6,15 @@
           <input [(ngModel)]="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
           <label *ngIf="!showSelectdItem && isSearchable && !hidePlaceholder" for="searchbox-input" class="float-label">{{placeholder}}</label>
           <label *ngIf="!showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{placeholder}}</label>
-          <label *ngIf="showSelectdItem && isSearchable && formControlRef.value?.length" for="searchbox-input" class="float-label">{{showSelectdItem}}</label>
-          <label *ngIf="showSelectdItem && !isSearchable && formControlRef.value?.length" for="searchbox-input" class="not-searchable-label">{{showSelectdItem}}</label>
+          <label *ngIf="showSelectdItem && isSearchable && formControlRef.value?.length" for="searchbox-input" class="float-label">{{showSelectdItem.name || showSelectdItem}}</label>
+          <label *ngIf="showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{showSelectdItem.name || showSelectdItem}}</label>
           <label *ngIf="field.default && !showSelectdItem" for="searchbox-input" class="not-searchable-label">{{field.default}}</label>
       </div>
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
       <div [hidden]="!showDropdown">
       <ul id="dd-dropdown" class="dd-dropdown-ul">
         <ng-container *ngIf="field.range && isOptionsArrayMap(field.range) && !field.association">
-          <li class="dd-dropdown-li optionsArrayMap" *ngFor="let option of field.range" (click)="addSelected(option)" [value]="getOptionValueForRange(option, 'map')">{{option}}</li>
+          <li class="dd-dropdown-li optionsArrayMap" *ngFor="let option of field.range" (click)="addSelected(option); onSubmit();" [value]="getOptionValueForRange(option, 'map')">{{option.name || option}}</li>
         </ng-container>
         <ng-container *ngIf="field.range && isOptionsArray(field.range) && !isOptionsArrayMap(field.range) && !field.association">
           <li class="dd-dropdown-li optionsArray" *ngFor="let option of field.range" (click)="addSelected(option)" [value]="getOptionValueForRange(option, 'array')">{{option.name || option}}</li>

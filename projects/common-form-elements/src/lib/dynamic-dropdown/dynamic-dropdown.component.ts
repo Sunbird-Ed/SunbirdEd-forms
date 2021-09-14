@@ -42,6 +42,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   public hidePlaceholder:boolean = false;
   private dispose$ = new Subject<undefined>();
   public editable:boolean;
+  public tempValue:any;
 
   options$?: Observable<FieldConfigOption<any>[]>;
   contextValueChangesSubscription?: Subscription;
@@ -80,6 +81,10 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.editable = this.field.editable;
     }
 
+    if (!_.isEmpty(this.field.output)) {
+      this.formControlRef.output = this.field.output;
+    }
+
     // if (this.context) {
       // this.contextValueChangesSubscription = this.context.valueChanges.pipe(
       //   tap(() => {
@@ -100,6 +105,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     if (!_.isEmpty(this.depends)) {
+     this.resetTempValue();
      this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
       tap((value: any) => {
         this.latestParentValue = value;
@@ -152,6 +158,8 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     this.showSelectdItem = selectedItem;
     this.showDropdown = false;
     this.searchInput='';
+
+    this.setTempValue(selectedItem);
 
     if (this.field && this.field.range) {
       this.field.range.forEach(element => {
@@ -313,6 +321,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
     if (!this.searchInput) {
       this.field.range = this.options;
+      this.setTempValue(this.formControlRef.value);
     } else {
       this.field.range = this.field.range.filter(val => {
           // Search the option and return match result
@@ -321,5 +330,21 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
           }
       });
     }
+  }
+  onSubmit(){
+    const finalValue = this.tempValue;
+    this.formControlRef.patchValue(finalValue);
+    this.formControlRef.markAsDirty();
+  }
+
+  private setTempValue(value: any) {
+    if (value) {
+        this.tempValue = value.name || value;
+      }
+  }
+
+  resetTempValue() {
+    this.tempValue = null;
+    this.default = [];
   }
 }
