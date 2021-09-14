@@ -268,10 +268,18 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             validationList.push(Validators.pattern(element.validations[i].value as string));
             break;
           case 'minLength':
-            validationList.push(Validators.minLength(element.validations[i].value as number));
+            if (element.inputType === 'richtext') {
+              validationList.push(this.validateRichTextLength.bind(this, 'minLength' , '<', element.validations[i].value ));
+             } else {
+              validationList.push(Validators.minLength(element.validations[i].value as number));
+             }
             break;
           case 'maxLength':
-            validationList.push(Validators.maxLength(element.validations[i].value as number));
+            if (element.inputType === 'richtext') {
+              validationList.push(this.validateRichTextLength.bind(this, 'maxLength' , '>', element.validations[i].value ));
+             } else {
+              validationList.push(Validators.maxLength(element.validations[i].value as number));
+             }
             break;
           case 'min':
             validationList.push(Validators.min(element.validations[i].value as number));
@@ -282,6 +290,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           case 'time':
             validationList.push(this.validateTime.bind(this, element.validations[i].value, element));
             break;
+          case 'maxTime':
+            validationList.push(this.compareTime.bind(this, element.validations[i].value, element.validations[i].type));
+            break;
+          case 'minTime':
+            validationList.push(this.compareTime.bind(this, element.validations[i].value, element.validations[i].type));
+            break;
           case 'compare':
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
             break;
@@ -290,7 +304,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             break;
           case 'maxDate':
               validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
-            break;    
+            break;
         }
       });
     }
@@ -352,6 +366,30 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     // return moment(control.value, pattern, true).isValid() && control.touched ? null : {time: true};
   }
 
+  compareTime(timeValue, type, control: AbstractControl): ValidationErrors | null {
+    if (control.value && timeValue) {
+      const inputTime = control.value.split(':');
+      const timeRequired = timeValue.split(':');
+      const timeRequiredInSeconds = (_.parseInt(timeRequired[0]) * 3600) +
+      (_.parseInt(timeRequired[1]) * 60);
+      const inputTimeInSeconds = (_.parseInt(inputTime[0]) * 3600) +
+      (_.parseInt(inputTime[1]) * 60);
+      if (type === 'maxTime') {
+        if (inputTimeInSeconds > timeRequiredInSeconds) {
+          return { maxtime: true };
+        }
+      }
+      if (type === 'minTime') {
+        if (inputTimeInSeconds < timeRequiredInSeconds) {
+          return { mintime: true };
+        }
+      }
+      return null;
+    } else {
+      return null;
+    }
+  }
+
 
 
   compareFields(criteria, control: AbstractControl): ValidationErrors | null {
@@ -386,6 +424,19 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       }
       else if((types.type==='maxDate' && control.value > maxDate)){
         return {maxdate:types.message};
+      }
+      return null;
+    }
+
+    validateRichTextLength(validationType, keyOperator, validationValue, control: AbstractControl): ValidationErrors | null {
+      let comp;
+        if (control.touched) {
+          comp = FieldComparator.operators[keyOperator](control['richTextCharacterCount'], validationValue);
+        } else {
+          comp =  false;
+        }
+      if (comp && (control.touched || control.dirty)) {
+        return { [_.toLower(validationType)]: true };
       }
       return null;
     }
