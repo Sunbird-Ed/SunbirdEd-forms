@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
-import {FieldConfigInputType, FieldConfigInputTypeOptionsModelMap, FieldConfigOptionsBuilder} from '../common-form-config';
+import {FieldConfig, FieldConfigInputType, FieldConfigInputTypeOptionsModelMap, FieldConfigOptionsBuilder} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
 import {fromJS, List, Map, Set} from 'immutable';
 
@@ -38,6 +38,7 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
+  @Input() config: FieldConfig<String>;
   showModalStateDirty = false;
   showModal = false;
   tempValue = Set<any>();
@@ -89,7 +90,6 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
     this.setupOptions();
   }
-
   onSubmit() {
     const finalValue = this.tempValue.toList().toJS();
     this.formControlRef.patchValue(this.isMultiple ? finalValue : finalValue[0]);

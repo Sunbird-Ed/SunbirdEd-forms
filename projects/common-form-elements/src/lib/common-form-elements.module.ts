@@ -37,6 +37,7 @@ import { DynamicRadioComponent } from './dynamic-radio/dynamic-radio.component';
 import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.component';
 import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
 import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
+import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.component';
 
 @NgModule({
    declarations: [
@@ -72,7 +73,8 @@ import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
       DynamicRadioComponent,
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
-      DynamicDateComponent
+      DynamicDateComponent,
+DynamicRichtextComponent
    ],
    imports: [
       CommonModule,
@@ -113,7 +115,8 @@ import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
       DynamicRadioComponent,
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
-      DynamicDateComponent
+      DynamicDateComponent,
+DynamicRichtextComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -133,7 +136,8 @@ import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
       DynamicRadioComponent,
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
-      DynamicDateComponent
+      DynamicDateComponent,
+DynamicRichtextComponent
    ]
 })
 export class CommonFormElementsModule { }
