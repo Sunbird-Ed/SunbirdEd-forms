@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter, HostListener} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
 import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup, CustomFormControl} from '../common-form-config';
@@ -35,13 +35,21 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;
+  public isSearchable: any;
+  public showDropdown: boolean = false;
+  public showSelectdItem: any='';
+  public searchInput:any;
+  public hidePlaceholder:boolean = false;
   private dispose$ = new Subject<undefined>();
+  public editable:boolean;
+  public tempValue:any;
 
   options$?: Observable<FieldConfigOption<any>[]>;
   contextValueChangesSubscription?: Subscription;
   selectedType: any;
   tempAssociation: any;
   latestParentValue: string;
+
   constructor() {
   }
 
@@ -69,6 +77,14 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.formControlRef.sourceCategory = this.field.sourceCategory;
     }
 
+    if (this.field && this.field.isSearchable) {
+      this.isSearchable = this.field.isSearchable;
+    }
+
+    if (this.field && this.field.editable) {
+      this.editable = this.field.editable;
+    }
+
     if (!_.isEmpty(this.field.output)) {
       this.formControlRef.output = this.field.output;
     }
@@ -92,13 +108,14 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.field.range.push(this.default);
     }
 
-
     if (!_.isEmpty(this.depends)) {
+     this.resetTempValue();
      this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
       tap((value: any) => {
         this.latestParentValue = value;
         this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
         this.formControlRef.patchValue(null);
+        this.showSelectdItem = null;
       })
       ).subscribe();
 
@@ -121,6 +138,43 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       }),
       takeUntil(this.dispose$)
     ).subscribe();
+
+    if (this.field && this.field.range) {
+      this.field.range.forEach(element => {
+        let rangeResult = ValueComparator.valueComparator(element, this.field.default);
+
+        if (rangeResult) {
+          this.field.default = element; 
+        }
+      });
+    }
+  }
+
+  showList(event) {
+    if (this.editable !== true || this.isDependsInvalid) {
+      return;
+    }
+
+    this.showDropdown = !this.showDropdown? true : false;
+    event.stopPropagation();
+  }
+
+  addSelected(selectedItem) {
+    this.showSelectdItem = selectedItem;
+    this.showDropdown = false;
+    this.searchInput='';
+
+    this.setTempValue(selectedItem);
+
+    if (this.field && this.field.range) {
+      this.field.range.forEach(element => {
+        let rangeResult = ValueComparator.valueComparator(element, this.field.default);
+
+        if (rangeResult) {
+          this.field.default = element; 
+        }
+      });
+    }
   }
 
   ngOnDestroy(): void {
@@ -143,6 +197,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   isOptionsArrayMap(input: any) {
+
     return Array.isArray(input) && typeof input[0] === 'object';
   }
 
@@ -259,5 +314,42 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
      }
       // tslint:disable-next-line:max-line-length
     });
+  }
+  showAllList(){
+    this.field.range = this.options;
+    this.showSelectdItem='';
+    this.hidePlaceholder = true;
+  }
+  // Filter items from the dropdown
+  filterItem(){
+    this.showDropdown = true;
+
+    if (!this.searchInput) {
+      this.field.range = this.options;
+      this.setTempValue(this.formControlRef.value);
+    } else {
+      this.field.range = this.field.range.filter(val => {
+          // Search the option and return match result
+          if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())) {
+            return val;
+          }
+      });
+    }
+  }
+  onSubmit(){
+    const finalValue = this.tempValue;
+    this.formControlRef.patchValue(finalValue);
+    this.formControlRef.markAsDirty();
+  }
+
+  private setTempValue(value: any) {
+    if (value) {
+        this.tempValue = value.name || value;
+      }
+  }
+
+  resetTempValue() {
+    this.tempValue = null;
+    this.default = [];
   }
 }
