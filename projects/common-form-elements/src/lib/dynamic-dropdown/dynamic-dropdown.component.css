@@ -96,7 +96,7 @@ outline: none;
 .dd-dropdown-li{
   position: relative;
   display: block;
-  padding: .75rem 1.25rem;
+  padding: .4rem 0.5rem;
   background-color: #fff;
 }
 #dd-dropdown li:hover {background-color:#eee;}
@@ -119,6 +119,7 @@ display: -webkit-box;
 .sb-dropdown .dropdown-container .dd-container{
   border: 0.5px solid var(--gray-400);
   font-size: 14px;
+  height: 40px;
 }
 
 .form-floating {

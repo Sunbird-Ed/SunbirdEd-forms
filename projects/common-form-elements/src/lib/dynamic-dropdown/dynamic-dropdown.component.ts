@@ -73,6 +73,10 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.options = [];
     }
 
+    if (!_.isEmpty(this.field.sourceCategory)) {
+      this.formControlRef.sourceCategory = this.field.sourceCategory;
+    }
+
     if (this.field && this.field.isSearchable) {
       this.isSearchable = this.field.isSearchable;
     }
@@ -111,6 +115,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
         this.latestParentValue = value;
         this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
         this.formControlRef.patchValue(null);
+        this.showSelectdItem = null;
       })
       ).subscribe();
 
