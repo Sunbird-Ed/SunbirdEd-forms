@@ -43,7 +43,7 @@ export class DynamicCheckboxComponent implements OnInit {
 
   _: any = _;
 
-  public checked: boolean;
+  public checked: any;
 
   constructor() { }
 

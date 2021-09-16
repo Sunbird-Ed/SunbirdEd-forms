@@ -361,6 +361,7 @@ export class AppComponent implements OnInit {
 
   setEvidence(control, depends: FormControl[], formGroup: FormGroup, loading, loaded) {
     control.isVisible = 'no';
+    control.range = evidenceMimeType;
     const response = merge(..._.map(depends, depend => depend.valueChanges)).pipe(
         switchMap((value: any) => {
             if (!_.isEmpty(value) && _.toLower(value) === 'yes') {
