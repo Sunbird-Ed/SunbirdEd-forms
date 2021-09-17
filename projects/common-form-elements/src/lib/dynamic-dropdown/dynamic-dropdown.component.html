@@ -2,32 +2,33 @@
   <label [attr.data-title]="field.description ? field.description : null">{{label}} {{context && 'has context'}}  {{context ?  field.context : '' }}</label>
   <ng-container *ngIf="options">
     <div class="dropdown-container">
-      <div class="dd-container form-floating" (click)="showList($event)">
-          <input [(ngModel)]="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
-          <label *ngIf="!showSelectdItem && isSearchable && !hidePlaceholder" for="searchbox-input" class="float-label">{{placeholder}}</label>
-          <label *ngIf="!showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{placeholder}}</label>
-          <label *ngIf="showSelectdItem && isSearchable && formControlRef.value?.length" for="searchbox-input" class="float-label">{{showSelectdItem.name || showSelectdItem}}</label>
-          <label *ngIf="showSelectdItem && !isSearchable" for="searchbox-input" class="not-searchable-label">{{showSelectdItem.name || showSelectdItem}}</label>
-          <label *ngIf="field.default && !showSelectdItem" for="searchbox-input" class="not-searchable-label">{{field.default}}</label>
-      </div>
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
-      <div [hidden]="!showDropdown">
-      <ul id="dd-dropdown" class="dd-dropdown-ul">
+      <!-- [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" -->
+      <select [formControl]="formControlRef"
+              [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )"
+              [compareWith]="ValueComparator.valueComparator" class="sb-dropdown-select" id="sb-dropdown"
+              name="sb-dropdown">
+        <option [defaultSelected]="!default" [ngValue]="null" disabled>{{placeholder}}
+        </option>
         <ng-container *ngIf="field.range && isOptionsArrayMap(field.range) && !field.association">
-          <li class="dd-dropdown-li optionsArrayMap" *ngFor="let option of field.range" (click)="addSelected(option); onSubmit();" [value]="getOptionValueForRange(option, 'map')">{{option.name || option}}</li>
+          <option class="optionsArrayMap" *ngFor="let option of field.range" [ngValue]="getOptionValueForRange(option, 'map')">{{option.label}}</option>
         </ng-container>
         <ng-container *ngIf="field.range && isOptionsArray(field.range) && !isOptionsArrayMap(field.range) && !field.association">
-          <li class="dd-dropdown-li optionsArray" *ngFor="let option of field.range" (click)="addSelected(option)" [value]="getOptionValueForRange(option, 'array')">{{option.name || option}}</li>
+          <option class="optionsArray" *ngFor="let option of field.range" [ngValue]="getOptionValueForRange(option, 'array')">{{option.name || option}}</option>
         </ng-container>
+
         <ng-container *ngIf="field.range && isOptionsClosure(field.range)">
-          <li class="dd-dropdown-li closure" *ngFor="let option of options$ | async" (click)="addSelected(option)" [value]="getOptionValueForRange(option, 'closure')">{{option.label}}</li>
+          <option class="closure" *ngFor="let option of options$ | async" [ngValue]="getOptionValueForRange(option, 'closure')">{{option.label}}</option>
         </ng-container>
+
+        <!-- <ng-container *ngIf="isOptionsMap(options) && context && context.value && !field.association">
+          <option *ngFor="let option of options[context.value]" [ngValue]="option.value">{{option.label}}</option>
+        </ng-container> -->
+
         <ng-container *ngIf="!field.range && field.terms">
-          <li class="dd-dropdown-li optionsLast" *ngFor="let option of fetchAssociations()" (click)="addSelected(option)" [value]="getOptionValueForRange(option, '')">{{option.name}}</li>
+          <option class="optionsLast" *ngFor="let option of fetchAssociations()" [ngValue]="getOptionValueForTerms(option)">{{option.name}}</option>
         </ng-container>
-      </ul>
-      </div>
-      <!-- [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" -->
+      </select>
     </div>
   </ng-container>
 </div>

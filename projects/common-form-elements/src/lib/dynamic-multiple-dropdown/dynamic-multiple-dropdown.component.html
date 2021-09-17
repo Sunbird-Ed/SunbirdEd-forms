@@ -4,26 +4,15 @@
   <div class="multi-select-container">
     <sb-caret-down class="caret-down" [ngClass]="{'disabled': disabled === true ? true : ( depends ? (isDependsInvalid ? true : null) : null ) }" (click)="openModal($event)" [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">
     </sb-caret-down>
-    <div class="list-border form-floating" (click)="openModal($event)">
+    <div class="list-border" (click)="openModal($event)">
       <ul [ngClass]="{'disabled': disabled === true ? true : ( depends ? (isDependsInvalid ? true : null) : null ) }" [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">
         <ng-container *ngIf="isMultiple">
+          <li *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder">{{placeholder}}</li>
           <ng-container *ngIf="formControlRef.value?.length">
-            <span *ngFor="let value of formControlRef.value; let index=index" class="multi-select-label">
-              <span>
-                {{optionValueToOptionLabelMap.get(fromJS(value))}}
+            <span *ngFor="let value of formControlRef.value; let index=index">
+              {{optionValueToOptionLabelMap.get(fromJS(value))}}
+              <span *ngIf="index < formControlRef.value?.length - 1 && !_.isEmpty(optionValueToOptionLabelMap.get(fromJS(value)))">,
               </span>
-              <i (click)="removeItem(optionValueToOptionLabelMap.get(fromJS(value)))" class="delete icon"></i>
-              <span *ngIf="index < formControlRef.value?.length - 1 && !_.isEmpty(optionValueToOptionLabelMap.get(fromJS(value)))">
-              </span>
-            </span>
-          </ng-container>
-          <ng-container>
-            <span *ngIf="isSearchable">
-              <input [(ngModel)]="searchInput" id="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
-              <label for="searchbox-input" *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder float-label">{{placeholder}}</label>
-            </span>
-            <span *ngIf="!isSearchable">
-              <label for="searchbox-input" *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder not-searchable-label">{{placeholder}}</label>
             </span>
           </ng-container>
         </ng-container>
@@ -65,9 +54,10 @@
         </div>
       </div>
     </div>
+
     <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
       <ul>
-        <li (click)="checkUncheckAll()" [hidden]="!showMasterSelect">
+        <li (click)="checkUncheckAll()">
             <input type="checkbox" [checked]="masterSelected">
             <label class="cursor-pointer d-inline-block">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
         </li>

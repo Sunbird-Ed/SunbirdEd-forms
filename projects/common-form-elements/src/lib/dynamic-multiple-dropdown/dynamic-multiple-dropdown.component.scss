@@ -273,8 +273,7 @@ label{
   list-style-type: none;
   display: block;
   position: absolute;
-  top: 100%;
-  margin-top:5px;
+  top: 38px;
   left: 0;
   background-color: white;
   width: 100%;
@@ -326,90 +325,3 @@ label{
 .cursor-pointer {
     cursor: pointer;
 }
-
-.searchbox-input,
-.searchbox-input:hover,
-.searchbox-input:focus,
-.searchbox-input:focus-visible,
-.searchbox-input:active {
-border: none;
-padding: 7px;
-flex: 0 0 100%;
-outline: none;
-background-color: #f9f9f9;
-margin-top: 10px;
-}
-
-.multi-select-container .list-border {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.multi-select-container .list-border ul{
-  flex: 0 0 100%;
-  line-height: 34px;
-}
-
-.multi-select-container .multi-select-label-parent {
-  background-color: #efefef;
-  padding: 8px;
-  margin-right: 5px;
-}
-.multi-select-container .multi-select-label{
-margin: .1rem .3rem .1rem 0;
-background: #efefef;
-height: 32px;
-display: inline-block;
-text-align: center;
-}
-
-.multi-select-container .multi-select-label .delete{
-cursor: pointer;
-}
-
-.form-floating {
-  position: relative;
-  padding: 20px;
-}
-.float-label {
-    position: absolute;
-    left: 25px;
-    top: 21px;
-    color: #767676;
-    pointer-events: none;
-    transition: 0.2s ease all;
-    text-align: center;
-}
-.not-searchable-label{
-  left: 25px;
-    top: 21px;
-    color: #767676;
-    pointer-events: none;
-    transition: 0.2s ease all;
-    text-align: center;
-}
-
-input::placeholder {
-  color: transparent;
-}
-
-.searchbox-input:focus ~ .float-label, 
-.searchbox-input:not(:focus):valid ~ .float-label,
-input:not(:placeholder-shown) ~ .float-label {
-    top: 5px;
-    font-size: 12px;
-    opacity: 1;
-    z-index: 1;
-    background-color: transparent;
-}
-
-.multi-select-container {
-  .placeholder{
-    display: block !important;
-    text-align: left !important;
-  }
-  .multi-select-label{
-    height: inherit !important;
-  }
-}
-
