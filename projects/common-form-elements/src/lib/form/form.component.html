@@ -14,11 +14,12 @@
         [placeHolder]="field?.templateOptions?.placeHolder"
         [isMultiple]="field.templateOptions.multiple"
         [labelHtml]="field.templateOptions.labelHtml"
-        [platform]="platform">
+        [platform]="platform"
+        [config]="field">
       </sb-multiple-dropdown>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-textbox [class]="fieldTemplateClass" tabindex="0" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
+      <sb-textbox [config]="field" [class]="fieldTemplateClass" tabindex="0" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
         [placeholder]="field.templateOptions.placeHolder" [validations]="field.validations" [prefix]="field.templateOptions.prefix"
         [labelHtml]="field.templateOptions.labelHtml">
       </sb-textbox>
