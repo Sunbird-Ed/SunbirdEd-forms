@@ -2,3 +2,43 @@
 .two-column-grid .sectionName {
   display:none;
 }
+/* This is for show section name for new config */
+.display-sectionName .sectionName {
+  display: block;
+}
+/* This is for hide section name  for new config*/
+.hidden-sectionName .sectionName {
+  display: none;
+}
+ /* This is to hide section name for old config*/
+ .two-column-grid .sectionName {
+  display: none;
+}
+.sectionName {
+  font-size: 1rem !important;
+  font-weight: 600;
+}
+
+.sb-g-col-lg-1 {
+  grid-column: span 1 !important;
+}
+
+/* This is for one row 2 column view for check box fields*/
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 0.5rem;}
+
+/* This is for one row 1 column view for check box fields*/
+.one-column-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  column-gap: 0.5rem;
+}
+
+/* This is for one row 3 column view for check box fields*/
+.three-column-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 0.5rem;
+}
