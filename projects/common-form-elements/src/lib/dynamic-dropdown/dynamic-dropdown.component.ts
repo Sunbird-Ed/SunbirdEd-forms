@@ -332,16 +332,13 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.setTempValue(this.formControlRef.value);
     } else {
       this.field.range = this.field.range.filter(val => {
-
-          if (val.name)
-          {
-            val = val.name;
-          }
-
-          // Search the option and return match result
-          if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())) {
-            return val;
-          }
+        if (val.name) {
+          val = val.name;
+        }
+        // Search the option and return match result
+        if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())) {
+          return val;
+        }
       });
     }
   }

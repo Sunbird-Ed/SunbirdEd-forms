@@ -186,38 +186,30 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.formControlRef.markAsDirty();
     this.showModal = false;
   }
-  showAllList()
-  {
+  showAllList() {
     this.setupOptions();
     this.setTempValue(this.formControlRef.value);
     this.showMasterSelect = true;
   }
-  removeItem(removeSearch)
-  {
+  removeItem(removeSearch) {
     const index: number = this.formControlRef.value.indexOf(removeSearch);
     this.formControlRef.value.splice(index, 1);
   }
   // Filter items from the dropdown
   filterItem(){
-
-    if (!this.searchInput)
-    {
+    if (!this.searchInput) {
       // Set the actual option to the dropdown
       this.setupOptions();
       this.setTempValue(this.formControlRef.value);
 
       this.showMasterSelect = true;
-    }
-    else
-    {
+    } else {
       this.showMasterSelect = false;
 
       this.resolvedOptions = this.resolvedOptions.filter(it => {
           let optionValue = it.get('name');
-
           // Search the option and return match result
-          if (optionValue.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase()))
-          {
+          if (optionValue.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())) {
             return it;
           }
       });
