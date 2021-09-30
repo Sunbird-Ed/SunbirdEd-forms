@@ -116,6 +116,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
         this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
         this.formControlRef.patchValue(null);
         this.showSelectdItem = null;
+        this.field.default = null;
       })
       ).subscribe();
 
@@ -163,6 +164,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     this.showSelectdItem = selectedItem;
     this.showDropdown = false;
     this.searchInput='';
+    this.field.default = selectedItem;
 
     this.setTempValue(selectedItem);
 
@@ -317,6 +319,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   }
   showAllList(){
     this.field.range = this.options;
+    this.field.default = null;
     this.showSelectdItem='';
     this.hidePlaceholder = true;
   }
@@ -329,6 +332,12 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.setTempValue(this.formControlRef.value);
     } else {
       this.field.range = this.field.range.filter(val => {
+
+          if (val.name)
+          {
+            val = val.name;
+          }
+
           // Search the option and return match result
           if (val.toString().toLocaleLowerCase().includes(this.searchInput.toLocaleLowerCase())) {
             return val;
