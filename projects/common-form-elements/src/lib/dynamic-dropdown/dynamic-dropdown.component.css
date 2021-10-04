@@ -107,6 +107,10 @@ font-size: 12px;
   font-weight:bold ;
 }
 
+.sb-select-with-search .float-label::after{
+  display: none;
+}
+
 .sb-select-with-search input::placeholder {
   color: transparent;
 }
@@ -155,4 +159,7 @@ font-size: 12px;
 
 .dd-container .not-searchable-label{
   padding: 10px !important;
+}
+.dd-container .not-searchable-label::after{
+  display: none;
 }
