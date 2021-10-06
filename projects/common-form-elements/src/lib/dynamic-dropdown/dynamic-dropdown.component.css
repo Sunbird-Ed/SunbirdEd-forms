@@ -103,7 +103,7 @@ font-size: 12px;
   top: 21px;
   color: black;
   pointer-events: none;
-  text-align: center;
+  text-align: left;
   font-weight:bold ;
 }
 
@@ -149,6 +149,8 @@ font-size: 12px;
   border: 2px solid #80a7ce;
   overflow: scroll;
   max-height: 314px;
+  z-index: 999;
+  position: absolute;
 }
 
 .sb-dropdown .dropdown-container .dd-container{
