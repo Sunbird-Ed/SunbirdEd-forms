@@ -20,6 +20,7 @@ export class DynamicTextareaComponent implements OnInit {
   @Input() disabled: Boolean;
 
   remainderValidLength$?: Observable<number>;
+  maxLengthVal = 0;
 
   constructor() {
   }
@@ -28,6 +29,7 @@ export class DynamicTextareaComponent implements OnInit {
     const maxLengthValidation = this.field.validations &&
     this.field.validations.find((validation) => validation.type === FieldConfigValidationType.MAXLENGTH);
 
+    this.maxLengthVal = maxLengthValidation.value as number;
     if (maxLengthValidation) {
       this.remainderValidLength$ = this.formControlRef.valueChanges.pipe(
         startWith(''),
