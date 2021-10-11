@@ -35,6 +35,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
 
   public isDependsInvalid: any;
+  public isDependsEmpty: boolean = false;
   masterSelected: boolean = false;
   showModal = false;
   tempValue = Set<any>();
@@ -94,11 +95,13 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     merge(..._.map(this.depends, depend => depend.statusChanges)).pipe(
       tap(() => {
         this.checkIfDependsIsInvalid();
+        this.isDependsEmpty = _.every(_.map(this.depends, depend => depend.value), _.isEmpty);
       }),
       takeUntil(this.dispose$)
     ).subscribe();
 
     this.checkIfDependsIsInvalid();
+    this.isDependsEmpty = _.every(_.map(this.depends, depend => depend.value), _.isEmpty);
   }
 
   handleSelfChange() {
