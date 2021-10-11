@@ -35,7 +35,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;
-  public isDependsEmpty: boolean = true;
+  public isDependsEmpty: boolean = false;
   private dispose$ = new Subject<undefined>();
 
   options$?: Observable<FieldConfigOption<any>[]>;
