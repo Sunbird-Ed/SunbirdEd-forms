@@ -25,7 +25,7 @@
           <option *ngFor="let option of options[context.value]" [ngValue]="option.value">{{option.label}}</option>
         </ng-container> -->
 
-        <ng-container *ngIf="!field.range && field.terms && !isDependsEmpty">
+        <ng-container *ngIf="!field.range && field.terms">
           <option class="optionsLast" *ngFor="let option of fetchAssociations()" [ngValue]="getOptionValueForTerms(option)">{{option.name}}</option>
         </ng-container>
       </select>

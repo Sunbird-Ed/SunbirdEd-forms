@@ -35,7 +35,6 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;
-  public isDependsEmpty: boolean = false;
   private dispose$ = new Subject<undefined>();
 
   options$?: Observable<FieldConfigOption<any>[]>;
@@ -95,7 +94,15 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
 
     if (!_.isEmpty(this.depends)) {
-    this.handleDependentFieldChanges();
+     this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
+      tap((value: any) => {
+        this.latestParentValue = value;
+        this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
+        this.formControlRef.patchValue(null);
+      })
+      ).subscribe();
+
+      this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
     }
 
 
@@ -185,18 +192,6 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  handleDependentFieldChanges() {
-    this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
-      tap((value: any) => {
-        this.latestParentValue = value;
-        this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
-        this.isDependsEmpty = _.every(_.map(this.depends, depend => depend.value), _.isEmpty);
-        this.formControlRef.patchValue(null);
-      })
-      ).subscribe();
-      this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
-      this.isDependsEmpty = _.every(_.map(this.depends, depend => depend.value), _.isEmpty);    
-  }
 
   getParentValue() {
     return !_.isEmpty(this.latestParentValue) && this.latestParentValue ||
