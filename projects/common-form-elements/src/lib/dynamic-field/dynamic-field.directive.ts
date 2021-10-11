@@ -23,6 +23,8 @@ import { DynamicFrameworkCategorySelectComponent } from '../dynamic-framework-ca
 import { DynamicRadioComponent } from '../dynamic-radio/dynamic-radio.component';
 import { DynamicDialcodeComponent } from '../dynamic-dialcode/dynamic-dialcode.component';
 import { DynamicFrameworkCategoryNestedSelectComponent } from '../dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
+import { DynamicDateComponent } from '../dynamic-date/dynamic-date.component';
+import { DynamicRichtextComponent } from '../dynamic-richtext/dynamic-richtext.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -41,7 +43,9 @@ const componentMapper = {
   frameworkCategoryNestedSelect: DynamicFrameworkCategoryNestedSelectComponent,
   frameworkCategorySelect: DynamicFrameworkCategorySelectComponent,
   radio: DynamicRadioComponent,
-  dialcode: DynamicDialcodeComponent
+  dialcode: DynamicDialcodeComponent,
+  date: DynamicDateComponent,
+richtext: DynamicRichtextComponent
 };
 
 @Directive({

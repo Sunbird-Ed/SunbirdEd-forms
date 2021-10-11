@@ -1,4 +1,4 @@
-<div class="sb-dropdown" *ngIf="!type">
+<div class="sb-dropdown" *ngIf="!type && formControlRef?.isVisible === 'yes'">
   <label [attr.data-title]="field.description ? field.description : null">{{label}} {{context && 'has context'}}  {{context ?  field.context : '' }}</label>
   <ng-container *ngIf="options">
     <div class="dropdown-container">
