@@ -56,7 +56,7 @@
     </div>
 
     <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
-      <ul>
+      <ul *ngIf="!isDependsEmpty">
         <li (click)="checkUncheckAll()">
             <input type="checkbox" [checked]="masterSelected">
             <label class="cursor-pointer d-inline-block">{{ masterSelected ? 'Unselect All': 'Select All' }}</label>
