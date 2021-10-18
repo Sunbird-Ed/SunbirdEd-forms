@@ -343,7 +343,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   onSubmit(){
-    const finalValue = this.tempValue;
+    const finalValue = this.default;
     this.formControlRef.patchValue(finalValue);
     this.formControlRef.markAsDirty();
   }

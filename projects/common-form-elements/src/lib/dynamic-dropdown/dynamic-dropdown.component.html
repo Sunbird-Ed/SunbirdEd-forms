@@ -16,13 +16,13 @@
           <li class="dd-dropdown-li optionsArrayMap" *ngFor="let option of field.range" (click)="addSelected(option); onSubmit();" [value]="getOptionValueForRange(option, 'map')">{{option.name || option}}</li>
         </ng-container>
         <ng-container *ngIf="field.range && isOptionsArray(field.range) && !isOptionsArrayMap(field.range) && !field.association">
-          <li class="dd-dropdown-li optionsArray" *ngFor="let option of field.range" (click)="addSelected(option)" [value]="getOptionValueForRange(option, 'array')">{{option.name || option}}</li>
+          <li class="dd-dropdown-li optionsArray" *ngFor="let option of field.range" (click)="addSelected(option); onSubmit();" [value]="getOptionValueForRange(option, 'array')">{{option.name || option}}</li>
         </ng-container>
         <ng-container *ngIf="field.range && isOptionsClosure(field.range)">
-          <li class="dd-dropdown-li closure" *ngFor="let option of options$ | async" (click)="addSelected(option)" [value]="getOptionValueForRange(option, 'closure')">{{option.label}}</li>
+          <li class="dd-dropdown-li closure" *ngFor="let option of options$ | async" (click)="addSelected(option); onSubmit();" [value]="getOptionValueForRange(option, 'closure')">{{option.label}}</li>
         </ng-container>
         <ng-container *ngIf="!field.range && field.terms">
-          <li class="dd-dropdown-li optionsLast" *ngFor="let option of fetchAssociations()" (click)="addSelected(option)" [value]="getOptionValueForRange(option, '')">{{option.name}}</li>
+          <li class="dd-dropdown-li optionsLast" *ngFor="let option of fetchAssociations()" (click)="addSelected(option); onSubmit();" [value]="getOptionValueForRange(option, '')">{{option.name}}</li>
         </ng-container>
       </ul>
       </div>
