@@ -149,18 +149,17 @@ font-size: 12px;
   border: 2px solid #80a7ce;
   overflow: scroll;
   max-height: 314px;
-  z-index: 999;
+  z-index: 99999;
   position: absolute;
 }
 
 .sb-dropdown .dropdown-container .dd-container{
   border: 1px solid rgba(34,36,38,.15);
   font-size: 14px;
-  height: 40px;
 }
 
 .dd-container .not-searchable-label{
-  padding: 10px !important;
+  padding-right: 30px !important;
 }
 .dd-container .not-searchable-label::after{
   display: none;

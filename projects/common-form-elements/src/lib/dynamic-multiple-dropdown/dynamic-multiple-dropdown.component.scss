@@ -32,11 +32,11 @@ label{
 
 .multi-select-container .list-border ul {
   list-style-type: none;
-  position: inherit !important;
   margin: 0;
   font-size: 14px;
   font-weight: bold;
   padding-left: 0.3rem;
+  line-height: 20px;
 }
 
 .multi-select-container .list-border {
@@ -346,14 +346,12 @@ label{
   .float-label {
     position: absolute;
     left: 25px;
-    top: 21px;
     color: #767676;
     pointer-events: none;
     transition: 0.2s ease all;
     text-align: center;
   }
   .not-searchable-label{
-    left: 25px;
     top: 21px;
     color: #767676;
     pointer-events: none;
@@ -368,7 +366,6 @@ label{
   .searchbox-input:focus ~ .float-label, 
   .searchbox-input:not(:focus):valid ~ .float-label,
   input:not(:placeholder-shown) ~ .float-label {
-    top: 5px;
     font-size: 12px;
     opacity: 1;
     z-index: 1;
