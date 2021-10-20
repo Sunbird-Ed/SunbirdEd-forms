@@ -343,9 +343,9 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   onSubmit(){
-    const finalValue = this.default;
+    const finalValue = this.field.default;
+    this.formControlRef.markAsTouched();
     this.formControlRef.patchValue(finalValue);
-    this.formControlRef.markAsDirty();
   }
 
   private setTempValue(value: any) {
