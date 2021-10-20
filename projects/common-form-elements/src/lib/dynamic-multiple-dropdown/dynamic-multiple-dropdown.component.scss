@@ -32,11 +32,11 @@ label{
 
 .multi-select-container .list-border ul {
   list-style-type: none;
-  position: inherit !important;
   margin: 0;
   font-size: 14px;
   font-weight: bold;
   padding-left: 0.3rem;
+  line-height: 20px;
 }
 
 .multi-select-container .list-border {
@@ -273,7 +273,8 @@ label{
   list-style-type: none;
   display: block;
   position: absolute;
-  top: 38px;
+  top: 100%;
+  margin-top:5px;
   left: 0;
   background-color: white;
   width: 100%;
@@ -325,3 +326,57 @@ label{
 .cursor-pointer {
     cursor: pointer;
 }
+
+.sb-multiple-with-search{
+  .searchbox-input,
+  .searchbox-input:hover,
+  .searchbox-input:focus,
+  .searchbox-input:focus-visible,
+  .searchbox-input:active {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    outline: none;
+  }
+
+  .form-floating {
+    position: relative;
+    padding: 20px;
+  }
+  .float-label {
+    position: absolute;
+    left: 25px;
+    color: #767676;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    text-align: center;
+  }
+  .not-searchable-label{
+    top: 21px;
+    color: #767676;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    text-align: center;
+  }
+
+  input::placeholder {
+    color: transparent;
+  }
+
+  .searchbox-input:focus ~ .float-label, 
+  .searchbox-input:not(:focus):valid ~ .float-label,
+  input:not(:placeholder-shown) ~ .float-label {
+    font-size: 12px;
+    opacity: 1;
+    z-index: 1;
+    background-color: transparent;
+  }
+
+  .multi-select-label{
+    background: #efefef;
+    background-clip: content-box;
+    margin: 2px;
+    padding: 5px;
+  }
+}
+
