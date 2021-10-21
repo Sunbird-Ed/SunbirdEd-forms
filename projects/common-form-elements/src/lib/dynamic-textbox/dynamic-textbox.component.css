@@ -11,6 +11,12 @@ label {
   box-sizing: border-box;
 }
 
+.sb-textbox:disabled {
+  color: #cedaec;
+  background-color:#fdfdfd;
+  border-color:#f3f3f3;
+}
+
 ::placeholder {
   padding: 0.25rem;
   opacity: 0.99;
