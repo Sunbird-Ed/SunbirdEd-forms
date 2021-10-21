@@ -20,7 +20,7 @@
           <ng-container>
             <span *ngIf="isSearchable">
               <input [(ngModel)]="searchInput" id="searchInput" (keyup)="filterItem()" (click)="showAllList()" class="searchbox-input" type="text" [hidden]="!isSearchable" autocomplete="off">
-              <label for="searchbox-input" *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder float-label">{{placeholder}}</label>
+              <label for="searchbox-input" *ngIf="!hidePlaceholder && (!formControlRef.value || !formControlRef.value?.length)" class="placeholder float-label">{{placeholder}}</label>
             </span>
             <span *ngIf="!isSearchable">
               <label for="searchbox-input" *ngIf="!formControlRef.value || !formControlRef.value?.length" class="placeholder not-searchable-label">{{placeholder}}</label>

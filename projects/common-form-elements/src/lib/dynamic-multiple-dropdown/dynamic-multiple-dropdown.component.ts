@@ -37,6 +37,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   public isSearchable: any;
   public showMasterSelect: boolean = true;
   public searchInput:any;
+  public hidePlaceholder:boolean = false;
   masterSelected: boolean = false;
   showModal = false;
   tempValue = Set<any>();
@@ -190,6 +191,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.setupOptions();
     this.setTempValue(this.formControlRef.value);
     this.showMasterSelect = true;
+    this.hidePlaceholder = true;
   }
   removeItem(removeSearch) {
     const index: number = this.formControlRef.value.indexOf(removeSearch);
