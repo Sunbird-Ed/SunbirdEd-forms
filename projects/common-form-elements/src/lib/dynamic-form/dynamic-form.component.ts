@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
-  Output, QueryList, SimpleChanges, ViewChildren, ViewEncapsulation } from '@angular/core';
+  Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
   import {AsyncValidatorFactory, CustomFormGroup, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
@@ -12,8 +12,7 @@ const moment = moment_;
 @Component({
   selector: 'sb-dynamic-form',
   templateUrl: './dynamic-form.component.html',
-  styleUrls: ['./dynamic-form.component.css'],
-  encapsulation : ViewEncapsulation.None
+  styleUrls: ['./dynamic-form.component.css']
 })
 export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
   @Input() config;
@@ -431,13 +430,5 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         return { [_.toLower(validationType)]: true };
       }
       return null;
-    }
-
-    checkSectionLevelCss(section) {
-      if (_.has(section, 'renderingHints.class')) {
-        return true;
-      } else {
-        return false;
-      }
     }
 }
