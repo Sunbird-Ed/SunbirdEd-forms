@@ -3,7 +3,6 @@
   <ng-container *ngIf="options">
     <div class="dropdown-container">
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
-
       <!-- [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" -->
       <select [formControl]="formControlRef"
               [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )"
