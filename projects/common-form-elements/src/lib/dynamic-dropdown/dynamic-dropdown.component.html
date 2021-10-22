@@ -3,11 +3,12 @@
   <ng-container *ngIf="options">
     <div class="dropdown-container">
       <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
-        <!-- [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" -->
-        <select [formControl]="formControlRef"
-            [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )"
-            [compareWith]="ValueComparator.valueComparator" class="sb-dropdown-select" id="sb-dropdown"
-            name="sb-dropdown">
+
+      <!-- [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" -->
+      <select [formControl]="formControlRef"
+              [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )"
+              [compareWith]="ValueComparator.valueComparator" class="sb-dropdown-select" id="sb-dropdown"
+              name="sb-dropdown">
         <option [defaultSelected]="!default" [ngValue]="null" disabled>{{placeholder}}
         </option>
         <ng-container *ngIf="field.range && isOptionsArrayMap(field.range) && !field.association">
@@ -16,6 +17,7 @@
         <ng-container *ngIf="field.range && isOptionsArray(field.range) && !isOptionsArrayMap(field.range) && !field.association">
           <option class="optionsArray" *ngFor="let option of field.range" [ngValue]="getOptionValueForRange(option, 'array')">{{option.name || option}}</option>
         </ng-container>
+
         <ng-container *ngIf="field.range && isOptionsClosure(field.range)">
           <option class="closure" *ngFor="let option of options$ | async" [ngValue]="getOptionValueForRange(option, 'closure')">{{option.label}}</option>
         </ng-container>

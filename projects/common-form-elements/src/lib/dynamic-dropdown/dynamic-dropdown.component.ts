@@ -42,7 +42,6 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   selectedType: any;
   tempAssociation: any;
   latestParentValue: string;
-
   constructor() {
   }
 
@@ -92,6 +91,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       this.field.range = [];
       this.field.range.push(this.default);
     }
+
 
     if (!_.isEmpty(this.depends)) {
      this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
@@ -143,7 +143,6 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   isOptionsArrayMap(input: any) {
-
     return Array.isArray(input) && typeof input[0] === 'object';
   }
 

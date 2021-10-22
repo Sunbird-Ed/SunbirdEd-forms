@@ -33,6 +33,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
 
   _: any = _;
 
+
   public isDependsInvalid: any;
   masterSelected: boolean = false;
   showModal = false;
@@ -78,6 +79,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     this.setupOptions();
     this.isAllSelected();
   }
+
   handleDependantFieldChanges() {
     merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
       tap(() => {
@@ -338,6 +340,7 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     }
 
     this.resolvedOptions = this.sortOptions(this.resolvedOptions);
+
     this.setTempValue(this.default);
   }
 
