@@ -226,10 +226,6 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initTopicPicker(data: Array<TopicTreeNode>) {
-      let singleSelect = false;
-      if (this.field.dataType === 'text'){
-        singleSelect = true;
-      }
       $(`#treePicker_${this.field.code}`).treePicker({
         data: data,
         name: 'Topics',
@@ -240,7 +236,6 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
         chooseAllText: 'Choose All',
         searchText: 'Search',
         selectedText: 'selected',
-        singlePick: singleSelect,
         picked: (!_.isEmpty(this.selectedNodes)) ?
         _.map(this.selectedNodes, 'identifier') :
         (!_.isEmpty(this.default) ? this.default : []),
