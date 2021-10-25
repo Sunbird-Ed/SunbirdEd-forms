@@ -12,11 +12,6 @@ label {
   border-radius: 0.25rem;
   resize: vertical;
 }
-.sb-textarea:disabled {
-  color: #cedaec;
-  background-color:#fdfdfd;
-  border-color:#f3f3f3;
-}
 
 .sb-textarea-container {
   margin-bottom: 10px;
