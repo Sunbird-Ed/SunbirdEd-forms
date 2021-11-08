@@ -190,12 +190,12 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
       tap((value: any) => {
         this.latestParentValue = value;
         this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
-        this.isDependsEmpty = _.every(_.map(this.depends, depend => depend.value), _.isEmpty);
+        this.isDependsEmpty = _.some(_.map(this.depends, depend => depend.value), _.isEmpty);
         this.formControlRef.patchValue(null);
       })
       ).subscribe();
       this.isDependsInvalid = _.includes(_.map(this.depends, depend => depend.invalid), true);
-      this.isDependsEmpty = _.every(_.map(this.depends, depend => depend.value), _.isEmpty);    
+      this.isDependsEmpty = _.some(_.map(this.depends, depend => depend.value), _.isEmpty);
   }
 
   getParentValue() {
