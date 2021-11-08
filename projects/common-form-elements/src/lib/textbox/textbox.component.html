@@ -6,7 +6,7 @@
     <div class="prefix" *ngIf="prefix">
       <span>{{prefix}}</span>
     </div>
-    <input id="{{config?.code}}" [formControl]="formControlRef" class="sb-textbox" placeholder={{placeholder}} type="text">
+    <input id="{{config?.code}}" [formControl]="formControlRef" [attr.aria-label]="label" class="sb-textbox" placeholder={{placeholder}} type="text">
     <div class="async-icons" *ngIf="asyncValidation && asyncValidation?.trigger">
       <sb-green-tick *ngIf="formControlRef.value && formControlRef.status === 'VALID'"></sb-green-tick>
       <sb-red-exclamation *ngIf="formControlRef.value && formControlRef.status !== 'VALID'"></sb-red-exclamation>
