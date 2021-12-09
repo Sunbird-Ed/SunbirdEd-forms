@@ -10,7 +10,7 @@
                      [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-down>
 
-      <div class="cfe-multiselect-field-label-container list-border" (click)="openModal($event)" role="button">
+      <div class="cfe-multiselect-field-label-container list-border text-capitalize" (click)="openModal($event)" role="button">
         <ul [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
           <ng-container *ngIf="isMultiple">
             <li class="cfe-multiselect-field-label placeholder" *ngIf="!formControlRef.value || !formControlRef.value.length">{{placeHolder}}</li>
@@ -31,7 +31,7 @@
         </ul>
       </div>
 
-      <div class="cfe-multiselect-modal-container sb-modal-container" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
+      <div class="cfe-multiselect-modal-container sb-modal-container text-capitalize" *ngIf="platform === 'mobile'" [hidden]="!showModal" (click)="showModal=false;">
         <div class="cfe-multiselect-modal-overlay sb-modal-overlay">
           <div class="cfe-multiselect-modal sb-modal" (click)="$event.stopPropagation()" tabindex="0">
             <div class="cfe-multiselect-modal-header header" role="heading" aria-level="1">
