@@ -10,7 +10,8 @@
                      [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-down>
 
-      <div class="cfe-multiselect-field-label-container list-border text-capitalize" (click)="openModal($event)" role="button">
+      <div class="cfe-multiselect-field-label-container list-border text-capitalize" (click)="openModal($event)" role="button"
+        [attr.aria-disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
         <ul [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
           <ng-container *ngIf="isMultiple">
             <li class="cfe-multiselect-field-label placeholder" *ngIf="!formControlRef.value || !formControlRef.value.length">{{placeHolder}}</li>
