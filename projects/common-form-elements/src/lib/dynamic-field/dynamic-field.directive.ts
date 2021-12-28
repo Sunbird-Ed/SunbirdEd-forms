@@ -25,6 +25,7 @@ import { DynamicDialcodeComponent } from '../dynamic-dialcode/dynamic-dialcode.c
 import { DynamicFrameworkCategoryNestedSelectComponent } from '../dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
 import { DynamicDateComponent } from '../dynamic-date/dynamic-date.component';
 import { DynamicRichtextComponent } from '../dynamic-richtext/dynamic-richtext.component';
+import { DynamicInputFieldComponent } from '../dynamic-input-field/dynamic-input-field.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -33,6 +34,7 @@ const componentMapper = {
   multiselect: DynamicMultiSelectComponent,
   nestedselect: DynamicMultipleDropdownComponent,
   keywords: KeywordsComponent,
+  selectTextBox:KeywordsComponent,
   topicselector: TopicpickerComponent,
   licenses: DynamicDropdownComponent,
   label: DynamicTextboxComponent,
@@ -45,7 +47,8 @@ const componentMapper = {
   radio: DynamicRadioComponent,
   dialcode: DynamicDialcodeComponent,
   date: DynamicDateComponent,
-richtext: DynamicRichtextComponent
+  richtext: DynamicRichtextComponent,
+  dynamicInput:DynamicInputFieldComponent
 };
 
 @Directive({

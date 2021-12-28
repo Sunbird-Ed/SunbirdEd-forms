@@ -127,6 +127,29 @@ export const timer = [
                 'default': 'Untitled Course'
             },
             {
+                'code': 'dynamicInput',
+                'dataType': 'text',
+                'description': 'dynamicInput',
+                'editable': true,
+                'inputType': 'dynamicInput',
+                'label': 'Dynamic Input',
+                'name': 'Name',
+                'placeholder': 'Enter the text',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'required': true,
+                'visible': true,
+                'validations': [
+                    {
+                        'type': 'noOfFeilds',
+                        'value': '3',
+                        'message': 'Number of Input field is Exceeded'
+                    },
+                ],
+                'default':["test",'test2']
+            },
+            {
                 'code': 'startDate',
                 'dataType': 'date',
                 'description': 'start Date',
@@ -197,6 +220,30 @@ export const timer = [
                 'placeholder': 'Enter Keywords',
                 'required': false,
                 'validations': []
+            },
+            {
+                'code': 'Dropkeywords',
+                'visible': true,
+                'editable': true,
+                'dataType': 'list',
+                'name': 'Keywords',
+                'renderingHints': {
+                    'class': 'sb-g-col-lg-1 required'
+                },
+                'description': 'Keywords for the content',
+                'inputType': 'selectTextBox',
+                'label': 'DropDown keywords',
+                'placeholder': '',
+                'required': false,
+                'validations': [],
+                'default':[
+                   'Parent'
+                ],
+                'options':[
+                    'Parent',
+                    'Student',
+                    'Teacher'
+                ]
             }
         ]
     },

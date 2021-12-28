@@ -20,12 +20,31 @@ export class KeywordsComponent implements OnInit {
 
   public items: any;
   inputText = '';
+  selecteditems:any;
   constructor() { }
 
   ngOnInit() {
     if (!_.isEmpty(this.default)) {
       this.items = this.default;
     }
+    if(!_.isEmpty(this.field?.default)){
+      this.selecteditems = this.field?.default;
+    }
+  }
+
+  onItemAdded(ev) {
+    let items: any = [];
+    items = this.field.options;
+    let res = items.filter(item => item === ev.label);
+    if (res.length === 0) {
+      items.push(ev.label);
+    }
+    this.selecteditems.push(ev.label)
+    this.selecteditems.forEach((el, index) => {
+      if (el?.label === ev.label) {
+        this.selecteditems.splice(index, 1);
+      }
+    })
   }
 
 }
