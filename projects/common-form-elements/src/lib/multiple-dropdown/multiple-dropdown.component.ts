@@ -209,4 +209,24 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
     this.setTempValue(this.default);
   }
+
+  concatinatedMultipeSelectVal(value){
+    if(!value){
+      return '';
+    }
+    let concatStr = '';
+    if(Array.isArray(value) && value.length){
+      for (let index = 0; index < value.length; index++) {
+        if(!concatStr.length){
+          concatStr += this.optionValueToOptionLabelMap.get(fromJS(value[index]));
+        } else {
+          concatStr += ', ' + this.optionValueToOptionLabelMap.get(fromJS(value[index]));
+        }
+      }
+    } else if((typeof value === 'object' && !Array.isArray(value)) || typeof value==='string'){
+      concatStr = this.optionValueToOptionLabelMap.get(fromJS(value))
+    }
+    return concatStr;
+  }
+
 }
