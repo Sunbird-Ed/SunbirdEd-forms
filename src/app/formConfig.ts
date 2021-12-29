@@ -142,7 +142,7 @@ export const timer = [
                 'visible': true,
                 'validations': [
                     {
-                        'type': 'noOfFeilds',
+                        'type': 'noOfFields',
                         'value': '3',
                         'message': 'Number of Input field is Exceeded'
                     },

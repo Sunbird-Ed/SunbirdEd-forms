@@ -20,7 +20,7 @@ export class KeywordsComponent implements OnInit {
 
   public items: any;
   inputText = '';
-  selecteditems:any;
+  selectedItems:any;
   constructor() { }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class KeywordsComponent implements OnInit {
       this.items = this.default;
     }
     if(!_.isEmpty(this.field?.default)){
-      this.selecteditems = this.field?.default;
+      this.selectedItems = this.field?.default;
     }
   }
 
@@ -39,10 +39,10 @@ export class KeywordsComponent implements OnInit {
     if (res.length === 0) {
       items.push(ev.label);
     }
-    this.selecteditems.push(ev.label)
-    this.selecteditems.forEach((el, index) => {
+    this.selectedItems.push(ev.label)
+    this.selectedItems.forEach((el, index) => {
       if (el?.label === ev.label) {
-        this.selecteditems.splice(index, 1);
+        this.selectedItems.splice(index, 1);
       }
     })
   }

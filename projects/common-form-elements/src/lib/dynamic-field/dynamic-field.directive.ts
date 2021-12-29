@@ -34,7 +34,7 @@ const componentMapper = {
   multiselect: DynamicMultiSelectComponent,
   nestedselect: DynamicMultipleDropdownComponent,
   keywords: KeywordsComponent,
-  selectTextBox:KeywordsComponent,
+  selectTextBox: KeywordsComponent,
   topicselector: TopicpickerComponent,
   licenses: DynamicDropdownComponent,
   label: DynamicTextboxComponent,
@@ -48,7 +48,7 @@ const componentMapper = {
   dialcode: DynamicDialcodeComponent,
   date: DynamicDateComponent,
   richtext: DynamicRichtextComponent,
-  dynamicInput:DynamicInputFieldComponent
+  dynamicInput: DynamicInputFieldComponent
 };
 
 @Directive({

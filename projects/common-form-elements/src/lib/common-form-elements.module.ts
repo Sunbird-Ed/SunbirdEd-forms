@@ -75,8 +75,8 @@ import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
       DynamicDateComponent,
-DynamicRichtextComponent,
-DynamicInputFieldComponent
+      DynamicRichtextComponent,
+      DynamicInputFieldComponent
    ],
    imports: [
       CommonModule,
