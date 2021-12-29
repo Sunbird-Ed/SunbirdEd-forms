@@ -1,8 +1,5 @@
 <div class="sb-input">
-  <div class="flex-container">
-    <label [attr.data-title]="field.description ? field.description : null">{{label}}</label> <button class="addBtn"
-      (click)="addInputs()" class="btn btn-primary">Add More</button>
-  </div>
+    <label [attr.data-title]="field.description ? field.description : null">{{label}}</label> 
   <div [formGroup]="dynamicForm">
     <div formArrayName="inputs">
       <div *ngFor="let inputs of inputsArray().controls; let i=index" [formGroupName]="i">
@@ -12,6 +9,11 @@
      
     </div>
   </div>
+  <div>
+    <button class="sb-btn sb-btn-normal sb-btn-outline-primary" [disabled]="disabledAddInput"
+    (click)="addInputs()" class="btn btn-primary">Add +</button>
+  </div>
+ 
   <ng-container *ngFor="let validation of validations">
     <div class="cf-error"
       *ngIf="(validation.type && validation.type && validation.message && formControlRef.errors && formControlRef.errors[validation.type]) && (inputsArray().length > validation.value)">

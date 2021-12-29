@@ -144,10 +144,10 @@ export const timer = [
                     {
                         'type': 'noOfFields',
                         'value': '3',
-                        'message': 'Number of Input field is Exceeded'
+                        'message': 'Maximum number of input allowed is 3'
                     },
                 ],
-                'default':["test",'test2']
+                'default':["test"]
             },
             {
                 'code': 'startDate',

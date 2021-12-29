@@ -46,10 +46,9 @@ export class DynamicInputFieldComponent implements OnInit {
   }
 
   addInputs(val?:any) {
-    this.checkNoOfField();
-    console.log(this.disabledAddInput);
     if(!this.disabledAddInput){
       this.inputsArray().push(this.newInput(val));
+      this.checkNoOfField();
     }
   }
 
