@@ -38,6 +38,7 @@ import { DynamicDialcodeComponent } from './dynamic-dialcode/dynamic-dialcode.co
 import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
 import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
 import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.component';
+import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-field.component';
 
 @NgModule({
    declarations: [
@@ -74,7 +75,8 @@ import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.co
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
       DynamicDateComponent,
-DynamicRichtextComponent
+      DynamicRichtextComponent,
+      DynamicInputFieldComponent
    ],
    imports: [
       CommonModule,

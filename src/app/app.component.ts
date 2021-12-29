@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup,FormBuilder, FormArray  } from '@angular/forms';
 import { merge, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
 import { timer } from './formConfig';

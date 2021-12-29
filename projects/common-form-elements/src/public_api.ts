@@ -42,4 +42,5 @@ export * from './lib/dynamic-dropdown/dynamic-dropdown.component';
 export * from './lib/dynamic-radio/dynamic-radio.component';
 export * from './lib/dynamic-dropdown/dynamic-dropdown.component';
 export * from './lib/dynamic-dialcode/dynamic-dialcode.component';
+export * from './lib/dynamic-input-field/dynamic-input-field.component';
 

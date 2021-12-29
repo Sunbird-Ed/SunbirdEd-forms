@@ -298,6 +298,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
           case 'compare':
             validationList.push(this.compareFields.bind(this, element.validations[i].criteria));
             break;
+          case 'noOfFields':
+              validationList.push(this.checkFields.bind(this, element.validations[i]));
+            break;  
           case 'minDate':
             validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
             break;
@@ -431,4 +434,12 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       }
       return null;
     }
+
+    checkFields(validationType, control: AbstractControl) {
+    if (validationType.type === 'noOfFields' && control.value.length > +validationType.value) {
+      console.log(validationType.message);
+      return { noOfFeilds: true };
+    }
+  }
+
 }
