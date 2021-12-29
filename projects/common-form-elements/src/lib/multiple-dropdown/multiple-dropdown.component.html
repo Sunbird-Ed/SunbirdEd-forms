@@ -3,15 +3,17 @@
   <label class="cfe-multiselect-label" *ngIf="labelHtml" for="{{config?.code}}" [innerHTML]="labelHtml | transposeHtml"></label>
   <ng-container *ngIf="extras?.type === 'dropdown'">
     <div class="cfe-multiselect-field multi-select-container" id="{{config?.code}}">
-      <sb-caret-up *ngIf="showModal" class="cfe-multiselect-field-caret caret-down"  tabindex="0"
+      <sb-caret-up *ngIf="showModal" class="cfe-multiselect-field-caret caret-down"
                    [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-up>
-      <sb-caret-down *ngIf="!showModal" class="cfe-multiselect-field-caret caret-down"  tabindex="0"
+      <sb-caret-down *ngIf="!showModal" class="cfe-multiselect-field-caret caret-down"
                      [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" (click)="openModal($event)">
       </sb-caret-down>
-
-      <div class="cfe-multiselect-field-label-container list-border text-capitalize" (click)="openModal($event)" role="button"
-        [attr.aria-disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
+      <div class="cfe-multiselect-field-label-container list-border text-capitalize" tabindex="0" role="list" (click)="openModal($event)"
+        [attr.aria-disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )"
+        [attr.aria-label]="formControlRef?.value ? 
+        ( concatinatedMultipeSelectVal(formControlRef?.value) + ', selected ,'+placeHolder ) : 
+        placeHolder ">
         <ul [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )">
           <ng-container *ngIf="isMultiple">
             <li class="cfe-multiselect-field-label placeholder" *ngIf="!formControlRef.value || !formControlRef.value.length">{{placeHolder}}</li>
@@ -41,9 +43,9 @@
             <div class="cfe-multiselect-modal-body body">
               <ul>
                 <li *ngFor="let option of resolvedOptions; let i=index">
-                  <div class="cfe-multiselect-modal-item row" (click)="addSelected(option)" tabindex="0">
+                  <div class="cfe-multiselect-modal-item row" (click)="addSelected(option)" tabindex="0" attr.role="{{isMultiple ? 'checkbox' : 'radio'}}" attr.aria-checked="{{tempValue.includes(option.get('value'))}}">
                     <label class="container" style="pointer-events: none">
-                      <input [checked]="tempValue.includes(option.get('value'))" class="sb-checkbox" type="checkbox">
+                      <input [checked]="tempValue.includes(option.get('value'))" aria-hidden="true" class="sb-checkbox" type="checkbox">
                       <span class="checkmark"></span>
                     </label>
                     <span>{{option.get('label')}}</span>
