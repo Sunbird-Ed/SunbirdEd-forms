@@ -11,7 +11,7 @@
   </ng-container>
 </div>
 
-<div class="sb-keywords" *ngIf="field?.inputType === 'selectTextBox'">
+<div class="sb-keywords" *ngIf="field?.inputType === 'selectTextBox' && formControlRef?.isVisible === 'yes'">
   <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
   <tag-input class="sb-keywordbox" [formControl]="formControlRef"  [(ngModel)]='selectedItems' 
     [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
