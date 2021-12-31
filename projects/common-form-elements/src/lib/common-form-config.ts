@@ -146,5 +146,6 @@ export interface CustomFormControl extends FormControl {
   shouldListenToCustomEvent?: Boolean;
   isVisible?: any;
   range?: any;
+  options?:any;
   richTextCharacterCount?: any;
 }

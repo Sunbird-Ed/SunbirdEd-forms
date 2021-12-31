@@ -6,6 +6,7 @@ import { timer } from './formConfig';
 import * as _ from 'lodash-es';
 import * as moment_ from 'moment';
 let evidenceMimeType;
+let ecm;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -28,13 +29,17 @@ export class AppComponent implements OnInit {
             field.options = this.setEvidence;
             field.range = null;
         }
+        else if (field.code === 'ecm') {
+            ecm = field.options;
+            field.options = this.setEcm;
+        }
       });
     });
 
   }
 
   output(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   valueChanges(event) {
@@ -46,7 +51,7 @@ export class AppComponent implements OnInit {
   }
 
   statusChanges(event) {
-    console.log(event);
+    // console.log(event);
   }
 
   getFramework(control, depends: FormControl[], formGroup: FormGroup, loading, loaded) {
@@ -360,10 +365,12 @@ export class AppComponent implements OnInit {
   }
 
   setEvidence(control, depends: FormControl[], formGroup: FormGroup, loading, loaded) {
+    console.log(control);
     control.isVisible = 'no';
     control.range = evidenceMimeType;
     const response = merge(..._.map(depends, depend => depend.valueChanges)).pipe(
         switchMap((value: any) => {
+             console.log(value);
             if (!_.isEmpty(value) && _.toLower(value) === 'yes') {
                 control.isVisible = 'yes';
                 return of({range: evidenceMimeType});
@@ -375,4 +382,23 @@ export class AppComponent implements OnInit {
     );
     return response;
   }
+
+  setEcm(control, depends: FormControl[], formGroup: FormGroup, loading, loaded){
+    console.log(control);
+    control.isVisible = 'no';
+    control.options = ecm;
+    const response = merge(..._.map(depends, depend => depend.valueChanges)).pipe(
+        switchMap((value: any) => {
+            if (!_.isEmpty(value) && _.toLower(value) === 'yes') {
+                control.isVisible = 'yes';
+                return of({options:ecm});
+            } else {
+                control.isVisible = 'no';
+                return of(null);
+            }
+        })
+    );
+    return response;
+  }
+
 }
