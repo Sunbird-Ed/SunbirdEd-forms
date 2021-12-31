@@ -47,13 +47,6 @@ export class KeywordsComponent implements OnInit,OnChanges,OnDestroy {
       this.options = _.isEmpty(this.field.options) ? this.isOptionsClosure(this.field.options) && this.field.options : [];
     }
 
-    if (!_.isEmpty(this.depends) && !this.isOptionsClosure(this.options)) {
-      this.contextValueChangesSubscription =  merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
-       tap((value: any) => {
-         this.latestParentValue = value;
-       })
-       ).subscribe();
-     }
 
     if (!_.isEmpty(this.field.depends)) {
       merge(..._.map(this.depends, depend => depend.valueChanges)).pipe(
@@ -76,7 +69,6 @@ export class KeywordsComponent implements OnInit,OnChanges,OnDestroy {
       }
     );
   }
-console.log(this.formControlRef.isVisible);
   this.handleDependsWithDefault();
 
   }
