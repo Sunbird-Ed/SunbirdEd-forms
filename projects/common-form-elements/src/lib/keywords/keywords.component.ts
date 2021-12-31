@@ -59,7 +59,7 @@ export class KeywordsComponent implements OnInit,OnChanges,OnDestroy {
   if (this.isOptionsClosure(this.options)) {
     // tslint:disable-next-line:max-line-length
     this.options$ = (this.options as DynamicFieldConfigOptionsBuilder<any>)(this.formControlRef, this.depends, this.formGroup, () => this.dataLoadStatusDelegate.next('LOADING'), () => this.dataLoadStatusDelegate.next('LOADED')) as any;
-    this.options$.subscribe(
+    this.contextValueChangesSubscription = this.options$.subscribe(
       (response: any) => {
         if (response && response.options) {
           this.field.options = response.options;
