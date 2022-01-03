@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
-import {DynamicFieldConfigOptionsBuilder, FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder} from '../common-form-config';
+import {CustomFormControl, DynamicFieldConfigOptionsBuilder, FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder} from '../common-form-config';
 import {tap} from 'rxjs/operators';
 import * as _ from 'lodash-es';
 import {ValueComparator} from '../utilities/value-comparator';
@@ -25,7 +25,7 @@ export class DynamicCheckboxComponent implements OnInit {
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() contextTerms?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: FormGroup;
   @Input() default?: any;
   @Input() contextData: any;
@@ -53,6 +53,8 @@ export class DynamicCheckboxComponent implements OnInit {
     }
     const desiredValue = (this.field.dataType === 'text') ? (this.field.default === 'Yes' ? true : false) : !!this.field.default;
     this.checked = desiredValue;
+
+    this.formControlRef.isVisible='yes';
 
     if (this.isOptionsClosure(this.options)) {
       // tslint:disable-next-line:max-line-length

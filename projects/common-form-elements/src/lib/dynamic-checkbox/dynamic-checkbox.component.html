@@ -1,4 +1,4 @@
-<ng-container *ngIf="visible">
+<ng-container *ngIf="formControlRef?.isVisible === 'yes'">
   <div class="sb-checkbox sb-checkbox-primary" [attr.data-title]="field.description ? field.description : null">
     <input [attr.disabled]="disabled ? true : null" type="checkbox" id="{{_.kebabCase(field.name) || field.code}}"
     name="{{_.kebabCase(field.name) || field.code}}" [checked]="checked" (change)="onChecklistChange($event.target.checked)">
