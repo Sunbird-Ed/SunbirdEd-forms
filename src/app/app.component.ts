@@ -29,6 +29,9 @@ export class AppComponent implements OnInit {
             field.options = this.setEvidence;
             field.range = null;
         }
+        else if(field.code === 'allowECM'){
+            field.options = this.setAllowEcm;
+        }
         else if (field.code === 'ecm') {
             ecm = field.options;
             field.options = this.setEcm;
@@ -396,6 +399,25 @@ export class AppComponent implements OnInit {
                 control.isVisible = 'no';
                 return of(null);
             }
+        })
+    );
+    return response;
+  }
+
+  setAllowEcm(control, depends: FormControl[], formGroup: FormGroup, loading, loaded){
+    console.log(control);
+    control.isVisible = 'no';
+    const response = merge(..._.map(depends, depend => depend.valueChanges)).pipe(
+        switchMap((value: any) => {
+             console.log(value);
+             if (!_.isEmpty(value) && _.toLower(value) === 'self' ){
+                control.isVisible = 'no';
+                return of(null)
+             }
+             else{
+                control.isVisible = 'yes'; 
+                return of(null)
+             }
         })
     );
     return response;
