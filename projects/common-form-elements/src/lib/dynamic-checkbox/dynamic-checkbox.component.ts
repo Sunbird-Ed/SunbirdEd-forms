@@ -65,6 +65,17 @@ export class DynamicCheckboxComponent implements OnInit {
         },
       );
     }
+    this.handleDependsWithDefault();
+  }
+
+  handleDependsWithDefault() {
+    const value = _.first(_.map(this.depends, depend => depend.value));
+    console.log(value);
+    if (!_.isEmpty(value) && _.toLower(value) === 'external') {
+      this.formControlRef.isVisible = 'yes';
+    } else {
+        this.formControlRef.isVisible = 'no';
+    }
   }
 
   onChecklistChange(checked) {
