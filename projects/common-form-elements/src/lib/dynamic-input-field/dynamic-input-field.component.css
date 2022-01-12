@@ -65,15 +65,16 @@ label {
     margin: auto;
     padding: 0 4px;
   }
-  
-  .flex-container {
-    display: flex;
-    flex-direction:row;
-    justify-content: space-between;
+
+.btnActive{
+  border: none;
+  background: none;
+  font-size: 15px;
+  color: var(--primary-color);
 }
 
-.addBtn{
-  justify-content: flex-end;
-  width: 200px;
-  margin-bottom: 10px;
+.btnInActive{
+  border: none;
+  background: none;
+  font-size: 15px;
 }

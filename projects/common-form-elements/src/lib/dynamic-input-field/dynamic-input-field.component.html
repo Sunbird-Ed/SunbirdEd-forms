@@ -10,8 +10,8 @@
     </div>
   </div>
   <div>
-    <button class="sb-btn sb-btn-normal sb-btn-outline-primary" [disabled]="disabledAddInput"
-    (click)="addInputs()" class="btn btn-primary">Add +</button>
+    <button [disabled]="disabledAddInput" [ngClass]="disabledAddInput === true ? 'btnInActive' : 'btnActive'"
+    (click)="addInputs()">+ Add Levels</button>
   </div>
  
   <ng-container *ngFor="let validation of validations">
