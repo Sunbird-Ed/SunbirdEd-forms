@@ -93,6 +93,14 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         });
     });
     }
+
+    this.config.forEach((sections) => {
+      sections.fields.forEach((element: any) => {
+        if (!_.has(element, 'visible')) {
+          element['visible'] = true;
+        }
+      });
+    });
     this.flattenSectionFields = this.getFlattenedSectionFields();
     this.formGroup = this.formBuilder.group(formGroupData);
 
