@@ -71,6 +71,14 @@ export interface FieldConfig<T, F extends FieldConfigInputType = any> {
     multiple?: boolean,
     hidden?: boolean,
     disabled?: boolean,
+    showIcon?: {
+      show: boolean,
+      image?: {
+        active?: string,
+        inactive?: string
+      },
+      direction?: string
+    },
     options?: FieldConfigOption<T>[] | FieldConfigOptionsBuilder<T> | FieldConfigOptionAssociations<T>,
     labelHtml?: {
       contents: string,

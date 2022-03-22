@@ -21,7 +21,7 @@
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
       <sb-textbox [config]="field" [class]="fieldTemplateClass" tabindex="0" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"
         [placeholder]="field.templateOptions.placeHolder" [validations]="field.validations" [prefix]="field.templateOptions.prefix"
-        [labelHtml]="field.templateOptions.labelHtml">
+        [labelHtml]="field.templateOptions.labelHtml" (inputIconClick)="formClickEventsHandler($event)" (labelClickEventHandler)="labelEventClick($event)">
       </sb-textbox>
     </div>
     <div *ngIf="field.type === FieldConfigInputType.TEXTAREA" [hidden]="field.templateOptions?.hidden || null">

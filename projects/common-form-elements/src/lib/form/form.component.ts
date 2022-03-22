@@ -28,6 +28,8 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   @Output() linkClicked = new EventEmitter();
   @Output() valueChanges = new EventEmitter();
   @Output() statusChanges = new EventEmitter();
+  @Output() labelClickEvent = new EventEmitter();
+  @Output() formClickEvents = new EventEmitter();
   @Input() platform: 'mobile' | 'web' = 'web';
   @Output() dataLoadStatus = new EventEmitter<'LOADING' | 'LOADED'>();
   @Input() config;
@@ -233,4 +235,12 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   clickedLink(event) {
     this.linkClicked.emit(event);
   }
+
+  labelEventClick(event) {
+    this.labelClickEvent.emit(event);
+  }
+  formClickEventsHandler(event) {
+    this.formClickEvents.emit(event);
+  }
+  
 }
