@@ -8,6 +8,7 @@
     "immutable",
     "ngx-chips",
     "moment",
-    "@project-sunbird/ckeditor-build-classic"
+    "@project-sunbird/ckeditor-build-classic",
+    "ng2-semantic-ui-v9"
   ]
 }

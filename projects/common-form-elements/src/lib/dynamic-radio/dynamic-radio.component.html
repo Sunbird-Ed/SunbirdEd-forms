@@ -1,6 +1,6 @@
 <ng-container *ngIf="visible">
   <div class="sb-radio">
-    <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+    <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <i class="info circle icon ml-8" *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i>
     <div class="sb-radio-group">
       <ng-container *ngIf="field.range && isOptionsArrayMap(field.range) && !field.association">
         <div class="sb-radio-btn-checkbox sb-radio-btn-primary"  *ngFor="let option of field.range">

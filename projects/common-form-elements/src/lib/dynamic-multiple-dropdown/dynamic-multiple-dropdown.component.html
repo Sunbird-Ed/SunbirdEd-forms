@@ -1,5 +1,5 @@
 <div class="multi-select-section-app">
-  <label class="input-label" *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+  <label class="input-label" *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <i class="info circle icon ml-8" *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i>
   <!-- <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div> -->
   <div class="multi-select-container">
     <sb-caret-down class="caret-down" [ngClass]="{'disabled': disabled === true ? true : ( depends ? (isDependsInvalid ? true : null) : null ) }" (click)="openModal($event)" [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )">

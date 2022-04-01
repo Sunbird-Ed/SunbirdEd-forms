@@ -16,6 +16,7 @@
     "dependencies": {
         "tslib": "^1.10.0",
         "immutable": "^4.0.0-rc.12",
-        "moment": "^2.29.1"
+        "moment": "^2.29.1",
+        "ng2-semantic-ui-v9": "0.0.3"
     }
 }
