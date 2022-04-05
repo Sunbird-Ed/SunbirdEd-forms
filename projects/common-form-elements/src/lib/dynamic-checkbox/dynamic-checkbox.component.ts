@@ -68,6 +68,8 @@ export class DynamicCheckboxComponent implements OnInit {
     if (!_.isEmpty(this.depends)){
       this.handleDependsWithDefault();
     }
+
+     this.field.showInfo ? "" : this.field.showInfo=false; 
   }
 
   handleDependsWithDefault() {

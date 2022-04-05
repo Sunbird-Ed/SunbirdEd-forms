@@ -2,6 +2,10 @@ label {
   font-size: 16px;
 }
 
+.ml-8 {
+  font-size: 14px;
+}
+
 .sb-checkbox {
   padding: 0px 0px 0px 8px;
 }
@@ -77,5 +81,5 @@ label {
 }
 
 .label-html{
-  font-size: 14px;
+  font-size: 16px;
 }

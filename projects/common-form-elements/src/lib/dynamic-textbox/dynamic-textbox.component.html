@@ -1,5 +1,5 @@
 <div class="sb-input" *ngIf="isTextBoxRequired=='yes'">
-  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <i class="info circle icon ml-8" *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i>
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label><i class="info circle icon ml-8 " *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i>
   <!-- <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div> -->
 
   <div [ngClass]="{'async-text': (asyncValidation && asyncValidation?.trigger), '': (!asyncValidation || !asyncValidation?.trigger)}">

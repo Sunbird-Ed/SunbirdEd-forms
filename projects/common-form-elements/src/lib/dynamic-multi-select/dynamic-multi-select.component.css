@@ -1,9 +1,9 @@
 label {
-    display: block;
-    padding: 10px;
-    font-size: 1rem;
+  font-size: 16px;
 }
-
+.ml-8 {
+  font-size: 14px;
+}
 .dropdown-icon {
     position: absolute;
     top: 0.5rem;
