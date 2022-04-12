@@ -1,5 +1,5 @@
 <div class="sb-textarea-container">
-  <label [attr.data-title]="field.description ? field.description : null">{{label}}</label> <i class="info circle icon ml-8 " *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i>
+  <label [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
   <textarea class="sb-textarea" [formControl]="formControlRef" rows="5" name="sb-textarea" placeholder={{placeholder}} [attr.disabled]="disabled ? true : null">
   </textarea>
   <div class="remaining-length" *ngIf="remainderValidLength$">

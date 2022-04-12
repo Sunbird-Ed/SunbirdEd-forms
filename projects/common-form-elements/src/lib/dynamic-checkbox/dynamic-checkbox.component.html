@@ -2,9 +2,9 @@
   <div class="sb-checkbox sb-checkbox-primary" [attr.data-title]="(field.description && !field.showInfo) ? field.description : null" [attr.disabled]="disabled ? true : null">
     <input [attr.disabled]="disabled ? true : null" type="checkbox" id="{{_.kebabCase(field.name) || field.code}}"
     name="{{_.kebabCase(field.name) || field.code}}" [checked]="checked" (change)="onChecklistChange($event.target.checked)">
-    <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}">{{label}}<i class="info circle icon ml-8" *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i> </label>
+    <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}">{{label}} <sb-dynamic-info [data]="field"></sb-dynamic-info></label>
     <label class="label-html" *ngIf="labelHtml">
-      <div [innerHTML]="labelHtml | safeHtml"></div><i class="info circle icon ml-8 " *ngIf="field?.showInfo && field?.description" suiPopup  popupDelay="500" popupText="{{field.description}}" popupPlacement="top"></i>
+      <div [innerHTML]="labelHtml | safeHtml"></div><sb-dynamic-info [data]="field"></sb-dynamic-info>
     </label>
   </div>
 </ng-container>

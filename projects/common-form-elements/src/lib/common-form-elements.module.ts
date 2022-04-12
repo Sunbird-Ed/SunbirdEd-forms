@@ -39,7 +39,7 @@ import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framewo
 import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
 import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.component';
 import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-field.component';
-import { SuiModule } from 'ng2-semantic-ui-v9';
+import { DynamicInfoComponent } from './dynamic-info/dynamic-info.component';
 
 @NgModule({
    declarations: [
@@ -77,15 +77,15 @@ import { SuiModule } from 'ng2-semantic-ui-v9';
       DynamicFrameworkComponent,
       DynamicDateComponent,
       DynamicRichtextComponent,
-      DynamicInputFieldComponent
+      DynamicInputFieldComponent,
+      DynamicInfoComponent
    ],
    imports: [
       CommonModule,
       ReactiveFormsModule,
       FormsModule,
       PipesModule,
-      TagInputModule,
-      SuiModule
+      TagInputModule
    ],
    exports: [
       DropdownComponent,
@@ -120,7 +120,8 @@ import { SuiModule } from 'ng2-semantic-ui-v9';
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
       DynamicDateComponent,
-DynamicRichtextComponent
+      DynamicRichtextComponent,
+      DynamicInfoComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -141,7 +142,7 @@ DynamicRichtextComponent
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
       DynamicDateComponent,
-DynamicRichtextComponent
+      DynamicRichtextComponent
    ]
 })
 export class CommonFormElementsModule { }
