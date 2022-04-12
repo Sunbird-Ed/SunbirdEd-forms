@@ -1,5 +1,5 @@
 {
-    "name": "common-form-elements-web-v9",
+    "name": "@project-sunbird/common-form-elements-v9",
     "version": "4.9.0",
     "peerDependencies": {
         "@angular/common": "^9.1.13",
