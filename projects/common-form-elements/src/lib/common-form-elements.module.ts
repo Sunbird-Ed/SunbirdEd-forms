@@ -39,6 +39,7 @@ import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framewo
 import { DynamicDateComponent } from './dynamic-date/dynamic-date.component';
 import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.component';
 import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-field.component';
+import { DynamicInfoComponent } from './dynamic-info/dynamic-info.component';
 
 @NgModule({
    declarations: [
@@ -76,7 +77,8 @@ import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-
       DynamicFrameworkComponent,
       DynamicDateComponent,
       DynamicRichtextComponent,
-      DynamicInputFieldComponent
+      DynamicInputFieldComponent,
+      DynamicInfoComponent
    ],
    imports: [
       CommonModule,
@@ -118,7 +120,8 @@ import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
       DynamicDateComponent,
-DynamicRichtextComponent
+      DynamicRichtextComponent,
+      DynamicInfoComponent
    ],
    entryComponents: [
       DynamicFormComponent,
@@ -139,7 +142,7 @@ DynamicRichtextComponent
       DynamicDialcodeComponent,
       DynamicFrameworkComponent,
       DynamicDateComponent,
-DynamicRichtextComponent
+      DynamicRichtextComponent
    ]
 })
 export class CommonFormElementsModule { }

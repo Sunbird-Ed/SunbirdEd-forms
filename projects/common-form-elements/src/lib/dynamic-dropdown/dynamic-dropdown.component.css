@@ -1,9 +1,6 @@
 label {
-  display: block;
-  padding: 10px;
-  font-size: 1rem;
+  font-size: 16px;
 }
-
 .dropdown-icon {
   position: absolute;
   top: 0.5rem;

@@ -1,9 +1,7 @@
 label {
-    display: block;
-    font-size: 1rem;
-    margin: 0;
-  }
-  
+  font-size: 16px;
+}
+
   .sb-textbox {
     width: 100%;
     padding: 8px 16px;

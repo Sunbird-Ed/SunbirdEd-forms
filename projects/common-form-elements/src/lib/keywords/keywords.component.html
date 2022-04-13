@@ -1,5 +1,6 @@
 <div class="sb-keywords" *ngIf="field?.inputType != 'selectTextBox'">
-  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+
   <tag-input class="sb-keywordbox" [formControl]="formControlRef" [modelAsStrings]="true" [(ngModel)]='items'
     [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
     [disable]="disabled"></tag-input>
@@ -12,7 +13,7 @@
 </div>
 
 <div class="sb-keywords" *ngIf="field?.inputType === 'selectTextBox' && formControlRef?.isVisible === 'yes'">
-  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
   <tag-input class="sb-keywordbox" [formControl]="formControlRef"  [(ngModel)]='selectedItems' 
     [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
     [disable]="disabled" [displayBy]="'label'" (onAdd)="onItemAdded($event)" [identifyBy]="'label'" >
