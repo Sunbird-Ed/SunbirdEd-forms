@@ -25,9 +25,9 @@ jobs:
           name: Publish to NPM
           command: |
             if [ -z $CIRCLE_PR_NUMBER ]; then
-              npm run build
+              npm run build && npm pack ./dist/common-form-elements
               echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-              npm publish ./dist/common-form-elements
+              npm publish common-form-elements-*
             else
-              npm run build
+              npm run build && npm pack ./dist/common-form-elements
             fi
