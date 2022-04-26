@@ -27,7 +27,7 @@ jobs:
             if [ -z $CIRCLE_PR_NUMBER ]; then
               npm run build-mobile && npm pack ./dist/common-form-elements
               echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
-              npm publish common-form-elements-*
+              npm publish common-form-elements-v9-*
             else
-              npm run build && npm pack ./dist/common-form-elements
+              npm run build-mobile && npm pack ./dist/common-form-elements
             fi
