@@ -2,7 +2,7 @@ import {CategoryTerm, FrameworkCategory} from '@project-sunbird/client-services/
 import {IFrameworkCategoryFilterFieldTemplateConfig} from './framework-category-filter-field-template-config';
 import {ISearchFrameworkAssociationsMap, ISearchFrameworkCategoryFilter} from './models/framework';
 import {Injectable} from '@angular/core';
-import {FieldConfig, FieldConfigInputType} from '../../common-form-config';
+import {FieldConfig, FieldConfigInputType, ThemeType} from '../../common-form-config';
 
 type CategoryTermName = CategoryTerm['name'];
 
@@ -40,12 +40,14 @@ export class SearchFrameworkCategoryFormConfigAdapter {
         code: config.category,
         type: FieldConfigInputType.SELECT,
         fieldName: config.category,
-        default: (config.multiple && Array.isArray(selectedValue)) ? selectedValue : (selectedValue && selectedValue[0]),
+        default: (config.multiple && Array.isArray(selectedValue)) ? selectedValue : selectedValue,
         templateOptions: {
           inputTypeOptions: { type: config.type },
           label: config.labelText,
           placeHolder: config.placeholderText,
           multiple: config.multiple,
+          autocomplete: config.autocomplete ? config.autocomplete : false,
+          themeType: config.themeType ? config.themeType : ThemeType.MATERIAL,
           options: frameworkAssociationsMap[config.category] ?
             frameworkAssociationsMap[config.category]
               .map((value) => ({ label: value, value })) :

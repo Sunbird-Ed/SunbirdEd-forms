@@ -1,22 +1,45 @@
 <div [formGroup]="formGroup">
   <ng-container *ngFor="let field of config; let index = i">
     <div *ngIf="field.type === FieldConfigInputType.SELECT || field.type === FieldConfigInputType.NESTED_SELECT" [hidden]="field.templateOptions?.hidden || null">
-      <sb-multiple-dropdown
-        [class]="fieldTemplateClass"
-        [extras]="field.templateOptions?.inputTypeOptions"
-        [context]="field.context ? formGroup.get(field.context) : null "
-        [default]="field.default"
-        [formControlRef]="formGroup.get(field.code)"
-        [options]="field.templateOptions?.options"
-        [label]="field.templateOptions.label"
-        [dataLoadStatusDelegate]="dataLoadStatusDelegate"
-        [disabled]="field.templateOptions?.disabled"
-        [placeHolder]="field?.templateOptions?.placeHolder"
-        [isMultiple]="field.templateOptions.multiple"
-        [labelHtml]="field.templateOptions.labelHtml"
-        [platform]="platform"
-        [config]="field">
-      </sb-multiple-dropdown>
+      <ng-container *ngIf="!field.templateOptions.themeType">
+        <sb-multiple-dropdown
+          [class]="fieldTemplateClass"
+          [extras]="field.templateOptions?.inputTypeOptions"
+          [context]="field.context ? formGroup.get(field.context) : null "
+          [default]="field.default"
+          [formControlRef]="formGroup.get(field.code)"
+          [options]="field.templateOptions?.options"
+          [label]="field.templateOptions.label"
+          [dataLoadStatusDelegate]="dataLoadStatusDelegate"
+          [disabled]="field.templateOptions?.disabled"
+          [placeHolder]="field?.templateOptions?.placeHolder"
+          [isMultiple]="field.templateOptions.multiple"
+          [labelHtml]="field.templateOptions.labelHtml"
+          [platform]="platform"
+          [config]="field">
+        </sb-multiple-dropdown>
+      </ng-container>
+
+      <ng-container *ngIf="field.templateOptions.themeType === ThemeType.MATERIAL">
+        <app-material-dropdown
+          [class]="fieldTemplateClass"
+          [extras]="field.templateOptions?.inputTypeOptions"
+          [context]="field.context ? formGroup.get(field.context) : null "
+          [default]="field.default"
+          [formControlRef]="formGroup.get(field.code)"
+          [options]="field.templateOptions?.options"
+          [label]="field.templateOptions.label"
+          [dataLoadStatusDelegate]="dataLoadStatusDelegate"
+          [disabled]="field.templateOptions?.disabled"
+          [placeHolder]="field?.templateOptions?.placeHolder"
+          [isMultiple]="field.templateOptions.multiple"
+          [labelHtml]="field.templateOptions.labelHtml"
+          [formGroup]="formGroup"
+          [platform]="platform"
+          [config]="field"
+        ></app-material-dropdown>
+      </ng-container>
+
     </div>
     <div *ngIf="field.type === FieldConfigInputType.INPUT" [hidden]="field.templateOptions?.hidden || null">
       <sb-textbox [config]="field" [class]="fieldTemplateClass" tabindex="0" [formControlRef]="formGroup.get(field.code)" [asyncValidation]="field.asyncValidation" [label]="field.templateOptions.label"

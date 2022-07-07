@@ -69,6 +69,8 @@ export interface FieldConfig<T, F extends FieldConfigInputType = any> {
     placeHolder?: string,
     prefix?: string,
     multiple?: boolean,
+    themeType?: string,
+    autocomplete?: boolean,
     hidden?: boolean,
     disabled?: boolean,
     showIcon?: {
@@ -157,4 +159,8 @@ export interface CustomFormControl extends FormControl {
   range?: any;
   options?:any;
   richTextCharacterCount?: any;
+}
+
+export enum ThemeType {
+  MATERIAL = 'material'
 }

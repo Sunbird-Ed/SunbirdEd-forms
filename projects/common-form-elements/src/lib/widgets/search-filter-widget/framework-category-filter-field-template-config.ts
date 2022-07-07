@@ -6,4 +6,6 @@ export interface IFrameworkCategoryFilterFieldTemplateConfig {
   labelText: string;
   placeholderText: string;
   multiple: boolean;
+  autocomplete?: boolean;
+  themeType?: string;
 }

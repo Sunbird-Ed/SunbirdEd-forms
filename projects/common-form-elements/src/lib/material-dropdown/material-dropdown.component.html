@@ -1,0 +1,77 @@
+<ng-container *ngIf="config?.templateOptions?.autocomplete">
+  <app-material-auto-complete
+    [class]="class"
+    [extras]="config.templateOptions?.inputTypeOptions"
+    [context]="config.context ? formGroup.get(config.context) : null "
+    [default]="config.default"
+    [formControlRef]="formGroup.get(config.code)"
+    [options]="config.templateOptions?.options"
+    [label]="config.templateOptions.label"
+    [dataLoadStatusDelegate]="dataLoadStatusDelegate"
+    [disabled]="config.templateOptions?.disabled"
+    [placeHolder]="config?.templateOptions?.placeHolder"
+    [isMultiple]="config.templateOptions.multiple"
+    [labelHtml]="config.templateOptions.labelHtml"
+    [platform]="platform"
+    [config]="config"
+  ></app-material-auto-complete>
+</ng-container>
+
+<div *ngIf="!config?.templateOptions?.autocomplete" class="sb-input">
+  <label class="cfe-multiselect-label input-label" tabindex="0" *ngIf="label" for="{{config?.code}}">{{label}}</label>
+  <label class="cfe-multiselect-label" *ngIf="labelHtml" for="{{config?.code}}" [innerHTML]="labelHtml | transposeHtml"></label>
+
+    <div class="sb-field">
+      <ng-container *ngIf="!isMultiple">
+        <mat-form-field id={{config.code}} appearance="fill" class="sb-mat__dropdown w-100 mb-8">
+            <mat-select
+              role="listbox" 
+              [aria-label]="formControlRef?.value ? 
+              ( concatinatedMultipeSelectVal(formControlRef?.value) + ', selected ,'+placeHolder ) : 
+              placeHolder "
+              class="selection"
+              [placeholder]="placeHolder"
+              [formControl]="localFrmControlRef"
+              [(ngModel)]="selectedOptions"
+              [compareWith]="comparer" 
+              (selectionChange)="singleOptionSelected($event)">
+                <mat-option 
+                class="mat-dropdown__options" 
+                role="option" 
+                *ngFor="let option of filteredOptions" 
+                [value]="option.value"
+                attr.aria-label="{{option?.label}}">
+                {{option?.label}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="isMultiple">
+        <mat-form-field id={{config.code}} appearance="fill" class="sb-mat__dropdown w-100 mb-8">
+          <mat-select
+            multiple
+            role="listbox" 
+            [aria-label]="formControlRef?.value ? 
+            ( concatinatedMultipeSelectVal(formControlRef?.value) + ', selected ,'+placeHolder ) : 
+            placeHolder "
+            class="selection"
+            [placeholder]="placeHolder"
+            [formControl]="localFrmControlRef"
+            [(ngModel)]="selectedOptions"
+            (selectionChange)="singleOptionSelected($event)">
+              <mat-option 
+              class="mat-dropdown__options" 
+              role="option" 
+              *ngFor="let option of filteredOptions" 
+              [value]="option.value"
+              attr.aria-label="{{option?.label}}">
+              {{option?.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </div>
+  
+</div>
+

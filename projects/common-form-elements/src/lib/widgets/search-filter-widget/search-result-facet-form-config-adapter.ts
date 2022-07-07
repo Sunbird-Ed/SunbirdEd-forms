@@ -2,7 +2,7 @@ import {Facet, FacetValue, IFilterFacet} from './models/facets';
 import {IFacetFilterFieldTemplateConfig} from './facet-filter-field-template-config';
 import {ISearchFilter} from './models/search-filter';
 import {Injectable} from '@angular/core';
-import {FieldConfig, FieldConfigInputType} from '../../common-form-config';
+import {FieldConfig, FieldConfigInputType, ThemeType} from '../../common-form-config';
 
 type ISearchResultsFacetsMap = {[facet in Facet]?: FacetValue[]};
 
@@ -45,12 +45,14 @@ export class SearchResultFacetFormConfigAdapter {
         code: config.facet,
         type: FieldConfigInputType.SELECT,
         fieldName: config.facet,
-        default: (config.multiple && Array.isArray(selectedValue)) ? selectedValue : (selectedValue && selectedValue[0]),
+        default: (config.multiple && Array.isArray(selectedValue)) ? selectedValue : selectedValue,
         templateOptions: {
           inputTypeOptions: { type: config.type },
           label: config.labelText,
           placeHolder: config.placeholderText,
           multiple: config.multiple,
+          autocomplete: config.autocomplete ? config.autocomplete : false,
+          themeType: config.themeType ? config.themeType : ThemeType.MATERIAL,
           options: searchResultsFacetsMap[config.facet] ?
             searchResultsFacetsMap[config.facet]
               .sort()
