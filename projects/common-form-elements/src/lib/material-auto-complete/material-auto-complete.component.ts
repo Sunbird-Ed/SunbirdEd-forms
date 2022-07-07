@@ -58,7 +58,7 @@ export class MaterialAutoCompleteComponent implements OnInit, OnChanges {
     this.lastFilter = filter;
     if (filter) {
       return this.options.filter(option => {
-        return option.label.toLowerCase().includes(filter.toLowerCase()) >= 0;
+        return option.label.toLowerCase().includes(filter.toLowerCase());
       })
     } else {
       return this.isOptionsArray() && this.options.length ? this.options.slice() : [] ;
