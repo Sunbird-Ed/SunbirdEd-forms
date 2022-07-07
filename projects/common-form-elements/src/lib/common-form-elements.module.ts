@@ -9,6 +9,8 @@ import { OptionGroupComponent } from './option-group/option-group.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DropdownIconComponent } from './icon/dropdown/dropdownIcon.component';
 import { MultipleDropdownComponent } from './multiple-dropdown/multiple-dropdown.component';
+import { MaterialAutoCompleteComponent } from './material-auto-complete/material-auto-complete.component';
+import { MaterialDropdownComponent } from './material-dropdown/material-dropdown.component';
 import { CaretDownComponent } from './icon/caret-down/caret-down.component';
 import { CaretUpComponent } from './icon/caret-up/caret-up.component';
 import { PipesModule } from './pipes/pipes.module';
@@ -41,6 +43,8 @@ import { DynamicRichtextComponent } from './dynamic-richtext/dynamic-richtext.co
 import { DynamicInputFieldComponent } from './dynamic-input-field/dynamic-input-field.component';
 import { DynamicInfoComponent } from './dynamic-info/dynamic-info.component';
 
+import { MaterialModule } from './material.module';
+
 @NgModule({
    declarations: [
       DropdownComponent,
@@ -51,6 +55,8 @@ import { DynamicInfoComponent } from './dynamic-info/dynamic-info.component';
       OptionGroupComponent,
       DropdownIconComponent,
       MultipleDropdownComponent,
+      MaterialAutoCompleteComponent,
+      MaterialDropdownComponent,
       CaretDownComponent,
       CaretUpComponent,
       RedExclamationComponent,
@@ -85,7 +91,8 @@ import { DynamicInfoComponent } from './dynamic-info/dynamic-info.component';
       ReactiveFormsModule,
       FormsModule,
       PipesModule,
-      TagInputModule
+      TagInputModule,
+      MaterialModule
    ],
    exports: [
       DropdownComponent,
@@ -101,6 +108,8 @@ import { DynamicInfoComponent } from './dynamic-info/dynamic-info.component';
       GreenTickComponent,
       EmptyCircleComponent,
       MultipleDropdownComponent,
+      MaterialAutoCompleteComponent,
+      MaterialDropdownComponent,
       FiltersComponent,
       DynamicFormComponent,
       DynamicTextboxComponent,

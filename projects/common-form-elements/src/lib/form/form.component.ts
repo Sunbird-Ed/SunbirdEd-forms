@@ -11,7 +11,7 @@ import {
   SimpleChanges,
   ViewChildren
 } from '@angular/core';
-import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType} from '../common-form-config';
+import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType, ThemeType} from '../common-form-config';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
@@ -39,7 +39,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   formGroup: FormGroup;
 
   FieldConfigInputType = FieldConfigInputType;
-
+  ThemeType = ThemeType;
   private statusChangesSubscription: Subscription;
   private valueChangesSubscription: Subscription;
   private dataLoadStatusSinkSubscription: Subscription;
