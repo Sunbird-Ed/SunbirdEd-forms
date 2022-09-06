@@ -20,7 +20,7 @@ const run = async () => {
         const answers = {
             environment: 'mobile',
             name: '@project-sunbird/common-form-elements-v9',
-            version: '4.9.0'
+            version: '5.0.1'
           }
         const { environment } = answers;
         console.log(answers);
