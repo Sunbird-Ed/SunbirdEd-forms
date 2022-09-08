@@ -1,0 +1,17 @@
+<div class="sb-input">
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+  <sb-dynamic-info [data]="field"></sb-dynamic-info>
+  <form [formGroup]="form">
+    <div *ngFor="let row of form.controls;let i=index">
+      <input *ngFor="let col of row.controls;let j=index" [formControl]="col" class="sb-textbox"
+        [type]='field?.dataType[j]' [placeholder]='field?.placeholder[j]' [attr.disabled]='field?.disabled[j]'
+        (input)="onChange(this.form.value,this.form.valid)" required>
+    </div>
+  </form>
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()])">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>

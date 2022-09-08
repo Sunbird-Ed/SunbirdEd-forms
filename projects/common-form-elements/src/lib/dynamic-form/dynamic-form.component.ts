@@ -191,6 +191,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'richtext':
         defaultVal = element.default || null;
         break;
+      case 'matrix':
+        defaultVal = element.default || null;
+        break;
       case 'select':
       case 'topicselector':
       case 'framework':
@@ -256,6 +259,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
     }
 
     formValueList.push(defaultVal);
+    console.log(formValueList);
 
     if (element.validations && element.validations.length) {
       element.validations.forEach((data, i) => {
@@ -266,6 +270,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             element.inputType === 'frameworkCategorySelect') {
               validationList.push(Validators.required);
             } else if (element.inputType === 'checkbox') {
+              validationList.push(Validators.requiredTrue);
+            } else if (element.inputType === 'matrix'){
               validationList.push(Validators.requiredTrue);
             } else {
               validationList.push(Validators.required);
@@ -445,7 +451,6 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
     checkFields(validationType, control: AbstractControl) {
     if (validationType.type === 'noOfFields' && control.value.length > +validationType.value) {
-      console.log(validationType.message);
       return { noOfFeilds: true };
     }
   }
