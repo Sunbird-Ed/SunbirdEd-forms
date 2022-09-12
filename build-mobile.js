@@ -18,9 +18,9 @@ const run = async () => {
     try {
         // const answers = await askLibraryDetails();
         const answers = {
-            environment: 'web',
+            environment: 'mobile',
             name: '@project-sunbird/common-form-elements-v9',
-            version: '5.0.1'
+            version: '5.0.2'
           }
         const { environment } = answers;
         console.log(answers);
