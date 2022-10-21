@@ -90,18 +90,18 @@ export class KeywordsComponent implements OnInit,OnChanges,OnDestroy {
   }
 
   onItemAdded(ev) {
-    let items: any = [];
-    items = this.field.options;
-    let res = items.filter(item => item === ev.label);
-    if (res.length === 0) {
-      items.push(ev.label);
+    let fieldOptions = [];
+    fieldOptions = this.field.options;
+    const checkObject = fieldOptions.find(o => o.label === ev.label);
+    if (!checkObject) {
+    const obj = this.selectedItems.find(o => o.label === ev.label);
+    obj.value =  'ECM_' + Date.now();
     }
-    this.selectedItems.push(ev.label)
-    this.selectedItems.forEach((el, index) => {
-      if (el?.label === ev.label) {
-        this.selectedItems.splice(index, 1);
-      }
-    })
+    if (ev.label === ev.value) {
+      const index = _.findIndex(this.selectedItems, (el) => el.value === ev.value);
+      this.selectedItems.splice(index, 1);
+      this.formControlRef.patchValue(this.selectedItems);
+    }
   }
 
   isOptionsClosure(options: any) {
