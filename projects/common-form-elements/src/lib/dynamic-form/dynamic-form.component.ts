@@ -191,6 +191,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'richtext':
         defaultVal = element.default || null;
         break;
+      case 'matrix':
+        defaultVal = element.default || null;
+        break;
       case 'select':
       case 'topicselector':
       case 'framework':
@@ -266,6 +269,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             element.inputType === 'frameworkCategorySelect') {
               validationList.push(Validators.required);
             } else if (element.inputType === 'checkbox') {
+              validationList.push(Validators.requiredTrue);
+            } else if (element.inputType === 'matrix') {
               validationList.push(Validators.requiredTrue);
             } else {
               validationList.push(Validators.required);

@@ -27,7 +27,131 @@ export const timer = [
         ],
         'required': true,
         'visible': true,
-      }]
+      },
+      {
+        'code': 'scoreRange',
+        'dataType': ['text', 'number', 'number'],
+        'description': 'Name of the Instruction',
+        'showInfo': true,
+        'editable': true,
+        'disabled': [true, null, null],
+        'inputType': 'matrix',
+        'martixType': [3, 2],
+        'label': 'Define Score range for Each levels',
+        'name': 'Instruction',
+        'placeholder': ['label', 'minimum', 'maximum'],
+        'default': [['Good', 70, 100], ['Average', 40, 70], ['Bad', null, 30]],
+        'renderingHints': {
+          'class': 'sb-g-col-lg-2 required'
+        },
+        'validations': [
+          {
+            'type': 'required',
+            'message': 'Score range for Each levels'
+          }
+        ],
+        'required': true,
+        'visible': true,
+      },
+      {
+        code: 'recordedBy',
+        name: 'RecordedBy',
+        label: 'Observation Recorded By',
+        placeholder: 'Select Observation Recorded By',
+        description: 'Select Observation Recorded By',
+        dataType: 'text',
+        inputType: 'select',
+        editable: true,
+        output: 'label',
+        required: true,
+        visible: true,
+        renderingHints: {
+          class: 'sb-g-col-lg-1 required',
+        },
+        range: [
+          {
+            value: 'Self',
+            label: 'Self',
+          },
+          {
+            value: 'External',
+            label: 'External',
+          },
+        ],
+        validations: [
+          {
+            type: 'required',
+            message: 'Observation Recorded By is required',
+          },
+        ],
+      },
+      {
+        code: 'allowECM',
+        name: 'allowECM',
+        depends: ['recordedBy'],
+        label: 'Add Evidence collection methods',
+        placeholder: 'Add Evidence collection methods',
+        description: 'Add Evidence collection methods',
+        dataType: 'text',
+        inputType: 'checkbox',
+        editable: true,
+        required: false,
+        visible: true,
+        renderingHints: {
+          class: 'sb-g-col-lg-1',
+        },
+      },
+      {
+        code: 'ecm',
+        name: 'ECM',
+        depends: ['allowECM'],
+        label: 'Select ECM',
+        placeholder: 'Select ECM',
+        description: 'ECM for the Observation with rubrics',
+        dataType: 'list',
+        inputType: 'selectTextBox',
+        editable: true,
+        required: false,
+        visible: true,
+        renderingHints: {
+          class: 'sb-g-col-lg-1',
+        },
+        options: [
+          {
+            value: 'ECM_1665656636257',
+            label: 'Student interview',
+          },
+          {
+            value: 'ECM_1665656666379',
+            label: 'Teacher interview',
+          },
+          {
+            value: 'ECM_1665656694741',
+            label: 'HM/HT interview',
+          },
+          {
+            value: 'ECM_1665656716414',
+            label: 'Parent interview',
+          },
+          {
+            value: 'ECM_1665719517607',
+            label: 'Official interview',
+          },
+          {
+            value: 'ECM_1665719576656',
+            label: 'School walkthrough',
+          },
+          {
+            value: 'ECM_1665719587380',
+            label: 'Class observation',
+          },
+          {
+            value: 'ECM_1665719655162',
+            label: 'Document Review',
+          }
+        ],
+      },
+    ]
 },
 {
     'name': 'First Section',

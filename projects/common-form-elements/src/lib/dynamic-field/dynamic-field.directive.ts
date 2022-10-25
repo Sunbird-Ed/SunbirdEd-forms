@@ -26,6 +26,7 @@ import { DynamicFrameworkCategoryNestedSelectComponent } from '../dynamic-framew
 import { DynamicDateComponent } from '../dynamic-date/dynamic-date.component';
 import { DynamicRichtextComponent } from '../dynamic-richtext/dynamic-richtext.component';
 import { DynamicInputFieldComponent } from '../dynamic-input-field/dynamic-input-field.component';
+import { MatrixComponent } from '../matrix/matrix.component';
 
 const componentMapper = {
   textarea: DynamicTextareaComponent,
@@ -48,7 +49,8 @@ const componentMapper = {
   dialcode: DynamicDialcodeComponent,
   date: DynamicDateComponent,
   richtext: DynamicRichtextComponent,
-  dynamicInput: DynamicInputFieldComponent
+  dynamicInput: DynamicInputFieldComponent,
+  matrix: MatrixComponent
 };
 
 @Directive({
