@@ -19,7 +19,7 @@ const run = async () => {
         // const answers = await askLibraryDetails();
         const answers = {
             environment: 'web',
-            name: '@project-sunbird/common-form-elements-v9',
+            name: '@project-sunbird/common-form-elements-web-v9',
             version: '4.9.0'
           }
         const { environment } = answers;
