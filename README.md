@@ -82,6 +82,7 @@ Function Signature should be as follows:
 functionName(config: FieldConfig<any>, initial = false): FieldConfigOptionsBuilder<T>
 ```
 
+
 ## Versions
 |   release branch  | npm package version | Angular Version |
 |:-----------------:|:-------------------:|:---------------:|
