@@ -86,4 +86,4 @@ functionName(config: FieldConfig<any>, initial = false): FieldConfigOptionsBuild
 |   release branch  | npm package version | Angular Version |
 |:-----------------:|:-------------------:|:---------------:|
 | release-5.0.1     |        5.0.1        |      Ng V9      |
-| release-5.1.0_v10 |        5.0.2        |      Ng V10     |
+| release-5.1.0_v10 |        5.1.0        |      Ng V10     |
