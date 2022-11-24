@@ -1,5 +1,5 @@
 import {ActivatedRoute, Router} from '@angular/router';
-import {EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import { EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges, Directive } from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {Facet, FacetValue} from './models/facets';
@@ -9,6 +9,7 @@ import {FieldConfig} from '../../common-form-config';
 
 type IAnySearchFilter = ISearchFilter<any, any>;
 
+@Directive()
 export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, OnDestroy {
   public supportedFilterAttributes: string[];
   public baseSearchFilter: IAnySearchFilter = {};

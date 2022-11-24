@@ -1,10 +1,10 @@
 {
-    "name": "@project-sunbird/common-form-elements-v9",
-    "version": "5.0.1",
+    "name": "@project-sunbird/common-form-elements",
+    "version": "5.1.0",
     "peerDependencies": {
-        "@angular/common": "^9.1.13",
-        "@angular/core": "^9.1.13",
-        "@angular/forms": "^9.1.13",
+        "@angular/common": "^10.2.5",
+        "@angular/core": "^10.2.5",
+        "@angular/forms": "^10.2.5",
         "@project-sunbird/client-services": "3.6.x",
         "lodash-es": "^4.17.15"
     },
@@ -14,8 +14,8 @@
         }
     },
     "dependencies": {
-        "tslib": "^1.10.0",
-        "immutable": "^4.0.0-rc.12",
-        "moment": "^2.29.1"
+      "immutable": "^4.0.0-rc.12",
+        "moment": "^2.29.1",
+        "tslib": "^2.0.0"
     }
 }
