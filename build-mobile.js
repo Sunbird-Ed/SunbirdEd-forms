@@ -125,9 +125,9 @@ const updatePackageFile = (filepath, { environment, name, version }) => {
     if (name) {
         packageData.name = name;
     } else if (environment === 'mobile') {
-        packageData.name = 'common-form-elements-v9';
+        packageData.name = 'common-form-elements';
     } else if (environment === 'web') {
-        packageData.name = 'common-form-elements-full-v9';
+        packageData.name = 'common-form-elements-full';
     }
     fs.writeFileSync(filepath, JSON.stringify(packageData, null, 4));
     console.log(chalk.yellow(
