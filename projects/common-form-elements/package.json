@@ -1,10 +1,10 @@
 {
   "name": "@project-sunbird/common-form-elements",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "peerDependencies": {
-    "@angular/common": "^10.2.5",
-    "@angular/core": "^10.2.5",
-    "@angular/forms": "^10.2.5",
+    "@angular/common": "^11.2.14",
+    "@angular/core": "^11.2.14",
+    "@angular/forms": "^11.2.14",
     "@project-sunbird/client-services": "3.6.x",
     "lodash-es": "^4.17.15"
   },
@@ -23,3 +23,4 @@
     "access": "public"
   }
 }
+
