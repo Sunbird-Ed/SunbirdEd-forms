@@ -18,8 +18,10 @@
         ,          "configurations": {
             "production": {
               "tsConfig": "projects/common-form-elements/tsconfig.lib.prod.json"
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
 },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -58,7 +60,6 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -75,7 +76,13 @@
               "src/assets/libs/transition.min.js",
               "src/assets/libs/modal.min.js",
               "src/assets/libs/semantic-ui-tree-picker.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -105,19 +112,24 @@
                   "maximumError": "10kb"
                 }
               ]
-            }
-          }
+            },
+            "development": {}
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "sunbird-forms:build"
           },
           "configurations": {
             "production": {
               "browserTarget": "sunbird-forms:build:production"
+            },
+            "development": {
+              "browserTarget": "sunbird-forms:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
