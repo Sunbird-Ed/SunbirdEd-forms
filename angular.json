@@ -30,18 +30,6 @@
             "tsConfig": "projects/common-form-elements/tsconfig.spec.json",
             "karmaConfig": "projects/common-form-elements/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/common-form-elements/tsconfig.lib.json",
-              "projects/common-form-elements/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -95,7 +83,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
