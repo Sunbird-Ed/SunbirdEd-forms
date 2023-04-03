@@ -11,7 +11,7 @@ import {
   ViewChild,
   Output, EventEmitter
 } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
 import {FieldConfig, FieldConfigInputType, FieldConfigInputTypeOptionsModelMap, FieldConfigOptionsBuilder} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
@@ -32,8 +32,8 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() labelHtml: any;
   @Input() placeHolder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
-  @Input() formControlRef?: FormControl;
+  @Input() context?: UntypedFormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() platform: any;
   @Input() default?: any;
   @Input() contextData: any;

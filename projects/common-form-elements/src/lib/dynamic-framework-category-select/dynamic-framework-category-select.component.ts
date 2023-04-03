@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy,
   OnInit, SimpleChanges, HostListener, ViewChild } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, FormGroup} from '@angular/forms';
 import {from, Subject, merge, Observable} from 'rxjs';
 import {FieldConfig, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder,
   CustomFormControl, FieldConfigOption, CustomFormGroup} from '../common-form-config';
@@ -23,14 +23,14 @@ export class DynamicFrameworkCategorySelectComponent implements OnInit {
   @Input() labelHtml: any;
   @Input() placeholder?: string;
   @Input() isMultiple = false;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
   @Input() platform: any = 'web';
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
 
   _: any = _;

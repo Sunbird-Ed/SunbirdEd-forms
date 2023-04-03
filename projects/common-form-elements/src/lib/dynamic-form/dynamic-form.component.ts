@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
   Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
   import {AsyncValidatorFactory, CustomFormGroup, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash-es';
@@ -37,7 +37,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
   flattenSectionFields;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) { }
 
   ngOnInit() {

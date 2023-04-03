@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {FieldConfigOption, FieldConfigOptionsBuilder} from '../common-form-config';
 import {tap} from 'rxjs/operators';
@@ -19,8 +19,8 @@ export class DropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() labelHtml: any;
   @Input() placeHolder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
-  @Input() formControlRef?: FormControl;
+  @Input() context?: UntypedFormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;

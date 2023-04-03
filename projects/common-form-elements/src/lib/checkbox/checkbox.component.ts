@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'sb-checkbox',
@@ -10,7 +10,7 @@ export class CheckboxComponent implements OnInit {
   @Input() label: any;
   @Input() code: any;
   @Input() value?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() labelHtml?: any;
   @Output() clickedLink = new EventEmitter();
 

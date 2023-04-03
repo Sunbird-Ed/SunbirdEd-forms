@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {FieldConfig, FieldConfigValidationType} from '../common-form-config';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -12,7 +12,7 @@ import {map, startWith} from 'rxjs/operators';
 export class TextareaComponent implements OnInit {
   @Input() label: String;
   @Input() placeholder: String;
-  @Input() formControlRef: FormControl;
+  @Input() formControlRef: UntypedFormControl;
   @Input() config: FieldConfig<String>;
 
   remainderValidLength$?: Observable<number>;

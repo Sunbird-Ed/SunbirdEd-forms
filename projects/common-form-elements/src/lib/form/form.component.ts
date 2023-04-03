@@ -12,7 +12,7 @@ import {
   ViewChildren
 } from '@angular/core';
 import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType, ThemeType} from '../common-form-config';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
 
@@ -36,7 +36,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   @Input() dataLoadStatusDelegate = new Subject<'LOADING' | 'LOADED'>();
   @Input() asyncValidatorFactory?: AsyncValidatorFactory;
 
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   FieldConfigInputType = FieldConfigInputType;
   ThemeType = ThemeType;
@@ -45,7 +45,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   private dataLoadStatusSinkSubscription: Subscription;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {
     if (!window['forms']) {
       window['forms'] = [];
@@ -136,25 +136,25 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
     ).subscribe();
   }
 
-  onNestedFormFinalize(nestedFormGroup: FormGroup, fieldConfig: FieldConfig<any>) {
+  onNestedFormFinalize(nestedFormGroup: UntypedFormGroup, fieldConfig: FieldConfig<any>) {
     if (!this.formGroup.get('children') || !this.formGroup.get(`children.${fieldConfig.code}`)) {
       return;
     }
 
-    (this.formGroup.get('children') as FormGroup).removeControl(fieldConfig.code);
+    (this.formGroup.get('children') as UntypedFormGroup).removeControl(fieldConfig.code);
 
-    if (!Object.keys((this.formGroup.get('children') as FormGroup).controls).length) {
+    if (!Object.keys((this.formGroup.get('children') as UntypedFormGroup).controls).length) {
       this.formGroup.removeControl('children');
     }
   }
 
-  onNestedFormInitialize(nestedFormGroup: FormGroup, fieldConfig: FieldConfig<any>) {
+  onNestedFormInitialize(nestedFormGroup: UntypedFormGroup, fieldConfig: FieldConfig<any>) {
     if (!this.formGroup.get('children')) {
-      this.formGroup.addControl('children', new FormGroup({}));
+      this.formGroup.addControl('children', new UntypedFormGroup({}));
     }
 
-    (this.formGroup.get('children') as FormGroup).removeControl(fieldConfig.code);
-    (this.formGroup.get('children') as FormGroup).addControl(fieldConfig.code, nestedFormGroup);
+    (this.formGroup.get('children') as UntypedFormGroup).removeControl(fieldConfig.code);
+    (this.formGroup.get('children') as UntypedFormGroup).addControl(fieldConfig.code, nestedFormGroup);
   }
 
   private initializeForm() {

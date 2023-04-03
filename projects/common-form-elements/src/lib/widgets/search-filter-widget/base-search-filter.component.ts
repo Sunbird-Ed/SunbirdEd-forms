@@ -1,6 +1,6 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import { EventEmitter, OnChanges, OnDestroy, OnInit, SimpleChanges, Directive } from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {Facet, FacetValue} from './models/facets';
 import {cloneDeep, isEqual} from 'lodash-es';
@@ -15,7 +15,7 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
   public baseSearchFilter: IAnySearchFilter = {};
   public searchFilterChange: EventEmitter<IAnySearchFilter> = new EventEmitter<IAnySearchFilter>();
 
-  private formGroup?: FormGroup;
+  private formGroup?: UntypedFormGroup;
   private onResetSearchFilter?: IAnySearchFilter;
 
   protected abstract isFieldMultipleSelectMap: {[field: string]: boolean};
@@ -49,7 +49,7 @@ export abstract class BaseSearchFilterComponent implements OnInit, OnChanges, On
     }
   }
 
-  onFormInitialize(formGroup: FormGroup) {
+  onFormInitialize(formGroup: UntypedFormGroup) {
     this.formGroup = formGroup;
     if (this.currentFilter) {
       this.formGroup.patchValue(this.currentFilter, { emitEvent: false });

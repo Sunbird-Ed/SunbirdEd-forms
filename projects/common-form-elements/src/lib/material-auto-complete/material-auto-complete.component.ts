@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { from, Observable, Subject } from 'rxjs';
 import { map, startWith, tap, takeUntil } from 'rxjs/operators';
@@ -19,14 +19,14 @@ export class MaterialAutoCompleteComponent implements OnInit, OnChanges {
   @Input() labelHtml: any;
   @Input() placeHolder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
-  @Input() formControlRef?: FormControl;
+  @Input() context?: UntypedFormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() platform: any;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
   @Input() config: FieldConfig<String>;
-  localFrmControl = new FormControl();;
+  localFrmControl = new UntypedFormControl();;
   
   selectedOptions = new Array();
   filteredOptions: Observable<any>;
