@@ -15,7 +15,7 @@
     "@angular/animations": "^14.3.0",
     "@angular/cdk": "^13.3.9",
     "@angular/common": "^14.3.0",
-    "@angular/compiler": "~14.3.0",
+    "@angular/compiler": "^14.3.0",
     "@angular/core": "^14.3.0",
     "@angular/forms": "^14.3.0",
     "@angular/material": "^13.3.9",
@@ -36,10 +36,10 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~14.2.11",
-    "@angular/cli": "~14.2.11",
-    "@angular/compiler-cli": "~14.3.0",
-    "@angular/language-service": "~14.3.0",
+    "@angular-devkit/build-angular": "^14.2.11",
+    "@angular/cli": "^14.2.11",
+    "@angular/compiler-cli": "^14.3.0",
+    "@angular/language-service": "^14.3.0",
     "@ionic/angular-toolkit": "^3.1.1",
     "@project-sunbird/client-services": "3.8.6",
     "@types/jasmine": "~3.6.0",
