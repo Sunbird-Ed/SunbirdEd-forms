@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef, OnDestroy} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import { FieldConfigAsyncValidation } from '../common-form-config';
 import { DatePipe } from '@angular/common';
 import * as _ from 'lodash-es';
@@ -18,12 +18,12 @@ export class DynamicDateComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() labelHtml: any;
   @Input() placeholder: String;
   @Input() validations?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() prefix?: String;
   @Input() default: String;
   @Input() field?: any;
   @Input() disabled: Boolean;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @ViewChild('validationTrigger') validationTrigger: ElementRef;
   valueChangesSubscription: Subscription;
   contextValueChangesSubscription: any;

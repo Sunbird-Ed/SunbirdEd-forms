@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
 import {CustomFormControl, DynamicFieldConfigOptionsBuilder, FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder} from '../common-form-config';
 import {tap} from 'rxjs/operators';
@@ -23,10 +23,10 @@ export class DynamicCheckboxComponent implements OnInit {
   @Input() labelHtml?: any;
   @Input() placeholder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() contextTerms?: any;
   @Input() formControlRef?: CustomFormControl;
-  @Input() formGroup?: FormGroup;
+  @Input() formGroup?: UntypedFormGroup;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
@@ -36,7 +36,7 @@ export class DynamicCheckboxComponent implements OnInit {
   @Input() validations?: any;
 
   options$?: Observable<FieldConfigOption<any>[]>;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
   contextValueChangesSubscription?: Subscription;
 

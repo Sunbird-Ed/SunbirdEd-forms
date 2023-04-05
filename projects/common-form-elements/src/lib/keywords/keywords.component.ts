@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, UntypedFormGroup } from '@angular/forms';
 import { CustomFormControl, DynamicFieldConfigOptionsBuilder, FieldConfig, FieldConfigOption } from '../common-form-config';
 import * as _ from 'lodash-es';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ export class KeywordsComponent implements OnInit,OnChanges,OnDestroy {
   @Input() disabled: Boolean;
   @Input() default: String;
   @Input() options: any;
-  @Input() formGroup?: FormGroup;
+  @Input() formGroup?: UntypedFormGroup;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
   @Input() depends?: any;
   public items: any;

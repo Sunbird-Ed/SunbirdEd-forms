@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash-es';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormControl, UntypedFormGroup, ValidationErrors, Validators} from '@angular/forms';
 import { DynamicFieldConfigOptionsBuilder, FieldConfig, FieldConfigAsyncValidation, FieldConfigOption } from '../common-form-config';
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { FieldComparator } from '../utilities/fieldComparator';
@@ -19,7 +19,7 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
   @Input() label: String;
   @Input() field: FieldConfig<String>;
   @Input() options: any;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
 
   @Input() type?: string;
@@ -28,8 +28,8 @@ export class DynamicTimerComponent implements OnInit, OnDestroy {
   @Input() labelHtml: any;
   @Input() placeholder: String;
   @Input() validations?: any;
-  @Input() formControlRef?: FormControl;
-  @Input() formGroup?: FormGroup;
+  @Input() formControlRef?: UntypedFormControl;
+  @Input() formGroup?: UntypedFormGroup;
 
   @Input() prefix?: String;
   @Input() default: String;

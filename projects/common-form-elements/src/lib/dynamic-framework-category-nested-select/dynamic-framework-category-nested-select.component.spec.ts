@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicFrameworkCategoryNestedSelectComponent } from './dynamic-framework-category-nested-select.component';
-import {FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import { CaretDownComponent } from '../icon/caret-down/caret-down.component';
 
 
@@ -19,7 +19,7 @@ describe('DynamicFrameworkCategoryNestedSelectComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DynamicFrameworkCategoryNestedSelectComponent);
     component = fixture.componentInstance;
-    component.formControlRef = new FormControl();
+    component.formControlRef = new UntypedFormControl();
     component.options = [];
     fixture.detectChanges();
   });

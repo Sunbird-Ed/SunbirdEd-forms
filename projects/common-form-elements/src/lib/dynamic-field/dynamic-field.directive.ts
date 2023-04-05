@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, ComponentRef, Directive, Input, OnInit, ViewContainerRef, Renderer2, ElementRef} from '@angular/core';
 
-import { FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { FieldConfig } from '../common-form-config';
 // import { InputComponent } from '../input/input.component';
 // import { ButtonComponent } from '../button/button.component';
@@ -59,18 +59,18 @@ export class DynamicFieldDirective implements OnInit {
 
 
   @Input() field: FieldConfig<String>;
-  @Input() formGroup: FormGroup;
-  @Input() formControlRef?: FormControl;
+  @Input() formGroup: UntypedFormGroup;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() disabled?: boolean;
   @Input() visible?: boolean;
   @Input() label: String;
   @Input() labelHtml?: any;
   @Input() options?: any = [];
   @Input() placeholder?: string;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() validations?: any;
   @Input() contextTerms?: any = [];
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
   @Input() default: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;

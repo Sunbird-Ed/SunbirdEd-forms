@@ -1,5 +1,5 @@
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
-import {AsyncValidatorFn, FormControl, FormGroup} from '@angular/forms';
+import {AsyncValidatorFn, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 
 export enum FieldConfigInputType {
   INPUT = 'input',
@@ -37,7 +37,7 @@ export interface DialcodeResponse {
 }
 
 export type FieldConfigOptionsBuilder<T> =
-  (control: FormControl, context?: FormControl, notifyLoading?: () => void,
+  (control: UntypedFormControl, context?: UntypedFormControl, notifyLoading?: () => void,
     notifyLoaded?: () => void) => Observable<FieldConfigOption<T>[]> | Promise<FieldConfigOption<T>[]>;
 export type AsyncValidatorFactory = (marker: string, trigger: HTMLElement) => AsyncValidatorFn;
 
@@ -111,7 +111,7 @@ export interface FieldConfig<T, F extends FieldConfigInputType = any> {
   value?: any;
   terms?: any;
   range?: any;
-  depends?: FormControl[];
+  depends?: UntypedFormControl[];
   dependencyTerms?: any;
   output?: string;
   sourceCategory?: string;
@@ -133,7 +133,7 @@ export interface Validator {
 
 
 export type DynamicFieldConfigOptionsBuilder<T> =
-  (control: CustomFormControl, depends?: FormControl[], formGroup?: FormGroup, notifyLoading?: () => void,
+  (control: CustomFormControl, depends?: UntypedFormControl[], formGroup?: UntypedFormGroup, notifyLoading?: () => void,
     notifyLoaded?: () => void) => Observable<FieldConfigOption<T>[]> | Promise<FieldConfigOption<T>[]>;
 
 
@@ -145,11 +145,11 @@ export interface SectionConfig<T> {
 
 
 
-export interface CustomFormGroup extends FormGroup {
+export interface CustomFormGroup extends UntypedFormGroup {
   lastChangedField?: any;
 }
 
-export interface CustomFormControl extends FormControl {
+export interface CustomFormControl extends UntypedFormControl {
   termsForDependantFields?: any;
   sourceCategory?: any;
   output?: any;

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Subscription, combineLatest, Subject, merge, from, Observable } from 'rxjs';
 import * as _ from 'lodash-es';
-import { FormControl , FormGroup} from '@angular/forms';
+import { UntypedFormControl , FormGroup} from '@angular/forms';
 import { CustomFormControl, CustomFormGroup, DynamicFieldConfigOptionsBuilder,
   FieldConfig, FieldConfigOption } from '../common-form-config';
 import { tap, takeUntil } from 'rxjs/operators';
@@ -41,7 +41,7 @@ export class TopicpickerComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() formGroup?: CustomFormGroup;
   @Input() default?: any;
 
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
   @Input() dependencyTerms?: any = [];
   public selectedNodes: any;

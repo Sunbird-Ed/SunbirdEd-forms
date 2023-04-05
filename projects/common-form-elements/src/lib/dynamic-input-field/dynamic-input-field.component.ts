@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { FormControl, FormGroup, FormBuilder, FormArray } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, UntypedFormBuilder, UntypedFormArray } from "@angular/forms";
 import { FieldConfig } from "../common-form-config";
 import * as _ from 'lodash-es';
 
@@ -11,14 +11,14 @@ import * as _ from 'lodash-es';
 export class DynamicInputFieldComponent implements OnInit {
   @Input() label: String;
   @Input() placeholder: String;
-  @Input() formControlRef: FormControl;
+  @Input() formControlRef: UntypedFormControl;
   @Input() field: FieldConfig<String>;
   @Input() validations?: any;
   @Input() default: String;
   @Input() disabled: Boolean;
-  dynamicForm: FormGroup;
+  dynamicForm: UntypedFormGroup;
   disabledAddInput:boolean=false;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit() {
     this.dynamicForm = this.fb.group({
@@ -35,14 +35,14 @@ export class DynamicInputFieldComponent implements OnInit {
     }
   }
 
-  newInput(val?:any): FormGroup {
+  newInput(val?:any): UntypedFormGroup {
     return this.fb.group({
       inputVal: val ? val : '',
     });
   }
 
-  inputsArray(): FormArray {
-    return this.dynamicForm.get("inputs") as FormArray;
+  inputsArray(): UntypedFormArray {
+    return this.dynamicForm.get("inputs") as UntypedFormArray;
   }
 
   addInputs(val?:any) {
