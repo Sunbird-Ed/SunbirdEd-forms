@@ -27,7 +27,7 @@ const run = async () => {
         updateFiles(environment);
         updatePackageFile(packageFilepath, answers);
         console.log(chalk.bgBlue(' =========== Building Angular Package ==========='));
-        const child = spawn('ng', ['build', 'common-form-elements', '--prod']);
+        const child = spawn('ng', ['build', 'common-form-elements']);
         child.stdout.on('data', (data) => {
             console.log(chalk.green(`${data}`));
         });
