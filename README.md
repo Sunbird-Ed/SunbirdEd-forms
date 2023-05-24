@@ -1,6 +1,6 @@
 # SunbirdEdForms
 
-Contains  Form component powered by angular. This component expects a configuration and renders form according to the view.
+This library contains form component powered by Angular. This component expects a configuration and renders form according to the view. It offers the flexibility to render wide variety of form elements like text area, textbox, dropdown, etc based on the configuration passed to the component.
 
 # Getting Started
 
