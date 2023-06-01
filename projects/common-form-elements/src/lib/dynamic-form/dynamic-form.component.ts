@@ -5,10 +5,8 @@ import {AbstractControl, UntypedFormBuilder, FormControl, FormGroup, ValidationE
 import {Subject, Subscription} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash-es';
-import * as moment_ from 'moment';
+import moment from 'moment';
 import { FieldComparator } from '../utilities/fieldComparator';
-const moment = moment_;
-
 @Component({
   selector: 'sb-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -419,8 +417,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   compareDate(validations,types, control: AbstractControl): ValidationErrors | null {
     let result = validations.find(data => data.type === 'dateFormat');
-    let minDate = moment_(types.value, result.value).format('YYYY-MM-DD');
-    let maxDate = moment_(types.value, result.value).format('YYYY-MM-DD');
+    let minDate = moment(types.value, result.value).format('YYYY-MM-DD');
+    let maxDate = moment(types.value, result.value).format('YYYY-MM-DD');
       if ((types.type==='minDate' && control.value < minDate)){
         return {mindate:types.message};
       }
