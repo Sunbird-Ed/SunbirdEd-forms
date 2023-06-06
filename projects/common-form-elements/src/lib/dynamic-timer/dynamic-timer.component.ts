@@ -5,7 +5,7 @@ import { DynamicFieldConfigOptionsBuilder, FieldConfig, FieldConfigAsyncValidati
 import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { FieldComparator } from '../utilities/fieldComparator';
 import { tap } from 'rxjs/operators';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'sb-dynamic-timer',

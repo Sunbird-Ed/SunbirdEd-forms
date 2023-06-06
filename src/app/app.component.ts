@@ -4,7 +4,7 @@ import { merge, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
 import { timer } from './formConfig';
 import * as _ from 'lodash-es';
-import * as moment_ from 'moment';
+import moment from 'moment';
 let evidenceMimeType;
 let ecm;
 @Component({
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
   valueChanges(event) {
     if(event.startDate){
-        let date = moment_(event.startDate).format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
+        let date = moment(event.startDate).format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
         event.startDate=date;
       }
     console.log(event);
