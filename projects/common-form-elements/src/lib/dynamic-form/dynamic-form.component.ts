@@ -367,7 +367,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   validateTime(pattern, field, control: AbstractControl): ValidationErrors | null  {
     const isPatternMatched = moment(control.value, pattern, true).isValid();
-    if (!isPatternMatched && (control.touched || control.dirty)) {
+    if (!isPatternMatched  && control.value && (control.touched || control.dirty)) {
       return {time : true};
     }
     return null;
@@ -402,7 +402,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   compareFields(criteria, control: AbstractControl): ValidationErrors | null {
     const result = _.find(criteria, (val, key) => {
-      if (control && control.parent && control.parent.controls[val]) {
+      if (control && control.parent && control.parent.controls[val] && control.parent.controls[val].value) {
         return FieldComparator.operators[key](control.parent.controls[val].value, control.value);
       } else {
         return false;
