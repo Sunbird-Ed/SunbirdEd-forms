@@ -1,6 +1,6 @@
 # SunbirdEdForms
 
-Contains  Form component powered by angular. This component expects a configuration and renders form according to the view.
+Contains  Form component powered by angular 11.2.14 . This component expects a configuration and renders form according to the view.
 
 # Getting Started
 
