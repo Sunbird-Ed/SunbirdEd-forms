@@ -1,0 +1,21 @@
+<div class="sb-dropdown">
+  <label class="input-label" [attr.data-title]="field.description ? field.description : null"  *ngIf="label">{{label}}</label>
+  <div class="dropdown-container">
+    <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
+    <select [formControl]="formControlRef" [ngClass]="{'disabled': disabled === true ? true : ( depends ? (isDependsInvalid ? true : null) : null ) }"
+            [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )"
+            class="sb-dropdown-select" [compareWith]="ValueComparator.valueComparator" name="sb-dropdown">
+        <option [defaultSelected]="!default" [ngValue]="null" disabled>{{placeholder}}</option>
+        <ng-container *ngIf="field.dataType === 'list'">
+          <option class="optionList" *ngFor="let option of resolvedOptions; let i=index" [ngValue]="getOptionValueForRange(option)">
+            {{[option.get('name')]}}
+          </option>
+        </ng-container>
+        <ng-container *ngIf="field.dataType === 'text'">
+          <option class="optionList" *ngFor="let option of resolvedOptions; let i=index" [ngValue]="getOptionValueForRange(option)">
+            {{option.get('name')}}
+          </option>
+        </ng-container>
+    </select>
+  </div>
+</div>

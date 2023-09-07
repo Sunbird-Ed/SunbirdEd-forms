@@ -1,0 +1,324 @@
+.multi-select-section-app {
+  margin: 1rem 0;
+}
+
+label{
+  font-size: 16px;
+}
+.multi-select-container {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.multi-select-container .caret-down {
+  position: absolute;
+  top: 12px;
+  right: 19px;
+  z-index: 0;
+}
+
+.multi-select-container .list-border .placeholder {
+  margin: 0;
+  color: var(--gray-100);
+}
+
+.multi-select-container .list-border ul[disabled] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.multi-select-container .list-border ul {
+  list-style-type: none;
+  position: inherit !important;
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 0.3rem;
+}
+
+.multi-select-container .list-border {
+  border: 0.5px solid var(--gray-400);
+  padding: 0.6rem 1.7rem 0.6rem 0.8rem !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  left: 0;
+  height: inherit !important;
+}
+
+.multi-select-container .list-border li {
+  float: left;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 4px;
+}
+
+.multi-select-container .dropdown ul {
+  list-style-type: none;
+}
+
+.multi-select-container .dropdown li {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid var(--white);
+}
+
+.multi-select-container .dropdown ul {
+  margin: 0;
+  padding: 0;
+}
+
+.multi-select-container .row {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  grid-gap: 0rem;
+}
+
+.multi-select-container .footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 0rem;
+  padding-left: 8px;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}
+
+.multi-select-container .sb-modal-container {
+  position: fixed;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.multi-select-container .sb-modal-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.6);
+  left: 0;
+  z-index: 10;
+}
+
+.multi-select-container .fa .fa-close {
+  float: right;
+}
+
+.multi-select-container .sb-modal {
+  display: block;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  --border-top: 0.5px solid var(--white);
+  z-index: 11;
+  background: var(--white);
+}
+
+.multi-select-container .sb-modal ul {
+  list-style-type: none;
+}
+
+.multi-select-container .sb-modal li {
+  cursor: pointer;
+  padding-bottom: 8px;
+  padding-top: 8px;
+  padding-left: 16px;
+
+}
+
+.value-label {
+  width: 270px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.multi-select-container .sb-forms-radio {
+  margin-top: 6px;
+}
+
+.multi-select-container .sb-form-button {
+  display: inline;
+  padding: 10px;
+}
+
+.multi-select-container .sb-btn-primary-outline {
+  color: var(--primary-color);
+  background-color: transparent;
+  border: 0.5px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 10px 40px;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.multi-select-container .sb-btn-primary {
+  color: var(--white);
+  background-color: var(--primary-color);
+  border: 0.5px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 10px 40px;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.multi-select-container .header {
+  padding: 16px;
+  margin-left: 8px;
+  font-weight: bold;
+}
+
+.multi-select-container .body {
+  padding-top: 8px;
+  border-bottom: 0.5px solid var(--gray-100);
+  ;
+  border-top: 0.5px solid var(--gray-100);
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.list-with-ellipsis:nth-child(3) {
+  float: left;
+  font-size: 12px;
+  font-weight: 700;
+  margin-left: 4px;
+  width: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.list-with-ellipsis:nth-child(n+4) {
+  visibility: hidden;
+}
+
+/* The container */
+.multi-select-container .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  border: 0.4px solid var(--black);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
+  background-color: var(--white);
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
+  background-color: var(--primary-600);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 5px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.sb-modal-dropdown-web ul {
+  list-style-type: none;
+  display: block;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 2px 2px 2px 2px aliceblue;
+  border: 2px solid #80a7ce;
+  max-height: 314px;
+  overflow: scroll;
+  padding-left: 1rem;
+}
+
+.sb-modal-dropdown-web ul li {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.sb-modal-dropdown-web ul li label{
+  padding-left: 0.5em;
+}
+
+.sb-modal-dropdown-web .selected-option {
+  font-weight: bold;
+  background-color: #eee;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}

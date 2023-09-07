@@ -1,0 +1,18 @@
+
+<div class="dynamic-form" [formGroup]="formGroup">
+  <div *ngFor="let section of config" class="formSection" [ngClass]="section?.renderingHints?.class || 'grid two-column-grid'">
+    <span class="sectionName"> {{section?.name}} </span>
+    <ng-container *ngFor="let field of section['fields']">
+      <ng-container *ngIf="field.visible">
+        <ng-container sbDynamicField
+        [depends]="getAllDependsFormControl(field.code, field.depends)" [dependencyTerms]="field.depends ? fetchDependencyTerms(field.code, field.depends) : []"
+        [context]="field.context ? formGroup.get(field.context) : null" [contextTerms]="fetchContextTerms(config, field.context)"
+        [options]="field.terms" [field]="field" [formGroup]="formGroup" [default]="field.default || ''" [label]="field.label" [labelHtml]="field.labelHtml || undefined" [formControlRef]="formGroup.get(field.code)"
+        [dataLoadStatusDelegate]="dataLoadStatusDelegate" [placeholder]="field.placeholder || ''" [visible]="field.visible === false ? false : true" [validations]="field.validations || []"
+        [disabled]="field.editable === true ? false : true">
+      </ng-container>
+    </ng-container>
+    </ng-container>
+  </div>
+</div>
+

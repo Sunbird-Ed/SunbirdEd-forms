@@ -1,0 +1,80 @@
+label {
+  font-size: 16px;
+}
+.dropdown-icon {
+  position: absolute;
+  top: 0.5rem;
+  right: 18px;
+  z-index: 1;
+}
+.dropdown-container{
+position: relative;
+}
+
+select {
+-webkit-appearance: none;
+-moz-appearance: none;
+text-indent: 1px;
+text-overflow: '';
+}
+
+select[disabled] {
+opacity: 0.3;
+}
+
+.sb-dropdown-select {
+opacity: 0.99;
+color: #333333;
+font-family: "Noto Sans";
+font-size: 12px;
+font-weight: bold;
+letter-spacing: 0;
+line-height: 17px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+
+.sb-dropdown-select {
+  opacity: 0.99;
+  color: #333333;
+  font-family: "Noto Sans";
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 17px;
+}
+
+.sb-dropdown {
+  margin-bottom: 8px;
+}
+
+.placeholder select option:first-child {
+  color: #999999;
+}
+
+.option-default {
+  color: #333333;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.sb-dropdown select {
+  background-color: white;
+  padding: 10px 20px 10px 20px;
+  font-size: 14px;
+  width: 100%;
+  border: 0.5px solid #333333;
+}
+
+
+.cf-error{
+color: red;
+font-family: "Noto Sans";
+font-size: 12px;
+}
+

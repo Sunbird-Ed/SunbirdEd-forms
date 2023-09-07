@@ -1,0 +1,14 @@
+<div class="sb-textarea-container">
+  <label [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+  <textarea class="sb-textarea" [formControl]="formControlRef" rows="5" name="sb-textarea" placeholder={{placeholder}} [attr.disabled]="disabled ? true : null">
+  </textarea>
+  <div class="remaining-length" *ngIf="remainderValidLength$">
+     {{remainderValidLength$ | async}} Characters left
+  </div>
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>

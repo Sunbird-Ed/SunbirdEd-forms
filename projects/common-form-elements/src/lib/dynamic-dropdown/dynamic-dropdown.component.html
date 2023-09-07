@@ -1,0 +1,58 @@
+<div class="sb-dropdown" *ngIf="!type">
+  <label [attr.data-title]="field.description ? field.description : null">{{label}} {{context && 'has context'}}  {{context ?  field.context : '' }}</label><sb-dynamic-info [data]="field"></sb-dynamic-info>
+  <ng-container *ngIf="options">
+    <div class="dropdown-container">
+      <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
+      <!-- [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )" -->
+      <select [formControl]="formControlRef"
+              [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )"
+              [compareWith]="ValueComparator.valueComparator" class="sb-dropdown-select" id="sb-dropdown"
+              name="sb-dropdown">
+        <option [defaultSelected]="!default" [ngValue]="null" disabled>{{placeholder}}
+        </option>
+        <ng-container *ngIf="field.range && isOptionsArrayMap(field.range) && !field.association">
+          <option class="optionsArrayMap" *ngFor="let option of field.range" [ngValue]="getOptionValueForRange(option, 'map')">{{option.label}}</option>
+        </ng-container>
+        <ng-container *ngIf="field.range && isOptionsArray(field.range) && !isOptionsArrayMap(field.range) && !field.association">
+          <option class="optionsArray" *ngFor="let option of field.range" [ngValue]="getOptionValueForRange(option, 'array')">{{option.name || option}}</option>
+        </ng-container>
+
+        <ng-container *ngIf="field.range && isOptionsClosure(field.range)">
+          <option class="closure" *ngFor="let option of options$ | async" [ngValue]="getOptionValueForRange(option, 'closure')">{{option.label}}</option>
+        </ng-container>
+
+        <!-- <ng-container *ngIf="isOptionsMap(options) && context && context.value && !field.association">
+          <option *ngFor="let option of options[context.value]" [ngValue]="option.value">{{option.label}}</option>
+        </ng-container> -->
+
+        <ng-container *ngIf="!field.range && field.terms && !isDependsEmpty">
+          <option class="optionsLast" *ngFor="let option of fetchAssociations()" [ngValue]="getOptionValueForTerms(option)">{{option.name}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Dropdown for filters component -->
+<div class="sb-dropdown" *ngIf="type === 'facet'">
+  <label>{{label}}</label>
+  <ng-container *ngIf="options && options.data">
+    <div class="dropdown-container">
+      <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
+      <select [attr.disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )"
+        class="sb-dropdown-select" [ngClass]="(styleClass ? styleClass : 'default-dropdown')" id="sb-dropdown" name="sb-dropdown"
+        (change)="onChangeFacet($event)" placeholder="placeholder">
+        <option *ngIf="!default" [disabled]="true" selected>{{placeholder}}</option>
+        <option *ngFor="let option of options.data" [ngValue]="option" [selected]="options.default === option.value">{{option.label}}</option>
+      </select>
+    </div>
+  </ng-container>
+</div>
+<ng-container *ngFor="let validation of validations">
+  <div class="cf-error"
+    *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+    {{ validation.message }}
+  </div>
+</ng-container>
+
+<!-- Dropdown for filters component -->

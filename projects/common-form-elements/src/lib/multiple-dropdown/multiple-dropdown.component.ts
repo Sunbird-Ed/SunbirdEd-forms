@@ -1,7 +1,19 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+  HostListener,
+  ViewChild,
+  Output, EventEmitter
+} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {from, Subject} from 'rxjs';
-import {FieldConfigOptionsBuilder} from '../common-form-config';
+import {FieldConfig, FieldConfigInputType, FieldConfigInputTypeOptionsModelMap, FieldConfigOptionsBuilder} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
 import {fromJS, List, Map, Set} from 'immutable';
 
@@ -9,10 +21,11 @@ import {fromJS, List, Map, Set} from 'immutable';
 @Component({
   selector: 'sb-multiple-dropdown',
   templateUrl: './multiple-dropdown.component.html',
-  styleUrls: ['./multiple-dropdown.component.css'],
+  styleUrls: ['./multiple-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() extras?: FieldConfigInputTypeOptionsModelMap[FieldConfigInputType.SELECT];
   @Input() disabled?: boolean;
   @Input() options: any;
   @Input() label?: string;
@@ -21,9 +34,12 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() isMultiple?: boolean;
   @Input() context?: FormControl;
   @Input() formControlRef?: FormControl;
+  @Input() platform: any;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
+  @Input() config: FieldConfig<String>;
+  showModalStateDirty = false;
   showModal = false;
   tempValue = Set<any>();
   resolvedOptions = List<Map<string, string>>();
@@ -33,15 +49,26 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
   private dispose$ = new Subject<undefined>();
 
+  @HostListener('document:click')
+  docClick() {
+    if (this.showModal) {
+      this.showModal = false;
+    }
+  }
   constructor(
     private changeDetectionRef: ChangeDetectorRef
   ) {
   }
   ngOnInit() {
+    if (!this.extras) {
+      this.extras = { type: 'dropdown' };
+    }
+
     if (this.context) {
       this.context.valueChanges.pipe(
         tap(() => {
           this.formControlRef.patchValue(null);
+          this.tempValue = this.tempValue.clear();
           this.setupOptions();
         }),
         takeUntil(this.dispose$)
@@ -63,21 +90,37 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
 
     this.setupOptions();
   }
-
   onSubmit() {
     const finalValue = this.tempValue.toList().toJS();
     this.formControlRef.patchValue(this.isMultiple ? finalValue : finalValue[0]);
     this.formControlRef.markAsDirty();
     this.showModal = false;
   }
-  openModal() {
+  openModal(event) {
     if (this.context && this.context.invalid) {
       return;
     }
 
-    this.setTempValue(this.formControlRef.value);
+    this.showModalStateDirty = true;
 
-    this.showModal = true;
+    this.setTempValue(this.formControlRef.value);
+    const htmlCollection = document.getElementsByClassName('sb-modal-dropdown-web');
+    const modalElements = Array.from(htmlCollection);
+    const isModalAlreadyOpened = modalElements.some((element: HTMLElement) => element.hidden === false );
+
+    if (this.platform === 'web' && isModalAlreadyOpened && !this.showModal) {
+      modalElements.forEach((item: HTMLElement) => {
+        item.hidden = true;
+      });
+    }
+
+    if (this.platform === 'web' && this.showModal) {
+      this.showModal = false;
+    } else {
+      this.showModal = true;
+    }
+
+    event.stopPropagation();
   }
 
   addSelected(option: Map<string, string>) {
@@ -158,10 +201,32 @@ export class MultipleDropdownComponent implements OnInit, OnChanges, OnDestroy {
       ).subscribe();
     }
 
-    this.resolvedOptions.forEach((option) => {
-      this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(option.get('value'), option.get('label'));
-    });
+    if (this.resolvedOptions) { 
+      this.resolvedOptions.forEach((option) => {
+        this.optionValueToOptionLabelMap = this.optionValueToOptionLabelMap.set(option.get('value'), option.get('label'));
+      });
+    }
 
     this.setTempValue(this.default);
   }
+
+  concatinatedMultipeSelectVal(value){
+    if(!value){
+      return '';
+    }
+    let concatStr = '';
+    if(Array.isArray(value) && value.length){
+      for (let index = 0; index < value.length; index++) {
+        if(!concatStr.length){
+          concatStr += this.optionValueToOptionLabelMap.get(fromJS(value[index]));
+        } else {
+          concatStr += ', ' + this.optionValueToOptionLabelMap.get(fromJS(value[index]));
+        }
+      }
+    } else if((typeof value === 'object' && !Array.isArray(value)) || typeof value==='string'){
+      concatStr = this.optionValueToOptionLabelMap.get(fromJS(value))
+    }
+    return concatStr;
+  }
+
 }

@@ -1,0 +1,41 @@
+label {
+  font-size: 16px;
+}
+.sb-textarea {
+  width: 100%;
+  padding: 8px 8px;
+  box-sizing: border-box;
+  border: 1px solid #CCCCCC;
+  border-radius: 0.25rem;
+  resize: vertical;
+}
+
+.sb-textarea-container {
+  margin-bottom: 10px;
+}
+.sb-textarea-container {
+    position: relative;
+}
+
+.remaining-length {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 1rem;
+    font-size: 10px;
+    color: #999;
+}
+
+::placeholder {
+  padding: 0.25rem;
+  color: #999999;
+  font-family: "Noto Sans";
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 20px;
+}
+
+.cf-error{
+  color: red;
+  font-family: "Noto Sans";
+  font-size: 12px;
+}

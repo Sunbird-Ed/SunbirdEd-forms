@@ -1,6 +1,6 @@
-import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef} from '@angular/core';
+import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import { FieldConfigAsyncValidation } from '../common-form-config';
+import { FieldConfig, FieldConfigAsyncValidation } from '../common-form-config';
 
 @Component({
   selector: 'sb-textbox',
@@ -15,7 +15,11 @@ export class TextboxComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() validations?: any;
   @Input() formControlRef?: FormControl;
   @Input() prefix?: String;
+  @Input() config: FieldConfig<String>;
+  @Output() labelClickEventHandler = new EventEmitter();
+  @Output() inputIconClick = new EventEmitter();
   @ViewChild('validationTrigger') validationTrigger: ElementRef;
+  image: string;
 
   constructor() {
   }
@@ -38,6 +42,25 @@ export class TextboxComponent implements OnInit, AfterViewInit, OnChanges {
         this.validationTrigger.nativeElement
       ));
     }
+    if (this.config.templateOptions.showIcon && this.config.templateOptions.showIcon.show) {
+      this.image = this.config.templateOptions.showIcon.image.inactive;
+    }
   }
 
+  labelClickHandler(event) {
+    this.labelClickEventHandler.emit(event);
+  }
+
+  inputIconHandler(event) {
+    if (event) {
+      if(this.config.templateOptions.type == 'text') {
+        this.config.templateOptions.type = "password";
+        this.image = this.config.templateOptions.showIcon.image.inactive;
+      } else if(this.config.templateOptions.type == 'password') {
+        this.config.templateOptions.type = "text";
+        this.image = this.config.templateOptions.showIcon?.image?.active;
+      }
+    }
+    this.inputIconClick.emit({config: this.config, event});
+  }
 }

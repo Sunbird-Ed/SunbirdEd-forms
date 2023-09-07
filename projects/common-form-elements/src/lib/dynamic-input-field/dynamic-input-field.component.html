@@ -1,0 +1,23 @@
+<div class="sb-input">
+    <label [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+  <div [formGroup]="dynamicForm">
+    <div formArrayName="inputs">
+      <div *ngFor="let inputs of inputsArray().controls; let i=index" [formGroupName]="i">
+        <input class="sb-textbox"  formControlName="inputVal" placeholder={{placeholder}}
+          [attr.disabled]="disabled ? true : null" (change)="onSubmit()" />
+      </div>
+     
+    </div>
+  </div>
+  <div>
+    <button [disabled]="disabledAddInput" [ngClass]="disabledAddInput === true ? 'btnInActive' : 'btnActive'"
+    (click)="addInputs()">+ Add Levels</button>
+  </div>
+ 
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && validation.type && validation.message && formControlRef.errors && formControlRef.errors[validation.type]) && (inputsArray().length > validation.value)">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,16 @@
+<ng-container *ngIf="formControlRef?.isVisible === 'yes'">
+  <div class="sb-checkbox sb-checkbox-primary" [attr.data-title]="(field.description && !field.showInfo) ? field.description : null" [attr.disabled]="disabled ? true : null">
+    <input [attr.disabled]="disabled ? true : null" type="checkbox" id="{{_.kebabCase(field.name) || field.code}}"
+    name="{{_.kebabCase(field.name) || field.code}}" [checked]="checked" (change)="onChecklistChange($event.target.checked)">
+    <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}">{{label}} <sb-dynamic-info [data]="field"></sb-dynamic-info></label>
+    <label class="label-html" *ngIf="labelHtml">
+      <div [innerHTML]="labelHtml | safeHtml"></div><sb-dynamic-info [data]="field"></sb-dynamic-info>
+    </label>
+  </div>
+</ng-container>
+<ng-container *ngFor="let validation of validations">
+  <div class="cf-error"
+    *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+    {{ validation.message }}
+  </div>
+</ng-container>

@@ -1,0 +1,17 @@
+<div class="treepicker-parent">
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+  <div [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid && !isDependsTouched ? true : null) : null )"
+  id="treePicker_{{field.code}}" class="topic-picker-selector_{{field.code}} cursor-pointer list-border">
+  {{placeHolder}}
+  </div>
+  <!-- [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid ? true : null) : null )" -->
+  <input
+  [attr.disabled]="disabled ? true : ( depends ? (isDependsInvalid && !isDependsTouched ? true : null) : null )"
+  [formControl]="formControlRef" [placeholder]="placeHolder" readonly hidden/>
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>

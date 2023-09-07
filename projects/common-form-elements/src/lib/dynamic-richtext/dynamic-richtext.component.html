@@ -1,0 +1,24 @@
+<div class="sb-input" *ngIf="visible">
+    <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+    <div
+      [ngClass]="{'async-text': (asyncValidation && asyncValidation?.trigger), '': (!asyncValidation || !asyncValidation?.trigger)}">
+      <div class="prefix" *ngIf="prefix">
+        <span>{{prefix}}</span>
+      </div>
+      <textarea *ngIf="showEditor" id="richTextCount" #EDITOR [formControl]="formControlRef" [class.valid]="formControlRef.valid &&
+  (formControlRef.dirty || formControlRef.touched)" [class.invalid]="formControlRef.invalid &&
+  (formControlRef.dirty || formControlRef.touched)" class="sb-textbox {{disabled}} ck ck-reset ck-editor ck-rounded-corners 
+  ck ck-reset ck-editor ck-rounded-corners " placeholder={{placeholder}} type="text"
+        [attr.disabled]="disabled ? true : null"></textarea>
+      <div class="async-icons" *ngIf="asyncValidation && asyncValidation?.trigger">
+      </div>
+    </div>
+  
+    <ng-container *ngFor="let validation of validations">
+      <div class="cf-error"
+        *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  
+  </div> 

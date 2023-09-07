@@ -1,0 +1,52 @@
+.treepicker-parent {
+    margin: 1rem 0;
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+.topic-picker-selector {
+    width: 100%;
+    padding: 8px 16px;
+    border: 0.5px solid #333333;
+    box-sizing: border-box;
+}
+
+.cf-error{
+  color: red;
+  font-family: "Noto Sans";
+  font-size: 12px;
+}
+
+
+.treepicker-parent .list-border {
+    border: .5px solid var(--gray-400);
+    padding: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    left: 0;
+    height: 40px;
+}
+[data-title]:hover::before {
+  content: attr(data-title);
+  position: absolute;
+  bottom: -26px;
+  display: inline-block;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  font-family: sans-serif;
+  white-space: nowrap;
+  border: solid 1px #ccc;
+}
+[data-title] {
+  position: relative;
+  cursor: pointer;
+  z-index: 9999;
+}

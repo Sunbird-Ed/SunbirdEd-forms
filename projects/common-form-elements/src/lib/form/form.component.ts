@@ -11,7 +11,7 @@ import {
   SimpleChanges,
   ViewChildren
 } from '@angular/core';
-import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType} from '../common-form-config';
+import {AsyncValidatorFactory, FieldConfig, FieldConfigInputType, FieldConfigValidationType, ThemeType} from '../common-form-config';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
@@ -22,11 +22,15 @@ import {distinctUntilChanged, map, scan, tap} from 'rxjs/operators';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() fieldTemplateClass?: String;
   @Output() initialize = new EventEmitter();
   @Output() finalize = new EventEmitter();
   @Output() linkClicked = new EventEmitter();
   @Output() valueChanges = new EventEmitter();
   @Output() statusChanges = new EventEmitter();
+  @Output() labelClickEvent = new EventEmitter();
+  @Output() formClickEvents = new EventEmitter();
+  @Input() platform: 'mobile' | 'web' = 'web';
   @Output() dataLoadStatus = new EventEmitter<'LOADING' | 'LOADED'>();
   @Input() config;
   @Input() dataLoadStatusDelegate = new Subject<'LOADING' | 'LOADED'>();
@@ -35,7 +39,7 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   formGroup: FormGroup;
 
   FieldConfigInputType = FieldConfigInputType;
-
+  ThemeType = ThemeType;
   private statusChangesSubscription: Subscription;
   private valueChangesSubscription: Subscription;
   private dataLoadStatusSinkSubscription: Subscription;
@@ -231,4 +235,12 @@ export class FormComponent implements OnInit, OnChanges, OnDestroy {
   clickedLink(event) {
     this.linkClicked.emit(event);
   }
+
+  labelEventClick(event) {
+    this.labelClickEvent.emit(event);
+  }
+  formClickEventsHandler(event) {
+    this.formClickEvents.emit(event);
+  }
+  
 }

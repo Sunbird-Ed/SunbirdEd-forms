@@ -1,0 +1,43 @@
+<div class="sb-input" *ngIf="shouldBeVisible === 'yes'">
+    <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+    <!-- <div *ngIf="labelHtml" [innerHTML]="labelHtml | transposeHtml"></div> -->
+
+    <div [ngClass]="{'async-text': (asyncValidation && asyncValidation?.trigger), '': (!asyncValidation || !asyncValidation?.trigger)}">
+      <div class="prefix" *ngIf="prefix">
+        <span>{{prefix}}</span>
+      </div>
+      <input [formControl]="formControlRef" [class.valid]="formControlRef.valid &&
+      (formControlRef.dirty || formControlRef.touched)"
+  [class.invalid]="formControlRef.invalid &&
+  (formControlRef.dirty || formControlRef.touched)" class="form-control sb-textbox {{disabled}}" placeholder={{placeholder}} [type]="field?.dataType"
+  [attr.disabled]="disabled ? true : null">
+      <div class="async-icons" *ngIf="asyncValidation && asyncValidation?.trigger">
+        <!-- <sb-green-tick *ngIf="formControlRef.value && formControlRef.status === 'VALID'"></sb-green-tick> -->
+        <!-- <sb-red-exclamation *ngIf="formControlRef.value && formControlRef.status !== 'VALID'"></sb-red-exclamation> -->
+        <!-- <sb-empty-circle *ngIf="!formControlRef.value"></sb-empty-circle> -->
+      </div>
+    </div>
+
+    <ng-container *ngFor="let validation of validations">
+      <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] &&
+      (formControlRef.dirty || formControlRef.touched)) ">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="asyncValidation?.trigger">
+      <div class="async-validator"
+        [hidden]="formControlRef.status === 'VALID' || formControlRef.status !== 'PENDING' || !formControlRef.value">
+        <div class="cf-error" *ngIf="asyncValidation?.message">
+          {{ asyncValidation.message }}
+        </div>
+        <div class="async-container">
+          <button class="async-btn" #validationTrigger [attr.data-marker]="asyncValidation.marker">
+            {{asyncValidation.trigger}}
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>

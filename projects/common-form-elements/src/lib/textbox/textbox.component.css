@@ -1,13 +1,12 @@
 label {
   display: block;
-  font-size: 1rem;
-  margin: 0;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
 }
-
 .sb-textbox {
   width: 100%;
-  padding: 8px 16px;
-  border: 0.5px solid #333333;
+  padding: 0.5rem 1rem;
+  border: 0.031rem solid #333333;
   box-sizing: border-box;
 }
 
@@ -15,8 +14,7 @@ label {
   padding: 0.25rem;
   opacity: 0.99;
   color: #999999;
-  font-family: "Noto Sans";
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
 }
 
@@ -26,25 +24,23 @@ label {
 
 .cf-error{
   color: red;
-  font-family: "Noto Sans";
-  font-size: 12px;
+  font-size: 0.75rem;
 }
-
 .async-container{
   text-align: center;
 }
 
 .async-btn{
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   background-color: #008840;
   color: white;
-  border-radius: 20px !important;
+  border-radius: 1.25rem !important;
 }
 
 .async-text{
   display: flex;
   align-items: center;
-  border: 0.5px solid #333333;
+  border: 0.031rem solid #333333;
 }
 
 .async-text > input{
@@ -57,10 +53,31 @@ label {
 
 .prefix{
   white-space: nowrap;
-  padding: 0 4px;
+  padding: 0 0.25rem;
 }
 
 .async-icons{
   margin: auto;
-  padding: 0 4px;
+  padding: 0 0.25rem;
+}
+
+.right-icon {
+  width: 1.563rem;
+  margin: 0.375rem 0 0 -3.125rem;
+  float: right;
+  cursor: pointer;
+  position: absolute;
+}
+
+.left-icon {
+  width: 1.563rem;
+  margin: 0.375rem -3.125rem 0 0;
+  float: left;
+  cursor: pointer;
+  position: absolute;
+}
+
+.sb-textbox-leftContent {
+  text-align: center;
+  text-align-last: right;
 }

@@ -1,0 +1,22 @@
+<ng-container *ngIf="visible">
+  <div class="sb-radio">
+    <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+    <div class="sb-radio-group">
+      <ng-container *ngIf="field.range && isOptionsArrayMap(field.range) && !field.association">
+        <div class="sb-radio-btn-checkbox sb-radio-btn-primary"  *ngFor="let option of field.range">
+          <input [attr.disabled]="disabled ? true : null" type="radio" [formControl]="formControlRef" id="{{_.kebabCase(field.name) || field.code}}_{{_.kebabCase(option.label)}}"
+          name="{{_.kebabCase(field.name) || field.code}}" [value]="getOptionValueForRange(option, 'map')">
+          <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}_{{_.kebabCase(option.label)}}">{{option.label}}</label>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="field.range && isOptionsArray(field.range) && !isOptionsArrayMap(field.range) && !field.association">
+        <div class="sb-radio-btn-checkbox sb-radio-btn-primary"  *ngFor="let option of field.range">
+          <input [attr.disabled]="disabled ? true : null" type="radio" [formControl]="formControlRef" id="{{_.kebabCase(field.name) || field.code}}_{{_.kebabCase(option.name || option)}}"
+          name="{{_.kebabCase(field.name) || field.code}}" [value]="getOptionValueForRange(option, 'array')">
+          <label *ngIf="label" for="{{_.kebabCase(field.name) || field.code}}_{{_.kebabCase(option.name || option)}}">{{option.name || option}}</label>
+        </div>
+      </ng-container>
+    </div>
+  </div>  
+
+</ng-container>

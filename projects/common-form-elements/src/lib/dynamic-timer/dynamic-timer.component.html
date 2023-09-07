@@ -1,0 +1,41 @@
+<div class="sb-input">
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null"> {{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+  <ng-container>
+    <div class="d-flex">
+      <div>
+        <input class="sb-timer-input" list="hours" #hourField name="hour" maxlength="2"
+        placeholder="{{placeholders[0]}}"
+        (change)="onChangeTimer('hr', $event.target.value)"
+        (keyup)="onChangeTimer('hr', $event.target.value);"
+        (focusout)="onFocusOutEvent('hr', $event.target.value)"
+        [attr.disabled]="disabled ? true : null">
+        <datalist id="hours">
+            <option *ngFor="let hour of hourOptions" [value]="hour">
+        </datalist>
+      </div>
+      <div>
+        <input class="sb-timer-input" list="minutes" #minField name="minute" maxlength="2"
+        placeholder="{{placeholders[1]}}"
+        (change)="onChangeTimer('min', $event.target.value)"
+        (keyup)="onChangeTimer('min', $event.target.value)"
+        (focusout)="onFocusOutEvent('min', $event.target.value)"
+        [attr.disabled]="disabled ? true : null">
+        <datalist id="minutes">
+          <ng-container>
+            <option *ngFor="let minute of minuteOptions" [value]="minute">{{minute}}</option>
+          </ng-container>
+        </datalist>
+      </div>
+      <div>
+        <button *ngIf="!disabled" class="sb-btn sb-btn-normal sb-btn-outline-primary" (click)="restTime()">Reset</button>
+      </div>
+    </div>
+    <ng-container *ngFor="let validation of validations">
+      <div class="cf-error"
+        *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] &&
+        (formControlRef.dirty || formControlRef.touched)) ">
+        {{ validation.message }}
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

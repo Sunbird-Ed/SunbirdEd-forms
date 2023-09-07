@@ -1,0 +1,31 @@
+<div class="sb-keywords" *ngIf="field?.inputType != 'selectTextBox'">
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+
+  <tag-input class="sb-keywordbox" [formControl]="formControlRef" [modelAsStrings]="true" [(ngModel)]='items'
+    [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
+    [disable]="disabled"></tag-input>
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>
+
+<div class="sb-keywords" *ngIf="field?.inputType === 'selectTextBox' && formControlRef?.isVisible === 'yes'">
+  <label *ngIf="label" [attr.data-title]="field.description ? field.description : null">{{label}}</label> <sb-dynamic-info [data]="field"></sb-dynamic-info>
+  <tag-input class="sb-keywordbox" [formControl]="formControlRef"  [(ngModel)]='selectedItems' 
+    [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
+    [disable]="disabled" [displayBy]="'label'" (onAdd)="onItemAdded($event)" [identifyBy]="'label'" >
+
+    <tag-input-dropdown [appendToBody]="false" [showDropdownIfEmpty]="true" [autocompleteItems]="field?.options"
+      [identifyBy]="'label'" [displayBy]="'label'"></tag-input-dropdown>
+
+  </tag-input>
+  <ng-container *ngFor="let validation of validations">
+    <div class="cf-error"
+      *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
+      {{ validation.message }}
+    </div>
+  </ng-container>
+</div>

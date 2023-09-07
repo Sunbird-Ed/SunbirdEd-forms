@@ -1,0 +1,10 @@
+<!-- <button (click)="switchConfig('one')">Form Config One - Curriculum Course</button>
+<button (click)="switchConfig('two')">Form Config Two - Professional Development Course</button>
+<button (click)="switchConfig('three')">Form Config three - Two topic picker in the same form</button> -->
+
+
+<div class="form-container">
+  <sb-dynamic-form [config]="config" (initialize)="output($event)" (valueChanges)="valueChanges($event)" (statusChanges)="statusChanges($event)"></sb-dynamic-form>
+  <!-- <pre>{{result | json}}</pre> -->
+</div>
+

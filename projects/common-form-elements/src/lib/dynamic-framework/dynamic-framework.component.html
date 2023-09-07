@@ -1,0 +1,18 @@
+<div class="sb-dropdown">
+  <label [attr.data-title]="field.description ? field.description : null">{{label}}</label>
+  <ng-container *ngIf="options">
+    <div class="dropdown-container">
+      <sb-icon-dropdown class="dropdown-icon"></sb-icon-dropdown>
+      <select [formControl]="formControlRef" [attr.disabled]="disabled ? true : null"
+        [compareWith]="ValueComparator.valueComparator" class="sb-dropdown-select" id="sb-dropdown"
+        name="sb-dropdown">
+
+        <option [defaultSelected]="!default" [ngValue]="null" disabled>{{placeholder}}
+        </option>
+        <ng-container *ngIf="field.range">
+          <option class="optionsArrayMap" *ngFor="let option of field.range" [ngValue]="getOptionValueForTerms(option)">{{option.label}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </ng-container>
+</div>

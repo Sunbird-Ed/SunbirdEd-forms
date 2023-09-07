@@ -1,0 +1,49 @@
+<div class="sb-input">
+  <label class="cfe-multiselect-label input-label" tabindex="0" *ngIf="label" for="{{config?.code}}">{{label}}</label>
+  <label class="cfe-multiselect-label" *ngIf="labelHtml" for="{{config?.code}}" [innerHTML]="labelHtml | transposeHtml"></label>
+  <ng-container *ngIf="isMultiple">
+    <mat-form-field aria-required="true" appearance="fill" class="sb-mat__dropdown sb-mat__dropdown--autocmp w-100">
+      <input type="text"
+        [attr.aria-disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )"
+        [attr.aria-label]="formControlRef?.value ? 
+        ( concatinatedMultipeSelectVal(formControlRef?.value) + ', selected ,'+placeHolder ) : 
+        placeHolder "
+        matInput 
+        [matAutocomplete]="auto" 
+        [placeholder]="placeHolder"
+        [formControl]="localFrmControl">
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChange($event)" [displayWith]="displayFn.bind(this)">
+      <mat-option  *ngFor="let option of filteredOptions | async" [value]="selectedOptions">
+          <mat-pseudo-checkbox 
+            color="primary" 
+            [state]="selectedOptions.includes(option.value) ? 'checked' : 'unchecked' ">
+          </mat-pseudo-checkbox>
+          <span class="ml-5 multi-select-option-text">{{option.label}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </ng-container>
+  
+  <ng-container *ngIf="!isMultiple">
+    <mat-form-field aria-required="true" appearance="fill" class="sb-mat__dropdown sb-mat__dropdown--autocmp w-100">
+      <input type="text"
+        [attr.aria-disabled]="disabled ? true : ( context ? (context.invalid ? true : null) : null )"
+        [attr.aria-label]="formControlRef?.value ? 
+        ( concatinatedMultipeSelectVal(formControlRef?.value) + ', selected ,'+placeHolder ) : 
+        placeHolder "
+        matInput 
+        [placeholder]="placeHolder"
+        [matAutocomplete]="auto" 
+        [formControl]="localFrmControl">
+
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="singleOptionSelected($event)" [displayWith]="displayFn.bind(this)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </mat-autocomplete>
+
+    </mat-form-field>
+  </ng-container>
+  
+</div>
+

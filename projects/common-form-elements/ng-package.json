@@ -5,6 +5,9 @@
     "entryFile": "src/public_api.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "immutable"
+    "immutable",
+    "ngx-chips",
+    "moment",
+    "@project-sunbird/ckeditor-build-classic"
   ]
 }
