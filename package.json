@@ -27,7 +27,7 @@
     "common-consumption-styles": "0.0.17",
     "inquirer": "^8.1.2",
     "jquery": "^3.6.0",
-    "jquery.fancytree": "^2.38.0",
+    "jquery.fancytree": "^2.38.3",
     "lodash-es": "^4.17.20",
     "moment": "^2.29.1",
     "ngx-chips": "2.2.2",
