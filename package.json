@@ -33,7 +33,7 @@
     "ngx-chips": "2.2.2",
     "rxjs": "^6.3.3",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.14.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.19",
