@@ -1,6 +1,7 @@
 {
   "name": "common-form-elements",
   "version": "3.7.3",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
