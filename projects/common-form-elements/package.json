@@ -1,26 +1,25 @@
 {
-  "name": "@project-sunbird/common-form-elements",
-  "version": "6.0.3",
-  "peerDependencies": {
-    "@angular/common": ">=13.3.12",
-    "@angular/core": ">=13.3.12",
-    "@angular/forms": ">=13.3.12",
-    "@project-sunbird/client-services": "5.1.2",
-    "lodash-es": "^4.17.15"
-  },
-  "peerDependenciesMeta": {
-    "@project-sunbird/ckeditor-build-classic": {
-      "optional": true
+    "name": "@project-sunbird/common-form-elements",
+    "version": "8.0.0",
+    "peerDependencies": {
+        "@angular/common": "15.2.10",
+        "@angular/core": "15.2.10",
+        "@angular/forms": "15.2.10",
+        "@project-sunbird/client-services": "5.1.2",
+        "lodash-es": "^4.17.15"
+    },
+    "peerDependenciesMeta": {
+        "@project-sunbird/ckeditor-build-classic": {
+            "optional": true
+        }
+    },
+    "dependencies": {
+        "immutable": "^4.0.0-rc.12",
+        "moment": "^2.29.1",
+        "tslib": "^2.0.0"
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "access": "public"
     }
-  },
-  "dependencies": {
-    "immutable": "^4.0.0-rc.12",
-    "moment": "^2.29.1",
-    "tslib": "^2.0.0"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  }
 }
-
