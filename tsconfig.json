@@ -13,7 +13,7 @@
     "moduleResolution": "node",
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -29,6 +29,7 @@
         "dist/common-form-elements/*"
       ]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "useDefineForClassFields": false
   }
 }
