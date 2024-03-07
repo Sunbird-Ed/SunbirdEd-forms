@@ -82,7 +82,7 @@ import { MaterialModule } from './material.module';
         DynamicDialcodeComponent,
         DynamicFrameworkComponent,
         DynamicDateComponent,
-DynamicRichtextComponent,
+        DynamicRichtextComponent,
         DynamicInputFieldComponent,
         DynamicInfoComponent
     ],
@@ -129,7 +129,7 @@ DynamicRichtextComponent,
         DynamicDialcodeComponent,
         DynamicFrameworkComponent,
         DynamicDateComponent,
-DynamicRichtextComponent,
+        DynamicRichtextComponent,
         DynamicInfoComponent
     ]
 })
