@@ -47,7 +47,7 @@ const componentMapper = {
   radio: DynamicRadioComponent,
   dialcode: DynamicDialcodeComponent,
   date: DynamicDateComponent,
-  richtext: DynamicRichtextComponent,
+richtext: DynamicRichtextComponent,
   dynamicInput: DynamicInputFieldComponent
 };
 
