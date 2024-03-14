@@ -126,7 +126,7 @@ functionName(config: FieldConfig<any>, initial = false): FieldConfigOptionsBuild
 | release-5.1.0_v12 |        5.1.2        |      Ng V12     |
 | release-6.0.0_v13 |        6.0.0        |      Ng V13     |
 | release-6.0.0_v14 |  6.0.1/6.0.2/6.0.3  |      Ng V14     |
-|     8.0.0_v15     |        6.0.4        |      Ng V15     |
-|     8.0.0_v16     |        8.0.0        |      Ng V16     |
+|     8.0.0_v15     |        8.0.0        |      Ng V15     |
+|     8.0.0_v16     |        8.0.1        |      Ng V16     |
 
 
