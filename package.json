@@ -1,6 +1,6 @@
 {
   "name": "common-form-elements",
-  "version": "3.7.3",
+  "version": "3.7.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -41,7 +41,7 @@
     "@angular/compiler-cli": "^16.2.12",
     "@angular/language-service": "^16.2.12",
     "@ionic/angular-toolkit": "7.0.0",
-    "@project-sunbird/client-services": "3.8.6",
+    "@project-sunbird/client-services": "7.0.6",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
