@@ -1,12 +1,12 @@
 {
     "name": "@project-sunbird/common-form-elements",
-    "version": "8.0.1",
+    "version": "8.0.2",
     "peerDependencies": {
         "@angular/common": ">=16.2.12",
         "@angular/core": ">=16.2.12",
         "@angular/forms": ">=16.2.12",
         "@project-sunbird/client-services": "7.0.6",
-        "lodash-es": "^4.17.15"
+        "lodash-es": "^4.17.21"
     },
     "peerDependenciesMeta": {
         "@project-sunbird/ckeditor-build-classic": {

@@ -28,7 +28,7 @@
     "inquirer": "^8.1.2",
     "jquery": "^3.6.0",
     "jquery.fancytree": "^2.38.0",
-    "lodash-es": "^4.17.20",
+    "lodash-es": "^4.17.21",
     "moment": "^2.29.1",
     "ngx-chips": "3.0.0",
     "rxjs": "^6.3.3",
