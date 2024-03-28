@@ -41,7 +41,6 @@
     "@angular/compiler-cli": "^15.2.10",
     "@angular/language-service": "^15.2.10",
     "@ionic/angular-toolkit": "7.0.0",
-    "@project-sunbird/client-services": "3.8.6",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",

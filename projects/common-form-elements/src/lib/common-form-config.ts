@@ -164,3 +164,36 @@ export interface CustomFormControl extends UntypedFormControl {
 export enum ThemeType {
   MATERIAL = 'material'
 }
+
+export interface FrameworkCategory {
+  identifier: string;
+  code: string;
+  terms?: CategoryTerm[];
+  translations?: string;
+  name: string;
+  description: string;
+  index: number;
+  status: string;
+}
+export interface CategoryTerm {
+  associations?: CategoryAssociation[];
+  identifier: string;
+  code: string;
+  translations?: string;
+  name: string;
+  description?: string;
+  index: number;
+  category: string;
+  status: string;
+  children?: CategoryAssociation[];
+}
+
+export interface CategoryAssociation {
+  identifier: string;
+  code: string;
+  translations?: string;
+  name: string;
+  description?: string;
+  category: string;
+  status: string;
+}

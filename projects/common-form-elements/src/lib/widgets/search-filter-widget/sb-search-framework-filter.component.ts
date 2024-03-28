@@ -11,11 +11,11 @@ import {PLATFORM_TOKEN} from './injection-tokens';
 import {BaseSearchFilterComponent} from './base-search-filter.component';
 import {IFrameworkCategoryFilterFieldTemplateConfig} from './framework-category-filter-field-template-config';
 import {ISearchFilter} from './models/search-filter';
-import {CategoryTerm, FrameworkCategory} from '@project-sunbird/client-services/models';
 import {map, takeUntil, tap} from 'rxjs/operators';
 import {ISearchFrameworkAssociationsMap} from './models/framework';
 import {SearchFrameworkCategoryFormConfigAdapter} from './search-framework-category-form-config-adapter';
 import {TitleCasePipe} from '@angular/common';
+import { CategoryTerm, FrameworkCategory } from '../../common-form-config';
 
 type IFrameworkCategoryFilter = ISearchFilter<FrameworkCategory['code'], CategoryTerm['name'] | CategoryTerm['name'][]>;
 

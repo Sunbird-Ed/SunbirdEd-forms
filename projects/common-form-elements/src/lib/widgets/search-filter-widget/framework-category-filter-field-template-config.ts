@@ -1,4 +1,4 @@
-import {FrameworkCategory} from '@project-sunbird/client-services/models';
+import { FrameworkCategory } from "../../common-form-config";
 
 export interface IFrameworkCategoryFilterFieldTemplateConfig {
   category: FrameworkCategory['code'];
