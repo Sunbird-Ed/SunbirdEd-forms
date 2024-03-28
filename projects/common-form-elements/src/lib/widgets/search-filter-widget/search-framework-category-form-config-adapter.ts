@@ -1,8 +1,7 @@
-import {CategoryTerm, FrameworkCategory} from '@project-sunbird/client-services/models';
 import {IFrameworkCategoryFilterFieldTemplateConfig} from './framework-category-filter-field-template-config';
 import {ISearchFrameworkAssociationsMap, ISearchFrameworkCategoryFilter} from './models/framework';
 import {Injectable} from '@angular/core';
-import {FieldConfig, FieldConfigInputType, ThemeType} from '../../common-form-config';
+import {CategoryTerm, FieldConfig, FieldConfigInputType, FrameworkCategory, ThemeType} from '../../common-form-config';
 
 type CategoryTermName = CategoryTerm['name'];
 
