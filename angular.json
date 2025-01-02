@@ -36,7 +36,7 @@
     "sunbird-forms": {
       "projectType": "application",
       "schematics": {},
-      "root": "src/sunbird-forms",
+      "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -126,5 +126,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
