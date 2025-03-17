@@ -34,6 +34,11 @@ export class DynamicTextboxComponent implements OnInit,  AfterViewInit, OnChange
     if (!_.isEmpty(this.depends)) {
       this.handleDependantFieldChanges();
     }
+    if (this.disabled) {
+      this.formControlRef?.disable({ emitEvent: false });
+    } else {
+      this.formControlRef?.enable();
+    }
   }
 
   ngOnChanges() {
