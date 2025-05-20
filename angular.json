@@ -30,6 +30,16 @@
             "tsConfig": "projects/common-form-elements/tsconfig.spec.json",
             "karmaConfig": "projects/common-form-elements/karma.conf.js"
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/common-form-elements/**/*.ts",
+              "projects/common-form-elements/**/*.html"
+            ],
+            "eslintConfig": "projects/common-form-elements/eslint.config.js"
+          }
         }
       }
     },
@@ -128,6 +138,9 @@
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }
