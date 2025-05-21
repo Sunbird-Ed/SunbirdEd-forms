@@ -3,6 +3,13 @@ const inquirer = require('inquirer');
 const chalk = require('chalk');
 const { spawn } = require("child_process");
 const packageFilepath = "projects/common-form-elements/package.json";
+
+const getVersion = () => {
+    const packageJson = fs.readFileSync(packageFilepath);
+    const { version } = JSON.parse(packageJson);
+    return version;
+};
+
 const filesToRemoveLines = [
     {
         filepath: "projects/common-form-elements/src/lib/dynamic-field/dynamic-field.directive.ts",
@@ -20,8 +27,8 @@ const run = async () => {
         const answers = {
             environment: 'mobile',
             name: '@project-sunbird/common-form-elements',
-            version: '8.0.6'
-          }
+            version: getVersion()
+        };
         const { environment } = answers;
         console.log(answers);
         updateFiles(environment);
