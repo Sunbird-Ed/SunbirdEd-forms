@@ -164,4 +164,4 @@ The workflow is triggered on:
 Key features of the workflow:
 1. Automatically builds the project
 2. Creates NPM package
-3. Publishes to NPM registry using provided authentication token
+3. Publishes to NPM registry using NPM authentication token (must be provided as GitHub secret `NPM_TOKEN`)
