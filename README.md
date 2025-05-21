@@ -159,7 +159,7 @@ Workflow automatically builds and publishes NPM packages whenever a new tag is p
 ### Publish Workflow
 
 The workflow is triggered on:
-- push of any tag
+- Triggered on push events for any Git tag
 
 Key features of the workflow:
 1. Automatically builds the project
