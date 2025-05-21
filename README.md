@@ -140,7 +140,7 @@ The project maintains code quality through automated checks that run on every pu
 
 2. **Dependencies**
    - Uses `npm ci` for deterministic installations
-   - GitHub Actions cache for faster builds
+   - GitHub Actions cache for faster builds (e.g., `node_modules`). See [GitHub Actions workflow](.github/workflows/pull_request.yml) for caching configuration details.
 
 3. **Code Formatting**
    - Ensures consistent code formatting
