@@ -130,3 +130,38 @@ functionName(config: FieldConfig<any>, initial = false): FieldConfigOptionsBuild
 |     8.0.0_v16     |        8.0.1        |      Ng V16     |
 
 
+## Code Quality
+
+The project maintains code quality through automated checks that run on every pull request:
+
+1. **Linting**
+   - ESLint for code style and quality
+   - Command: `npm run lint`
+
+2. **Dependencies**
+   - Uses `npm ci` for deterministic installations
+   - GitHub Actions cache for faster builds (e.g., `node_modules`). See [GitHub Actions workflow](.github/workflows/pull_request.yml) for caching configuration details.
+
+3. **Code Formatting**
+   - Ensures consistent code formatting
+   - Can be automatically fixed using `npm run lint:fix`
+
+4. **Testing**
+   - Unit tests using Karma
+   - Command: `npm run test`
+
+These checks ensure consistent code style, secure dependency management, and reliable testing.
+
+## Package Publishing
+
+Workflow automatically builds and publishes NPM packages whenever a new tag is pushed to the repository.
+
+### Publish Workflow
+
+The workflow is triggered on:
+- Triggered on push events for any Git tag
+
+Key features of the workflow:
+1. Automatically builds the project
+2. Creates NPM package
+3. Publishes to NPM registry using NPM authentication token (must be provided as GitHub secret `NPM_TOKEN`)
