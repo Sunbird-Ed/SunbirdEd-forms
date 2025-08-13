@@ -256,8 +256,6 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         break;
     }
 
-    formValueList.push(defaultVal);
-
     if (element.validations && element.validations.length) {
       element.validations.forEach((data, i) => {
         if (element.inputType === 'dialcode') { return false; }
@@ -322,11 +320,13 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         }
       });
     }
-    formValueList.push(Validators.compose(validationList));
-    return formValueList;
+    const validatorsFn = Validators.compose(validationList);
+    const formState =
+      element.editable === false
+        ? { value: defaultVal, disabled: true }
+        : defaultVal;
+    return [formState, validatorsFn];
   }
-
-
   fetchContextTerms(config: FieldConfig<any>, context) {
     return _.get(_.find(config, {'code': context}), 'terms') || null;
   }

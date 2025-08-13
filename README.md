@@ -9,7 +9,7 @@ Contains  Form component powered by angular. This component expects a configurat
 
 ---
 ## Getting started
-How to use @project-sunbird/common-form-elements in your projects
+How to use @tekdi/common-form-elements-full in your projects
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ npm link
 ```
 3. Link the library to your project
 ```console
-npm link @project-sunbird/common-form-elements
+npm link @tekdi/common-form-elements-full
 ```
 ---
 
