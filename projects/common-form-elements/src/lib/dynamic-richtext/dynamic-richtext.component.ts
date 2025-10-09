@@ -86,6 +86,12 @@ export class DynamicRichtextComponent implements OnInit, AfterViewInit {
       fontSize: this.editorConfig.fontSize,
       isReadOnly: this.editorConfig.isReadOnly,
       removePlugins: this.editorConfig.removePlugins,
+      typing: {
+        transformations: {
+          // Disable smart quotes so that single quotes/apostrophes are not auto-converted
+          remove: ["quotes", "quotesPrimary", "quotesSecondary"],
+        },
+      },
       wordCount: {
         onUpdate: stats => {
           this.characterCount = stats.characters;
