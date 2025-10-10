@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" >
+    <div class="sb-modal-dropdown-web" *ngIf="platform === 'web'"  [hidden]="!showModal" (click)="$event.stopPropagation()">
       <ul *ngIf="!isDependsEmpty">
         <li (click)="checkUncheckAll()">
             <input type="checkbox" [checked]="masterSelected">

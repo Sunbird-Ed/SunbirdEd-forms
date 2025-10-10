@@ -3,7 +3,7 @@
 
   <tag-input class="sb-keywordbox" [formControl]="formControlRef" [modelAsStrings]="true" [(ngModel)]='items'
     [placeholder]="field.placeholder || 'Enter Keyword'" [secondaryPlaceholder]="field.placeholder || 'Enter Keyword'"
-    [disable]="disabled"></tag-input>
+    [disable]="disabled" [separatorKeys]="[',']"></tag-input>
   <ng-container *ngFor="let validation of validations">
     <div class="cf-error"
       *ngIf="(validation.type && (validation.type).toLowerCase() && validation.message && formControlRef.errors && formControlRef.errors[(validation.type).toLowerCase()] && (formControlRef.dirty || formControlRef.touched))">
@@ -20,7 +20,6 @@
 
     <tag-input-dropdown [appendToBody]="false" [showDropdownIfEmpty]="true" [autocompleteItems]="field?.options"
       [identifyBy]="'label'" [displayBy]="'label'"></tag-input-dropdown>
-
   </tag-input>
   <ng-container *ngFor="let validation of validations">
     <div class="cf-error"

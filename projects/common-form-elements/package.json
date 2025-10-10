@@ -1,6 +1,6 @@
 {
-    "name": "@project-sunbird/common-form-elements",
-    "version": "8.0.6",
+    "name": "@tekdi/common-form-elements-full",
+    "version": "8.0.0-beta.2",
     "peerDependencies": {
         "@angular/common": ">=16.2.12",
         "@angular/core": ">=16.2.12",

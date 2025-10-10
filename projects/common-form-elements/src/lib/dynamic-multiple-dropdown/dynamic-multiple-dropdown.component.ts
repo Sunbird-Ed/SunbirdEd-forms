@@ -181,7 +181,10 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
     const finalValue = this.tempValue.toList().toJS();
     this.formControlRef.patchValue(this.isMultiple ? finalValue : finalValue[0]);
     this.formControlRef.markAsDirty();
-    this.showModal = false;
+    // Auto-close only on mobile or when single-select; keep open for multi-select on web
+    if (this.platform === "mobile" || !this.isMultiple) {
+      this.showModal = false;
+    }
   }
 
   openModal(event) {
