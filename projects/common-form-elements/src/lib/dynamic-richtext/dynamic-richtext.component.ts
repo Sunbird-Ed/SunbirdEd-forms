@@ -111,7 +111,34 @@ export class DynamicRichtextComponent implements OnInit, AfterViewInit {
     editor.model.document.on('change', (eventInfo, batch) => {
       this.formControlRef.markAsTouched();
       this.formControlRef.richTextCharacterCount = this.characterCount;
-      this.formControlRef.patchValue(editor.getData());
+      const rawHtml = editor.getData();
+      const sanitizedHtml = this.replaceDoubleQuotesInText(rawHtml);
+      this.formControlRef.patchValue(sanitizedHtml);
     });
+  }
+  private replaceDoubleQuotesInText(html: string): string {
+    if (!html) {
+      return html;
+    }
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const traverse = (node: Node) => {
+        for (let i = 0; i < node.childNodes.length; i++) {
+          const child = node.childNodes[i];
+          if (child.nodeType === Node.TEXT_NODE) {
+            if (child.textContent) {
+              child.textContent = child.textContent.replace(/"/g, "'");
+            }
+          } else {
+            traverse(child);
+          }
+        }
+      };
+      traverse(doc.body);
+      return doc.body.innerHTML.replace(/=\"([^\"]*)\"/g, "='$1'");
+    } catch (e) {
+      return html.replace(/"/g, "'");
+    }
   }
 }
