@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup,FormBuilder, FormArray  } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup,FormBuilder, FormArray  } from '@angular/forms';
 import { merge, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
 import { timer } from './formConfig';
 import * as _ from 'lodash-es';
-import * as moment_ from 'moment';
+import moment from 'moment';
 let evidenceMimeType;
 let ecm;
 @Component({
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
   valueChanges(event) {
     if(event.startDate){
-        let date = moment_(event.startDate).format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
+        let date = moment(event.startDate).format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]");
         event.startDate=date;
       }
     console.log(event);
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
     // console.log(event);
   }
 
-  getFramework(control, depends: FormControl[], formGroup: FormGroup, loading, loaded) {
+  getFramework(control, depends: UntypedFormControl[], formGroup: UntypedFormGroup, loading, loaded) {
     const response =  control.valueChanges.pipe(
       switchMap((value: any) => {
         if (!_.isEmpty(value)) {
@@ -367,7 +367,7 @@ export class AppComponent implements OnInit {
     return response;
   }
 
-  setEvidence(control, depends: FormControl[], formGroup: FormGroup, loading, loaded) {
+  setEvidence(control, depends: UntypedFormControl[], formGroup: UntypedFormGroup, loading, loaded) {
     console.log(control);
     control.isVisible = 'no';
     control.range = evidenceMimeType;
@@ -386,7 +386,7 @@ export class AppComponent implements OnInit {
     return response;
   }
 
-  setEcm(control, depends: FormControl[], formGroup: FormGroup, loading, loaded){
+  setEcm(control, depends: UntypedFormControl[], formGroup: UntypedFormGroup, loading, loaded){
     console.log(control);
     control.isVisible = 'no';
     control.options = ecm;
@@ -404,7 +404,7 @@ export class AppComponent implements OnInit {
     return response;
   }
 
-  setAllowEcm(control, depends: FormControl[], formGroup: FormGroup, loading, loaded){
+  setAllowEcm(control, depends: UntypedFormControl[], formGroup: UntypedFormGroup, loading, loaded){
     console.log(control);
     control.isVisible = 'no';
     const response = merge(..._.map(depends, depend => depend.valueChanges)).pipe(

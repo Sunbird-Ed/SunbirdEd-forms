@@ -1,5 +1,5 @@
 import { Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {FieldConfig} from '../common-form-config';
 import * as _ from 'lodash-es';
 
@@ -13,7 +13,7 @@ export class DynamicRadioComponent implements OnInit {
   @Input() disabled?: boolean;
   @Input() visible?: boolean;
   @Input() label?: string;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() default?: any;
   _: any = _;
 

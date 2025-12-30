@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import * as _ from 'lodash-es';
 import { merge, Subscription } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -18,13 +18,13 @@ export class DynamicDialcodeComponent implements OnInit, OnDestroy  {
   @Input() labelHtml: any;
   @Input() placeholder: String;
   @Input() validations?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() formGroup?: CustomFormGroup;
   @Input() prefix?: String;
   @Input() default: String;
   @Input() field?: any;
   @Input() disabled: Boolean;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   contextValueChangesSubscription?: Subscription;
   public isEditable = false;
   public isValid = false;

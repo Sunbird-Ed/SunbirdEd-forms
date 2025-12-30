@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
 import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormGroup, CustomFormControl} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Input() label?: string;
   @Input() placeholder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() contextTerms?: any;
   @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
@@ -31,7 +31,7 @@ export class DynamicDropdownComponent implements OnInit, OnChanges, OnDestroy {
   @Output() onChangeFilter: EventEmitter<any> = new EventEmitter();
   @Input() validations?: any;
 
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
 
   public isDependsInvalid: any;

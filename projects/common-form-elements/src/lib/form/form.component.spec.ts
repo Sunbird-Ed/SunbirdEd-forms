@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormComponent } from './form.component';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { throwError as observableThrowError, of as observableOf, Observable, Subscription } from 'rxjs';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
@@ -11,14 +11,14 @@ import { FieldConfig } from './form.component.spec.data';
 describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
-  const formBuilder: FormBuilder = new FormBuilder();
+  const formBuilder: UntypedFormBuilder = new UntypedFormBuilder();
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, BrowserDynamicTestingModule, FormsModule, ReactiveFormsModule],
       declarations: [FormComponent],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{ provide: FormBuilder, useValue: formBuilder }]
+      providers: [{ provide: UntypedFormBuilder, useValue: formBuilder }]
     })
       .compileComponents();
   }));

@@ -1,14 +1,12 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit,
   Output, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
   import {AsyncValidatorFactory, CustomFormGroup, FieldConfig, FieldConfigInputType, FieldConfigValidationType, SectionConfig} from '../common-form-config';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, UntypedFormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import { tap } from 'rxjs/operators';
 import * as _ from 'lodash-es';
-import * as moment_ from 'moment';
+import moment from 'moment';
 import { FieldComparator } from '../utilities/fieldComparator';
-const moment = moment_;
-
 @Component({
   selector: 'sb-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -37,7 +35,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
   flattenSectionFields;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) { }
 
   ngOnInit() {
@@ -178,7 +176,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
         break;
       case 'date':
         defaultVal = element.default || null;
-        break;  
+        break;
       case 'dialcode':
         defaultVal = element.default || null;
         break;
@@ -253,6 +251,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
       case 'radio':
         defaultVal = element.default || null;
         break;
+      case 'matrix':
+        defaultVal = element.default || null;
+        break;
     }
 
     formValueList.push(defaultVal);
@@ -266,6 +267,9 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             element.inputType === 'frameworkCategorySelect') {
               validationList.push(Validators.required);
             } else if (element.inputType === 'checkbox') {
+              validationList.push(Validators.requiredTrue);
+            }
+            else if (element.inputType === 'matrix') {
               validationList.push(Validators.requiredTrue);
             } else {
               validationList.push(Validators.required);
@@ -308,7 +312,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
             break;
           case 'noOfFields':
               validationList.push(this.checkFields.bind(this, element.validations[i]));
-            break;  
+            break;
           case 'minDate':
             validationList.push(this.compareDate.bind(this, element.validations,element.validations[i]));
             break;
@@ -369,7 +373,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   validateTime(pattern, field, control: AbstractControl): ValidationErrors | null  {
     const isPatternMatched = moment(control.value, pattern, true).isValid();
-    if (!isPatternMatched && (control.touched || control.dirty)) {
+    if (!isPatternMatched  && control.value && (control.touched || control.dirty)) {
       return {time : true};
     }
     return null;
@@ -404,7 +408,7 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   compareFields(criteria, control: AbstractControl): ValidationErrors | null {
     const result = _.find(criteria, (val, key) => {
-      if (control && control.parent && control.parent.controls[val]) {
+      if (control && control.parent && control.parent.controls[val] && control.parent.controls[val].value) {
         return FieldComparator.operators[key](control.parent.controls[val].value, control.value);
       } else {
         return false;
@@ -419,8 +423,8 @@ export class DynamicFormComponent implements OnInit, OnChanges, OnDestroy  {
 
   compareDate(validations,types, control: AbstractControl): ValidationErrors | null {
     let result = validations.find(data => data.type === 'dateFormat');
-    let minDate = moment_(types.value, result.value).format('YYYY-MM-DD');
-    let maxDate = moment_(types.value, result.value).format('YYYY-MM-DD');
+    let minDate = moment(types.value, result.value).format('YYYY-MM-DD');
+    let maxDate = moment(types.value, result.value).format('YYYY-MM-DD');
       if ((types.type==='minDate' && control.value < minDate)){
         return {mindate:types.message};
       }

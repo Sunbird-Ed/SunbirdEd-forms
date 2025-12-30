@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef, Output, EventEmitter} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import { FieldConfig, FieldConfigAsyncValidation } from '../common-form-config';
 
 @Component({
@@ -13,7 +13,7 @@ export class TextboxComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() labelHtml: any;
   @Input() placeholder: String;
   @Input() validations?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() prefix?: String;
   @Input() config: FieldConfig<String>;
   @Output() labelClickEventHandler = new EventEmitter();

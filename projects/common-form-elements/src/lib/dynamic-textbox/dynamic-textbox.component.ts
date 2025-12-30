@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, AfterViewInit, OnChanges, ViewChild, ElementRef, OnDestroy} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import { FieldConfigAsyncValidation } from '../common-form-config';
 import * as _ from 'lodash-es';
 import { merge, Subscription } from 'rxjs';
@@ -17,13 +17,13 @@ export class DynamicTextboxComponent implements OnInit,  AfterViewInit, OnChange
   @Input() labelHtml: any;
   @Input() placeholder: String;
   @Input() validations?: any;
-  @Input() formControlRef?: FormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() prefix?: String;
   @Input() default: String;
   @Input() field?: any;
   @Input() disabled: Boolean;
   @ViewChild('validationTrigger') validationTrigger: ElementRef;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   public isTextBoxRequired: String='yes';
   contextValueChangesSubscription?: Subscription;
 
@@ -33,6 +33,11 @@ export class DynamicTextboxComponent implements OnInit,  AfterViewInit, OnChange
   ngOnInit() {
     if (!_.isEmpty(this.depends)) {
       this.handleDependantFieldChanges();
+    }
+    if (this.disabled) {
+      this.formControlRef?.disable({ emitEvent: false });
+    } else {
+      this.formControlRef?.enable();
     }
   }
 

@@ -44,4 +44,11 @@ export * from './lib/dynamic-dropdown/dynamic-dropdown.component';
 export * from './lib/dynamic-dialcode/dynamic-dialcode.component';
 export * from './lib/dynamic-input-field/dynamic-input-field.component';
 export * from './lib/dynamic-info/dynamic-info.component';
+export * from './lib/material-auto-complete/material-auto-complete.component';
+export * from './lib/material-auto-complete/material-auto-complete.component';
+export * from './lib/material-dropdown/material-dropdown.component';
+export * from './lib/dynamic-framework-category-nested-select/dynamic-framework-category-nested-select.component';
+export * from './lib/dynamic-date/dynamic-date.component';
+export * from './lib/dynamic-richtext/dynamic-richtext.component';
+
 

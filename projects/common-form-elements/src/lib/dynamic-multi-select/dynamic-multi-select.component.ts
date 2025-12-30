@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge} from 'rxjs';
 import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormControl} from '../common-form-config';
 import {tap} from 'rxjs/operators';
@@ -18,10 +18,10 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   @Input() label?: string;
   @Input() placeHolder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() contextTerms?: any;
   @Input() formControlRef?: CustomFormControl;
-  @Input() formGroup?: FormGroup;
+  @Input() formGroup?: UntypedFormGroup;
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
@@ -30,7 +30,7 @@ export class DynamicMultiSelectComponent implements OnInit, OnChanges, OnDestroy
   @Output() onChangeFilter: EventEmitter<any> = new EventEmitter();
   @Input() validations?: any;
 
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
 
   options$?: Observable<FieldConfigOption<any>[]>;

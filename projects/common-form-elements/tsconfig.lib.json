@@ -3,13 +3,11 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "declarationMap": true,
-    "target": "es2015",
     "module": "es2015",
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "inlineSources": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "types": [],
@@ -19,14 +17,13 @@
     ]
   },
   "angularCompilerOptions": {
+    "compilationMode": "partial",
     "preserveSymlinks": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true,
-    "enableIvy": false
-
+    "enableResourceInlining": true
   },
   "exclude": [
     "src/test.ts",

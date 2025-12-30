@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 import { FilterType } from '../common-form-config';
 
@@ -16,7 +16,7 @@ export class FiltersComponent implements OnInit {
   @Input() styleClass?: string;
   @Output() selectedFilter: EventEmitter<any> = new EventEmitter();
   FilterType = FilterType;
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
 
   formattedFacets: any = [];
 

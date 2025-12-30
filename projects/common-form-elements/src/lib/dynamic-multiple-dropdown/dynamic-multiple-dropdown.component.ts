@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnChanges, OnDestroy,
   OnInit, SimpleChanges, HostListener, ViewChild } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, FormGroup} from '@angular/forms';
 import {from, Subject, merge} from 'rxjs';
 import {FieldConfig, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder, CustomFormControl, CustomFormGroup} from '../common-form-config';
 import {takeUntil, tap} from 'rxjs/operators';
@@ -21,14 +21,14 @@ export class DynamicMultipleDropdownComponent implements OnInit, OnChanges, OnDe
   @Input() labelHtml: any;
   @Input() placeholder?: string;
   @Input() isMultiple = true;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
   @Input() platform: any = 'web';
   @Input() default?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
 
   _: any = _;

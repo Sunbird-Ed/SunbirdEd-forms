@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { from, Subject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
 import { FieldConfig, FieldConfigInputType, FieldConfigInputTypeOptionsModelMap, FieldConfigOptionsBuilder } from '../common-form-config';
@@ -18,16 +18,16 @@ export class MaterialDropdownComponent implements OnInit, OnChanges {
   @Input() labelHtml: any;
   @Input() placeHolder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
-  @Input() formControlRef?: FormControl;
+  @Input() context?: UntypedFormControl;
+  @Input() formControlRef?: UntypedFormControl;
   @Input() platform: any;
   @Input() default?: any;
   @Input() class?: any;
   @Input() contextData: any;
   @Input() dataLoadStatusDelegate: Subject<'LOADING' | 'LOADED'>;
   @Input() config: FieldConfig<String>;
-  @Input() formGroup: FormGroup;
-  localFrmControlRef = new FormControl();
+  @Input() formGroup: UntypedFormGroup;
+  localFrmControlRef = new UntypedFormControl();
 
   selectedOptions:any;
   filteredOptions = [];

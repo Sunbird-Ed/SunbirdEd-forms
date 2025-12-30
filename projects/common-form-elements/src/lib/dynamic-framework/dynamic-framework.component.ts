@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, EventEmitter, AfterViewInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, FormGroup} from '@angular/forms';
 import {Observable, Subject, Subscription, combineLatest, merge, BehaviorSubject} from 'rxjs';
 import {FieldConfig, FieldConfigOption, FieldConfigOptionsBuilder, DynamicFieldConfigOptionsBuilder,
 CustomFormGroup, CustomFormControl } from '../common-form-config';
@@ -22,7 +22,7 @@ export class DynamicFrameworkComponent implements OnInit, OnDestroy {
   @Input() label?: string;
   @Input() placeholder?: string;
   @Input() isMultiple?: boolean;
-  @Input() context?: FormControl;
+  @Input() context?: UntypedFormControl;
   @Input() contextTerms?: any;
   @Input() formControlRef?: CustomFormControl;
   @Input() formGroup?: CustomFormGroup;
@@ -36,7 +36,7 @@ export class DynamicFrameworkComponent implements OnInit, OnDestroy {
   @Input() dependencyContext: any;
 
 
-  @Input() depends?: FormControl[];
+  @Input() depends?: UntypedFormControl[];
   @Input() dependencyTerms?: any = [];
 
   private dispose$ = new Subject<undefined>();

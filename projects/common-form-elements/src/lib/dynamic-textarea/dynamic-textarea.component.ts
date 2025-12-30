@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {FieldConfig, FieldConfigValidationType} from '../common-form-config';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class DynamicTextareaComponent implements OnInit {
 
   @Input() label: String;
   @Input() placeholder: String;
-  @Input() formControlRef: FormControl;
+  @Input() formControlRef: UntypedFormControl;
   @Input() field: FieldConfig<String>;
   @Input() validations?: any;
   @Input() default: String;
